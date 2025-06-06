@@ -1,0 +1,106 @@
+{% load static tailwind_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% tailwind_css %}
+</head>
+<body class="flex flex-col min-h-screen">
+
+<nav class="bg-pink-100 border-gray-200">
+  <div class="max-w-screen-xl mx-auto flex items-center justify-between p-4 relative">
+
+    <!-- Left: Navigation Links -->
+    <div class="hidden md:flex space-x-6">
+      <a href="" class="text-gray-800 hover:text-pink-600 font-medium">About</a>
+      <a href="" class="text-gray-800 hover:text-pink-600 font-medium">Blog</a>
+      <a href="" class="text-gray-800 hover:text-pink-600 font-medium">Challenges</a>
+    </div>
+
+    <!-- Center: Logo -->
+    <div class="absolute left-1/2 transform -translate-x-1/2">
+      <a href="" class="flex items-center space-x-2">
+        <img src="{% static 'beaunity_logo.png' %}" class="h-11"  />
+
+      </a>
+    </div>
+
+    <!-- Right: Login/Register -->
+    <div class="hidden md:flex space-x-4 items-center">
+      <a href="" class="text-gray-800 hover:text-pink-600 font-medium">Login</a>
+      <a href="" class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-md text-sm font-medium">Register</a>
+    </div>
+
+    <!-- Mobile menu toggle -->
+    <button data-collapse-toggle="navbar-menu" type="button"
+      class="md:hidden inline-flex items-center p-2 w-10 h-10 justify-center text-gray-500 rounded-lg hover:bg-pink-200 focus:outline-none"
+      aria-controls="navbar-menu" aria-expanded="false">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
+        viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="md:hidden hidden px-4 pb-4" id="navbar-menu">
+    <ul class="space-y-2">
+      <li><a href="" class="block text-gray-800 hover:text-pink-600">About</a></li>
+      <li><a href="" class="block text-gray-800 hover:text-pink-600">Blog</a></li>
+      <li><a href="" class="block text-gray-800 hover:text-pink-600">Challenges</a></li>
+      <li><a href="" class="block text-gray-800 hover:text-pink-600">Login</a></li>
+      <li><a href="" class="block text-pink-500 font-semibold">Register</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<!-- Hero Section--->
+<section class="flex-grow bg-pink-50">
+  <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+    <div class="mr-auto place-self-center lg:col-span-7">
+      <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl xl:text-6xl">
+        Glowing skin starts here
+      </h1>
+      <p class="max-w-2xl mb-6 font-light text-gray-700 lg:mb-8 md:text-lg lg:text-xl">
+          Join a vibrant skincare community and explore routines, products, and personal journeys.
+          Dive into routines, discover top products, and share your glow-up journey with a community that gets it.
+      </p>
+      <a href="#" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-white rounded-lg bg-pink-500 hover:bg-pink-600 focus:ring-4 focus:ring-pink-300">
+        Join the Forum
+        <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+        </svg>
+      </a>
+      <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-pink-700 border border-pink-300 rounded-lg hover:bg-pink-200 focus:ring-4 focus:ring-pink-300">
+        Learn More
+      </a>
+    </div>
+
+      <div class="w-full md:w-10/2">
+        <div class="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl opacity-80">
+            <img src="https://images.unsplash.com/photo-1614678996913-460ea55b4da0?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-pink-100">
+    <div class="w-full max-w-screen-xl mx-auto p-1 md:py-5">
+        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">Flowbite™</a>. All Rights Reserved.</span>
+    </div>
+</footer>
+
+</body>
+</html>
+
+
+
+<!--            <img src="https://images.unsplash.com/photo-1614678996913-460ea55b4da0?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+https://images.unsplash.com/photo-1668774833031-fa514917b190?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
