@@ -1,0 +1,58 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="w-full bg-pink-50 flex items-center">
+  <div class="max-w-screen-xl px-4 py-8 mx-auto lg:py-16 grid lg:grid-cols-12 gap-8">
+    <div class="lg:col-span-7 flex flex-col justify-center">
+      <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl xl:text-6xl">
+        Glowing skin starts here
+      </h1>
+      <p class="max-w-2xl mb-6 font-light text-gray-700 lg:mb-8 md:text-lg lg:text-xl">
+        Join a vibrant skincare community and explore routines, products, and personal journeys.
+        Dive into routines, discover top products, and share your glow-up journey with a community that gets it.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-white rounded-lg bg-pink-500 hover:bg-pink-600 focus:ring-4 focus:ring-pink-300">
+          Join the Forum
+          <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+        </a>
+        <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-pink-700 border border-pink-300 rounded-lg hover:bg-pink-200 focus:ring-4 focus:ring-pink-300">
+          Learn More
+        </a>
+      </div>
+    </div>
+    <div class="lg:col-span-5 flex items-center">
+      <div class="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl opacity-90">
+        <img class="w-full object-cover" src="https://images.unsplash.com/photo-1614678996913-460ea55b4da0?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Skincare image">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Category Grid Section -->
+<section class="bg-pink-50 py-12">
+  <div class="max-w-screen-xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-gray-800 mb-8">Explore Categories</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+      {% comment "Repeat this block for each category" %}
+      <div class="bg-gray-50 rounded-lg p-4 text-center shadow hover:shadow-md transition">
+        <img src="/static/icons/environment.svg" alt="Environment" class="mx-auto h-10 mb-3">
+        <p class="text-gray-800 font-medium">Environment</p>
+      </div>
+      <div class="bg-gray-50 rounded-lg p-4 text-center shadow hover:shadow-md transition">
+        <img src="/static/icons/food.svg" alt="Food & Hunger Relief" class="mx-auto h-10 mb-3">
+        <p class="text-gray-800 font-medium">Food & Hunger Relief</p>
+      </div>
+      <div class="bg-gray-50 rounded-lg p-4 text-center shadow hover:shadow-md transition">
+        <img src="/static/icons/animals.svg" alt="Animals & Wildlife" class="mx-auto h-10 mb-3">
+        <p class="text-gray-800 font-medium">Animals & Wildlife</p>
+      </div>
+      <!-- Add more cards as needed -->
+      {% endcomment %}
+    </div>
+  </div>
+</section>
+{% endblock %}
