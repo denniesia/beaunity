@@ -3,7 +3,7 @@ from django.contrib.auth.hashers import make_password
 
 
 class AppUserManager(BaseUserManager):
-    use_in_menus = True
+    use_in_migrations = True
 
     def _create_user(self, email, password, **extra_fields):
         if not email:
