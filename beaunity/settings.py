@@ -116,7 +116,9 @@ DATABASES = {
 #         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
 #     },
 # ]
-
+AUTHENTICATION_BACKENDS = [
+    'beaunity.accounts.backends.EmailOrUsernameModelBackend',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/

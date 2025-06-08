@@ -15,8 +15,6 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(
         max_length=30,
         unique=True,
-        blank=True,
-        null=True,
         error_messages={
             'unique': 'A user with that username already exists.'
         },
