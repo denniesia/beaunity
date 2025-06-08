@@ -1,0 +1,64 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Django migrations
+*/migrations/*.pyc
+*/migrations/__pycache__/
+
+# SQLite database
+*.sqlite3
+
+# Environment variables and config
+.env
+*.env
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# VS Code settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# MacOS system files
+.DS_Store
+
+# Logs and local files
+*.log
+*.pot
+*.mo
+
+# Compiled HTML help files
+*.chm
+
+# Test coverage
+htmlcov/
+.coverage
+.tox/
+.nox/
+.cache/
+coverage.xml
+*.cover
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Static and media files (if auto-generated)
+staticfiles/
+media/
+
+# Node stuff (if using frontend tools)
+node_modules/
+
+# Others
+*.bak
+*.swp
