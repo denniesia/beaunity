@@ -1,12 +1,16 @@
 {% extends 'common/base.html' %}
-
+{% load static %}
 {% block content %}
 
 <section class="flex justify-center items-center min-h-screen bg-pink-50 py-10">
   <div class="bg-white rounded-2xl shadow-xl w-full max-w-6xl p-10 grid md:grid-cols-3 gap-6">
 
     <!-- Left Column -->
-    <section class="col-span-1 text-center space-y-4">
+    <section class="col-span-1 relative text-center space-y-4 border-2 border-pink-300 rounded-2xl p-6">
+     <!-- Edit Button -->
+      <a href="{% url 'profile-edit' request.user.pk %}" class="absolute top-4 right-4 bg-white hover:bg-pink-600 text-white text-xs px-3 py-1 rounded-full shadow-md">
+        <img src="{% static 'common/edit.png' %}">
+      </a>
       <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg" class="w-32 h-32 rounded-full mx-auto">
       <h2 class="text-xl font-bold text-pink-600">Username: {{ profile.username }}</h2>
       <p class="text-sm text-gray-600">Full Name: </p>
@@ -20,9 +24,6 @@
 
       <div class="flex flex-wrap gap-2 justify-center mt-4">
         <span class="bg-pink-200 text-pink-700 px-3 py-1 rounded-full text-xs">Organized</span>
-        <span class="bg-pink-200 text-pink-700 px-3 py-1 rounded-full text-xs">Hardworking</span>
-        <span class="bg-pink-200 text-pink-700 px-3 py-1 rounded-full text-xs">Passionate</span>
-        <span class="bg-pink-200 text-pink-700 px-3 py-1 rounded-full text-xs">Practical</span>
       </div>
     </section>
 
@@ -47,8 +48,7 @@
         <h3 class="text-lg font-semibold text-pink-600 mb-1">Night Routine</h3>
         <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
           <li>Too much time spent booking – she's busy!</li>
-          <li>Too many websites visited per trip</li>
-          <li>Not terribly tech-savvy – doesn’t like the process</li>
+
         </ul>
       </div>
     </section>
@@ -59,9 +59,7 @@
         <h3 class="text-lg font-semibold text-pink-600 mb-1">My Posts:</h3>
         <div class="space-y-2 text-sm text-gray-700">
           <p>Introvert ▭▭▭▭▮▮▮▮▮▮ Extrovert</p>
-          <p>Analytical ▮▮▮▮▮▭▭▭▭▭ Creative</p>
-          <p>Loyal ▮▮▮▮▮▮▮▮▮▭ Fickle</p>
-          <p>Passive ▭▭▭▭▭▮▮▮▮▮ Active</p>
+
         </div>
       </div>
 
@@ -69,10 +67,7 @@
         <h3 class="text-lg font-semibold text-pink-600 mb-1">My Challenges:</h3>
         <div class="space-y-2 text-sm text-gray-700">
           <p>Price ▮▮▮▭▭▭▭▭▭▭</p>
-          <p>Comfort ▮▮▮▮▮▮▮▮▮▮</p>
-          <p>Convenience ▮▮▮▮▮▮▮▮▮▮</p>
-          <p>Speed ▮▮▮▮▮▮▮▮▭▭</p>
-          <p>Loyalty/Miles ▮▮▮▮▮▮▮▮▮▭</p>
+
         </div>
       </div>
 
@@ -80,10 +75,7 @@
         <h3 class="text-lg font-semibold text-pink-600 mb-1">My Dairy:</h3>
         <div class="flex flex-wrap gap-4 text-gray-600 text-sm">
           <span>Adidas</span>
-          <span>Nike</span>
-          <span>Netflix</span>
-          <span>Airbnb</span>
-          <span>Zara</span>
+
         </div>
       </div>
     </section>

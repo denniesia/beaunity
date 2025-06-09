@@ -31,6 +31,7 @@
     --breakpoint-xl: 80rem;
     --container-md: 28rem;
     --container-2xl: 42rem;
+    --container-4xl: 56rem;
     --container-6xl: 72rem;
     --text-xs: 0.75rem;
     --text-xs--line-height: calc(1 / 0.75);
@@ -225,11 +226,20 @@
   .static {
     position: static;
   }
+  .top-4 {
+    top: calc(var(--spacing) * 4);
+  }
+  .right-4 {
+    right: calc(var(--spacing) * 4);
+  }
   .left-1\/2 {
     left: calc(1/2 * 100%);
   }
   .col-span-1 {
     grid-column: span 1 / span 1;
+  }
+  .col-span-3 {
+    grid-column: span 3 / span 3;
   }
   .mx-auto {
     margin-inline: auto;
@@ -239,6 +249,9 @@
   }
   .mt-1 {
     margin-top: calc(var(--spacing) * 1);
+  }
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
   }
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
@@ -297,6 +310,9 @@
   .h-11 {
     height: calc(var(--spacing) * 11);
   }
+  .h-24 {
+    height: calc(var(--spacing) * 24);
+  }
   .h-32 {
     height: calc(var(--spacing) * 32);
   }
@@ -311,6 +327,9 @@
   }
   .w-1\/6 {
     width: calc(1/6 * 100%);
+  }
+  .w-2\/3 {
+    width: calc(2/3 * 100%);
   }
   .w-2\/5 {
     width: calc(2/5 * 100%);
@@ -333,6 +352,9 @@
   .w-10 {
     width: calc(var(--spacing) * 10);
   }
+  .w-24 {
+    width: calc(var(--spacing) * 24);
+  }
   .w-32 {
     width: calc(var(--spacing) * 32);
   }
@@ -341,6 +363,9 @@
   }
   .max-w-2xl {
     max-width: var(--container-2xl);
+  }
+  .max-w-4xl {
+    max-width: var(--container-4xl);
   }
   .max-w-6xl {
     max-width: var(--container-6xl);
@@ -425,6 +450,11 @@
     margin-block-start: calc(calc(var(--spacing) * 6) * var(--tw-space-y-reverse));
     margin-block-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-y-reverse)));
   }
+  :where(.space-y-8 > :not(:last-child)) {
+    --tw-space-y-reverse: 0;
+    margin-block-start: calc(calc(var(--spacing) * 8) * var(--tw-space-y-reverse));
+    margin-block-end: calc(calc(var(--spacing) * 8) * calc(1 - var(--tw-space-y-reverse)));
+  }
   :where(.space-x-2 > :not(:last-child)) {
     --tw-space-x-reverse: 0;
     margin-inline-start: calc(calc(var(--spacing) * 2) * var(--tw-space-x-reverse));
@@ -464,6 +494,10 @@
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
+  }
+  .border-2 {
+    border-style: var(--tw-border-style);
+    border-width: 2px;
   }
   .border-gray-200 {
     border-color: var(--color-gray-200);
@@ -525,6 +559,9 @@
   .px-5 {
     padding-inline: calc(var(--spacing) * 5);
   }
+  .px-6 {
+    padding-inline: calc(var(--spacing) * 6);
+  }
   .py-1 {
     padding-block: calc(var(--spacing) * 1);
   }
@@ -545,6 +582,9 @@
   }
   .py-16 {
     padding-block: calc(var(--spacing) * 16);
+  }
+  .pt-4 {
+    padding-top: calc(var(--spacing) * 4);
   }
   .pb-4 {
     padding-bottom: calc(var(--spacing) * 4);
@@ -655,6 +695,10 @@
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
+  .shadow-md {
+    --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
   .shadow-xl {
     --tw-shadow: 0 20px 25px -5px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 8px 10px -6px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
@@ -667,6 +711,11 @@
   @media (hover: hover) {
     .hover\:bg-pink-200:hover {
       background-color: var(--color-pink-200);
+    }
+  }
+  @media (hover: hover) {
+    .hover\:bg-pink-400:hover {
+      background-color: var(--color-pink-400);
     }
   }
   @media (hover: hover) {
@@ -741,6 +790,11 @@
   @media (width >= 48rem) {
     .md\:hidden {
       display: none;
+    }
+  }
+  @media (width >= 48rem) {
+    .md\:grid-cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
   @media (width >= 48rem) {

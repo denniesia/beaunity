@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView
 from django.contrib.auth import get_user_model, login
-from .forms import AppUserCreationForm, AppUserLoginForm
+from .forms import AppUserCreationForm, AppUserLoginForm, ProfileEditForm
 from django.urls import reverse_lazy
 from django.contrib.auth.views import  LoginView
 # Create your views here.
@@ -31,3 +31,11 @@ class ProfileDetailView(DetailView):
     template_name = 'accounts/profile-details-page.html'
     model = UserModel
     context_object_name = 'profile'
+
+class ProfileEditView(UpdateView):   #LoginRequiredMixin, UserPassesTestMixin
+    model = UserModel
+    form_class = ProfileEditForm
+    template_name = 'accounts/profile-edit-page.html'
+
+    def get_success_url(self):
+        return reverse_lazy('profile', kwargs={'pk': self.object.pk})

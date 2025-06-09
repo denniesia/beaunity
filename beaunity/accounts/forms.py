@@ -59,3 +59,10 @@ class AppUserLoginForm(AuthenticationForm):
             }
         )
     )
+
+'''Profile Forms'''
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = UserModel
+        exclude = ('user',)
