@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 from django.contrib.auth import get_user_model, login
 from .forms import AppUserCreationForm, AppUserLoginForm
 from django.urls import reverse_lazy
@@ -23,3 +23,11 @@ class AppUserRegisterView(CreateView):
 class AppUserLoginView(LoginView):
     template_name = 'accounts/login-page.html'
     form_class = AppUserLoginForm
+
+
+#Profile Views
+
+class ProfileDetailView(DetailView):
+    template_name = 'accounts/profile-details-page.html'
+    model = UserModel
+    context_object_name = 'profile'
