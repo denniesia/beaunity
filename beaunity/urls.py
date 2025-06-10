@@ -22,5 +22,6 @@ urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     path("", include("beaunity.common.urls")),
     path("accounts/", include("beaunity.accounts.urls")),
+    path("category/", include("beaunity.category.urls")),
 
 ]
