@@ -27,7 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+MY_APPS = [
+    'beaunity.accounts',
+    'beaunity.common',
+    # 'beaunity.challenge'
+    # 'beaunity.category',
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,9 +45,7 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'django_browser_reload',
-    'beaunity.accounts',
-    'beaunity.common',
-]
+] + MY_APPS
 
 TAILWIND_APP_NAME = 'theme'
 
