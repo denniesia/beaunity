@@ -1,0 +1,21 @@
+[33m884e519[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m fix: layout profile page
+[33m15c685c[m category
+[33md033dc0[m[33m ([m[1;32mdev[m[33m)[m feat:categories
+[33mc6f51f6[m styles changes
+[33m3cb7193[m feat: profile page + edit page not ready
+[33m1ca8ed2[m feat: profile1 page not ready
+[33ma103023[m feat: profile page not ready
+[33m12f6dc4[m idea folder
+[33m8c81e0b[m login page
+[33m4e4b184[m updated styles
+[33m99ac306[m Remove .pyc files and add to .gitignore
+[33mc0a18a8[m login and logout page
+[33m70d116e[m logout and login page
+[33m816312f[m logout view
+[33m53b7fa7[m fix: appusermanager
+[33m8251bf9[m fix: appusermanager
+[33m4f6e844[m user model and reg
+[33mae8a155[m user model and reg
+[33m777f0dd[m fix: logo icon
+[33m08586a1[m landing page set up
+[33m6f3d808[m initial commit
