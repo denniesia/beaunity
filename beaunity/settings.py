@@ -27,7 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+MY_APPS = [
+    'beaunity.accounts',
+    'beaunity.common',
+    # 'beaunity.challenge'
+    # 'beaunity.category',
+]
 # Application definition
 MY_APPS = [
     'beaunity.accounts',

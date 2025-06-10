@@ -1,0 +1,125 @@
+{% extends 'common/base.html' %}
+
+
+{% block content %}
+
+<section class="flex justify-center items-center min-h-screen bg-pink-50 py-10">
+  <form class="bg-white rounded-2xl shadow-xl w-full max-w-6xl p-10 grid md:grid-cols-3 gap-6" method="POST" >
+    {% csrf_token %}
+    <!-- Left Column -->
+    <section class="col-span-1 text-center space-y-4">
+      <!-- Profile Picture -->
+      <div class="flex flex-col items-center">
+        <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg" class="w-32 h-32 rounded-full mx-auto object-cover" alt="Profile Picture">
+        <input type="file" name="profile_picture" class="mt-2 text-sm text-gray-600">
+      </div>
+
+      <!-- Basic Info -->
+      <div>
+        <label class="block text-sm font-medium text-pink-600">Username</label>
+        <input type="text" name="username" placeholder="jill_doe" class="w-full mt-1 border rounded-md p-2 text-sm">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-pink-600">Full Name</label>
+        <input type="text" name="full_name" class="w-full mt-1 border rounded-md p-2 text-sm">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-pink-600">Bio</label>
+        <textarea name="bio" rows="2" class="w-full mt-1 border rounded-md p-2 text-sm"></textarea>
+      </div>
+
+      <!-- Other Info -->
+      <div class="space-y-2">
+        <div>
+          <label class="block text-sm font-medium text-pink-600">Age</label>
+          <input type="number" name="age" class="w-full border rounded-md p-2 text-sm">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-pink-600">Location</label>
+          <input type="text" name="location" class="w-full border rounded-md p-2 text-sm">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-pink-600">Skin Type</label>
+          <select name="skin_type" class="w-full border rounded-md p-2 text-sm">
+            <option>Normal</option>
+            <option>Oily</option>
+            <option>Dry</option>
+            <option>Combination</option>
+            <option>Sensitive</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Traits -->
+      <div class="flex flex-wrap gap-2 justify-center mt-4">
+        <input type="text" name="traits" placeholder="Add traits like 'Organized'" class="w-full border rounded-md p-2 text-sm text-center">
+      </div>
+    </section>
+
+    <!-- Middle Column -->
+    <section class="col-span-1 space-y-6 bg-pink-100 p-4 rounded-xl">
+      <div>
+        <h3 class="text-lg font-semibold text-pink-600 mb-1">Goals</h3>
+        <textarea name="goals" rows="3" class="w-full border rounded-md p-2 text-sm" placeholder="List your goals..."></textarea>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold text-pink-600 mb-1">Morning Routine</h3>
+        <textarea name="morning_routine" rows="3" class="w-full border rounded-md p-2 text-sm" placeholder="Describe your routine..."></textarea>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold text-pink-600 mb-1">Night Routine</h3>
+        <textarea name="night_routine" rows="3" class="w-full border rounded-md p-2 text-sm" placeholder="Describe your night routine..."></textarea>
+      </div>
+    </section>
+
+    <!-- Right Column -->
+    <section class="col-span-1 space-y-6 bg-pink-100 p-4 rounded-xl">
+      <div>
+        <h3 class="text-lg font-semibold text-pink-600 mb-1">My Posts</h3>
+        <div class="space-y-2 text-sm text-gray-700">
+          <label class="block text-sm font-medium text-pink-600">Describe your personality scale</label>
+          <textarea name="personality" rows="3" class="w-full border rounded-md p-2 text-sm" placeholder="Introvert ▭▭▮▮▮ ... etc."></textarea>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold text-pink-600 mb-1">My Challenges</h3>
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-pink-600">Motivation Ratings</label>
+          <div class="space-y-1">
+            <label class="block text-sm">Price</label>
+            <input type="range" name="price" min="1" max="10" class="w-full">
+            <label class="block text-sm">Comfort</label>
+            <input type="range" name="comfort" min="1" max="10" class="w-full">
+            <label class="block text-sm">Convenience</label>
+            <input type="range" name="convenience" min="1" max="10" class="w-full">
+            <label class="block text-sm">Speed</label>
+            <input type="range" name="speed" min="1" max="10" class="w-full">
+            <label class="block text-sm">Loyalty/Miles</label>
+            <input type="range" name="loyalty" min="1" max="10" class="w-full">
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold text-pink-600 mb-1">My Dairy</h3>
+        <input type="text" name="brands" class="w-full border rounded-md p-2 text-sm" placeholder="Adidas, Nike, Netflix...">
+      </div>
+    </section>
+
+    <!-- Submit -->
+    <div class="col-span-3 text-center pt-4">
+      <button type="submit" class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-lg font-semibold">
+        Save Profile
+      </button>
+    </div>
+
+  </form>
+</section>
+
+
+{% endblock %}
