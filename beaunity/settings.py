@@ -31,7 +31,7 @@ MY_APPS = [
     'beaunity.accounts',
     'beaunity.common',
     # 'beaunity.challenge'
-    # 'beaunity.category',
+     'beaunity.category',
 ]
 # Application definition
 
