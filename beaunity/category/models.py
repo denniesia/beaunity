@@ -9,6 +9,7 @@ class Category(LastUpdatedMixin, CreatedAtMixin, CreatedByMixin):
 
     class Meta:
         verbose_name_plural = 'Categories'
+        ordering = ['title']
 
     def save(self, *args, **kwargs):
         if not self.slug:

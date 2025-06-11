@@ -9,7 +9,7 @@ class CategoryOverviewView(ListView):
     template_name = 'category/category-overview.html'
 
     def get_queryset(self):
-        return Category.objects.all().order_by('title')
+        return Category.objects.all()
 
 
 class CategoryCreateView(CreateView):
