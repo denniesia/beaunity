@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.views.generic import ListView, CreateView, DeleteView
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from .models import Category
-from .forms import CategoryCreateForm, CategoryDeleteForm
+from .forms import CategoryCreateForm, CategoryDeleteForm, CategoryEditForm
 from django.urls import reverse_lazy
 from datetime import timezone
 # Create your views here.
@@ -21,6 +21,15 @@ class CategoryCreateView(CreateView):
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
+
+class CategoryEditView(UpdateView):
+    model = Category
+    form_class = CategoryEditForm
+    template_name = 'category/category-edit.html'
+    slug_url_kwarg = 'category_slug'
+
+    def get_success_url(self):
+        return reverse_lazy('category-overview')
 
 class CategoryDeleteView(DeleteView):
     model = Category

@@ -26,6 +26,9 @@ class CategoryBaseForm(forms.ModelForm):
 class CategoryCreateForm(CategoryBaseForm):
     pass
 
+class CategoryEditForm(CategoryBaseForm):
+    pass
+
 class CategoryDeleteForm(CategoryBaseForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
