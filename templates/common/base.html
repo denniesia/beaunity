@@ -17,7 +17,7 @@
     </header>
 
 <!-- Main Content -->
-<main class="flex-grow flex flex-col justify-center">
+<main class="flex-grow flex flex-col justify-center" style="background-color: #F9F5F6;" >
     {% block content %}
 
     {% endblock %}
@@ -26,10 +26,10 @@
 
 <!-- Footer -->
 <footer class="bg-pink-100">
-    <div class="w-full max-w-screen-xl mx-auto p-1 md:py-4">
-        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+    <div class="w-full max-w-screen-xl mx-auto p-1 md:py-2">
+        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-6" />
         <span class="flex items-center justify-center gap-1 text-sm text-gray-500 dark:text-gray-400">
-            © 2025
+            © 2025 -
             <a href="https://github.com/denniesia" class="flex items-center gap-1 hover:underline">
                 <img src="{% static 'common/github.png' %}" alt="GitHub" class="w-4 h-4">
                 denniesia

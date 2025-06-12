@@ -613,6 +613,12 @@
   .py-3 {
     padding-block: calc(var(--spacing) * 3);
   }
+  .py-4 {
+    padding-block: calc(var(--spacing) * 4);
+  }
+  .py-6 {
+    padding-block: calc(var(--spacing) * 6);
+  }
   .py-8 {
     padding-block: calc(var(--spacing) * 8);
   }
@@ -791,7 +797,6 @@
     --tw-duration: 300ms;
     transition-duration: 300ms;
   }
-
   @media (hover: hover) {
     .group-hover\:opacity-100:is(:where(.group):hover *) {
       opacity: 100%;
@@ -928,6 +933,11 @@
     }
   }
   @media (width >= 48rem) {
+    .md\:py-2 {
+      padding-block: calc(var(--spacing) * 2);
+    }
+  }
+  @media (width >= 48rem) {
     .md\:py-4 {
       padding-block: calc(var(--spacing) * 4);
     }
@@ -957,6 +967,16 @@
   @media (width >= 64rem) {
     .lg\:col-span-7 {
       grid-column: span 7 / span 7;
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:my-4 {
+      margin-block: calc(var(--spacing) * 4);
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:my-6 {
+      margin-block: calc(var(--spacing) * 6);
     }
   }
   @media (width >= 64rem) {
