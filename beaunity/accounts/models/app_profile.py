@@ -3,6 +3,8 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from beaunity.common.mixins import LastUpdatedMixin
 
+from cloudinary.models import CloudinaryField
+
 UserModel = get_user_model()
 
 class Profile(LastUpdatedMixin):
@@ -11,9 +13,11 @@ class Profile(LastUpdatedMixin):
         on_delete=models.CASCADE,
         primary_key=True,
     )
-    profile_pic = models.URLField(
-        null=True,
+    profile_pic = CloudinaryField(
+        'image',
         blank=True,
+        null=True,
+        default='',
     )
     first_name = models.CharField(
         max_length=20,
