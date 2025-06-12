@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <!-- Hero Section -->
-<section class="flex-grow flex items-center justify-center py-10 " style="background-color: #F9F5F6;">
+<section class="bg-pink-20 flex-grow flex items-center justify-center py-10 ">
   <div class="max-w-screen-xl px-4 py-8 mx-auto lg:py-16 grid lg:grid-cols-12 gap-8">
     <div class="lg:col-span-7 flex flex-col justify-center">
       <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl xl:text-6xl">
@@ -57,14 +57,14 @@
 {#</section>#}
 
 <!-- Horizontal Auto-Scrolling Categories -->
-<section class="py-2" style="background-color: #F9F5F6;">
+<section class="bg-pink-20 py-2">
   <div class="max-w-screen-xl mx-auto px-4">
     <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Explore Categories</h2>
 
     <div id="category-scroll" class="overflow-x-auto whitespace-nowrap scroll-smooth scrollbar-hide">
       <div class="inline-flex gap-6 w-max">
         {% for category in object_list %}
-        <div class="bg-pink-100 rounded-2xl p-5 flex flex-col items-center text-center shadow hover:shadow-lg transition-transform transform hover:-translate-y-1 hover:scale-105 duration-300">
+        <div class="bg-pink-50 rounded-2xl p-5 flex flex-col items-center text-center shadow hover:shadow-lg transition-transform transform hover:-translate-y-1 hover:scale-105 duration-300">
           <img
             src="{% static 'category/' %}{{ category.icon|default:'placeholder.png' }}"
             alt="{{ category.title }}"
