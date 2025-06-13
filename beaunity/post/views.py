@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, DetailView, UpdateView
+from django.views.generic import TemplateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth import get_user_model
 from beaunity.category.models import Category
 from django.urls import reverse_lazy
@@ -36,3 +36,7 @@ class PostEditView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('post-details', kwargs={'pk': self.object.pk})
+
+
+class PostDeleteView(DeleteView):
+    pass

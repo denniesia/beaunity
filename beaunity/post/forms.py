@@ -13,6 +13,7 @@ class PostEditForm(PostBaseForm):
         fields = ['banner', 'title', 'content', 'category']
 
     banner = forms.URLField(
+        required=False,
         widget=forms.URLInput(
             attrs={
                 'class': CLASS
@@ -27,9 +28,10 @@ class PostEditForm(PostBaseForm):
         ),
     )
     content = forms.CharField(
-        widget=forms.TextInput(
+        widget=forms.Textarea(
             attrs={
-                'class': CLASS
+                'class': CLASS,
+                'rows': 3,
             }
         ),
     )
