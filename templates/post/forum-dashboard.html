@@ -43,7 +43,7 @@
                         <div>
                             <a href="{% url 'post-details' post.pk %}" class="text-lg text-gray-600 hover:text-pink-900">{{ post.content }}</a>
                             <div class="text-right space-y-1">
-                                <a  href="{% url 'profile-details' post.created_by.id %}"><p class="text-sm text-gray-500">By: {{ post.created_by }}</p></a>
+                                <a  href="{% url 'profile-details' post.created_by.id %}"><span class="text-sm text-gray-500">By: {{ post.created_by }}</span></a>
                                 <p class="text-xs text-gray-500">Comments:count</p>
                                 <p class="text-xs text-gray-500">Last commented at:</p>
                             </div>
