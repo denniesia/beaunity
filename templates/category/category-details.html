@@ -1,0 +1,39 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+<div class="w-full max-w-screen-xl mx-auto px-4 py-8">
+    <!-- Categories Container -->
+    <div class="space-y-8 mb-4">
+    <!-- Single Category -->
+        <div class="rounded-lg overflow-hidden shadow-md">
+            <!-- Category Header -->
+            <div class="bg-pink-100 px-6 py-2">
+                <h2 class="text-xl font-bold text-pink-400">{{ category.title }}</h2>
+                <p class="text-gray-700 text-sm">{{ category.description }}</p>
+            </div>
+            <!-- Posts -->
+            {% for post in posts %}
+            <div class="bg-white px-6 py-2 hover:bg-gray-50">
+                <!-- Post Row: 3 Columns -->
+                <div class="grid grid-cols-3 gap-4 items-start py-4 border-b">
+                    <!-- Column 1: Post Content -->
+                    <div>
+                        <a href="{% url 'post-details' post.pk %}" class="text-lg text-gray-600 hover:text-pink-900">{{ post.content }}</a>
+                        <div class="text-right space-y-1">
+                            <a href="{% url 'profile-details' post.created_by.id %}"><p class="text-sm text-gray-500">By: {{ post.created_by }}</p></a>
+                            <p class="text-xs text-gray-500">Comments:count</p>
+                            <p class="text-xs text-gray-500">Last commented at:</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             {% endfor %}
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+{% endblock %}

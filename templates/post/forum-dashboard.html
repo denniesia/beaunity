@@ -9,44 +9,38 @@
         <p class="text-pink-500 text-center">Join thoughtful conversations, share experiences, and discover personalized skincare insights.</p>
     </div>
 
-{% for category, posts in category_posts %}
-<!-- Categories Container -->
-<div class="space-y-8 mb-4">
-    <!-- Single Category -->
-    <div class="rounded-lg overflow-hidden shadow-md">
-        <!-- Category Header -->
-        <div class="bg-pink-100 px-6 py-2">
-            <h2 class="text-xl font-bold text-pink-400">{{ category.title }}</h2>
-            <p class="text-gray-700 text-sm">{{ category.description }}</p>
-        </div>
-
-        <!-- Posts -->
-      {% for post in posts %}
-        <div class="bg-white px-6 py-2 hover:bg-gray-50">
-            <!-- Post Row: 3 Columns -->
-            <div class="grid grid-cols-3 gap-4 items-start py-4 border-b">
-                <!-- Column 1: Post Content -->
-                <div>
-                    <a href="{% url 'post-details' post.pk %}" class="text-lg text-gray-600 hover:text-pink-900">{{ post.content }}</a>
-                    <div class="text-right space-y-1">
-                    <p class="text-sm text-gray-500">By: {{ post.created_by }}</p>
-                    <p class="text-xs text-gray-500">
-                        Comments:count
-                    </p>
-                    <p class="text-xs text-gray-500">
-                        Last commented at:
-                    </p>
-                </div>
-                </div>
-
+    {% for category, posts in category_posts %}
+        <!-- Categories Container -->
+    <div class="space-y-8 mb-4">
+        <!-- Single Category -->
+        <div class="rounded-lg overflow-hidden shadow-md">
+            <!-- Category Header -->
+             <div class="bg-pink-100 px-6 py-4 rounded-lg shadow transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg hover:shadow-pink-300">
+                <a class="block cursor-pointer" href="{% url 'category-details' category.slug %}">
+                    <h2 class="text-xl font-bold text-pink-500 hover:text-pink-600 transition duration-300">{{ category.title }}</h2>
+                    <p class="text-gray-700 text-sm">{{ category.description }}</p>
+                </a>
             </div>
+            <!-- Posts -->
+            {% for post in posts %}
+                <div class="bg-white px-6 py-2 hover:bg-gray-50 ">
+                <!-- Post Row: 3 Columns -->
+                    <div class="grid grid-cols-3 gap-4 items-start py-4 border-b">
+                        <!-- Column 1: Post Content -->
+                        <div>
+                            <a href="{% url 'post-details' post.pk %}" class="text-lg text-gray-600 hover:text-pink-900">{{ post.content }}</a>
+                            <div class="text-right space-y-1">
+                                <a  href="{% url 'profile-details' post.created_by.id %}"><p class="text-sm text-gray-500">By: {{ post.created_by }}</p></a>
+                                <p class="text-xs text-gray-500">Comments:count</p>
+                                <p class="text-xs text-gray-500">Last commented at:</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-{% endfor %}
     </div>
-</div>
-{% endfor %}
-
-
+    {% endfor %}
 </div>
 
 

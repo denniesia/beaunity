@@ -8,5 +8,6 @@ urlpatterns = [
      path('<slug:category_slug>/', include([
          path('delete/', views.CategoryDeleteView.as_view(), name='category-delete'),
          path('edit/', views.CategoryEditView.as_view(), name='category-edit'),
+         path('details/', views.CategoryDetailsView.as_view(), name='category-details'),
      ])),
 ]

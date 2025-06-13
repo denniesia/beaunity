@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.views.generic import ListView, CreateView, DeleteView, UpdateView
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
 from .models import Category
 from .forms import CategoryCreateForm, CategoryDeleteForm, CategoryEditForm
 from django.urls import reverse_lazy
@@ -47,3 +47,16 @@ class CategoryDeleteView(DeleteView):
         self.object = self.get_object()
         self.object.delete()
         return HttpResponseRedirect(self.success_url)
+
+class CategoryDetailsView(DetailView):
+    model = Category
+    template_name = 'category/category-details.html'
+    context_object_name = 'category'
+    slug_field = 'slug'
+    slug_url_kwarg = 'category_slug'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category_posts = self.object.posts.all()
+        context['posts'] = category_posts
+        return context
