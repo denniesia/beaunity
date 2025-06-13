@@ -2,58 +2,95 @@
 {% load static %}
 
 {% block content %}
-<div class=" max-w-screen-xl mx-auto">
-        <!-- Forum Post Container -->
-        <div class="forum-post bg-white rounded-2xl shadow-md border border-pink-300 p-6 mb-6 transition hover:shadow-lg">
 
-            <!-- User Info Header -->
-            <div class="flex items-start justify-between mb-4">
-                <div class="flex items-center space-x-4">
-                    <!-- User Avatar Placeholder -->
-                    <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 font-semibold text-sm shadow-inner">
-                        <span>👤</span>
-                    </div>
+<div class="max-w-screen-xl mx-auto">
+    <!-- Unified Forum Post & Comments Container -->
+    <div class="bg-white rounded-2xl shadow-md border border-pink-300 p-6 mb-6 transition hover:shadow-lg">
 
-                    <div>
-                        <p class="text-sm font-semibold text-gray-900">{{ post.created_by }}</p>
-                        <p class="text-xs text-gray-500">{{ post.created_at }}</p>
-                    </div>
+        <!-- User Info Header -->
+        <div class="flex items-start justify-between mb-4">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 font-semibold text-sm shadow-inner">
+                    <span>👤</span>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-gray-900">{{ post.created_by }}</p>
+                    <p class="text-xs text-gray-500">{{ post.created_at }}</p>
                 </div>
             </div>
-
-            <!-- Banner (Optional) -->
-            {% if post.banner %}
-            <div class="flex justify-center mb-4">
-                <img src="{{ post.banner}}" alt="Post Banner" class=" rounded-lg object-cover shadow-sm border border-pink-200"  style="max-width: 450px; max-height: 450">
-            </div>
-            {% endif %}
-
-            <!-- Post Content -->
-            <div class="text-gray-800 text-base leading-relaxed">
-                {{ post.content }}
-            </div>
-        <!-- Interaction buttons -->
-        <div class="flex items-center text-pink-500 space-x-4 text-sm pl-10 ">
-            <a class="flex items-center text-2xs cursor-pointer gap-1 py-2">
-                <img src="{% static 'common/like.png' %}">
-                Like
+            <!-- Edit and Delete Icons -->
+            <div class="flex gap-2">
+                <a class="text-pink-500 hover:text-pink-700" href="">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
             </a>
-
-                <!-- Dislike Button -->
-            <a class="flex items-center  text-2xs cursor-pointer gap-1 py-2">
-                <img src="{% static 'common/dislike.png' %}">
-                Dislike
+            <a class="text-red-500 hover:text-red-700" href="">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
             </a>
+          </div>
+        </div>
 
-            <!-- Share Button -->
+        <!-- Optional Banner -->
+        {% if post.banner %}
+        <div class="flex justify-center mb-4">
+            <img src="{{ post.banner }}" alt="Post Banner" class="rounded-lg object-cover shadow-sm border border-pink-200" style="max-width: 450px; max-height: 450px;">
+        </div>
+        {% endif %}
+
+        <!-- Post Content -->
+        <div class="text-gray-800 text-base leading-relaxed mb-4">
+            {{ post.content }}
+        </div>
+
+        <!-- Interaction Buttons -->
+        <div class="flex items-center text-pink-500 space-x-4 text-sm pl-10 mb-4">
             <a class="flex items-center text-2xs cursor-pointer gap-1 py-2">
-                <img src="{% static 'common/share.png' %}">
-                Share
+                <img src="{% static 'common/like.png' %}"> Like
+            </a>
+            <a class="flex items-center text-2xs cursor-pointer gap-1 py-2">
+                <img src="{% static 'common/dislike.png' %}"> Dislike
+            </a>
+            <a class="flex items-center text-2xs cursor-pointer gap-1 py-2">
+                <img src="{% static 'common/share.png' %}"> Share
             </a>
         </div>
 
+        <!-- Divider -->
+        <hr class="border-t border-gray-300 my-4">
+
+        <!-- Comments Section -->
+        <p class="text-sm font-semibold text-gray-800 mb-2">Comments:</p>
+
+        {% for comment in post.comments.all %}
+        <div class="flex gap-3 items-start mb-3">
+            <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 text-xs shadow-inner">
+                💬
+            </div>
+            <div class="flex-1 text-sm">
+                <p class="font-medium text-gray-900">{{ comment.created_by }}</p>
+                <p class="text-gray-700">{{ comment.content }}</p>
+                <p class="text-xs text-gray-400">{{ comment.created_at }}</p>
+            </div>
         </div>
+        {% empty %}
+        <p class="text-xs text-gray-500">No comments yet. Be the first to comment!</p>
+        {% endfor %}
+
+        <!-- Add Comment Form -->
+        <form method="post" action="#" class="mt-4">
+            {% csrf_token %}
+            <div class="flex items-start gap-2">
+                <textarea name="content" rows="2" class="w-full text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-1 focus:ring-pink-400 resize-none" placeholder="Add a comment..."></textarea>
+                <button type="submit" class="bg-pink-500 text-white px-3 py-1 rounded-md text-sm hover:bg-pink-600 transition">Post</button>
+            </div>
+        </form>
     </div>
+</div>
+
+
 
 
 {% endblock %}
