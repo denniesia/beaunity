@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 from django.contrib.auth import get_user_model
 from beaunity.category.models import Category
 from django.urls import reverse_lazy
+
+from beaunity.post.models import Post
 
 # Create your views here.
 class ForumDashboardView(TemplateView):
@@ -20,5 +22,12 @@ class ForumDashboardView(TemplateView):
 
         context['category_posts'] = category_posts
         return context
+
+
+class PostDetailsView(DetailView):
+    model = Post
+    template_name = 'post/post-details.html'
+
+
 
 

@@ -27,11 +27,8 @@
             <div class="grid grid-cols-3 gap-4 items-start py-4 border-b">
                 <!-- Column 1: Post Content -->
                 <div>
-                    <a href="#" class="text-lg text-gray-600 hover:text-pink-900">{{ post.content }}</a>
-                </div>
-
-                <!-- Column 2: Created By & Last Comment -->
-                <div class="text-right space-y-1">
+                    <a href="{% url 'post-details' post.pk %}" class="text-lg text-gray-600 hover:text-pink-900">{{ post.content }}</a>
+                    <div class="text-right space-y-1">
                     <p class="text-sm text-gray-500">By: {{ post.created_by }}</p>
                     <p class="text-xs text-gray-500">
                         Comments:count
@@ -39,8 +36,9 @@
                     <p class="text-xs text-gray-500">
                         Last commented at:
                     </p>
-
                 </div>
+                </div>
+
             </div>
         </div>
 {% endfor %}

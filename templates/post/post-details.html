@@ -1,0 +1,60 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="w-full max-w-screen-xl mx-auto">
+        <!-- Forum Post Container -->
+        <div class="forum-post bg-white rounded-2xl shadow-md border border-pink-300 p-6 mb-6 transition hover:shadow-lg">
+
+            <!-- User Info Header -->
+            <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center space-x-4">
+                    <!-- User Avatar Placeholder -->
+                    <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 font-semibold text-sm shadow-inner">
+                        <span>👤</span>
+                    </div>
+
+                    <div>
+                        <p class="text-sm font-semibold text-gray-900">{{ post.created_by }}</p>
+                        <p class="text-xs text-gray-500">{{ post.created_at }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Banner (Optional) -->
+            {% if post.banner %}
+            <div class="flex justify-center mb-4">
+                <img src="{{ post.banner}}" alt="Post Banner" class="w-1/2 max-h-40 rounded-lg object-cover shadow-sm border border-pink-200">
+            </div>
+            {% endif %}
+
+            <!-- Post Content -->
+            <div class="text-gray-800 text-base leading-relaxed">
+                {{ post.content }}
+            </div>
+        <!-- Interaction buttons -->
+        <div class="flex items-center text-pink-500 space-x-4 text-sm pl-10 ">
+            <a class="flex items-center text-2xs cursor-pointer gap-1 py-2">
+                <img src="{% static 'common/like.png' %}">
+                Like
+            </a>
+
+                <!-- Dislike Button -->
+            <a class="flex items-center  text-2xs cursor-pointer gap-1 py-2">
+                <img src="{% static 'common/dislike.png' %}">
+                Dislike
+            </a>
+
+            <!-- Share Button -->
+            <a class="flex items-center text-2xs cursor-pointer gap-1 py-2">
+                <img src="{% static 'common/share.png' %}">
+                Share
+            </a>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
