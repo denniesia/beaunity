@@ -39,4 +39,6 @@ class PostEditView(UpdateView):
 
 
 class PostDeleteView(DeleteView):
-    pass
+    template_name = 'post/post-delete.html'
+    model = Post
+    success_url = reverse_lazy('forum-dashboard')
