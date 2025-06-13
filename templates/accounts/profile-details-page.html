@@ -13,19 +13,17 @@
       </a>
       <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg" class="w-32 h-32 rounded-full mx-auto">
       <h2 class="text-xl font-bold text-pink-600">Username: {{ profile.username }}</h2>
-      <p class="text-sm text-gray-600">First Name: {{ profile.first_name }} </p>
-      <p class="text-sm text-gray-600">Last Name: {{ profile.last_name }} </p>
-      <p class="text-sm italic text-gray-500">Bio: {{ profile.bio }} </p>
+      <p class="text-sm text-pink-600">First Name: {{ profile.first_name }} </p>
+      <p class="text-sm text-pink-600">Last Name: {{ profile.last_name }} </p>
+      <p class="text-sm text-pink-600">Email: {{ profile.user.email }} </p>
+      <p class="text-sm italic text-pink-500">Bio: {{ profile.bio }} </p>
 
       <div class="mt-4 space-y-1">
-        <p class="text-sm text-gray-600"><strong>Age:</strong> --- </p>
-        <p class="text-sm text-gray-600"><strong>Location:</strong> ---</p>
-        <p class="text-sm text-gray-600"><strong>Skin type:</strong> --- </p>
+        <p class="text-sm text-pink-600"><strong>Age:</strong> --- </p>
+        <p class="text-sm text-pink-600"><strong>Location:</strong> ---</p>
+        <p class="text-sm text-pink-600"><strong>Skin type:</strong> --- </p>
       </div>
 
-      <div class="flex flex-wrap gap-2 justify-center mt-4">
-        <span class="bg-pink-200 text-pink-700 px-3 py-1 rounded-full text-xs">Organized</span>
-      </div>
     </section>
 
     <!-- Middle Column -->
