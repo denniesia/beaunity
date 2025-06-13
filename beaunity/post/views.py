@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, UpdateView
 from django.contrib.auth import get_user_model
 from beaunity.category.models import Category
 from django.urls import reverse_lazy
-
+from .forms import PostEditForm
 from beaunity.post.models import Post
 
 # Create your views here.
@@ -29,5 +29,10 @@ class PostDetailsView(DetailView):
     template_name = 'post/post-details.html'
 
 
+class PostEditView(UpdateView):
+    model = Post
+    form_class = PostEditForm
+    template_name = 'post/post-edit.html'
 
-
+    def get_success_url(self):
+        return reverse_lazy('post-details', kwargs={'pk': self.object.pk})
