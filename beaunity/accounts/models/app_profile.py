@@ -2,6 +2,7 @@ from .app_user import AppUser
 from django.contrib.auth import get_user_model
 from django.db import models
 from beaunity.common.mixins import LastUpdatedMixin
+from .choices import SkinTypeChoices
 
 from cloudinary.models import CloudinaryField
 
@@ -44,8 +45,9 @@ class Profile(LastUpdatedMixin):
         blank=True,
     )
     skin_type = models.CharField(
-        max_length=20,
+        max_length=30,
         null=True,
         blank=True,
+        choices=SkinTypeChoices,
     )
 
