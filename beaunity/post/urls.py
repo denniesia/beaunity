@@ -7,6 +7,7 @@ urlpatterns = [
         path('edit/', views.PostEditView.as_view(), name='post-edit'),
         path('delete/', views.PostDeleteView.as_view(), name='post-delete'),
     ])),
+    path('pending/', views.PendingPostsView.as_view(), name='post-pending'),
 
 
 ]
