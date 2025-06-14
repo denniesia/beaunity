@@ -10,6 +10,7 @@ from beaunity.post.models import Post
 from django.db.models import Q
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 class ForumDashboardView(TemplateView):
@@ -57,6 +58,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         post.save()
         return super().form_valid(form)
 
+@login_required(login_url='login')
 def post_confirmation(request):
     return render(request, 'post/post-create-confirmation.html')
 class PostDetailsView(DetailView):
@@ -64,7 +66,7 @@ class PostDetailsView(DetailView):
     template_name = 'post/post-details.html'
 
 
-class PostEditView(UpdateView):
+class PostEditView(LoginRequiredMixin, UpdateView):
     model = Post
     form_class = PostEditForm
     template_name = 'post/post-edit.html'
@@ -73,13 +75,13 @@ class PostEditView(UpdateView):
         return reverse_lazy('post-details', kwargs={'pk': self.object.pk})
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'post/post-delete.html'
     model = Post
     success_url = reverse_lazy('forum-dashboard')
 
 
-class PendingPostsView(ListView):
+class PendingPostsView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'post/pending-posts.html'
 
