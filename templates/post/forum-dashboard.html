@@ -4,10 +4,18 @@
 
 <div class="w-full max-w-screen-xl mx-auto px-4 py-8">
     <!-- Page Header -->
-    <div class="mb-8">
-        <h1 class="text-4xl font-extrabold text-pink-500 text-center">Forum</h1>
-        <p class="text-pink-500 text-center py-1">Join thoughtful conversations, share experiences, and discover personalized skincare insights.</p>
-    </div>
+    <div class="w-full max-w-screen-xl mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-extrabold text-pink-500 text-center">Forum</h1>
+            <p class="text-pink-500 text-center py-1">Join thoughtful conversations, share experiences, and discover personalized skincare insights.</p>
+            <div class="text-center text-black mt-4">
+                <a href=""  class="inline-block bg-pink-500 text-white px-3 py-2 rounded-lg shadow hover:bg-pink-600 transition">
+                            + Create Post
+                </a>
+            </div>
+        </div>
+
 
     {% for category, posts in category_posts %}
         <!-- Categories Container -->
@@ -35,22 +43,36 @@
                  </div>
              </div>
             <!-- Posts -->
-            {% for post in posts %}
-                <div class="bg-white px-6 py-2 hover:bg-gray-50 ">
-                <!-- Post Row: 3 Columns -->
-                    <div class="grid grid-cols-3 gap-4 items-start py-4 border-b">
-                        <!-- Column 1: Post Content -->
-                        <div>
-                            <a href="{% url 'post-details' post.pk %}" class="text-lg text-gray-600 hover:text-pink-900">{{ post.content }}</a>
-                            <div class="text-right space-y-1">
-                                <a  href="{% url 'profile-details' post.created_by.id %}"><span class="text-sm text-gray-500">By: {{ post.created_by }}</span></a>
-                                <p class="text-xs text-gray-500">Comments:count</p>
-                                <p class="text-xs text-gray-500">Last commented at:</p>
+            <div class="bg-white px-6 py-2 hover:bg-gray-50 ">
+                <div class="grid grid-cols-3 gap-4 items-start py-2 border-b border-gray-200">
+                    {% if posts %}
+                        {% for post in posts %}
+                            <div >
+
+                                <a href="{% url 'post-details' post.pk %}" class="block text-lg text-gray-700 hover:text-pink-600 mb-2">
+                                    {{ post.title }}
+                                </a>
+                                <div class="flex justify-between text-xs text-gray-500">
+                                    <a href="{% url 'profile-details' post.created_by.id %}" class="hover:text-pink-500">
+                                        By: {{ post.created_by }}
+                                    </a>
+                                    <p>Comments: count</p>
+                                    <p>Last commented at:</p>
+                                </div>
                             </div>
+                        {% endfor %}
+                    {% else %}
+                        <div>
+                            <p class="text-lg text-gray-600 hover:text-pink-900">No posts yet. </p>
                         </div>
-                    </div>
+                    {% endif %}
                 </div>
-            {% endfor %}
+                <div class="flex justify-end py-2">
+                    <a href="" class="text-sm text-pink-500 hover:text-pink-700 underline">
+                        + Create Post in {{ category.title }}
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
     {% endfor %}
