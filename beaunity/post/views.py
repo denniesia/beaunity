@@ -9,6 +9,8 @@ from beaunity.post.models import Post
 
 from django.db.models import Q
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 # Create your views here.
 class ForumDashboardView(TemplateView):
     template_name = 'post/forum-dashboard.html'
@@ -26,11 +28,11 @@ class ForumDashboardView(TemplateView):
         context['category_posts'] = category_posts
         return context
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostCreateForm
     template_name = 'post/post-create.html'
-    success_url = reverse_lazy('post/post-create-confirmation')
+    success_url = reverse_lazy('post-confirmation')
 
     def get_initial(self):
         initial = super().get_initial()
@@ -47,7 +49,16 @@ class PostCreateView(CreateView):
         if self.initial.get('category'):
             form.fields['category'].widget = forms.HiddenInput()
         return form
+    
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        
+        post.created_by = self.request.user
+        post.save()
+        return super().form_valid(form)
 
+def post_confirmation(request):
+    return render(request, 'post/post-create-confirmation.html')
 class PostDetailsView(DetailView):
     model = Post
     template_name = 'post/post-details.html'
