@@ -2,11 +2,11 @@
 
 {% block content %}
 
-<div class="w-full max-w-screen-xl mx-auto px-4 py-8">
+<div class="w-full max-w-screen-xl mx-auto px-2 py-8">
     <!-- Page Header -->
     <div class="w-full max-w-screen-xl mx-auto px-4">
         <!-- Page Header -->
-        <div class="mb-8">
+        <div class="mb-2">
             <h1 class="text-4xl font-extrabold text-pink-500 text-center">Forum</h1>
             <p class="text-pink-500 text-center py-1">Join thoughtful conversations, share experiences, and discover personalized skincare insights.</p>
             <div class="text-center text-black mt-4">
@@ -14,12 +14,23 @@
                             + Create Post
                 </a>
             </div>
+            <div>
+                <form method="get" action="{% url 'post-search' %}" class="mt-4">
+                    <input
+                            type="text"
+                            name="query"
+                            placeholder="Search categories and posts..."
+                            value=""
+                            class="w-full md:w-96 px-3 py-2 border border-pink-300 rounded-full text-sm text-gray-700 placeholder-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition duration-200"
+                    />
+                </form>
+            </div>
         </div>
 
 
     {% for category, posts in category_posts %}
         <!-- Categories Container -->
-    <div class="space-y-8 mb-4">
+    <div class="space-y-4 mb-4">
         <!-- Single Category -->
         <div class="rounded-lg overflow-hidden shadow-md">
             <!-- Category Header -->

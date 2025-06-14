@@ -8,9 +8,11 @@
     <!-- Left Column -->
     <section class="col-span-1 relative text-center space-y-4 border-2 border-pink-300 rounded-2xl p-6">
      <!-- Edit Button -->
-      <a href="{% url 'profile-edit' request.user.pk %}" class="absolute top-4 right-4 bg-white hover:bg-pink-600 text-white text-xs px-3 py-1 rounded-full shadow-md">
-        <img src="{% static 'common/edit.png' %}">
-      </a>
+        {% if request.user == profile.user %}
+          <a href="{% url 'profile-edit' profile.pk %}" class="absolute top-4 right-4 bg-white hover:bg-pink-600 text-white text-xs px-3 py-1 rounded-full shadow-md">
+            <img src="{% static 'common/edit.png' %}">
+          </a>
+        {% endif %}
       <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg" class="w-32 h-32 rounded-full mx-auto">
       <h2 class="text-xl font-bold text-pink-600">Username: {{ profile.username }}</h2>
       <p class="text-sm text-pink-600">First Name: {{ profile.first_name }} </p>

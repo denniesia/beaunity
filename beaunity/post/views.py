@@ -6,6 +6,8 @@ from django.urls import reverse_lazy
 from .forms import PostEditForm
 from beaunity.post.models import Post
 
+from django.db.models import Q
+
 # Create your views here.
 class ForumDashboardView(TemplateView):
     template_name = 'post/forum-dashboard.html'
@@ -53,3 +55,23 @@ class PendingPostsView(ListView):
         return posts
 
 
+def forum_search(request):
+    query = request.GET.get('query')
+
+    categories = Category.objects.filter(
+        Q(title__icontains=query)
+            |
+        Q(description__icontains=query)
+    ) if query else []
+    posts = Post.objects.filter(
+        Q(title__icontains=query)
+            |
+        Q(content__icontains=query)
+    ) if query else []
+
+    context = {
+        'query': query,
+        'categories': categories,
+        'posts': posts,
+    }
+    return render(request, 'post/post-search.html', context)

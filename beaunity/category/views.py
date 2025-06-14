@@ -4,6 +4,7 @@ from .models import Category
 from .forms import CategoryCreateForm, CategoryDeleteForm, CategoryEditForm
 from django.urls import reverse_lazy
 from datetime import timezone
+from django.db.models import Q
 # Create your views here.
 class CategoryOverviewView(ListView):
     template_name = 'category/category-overview.html'
@@ -64,10 +65,14 @@ class CategoryDetailsView(DetailView):
 def category_search(request):
     query = request.GET.get('query')
 
-    categories = Category.objects.filter(title__icontains=query) if query else []
+    categories = Category.objects.filter(
+        Q(title__icontains=query)
+        |
+        Q(description__icontains=query)
+    ) if query else []
+
     context = {
         'query': query,
         'categories': categories
     }
-    print(context)
     return render(request, 'category/search_results.html', context)

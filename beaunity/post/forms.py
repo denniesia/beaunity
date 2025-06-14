@@ -41,4 +41,3 @@ class PostEditForm(PostBaseForm):
             'class': CLASS
         })
     )
-
