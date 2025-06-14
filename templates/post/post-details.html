@@ -38,14 +38,13 @@
                         </svg>
                     </a>
                 {% endif %}
-
             </div>
         </div>
 
         <!-- Optional Banner -->
         {% if post.banner %}
         <div class="flex justify-center mb-4">
-            <img src="{{ post.banner }}" alt="Post Banner" class="rounded-lg object-cover shadow-sm  " style="max-width: 450px; max-height: 450px;">
+            <img src="{{ post.banner }}" alt="Post Banner" class="rounded-lg object-cover shadow-sm  " style="max-width: 350px; max-height: 350px;">
         </div>
         {% endif %}
 
@@ -53,6 +52,7 @@
         <div class="text-gray-800 text-base leading-relaxed mb-4">
             {{ post.content }}
         </div>
+
 
         <!-- Interaction Buttons -->
         <div class="flex items-center text-pink-500 space-x-4 text-sm pl-10 mb-4">

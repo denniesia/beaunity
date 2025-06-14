@@ -26,17 +26,22 @@
             <!-- Dropdown Menu/Administration -->
 
             {% if perms.category.change_category %}
-            <div class="relative group">
-              <button class="text-gray-800 hover:text-pink-600 font-medium focus:outline-none">
-                Administration
-              </button>
-              <div class="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
-                <a href="{% url 'category-overview' %}" class="block px-4 py-2 text-gray-700 hover:bg-pink-100">Categories</a>
-                <a href="{% url 'post-pending' %}" class="block px-4 py-2 text-gray-700 hover:bg-pink-100">Posts</a>
-                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-pink-100">Events</a>
-                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-pink-100">Challenges</a>
-              </div>
-            </div>
+                <div class="relative inline-block group">
+                  <!-- Button -->
+                    <button class="text-gray-800 hover:text-pink-600 font-medium focus:outline-none">
+                        Administration
+                    </button>
+
+                    <!-- Dropdown Menu (hidden by default, shows on parent hover) -->
+                    <div class="absolute left-1/2 mt-2 w-48 bg-white border rounded-md shadow-lg
+                              opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                              transition-all duration-200 ease-in-out z-50  transform -translate-x-1/2 text-center">
+                        <a href="{% url 'category-overview' %}" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Categories</a>
+                        <a href="{% url 'post-pending' %}" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Posts</a>
+                        <a href="#" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Events</a>
+                        <a href="#" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Challenges</a>
+                    </div>
+                </div>
             {% endif %}
 
             <form action="{% url 'logout' %}" method="post" class="text-gray-800 hover:text-pink-600 font-medium">
