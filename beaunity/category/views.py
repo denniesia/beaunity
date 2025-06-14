@@ -58,7 +58,7 @@ class CategoryDetailsView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        category_posts = self.object.posts.all()
+        category_posts = self.object.posts.filter(is_approved=True)
         context['posts'] = category_posts
         return context
 
