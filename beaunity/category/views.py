@@ -60,3 +60,14 @@ class CategoryDetailsView(DetailView):
         category_posts = self.object.posts.all()
         context['posts'] = category_posts
         return context
+
+def category_search(request):
+    query = request.GET.get('query')
+
+    categories = Category.objects.filter(title__icontains=query) if query else []
+    context = {
+        'query': query,
+        'categories': categories
+    }
+    print(context)
+    return render(request, 'category/search_results.html', context)

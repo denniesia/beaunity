@@ -8,25 +8,19 @@
 
     <!-- Header with title and create button -->
     <div class="flex justify-between items-center mb-6 pb-4 border-b border-pink-200">
-      <h2 class="text-2xl font-bold text-pink-600">All Categories</h2>
-        <form method="get" action="{% url 'category-search' %}" class="mt-4 mb-2">
+      <h2 class="text-2xl font-bold text-pink-600">Search Results for "{{ query }}"</h2>
+        <form method="get" action="" class="mt-4 mb-2">
           <input
             type="text"
             name="query"
             placeholder="Search categories..."
-            value="{{ request.GET.query }}"
             class="w-full md:w-96 px-3 py-2 border border-pink-300 rounded-full text-sm text-gray-700 placeholder-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition duration-200"
           />
         </form>
-        <a href="{% url 'category-create' %}" class="flex items-center gap-1 bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow-md transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-        </svg>
-        Create New
-        </a>
     </div>
+    {% if categories %}
 
-    {% for category in  object_list %}
+    {% for category in  categories %}
     <!-- Category List -->
     <div class="space-y-4">
         <!-- Category Item  -->
@@ -73,6 +67,9 @@
             <p class="text-sm text-gray-600 mt-3">{{ category.description }}</p>
         </div>
     {% endfor %}
+    {% else %}
+        <p class="text-gray-500">No categories found matching your search.</p>
+    {% endif %}
       </div>
   </div>
 </section>
