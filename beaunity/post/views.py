@@ -17,7 +17,7 @@ class ForumDashboardView(TemplateView):
 
         category_posts = []
         for category in categories:
-            posts = category.posts.filter(is_approved=True).order_by('-created_at')
+            posts = category.posts.filter(is_approved=True).order_by('-created_at')[:5]
             category_posts.append((category, posts))
 
         context['category_posts'] = category_posts
