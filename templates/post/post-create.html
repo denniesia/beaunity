@@ -1,0 +1,51 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+<section class="flex-grow flex items-center justify-center py-10">
+    <div class="bg-white shadow-xl rounded-3xl w-3/4 max-w-2xl p-8">
+        <div class="text-center mb-4">
+            <h2 class="text-2xl font-bold text-pink-600">Create Post</h2>
+            <p class="text-red-500 text-bold mt-1">Your post will be up for approval as soon as it’s created!</p>
+        </div>
+
+        <form method="post" class="space-y-5">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <div>
+                {{ form.banner.label_tag }}
+                {{ form.banner }}
+                {{ form.banner.errors }}
+            </div>
+
+            <div>
+                {{ form.title.label_tag }}
+                {{ form.title }}
+                {{ form.title.errors }}
+            </div>
+
+            <div>
+                {{ form.content.label_tag }}
+                {{ form.content }}
+                {{ form.content.errors }}
+            </div>
+            <div>
+                {{ form.category.label_tag }}
+                {{ form.category }}
+                {{ form.category.errors }}
+            </div>
+
+            <button type="submit"
+                    class="w-full bg-pink-500 hover:bg-pink-600 text-white py-2 rounded-md font-semibold transition">
+                + Create Post
+            </button>
+            <a href=""
+               class="block w-full text-center text-white hover:text-pink-600 py-2 rounded-md font-semibold transition" style="background-color: #cccc; "
+            > Cancel
+            </a>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

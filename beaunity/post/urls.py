@@ -5,6 +5,7 @@ from beaunity.common.views import approve_functionality
 
 urlpatterns = [
     path('dashboard/', views.ForumDashboardView.as_view(), name='forum-dashboard' ),
+    path('create', views.PostCreateView.as_view(), name='post-create'),
     path('<int:pk>/', include([
         path('', views.PostDetailsView.as_view(), name='post-details'),
         path('edit/', views.PostEditView.as_view(), name='post-edit'),

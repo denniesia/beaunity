@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, DetailView, UpdateView, DeleteView, ListView
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, ListView
 from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
 from beaunity.category.models import Category
 from django.urls import reverse_lazy
-from .forms import PostEditForm
+from .forms import PostCreateForm, PostEditForm
 from beaunity.post.models import Post
 
 from django.db.models import Q
@@ -25,6 +26,27 @@ class ForumDashboardView(TemplateView):
         context['category_posts'] = category_posts
         return context
 
+class PostCreateView(CreateView):
+    model = Post
+    form_class = PostCreateForm
+    template_name = 'post/post-create.html'
+    success_url = reverse_lazy('post/post-create-confirmation')
+
+    def get_initial(self):
+        initial = super().get_initial()
+        slug = self.request.GET.get('category')
+        if slug:
+            cat = get_object_or_404(Category, slug=slug)
+            initial['category'] = cat.pk
+
+        return initial
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+
+        if self.initial.get('category'):
+            form.fields['category'].widget = forms.HiddenInput()
+        return form
 
 class PostDetailsView(DetailView):
     model = Post

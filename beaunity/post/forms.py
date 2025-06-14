@@ -3,27 +3,24 @@ from .models import Post
 from beaunity.category.models import Category
 
 class PostBaseForm(forms.ModelForm):
+    CLASS = 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
     class Meta:
         model = Post
-        fields = '__all__'
-
-class PostEditForm(PostBaseForm):
-    CLASS = 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
-    class Meta(PostBaseForm.Meta):
         fields = ['banner', 'title', 'content', 'category']
 
     banner = forms.URLField(
         required=False,
         widget=forms.URLInput(
             attrs={
-                'class': CLASS
+                'class': CLASS,
+                'placeholder': 'Please provide a URL link'
             }
         ),
     )
     title = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'class': CLASS
+                'class': CLASS,
             }
         ),
     )
@@ -31,8 +28,9 @@ class PostEditForm(PostBaseForm):
         widget=forms.Textarea(
             attrs={
                 'class': CLASS,
-                'rows': 3,
+                'rows': 4,
             }
+
         ),
     )
     category = forms.ModelChoiceField(
@@ -41,3 +39,11 @@ class PostEditForm(PostBaseForm):
             'class': CLASS
         })
     )
+
+class PostEditForm(PostBaseForm):
+    pass
+
+
+
+class PostCreateForm(PostBaseForm):
+    pass
