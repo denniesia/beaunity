@@ -44,7 +44,7 @@
         <!-- Optional Banner -->
         {% if post.banner %}
         <div class="flex justify-center mb-4">
-            <img src="{{ post.banner }}" alt="Post Banner" class="rounded-lg object-cover shadow-sm  " style="max-width: 350px; max-height: 350px;">
+            <img src="{{ post.banner }}" alt="Post Banner" class="rounded-lg object-cover shadow-sm  " style="max-width: 450px; max-height:450px;">
         </div>
         {% endif %}
 
@@ -66,6 +66,8 @@
                 <img src="{% static 'common/share.png' %}"> Share
             </a>
         </div>
+
+        {% if post.is_approved %}
 
         <!-- Divider -->
         <hr class="border-t border-gray-300 my-4">
@@ -96,6 +98,7 @@
                 <button type="submit" class="bg-pink-500 text-white px-3 py-1 rounded-md text-sm hover:bg-pink-600 transition">Post</button>
             </div>
         </form>
+      {% endif %}
     </div>
 </div>
 

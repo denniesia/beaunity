@@ -19,7 +19,7 @@ def approve_functionality(request, pk: int):
     if request.user.has_perm('post.can_approve_post'):
         approved_object.is_approved = True
         approved_object.save()
-        return redirect('post-pending', pk=pk)
+        return redirect('post-pending')
 
     return redirect('post-details', pk=pk)
 
