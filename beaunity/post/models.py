@@ -9,5 +9,10 @@ class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts')
     is_approved = models.BooleanField(default=False)
 
+    class Meta:
+        permissions = [
+            ("can_approve_post", "Can approve posts"),
+        ]
+
     def __str__(self):
         return self.title

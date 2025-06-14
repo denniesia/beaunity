@@ -25,11 +25,16 @@
 
                     <!-- Timestamp information row -->
                     <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1">
-                        <a href="{% url 'profile-details' post.created_by.id %}">
+                        <a href="{% url 'profile-details' post.created_by.pk %}">
                             <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
                                 Author: {{ post.created_by }}
                             </span>
                         </a>
+
+                        <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
+                            Category: {{ post.category }}
+                        </span>
+
                         <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -38,9 +43,9 @@
                         </span>
                     </div>
                 </div>
-                <!-- Edit/Delete Buttons -->
+                <!-- Check Button -->
                 <div class="flex gap-2">
-                    <a class="text-pink-500" href="">
+                    <a class="text-pink-500" href="{% url 'post-approve' post.pk %}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" style="color: green" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7" />
                         </svg>
