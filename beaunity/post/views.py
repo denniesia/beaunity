@@ -81,6 +81,7 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('forum-dashboard')
 
 
+
 class PendingPostsView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'post/pending-posts.html'

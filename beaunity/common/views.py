@@ -23,6 +23,9 @@ def approve_functionality(request, pk: int):
 
     return redirect('post-details', pk=pk)
 
-def not_found_page(request):
-    return render(request, 'common/404.html')
 
+def disapprove_functionality(request, pk: int):
+    declined_object = get_object_or_404(Post, pk=pk)
+    if request.user.has_perm('post.can_approve_post'):
+        declined_object.delete()
+        return redirect('post-pending')
