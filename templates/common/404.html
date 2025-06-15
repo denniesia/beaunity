@@ -1,0 +1,29 @@
+{% extends 'common/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<div class="flex justify-center items-center flex-col bg-white">
+  <div id="error-animation" class="w-88 h-88"></div>
+
+  <h1 class="text-4xl font-bold text-pink-600 ">Oops! Page not found</h1>
+  <p class="text-gray-500 mt-2">The page you're looking for doesn't exist.</p>
+
+</div>
+<script src="https://unpkg.com/lottie-web@latest/build/player/lottie.min.js"></script>
+
+<script>
+
+
+  lottie.loadAnimation({
+    container: document.getElementById('error-animation'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: "{% static 'common/404-animation.json' %}"  // path to your downloaded JSON
+  });
+</script>
+
+
+
+{% endblock %}

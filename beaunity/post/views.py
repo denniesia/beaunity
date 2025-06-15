@@ -86,7 +86,7 @@ class PendingPostsView(LoginRequiredMixin, ListView):
     template_name = 'post/pending-posts.html'
 
     def get_queryset(self):
-        posts = Post.objects.filter(is_approved=False).order_by('created_at')
+        posts = Post.objects.filter(is_approved=False).order_by('-created_at')
         return posts
 
 

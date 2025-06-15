@@ -23,3 +23,6 @@ def approve_functionality(request, pk: int):
 
     return redirect('post-details', pk=pk)
 
+def not_found_page(request):
+    return render(request, 'common/404.html')
+
