@@ -8,10 +8,22 @@ from django.db.models import Q
 # Create your views here.
 class CategoryOverviewView(ListView):
     template_name = 'category/category-overview.html'
+    model = Category
 
     def get_queryset(self):
-        return Category.objects.all()
+        query = self.request.GET.get('query')
+        if query:
+            return self.model.objects.filter(
+                Q(title__icontains=query)
+                |
+                Q(description__icontains=query)
+            )
+        return self.model.objects.all()
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.request.GET.get('query', '')
+        return context
 
 class CategoryCreateView(CreateView):
     model = Category
@@ -42,7 +54,11 @@ class CategoryDeleteView(DeleteView):
     success_url = reverse_lazy('category-overview')
 
     def get_initial(self):
+        #pk=self.kwargs.get(self.pk_url_kwarg)
+        #category=self.mocel.object.get(pk=pk)
         return self.object.__dict__
+
+    #TODO: What happens if i delete def post
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -62,17 +78,3 @@ class CategoryDetailsView(DetailView):
         context['posts'] = category_posts
         return context
 
-def category_search(request):
-    query = request.GET.get('query')
-
-    categories = Category.objects.filter(
-        Q(title__icontains=query)
-        |
-        Q(description__icontains=query)
-    ) if query else []
-
-    context = {
-        'query': query,
-        'categories': categories
-    }
-    return render(request, 'category/search_results.html', context)
