@@ -5,8 +5,9 @@ from .forms import CategoryCreateForm, CategoryDeleteForm, CategoryEditForm, Sea
 from django.urls import reverse_lazy
 from datetime import timezone
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
-class CategoryOverviewView(ListView):
+class CategoryOverviewView(LoginRequiredMixin, ListView):
     template_name = 'category/category-overview.html'
     model = Category
     context_object_name = 'categories'
@@ -29,7 +30,7 @@ class CategoryOverviewView(ListView):
         context['query'] =  self.request.GET.get('query', '')
         return context
 
-class CategoryCreateView(CreateView):
+class CategoryCreateView(LoginRequiredMixin, CreateView):
     model = Category
     form_class = CategoryCreateForm
     template_name = 'category/category-create.html'
@@ -39,7 +40,7 @@ class CategoryCreateView(CreateView):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
 
-class CategoryEditView(UpdateView):
+class CategoryEditView(LoginRequiredMixin, UpdateView):
     model = Category
     form_class = CategoryEditForm
     template_name = 'category/category-edit.html'
@@ -48,7 +49,7 @@ class CategoryEditView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('category-overview')
 
-class CategoryDeleteView(DeleteView):
+class CategoryDeleteView(LoginRequiredMixin, DeleteView):
     model = Category
     template_name = 'category/category-delete.html'
     form_class = CategoryDeleteForm

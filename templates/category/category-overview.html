@@ -36,10 +36,10 @@
         <!-- Category List -->
         <div class="space-y-4">
             <!-- Category Item  -->
-            <div class="border border-pink-200 rounded-xl p-5 hover:shadow-md transition-shadow">
+            <div class="border border-pink-200 rounded-xl p-5 hover:shadow-md cursor-default transition-shadow">
                 <div class="flex justify-between items-start">
                     <div>
-                        <h3 class="text-lg font-semibold text-pink-600 cursor-pointer">{{ category.title }}</h3>
+                        <h3 class="text-lg font-semibold text-pink-600 ">{{ category.title }}</h3>
                         <!-- Timestamp information row -->
                         <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1">
                             <a href="{% url 'profile-details' category.created_by.id %}">

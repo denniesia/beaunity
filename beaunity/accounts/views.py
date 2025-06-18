@@ -5,6 +5,8 @@ from .forms import AppUserCreationForm, AppUserLoginForm, ProfileEditForm
 from django.urls import reverse_lazy
 from django.contrib.auth.views import  LoginView
 from .models import Profile
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 UserModel = get_user_model()
@@ -28,12 +30,12 @@ class AppUserLoginView(LoginView):
 
 #Profile Views
 
-class ProfileDetailView(DetailView):
+class ProfileDetailView(LoginRequiredMixin, DetailView):
     template_name = 'accounts/profile-details-page.html'
     model = Profile
     context_object_name = 'profile'
 
-class ProfileEditView(UpdateView):   #LoginRequiredMixin, UserPassesTestMixin
+class ProfileEditView(LoginRequiredMixin, UpdateView):   #LoginRequiredMixin, UserPassesTestMixin
     model = Profile
     form_class = ProfileEditForm
     template_name = 'accounts/profile-edit-page.html'
