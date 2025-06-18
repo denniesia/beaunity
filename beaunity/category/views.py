@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
 from .models import Category
-from .forms import CategoryCreateForm, CategoryDeleteForm, CategoryEditForm
+from .forms import CategoryCreateForm, CategoryDeleteForm, CategoryEditForm, SearchForm
 from django.urls import reverse_lazy
 from datetime import timezone
 from django.db.models import Q
@@ -9,20 +9,24 @@ from django.db.models import Q
 class CategoryOverviewView(ListView):
     template_name = 'category/category-overview.html'
     model = Category
+    context_object_name = 'categories'
 
     def get_queryset(self):
-        query = self.request.GET.get('query')
-        if query:
-            return self.model.objects.filter(
-                Q(title__icontains=query)
-                |
-                Q(description__icontains=query)
-            )
+        self.form = SearchForm(self.request.GET)
+        if self.form.is_valid():
+            query = self.form.cleaned_data.get('query')
+            if query:
+                return self.model.objects.filter(
+                    Q(title__icontains=query)
+                        |
+                    Q(description__icontains=query)
+                )
         return self.model.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['query'] = self.request.GET.get('query', '')
+        context['form'] = self.form
+        context['query'] =  self.request.GET.get('query', '')
         return context
 
 class CategoryCreateView(CreateView):
