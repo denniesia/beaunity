@@ -53,22 +53,16 @@ class CategoryDeleteView(LoginRequiredMixin, DeleteView):
     model = Category
     template_name = 'category/category-delete.html'
     form_class = CategoryDeleteForm
-    slug_field = 'slug'
     slug_url_kwarg = 'category_slug'
 
     success_url = reverse_lazy('category-overview')
 
     def get_initial(self):
-        #pk=self.kwargs.get(self.pk_url_kwarg)
-        #category=self.mocel.object.get(pk=pk)
         return self.object.__dict__
 
-    #TODO: What happens if i delete def post
-
     def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        self.object.delete()
-        return HttpResponseRedirect(self.success_url)
+        return self.delete(request, *args, **kwargs)
+
 
 class CategoryDetailsView(DetailView):
     model = Category
