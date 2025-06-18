@@ -5,7 +5,7 @@
 <div class="w-full max-w-screen-xl mx-auto px-4 py-8">
 
         <!-- Categories Container -->
-    <div class="space-y-8 mb-4">
+    <div class="space-y-2">
         <!-- Single Category -->
         <div class="rounded-lg overflow-hidden shadow-md">
             <!-- Category Header -->
@@ -31,8 +31,8 @@
             <!-- Posts -->
             <div class="bg-white px-6 py-2 hover:bg-gray-50 ">
                 <div class="grid-cols-3 gap-4 items-start py-2 border-b border-gray-200">
-                    {% if posts %}
-                        {% for post in posts %}
+                    {% if page_obj %}
+                        {% for post in page_obj %}
                             <div>
                                 <a href="{% url 'post-details' post.pk %}" class="block text-lg text-gray-500 hover:text-pink-600 mb-1">
                                     {{ post.title }}
@@ -75,12 +75,21 @@
                     {% endif %}
                 </div>
                 <div class="flex justify-end py-2">
-
                     <a href="{% url 'post-create' %}" class="text-sm text-pink-500 hover:text-pink-700 underline">
                         + Create Post in {{ category.title }}
                     </a>
                 </div>
             </div>
+        </div>
+        <div class="text-sm font-medium text-pink-500 ml-2">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class=" hover:text-blue-700">Previous</a>
+            {% endif %}
+            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="hover:text-blue-700">Next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="hover:text-blue-700">Last</a>
+            {% endif %}
         </div>
     </div>
 </div>

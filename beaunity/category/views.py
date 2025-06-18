@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from datetime import timezone
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 # Create your views here.
 class CategoryOverviewView(LoginRequiredMixin, ListView):
     template_name = 'category/category-overview.html'
@@ -68,12 +69,17 @@ class CategoryDetailsView(DetailView):
     model = Category
     template_name = 'category/category-details.html'
     context_object_name = 'category'
-    slug_field = 'slug'
     slug_url_kwarg = 'category_slug'
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         category_posts = self.object.posts.filter(is_approved=True)
-        context['posts'] = category_posts
+
+        paginator = Paginator(category_posts, 10)
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        context['page_obj'] = page_obj
+
         return context
 
