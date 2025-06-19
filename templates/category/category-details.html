@@ -1,8 +1,8 @@
 {% extends 'common/base.html' %}
-
+{% load static %}
 {% block content %}
 
-<div class="w-full max-w-screen-xl mx-auto px-4 py-8">
+<div class="w-full max-w-screen-xl mx-auto px-4">
 
         <!-- Categories Container -->
     <div class="space-y-2">
@@ -83,15 +83,23 @@
             </div>
         </div>
         <div class="text-sm font-medium text-pink-500 ml-2">
-            {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}" class=" hover:text-blue-700">Previous</a>
+            {% if page_obj.has_previous %}<a href="?page=1" class="hover:text-blue-700">First</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="hover:text-blue-700">Previous</a>
             {% endif %}
-            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            <span class="text-gray-700">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
             {% if page_obj.has_next %}
                 <a href="?page={{ page_obj.next_page_number }}" class="hover:text-blue-700">Next</a>
                 <a href="?page={{ page_obj.paginator.num_pages }}" class="hover:text-blue-700">Last</a>
             {% endif %}
+
         </div>
+            <div class="text-pink-400 text-base text-center font-semibold" >
+                <a href="{% url 'forum-dashboard' %}" class="inline-flex hover:text-pink-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061A1.125 1.125 0 0 1 21 8.689v8.122ZM11.25 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061a1.125 1.125 0 0 1 1.683.977v8.122Z" />
+                    </svg>
+                </a>
+             </div>
     </div>
 </div>
 
