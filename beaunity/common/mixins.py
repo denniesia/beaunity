@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.core.validators import MinLengthValidator
+
 
 UserModel = get_user_model()
 
@@ -18,5 +20,14 @@ class CreatedAtMixin(models.Model):
 class CreatedByMixin(models.Model):
     created_by = models.ForeignKey(UserModel, on_delete=models.CASCADE)
 
+    class Meta:
+        abstract = True
+
+class ContentMixin(models.Model):
+    content = models.TextField(
+        validators=[
+            MinLengthValidator(5),
+        ]
+    )
     class Meta:
         abstract = True

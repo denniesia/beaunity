@@ -38,6 +38,7 @@ MY_APPS = [
     # 'beaunity.challenge'
      'beaunity.category',
      'beaunity.post',
+     'beaunity.comment',
 ]
 # Application definition
 

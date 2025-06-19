@@ -45,8 +45,8 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         initial = super().get_initial()
         slug = self.request.GET.get('category')
         if slug:
-            cat = get_object_or_404(Category, slug=slug)
-            initial['category'] = cat.pk
+            category = get_object_or_404(Category, slug=slug)
+            initial['category'] = category.pk
 
         return initial
 

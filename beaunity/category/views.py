@@ -79,7 +79,7 @@ class CategoryDetailsView(DetailView):
         paginator = Paginator(category_posts, 6)
         page_number = self.request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-        context['page_obj'] = page_obj
+        context['posts'] = page_obj
 
         return context
 

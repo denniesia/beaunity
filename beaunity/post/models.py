@@ -1,17 +1,12 @@
 from django.db import models
 from beaunity.category.models import Category
-from beaunity.common.mixins import CreatedByMixin, CreatedAtMixin, LastUpdatedMixin
+from beaunity.common.mixins import ContentMixin, CreatedByMixin, CreatedAtMixin, LastUpdatedMixin
 from django.core.validators import MinLengthValidator
 # Create your models here.
-class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
+class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, ContentMixin):
     banner = models.URLField(null=True, blank=True)
     title = models.CharField(
         max_length=100,
-        validators=[
-            MinLengthValidator(5),
-        ]
-    )
-    content = models.TextField(
         validators=[
             MinLengthValidator(5),
         ]
