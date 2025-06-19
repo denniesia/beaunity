@@ -23,6 +23,7 @@ class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
         permissions = [
             ("can_approve_post", "Can approve posts"),
         ]
+        ordering = ['-created_at']
 
     def __str__(self):
         return self.title

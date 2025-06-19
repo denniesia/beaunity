@@ -3,7 +3,7 @@ from django.views.generic import TemplateView, CreateView, DetailView, UpdateVie
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from beaunity.category.models import Category
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .forms import PostCreateForm, PostEditForm
 from beaunity.post.models import Post
 
@@ -11,6 +11,7 @@ from django.db.models import Q
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from beaunity.common.utils import user_is_admin_or_moderator
 
 # Create your views here.
 class ForumDashboardView(TemplateView):
@@ -33,7 +34,12 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostCreateForm
     template_name = 'post/post-create.html'
-    success_url = reverse_lazy('post-confirmation')
+
+    def get_success_url(self):
+        if user_is_admin_or_moderator(self.request.user):
+            return reverse('category-details', kwargs={'category_slug': self.object.category.slug})
+        else:
+            return reverse_lazy('post-confirmation')
 
     def get_initial(self):
         initial = super().get_initial()
@@ -55,6 +61,10 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         post = form.save(commit=False)
         
         post.created_by = self.request.user
+
+        if user_is_admin_or_moderator(self.request.user):
+            post.is_approved = True
+
         post.save()
         return super().form_valid(form)
 

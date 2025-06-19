@@ -76,7 +76,7 @@ class CategoryDetailsView(DetailView):
         context = super().get_context_data(**kwargs)
         category_posts = self.object.posts.filter(is_approved=True)
 
-        paginator = Paginator(category_posts, 10)
+        paginator = Paginator(category_posts, 6)
         page_number = self.request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         context['page_obj'] = page_obj
