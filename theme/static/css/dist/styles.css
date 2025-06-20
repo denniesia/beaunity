@@ -884,6 +884,24 @@
   .text-red-500 {
     color: var(--color-red-500);
   }
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-20%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
   .text-red-600 {
     color: var(--color-red-600);
   }
