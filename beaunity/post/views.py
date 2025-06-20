@@ -14,6 +14,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from beaunity.common.utils import user_is_admin_or_moderator
 
+from django.core.paginator import Paginator
+
 # Create your views here.
 class ForumDashboardView(TemplateView):
     template_name = 'post/forum-dashboard.html'
@@ -80,7 +82,14 @@ class PostDetailsView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = CommentCreateForm()
-        context['comments'] = self.object.comments.all()
+        comments = self.object.comments.all().order_by('-created_at')
+
+
+        paginator = Paginator(comments, 5)
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        context['comments'] = page_obj
+
         return context
 
     def post(self, request, *args, **kwargs):

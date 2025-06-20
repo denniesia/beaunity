@@ -13,7 +13,7 @@ class CommentBaseForm(forms.ModelForm):
                 attrs={
                     'class': CLASS,
                     'placeholder': 'Comments must be longer than 5 characters...',
-                    'rows': 4,
+                    'rows': 3,
                 }
             )
         }
