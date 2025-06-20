@@ -12,6 +12,9 @@ class IndexView(ListView):
     def get_queryset(self):
         return Category.objects.all()
 
+def custom_permission_denied_view(request, exception=None):
+    return render(request, "403.html", status=403)
+
 
 #TODO - Challenge and Events logic
 @login_required
@@ -32,3 +35,5 @@ def disapprove_functionality(request, pk: int):
     if request.user.has_perm('post.can_approve_post'):
         declined_object.delete()
         return redirect('post-pending')
+
+
