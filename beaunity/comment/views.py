@@ -4,10 +4,11 @@ from .models import Comment
 from .forms import CommentEditForm
 from django.views.generic import UpdateView, DeleteView
 
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-class CommentEditView(UpdateView):
+class CommentEditView(LoginRequiredMixin, UpdateView):
     model = Comment
     form_class = CommentEditForm
     template_name = 'comment/comment-edit.html'
@@ -15,7 +16,7 @@ class CommentEditView(UpdateView):
     def get_success_url(self):
         return reverse('post-details', kwargs={'pk': self.object.content_object.pk })
 
-
+@login_required(login_url='login')
 def delete_comment(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
 
