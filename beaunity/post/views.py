@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from beaunity.category.models import Category
 from django.urls import reverse_lazy, reverse
-from .forms import PostCreateForm, PostEditForm
+from .forms import PostCreateForm, PostEditForm, AdminPostEditForm
 from beaunity.comment.forms import CommentCreateForm
 from beaunity.post.models import Post
 
@@ -112,13 +112,21 @@ class PostDetailsView(DetailView):
 
 class PostEditView(LoginRequiredMixin, UpdateView):
     model = Post
-    form_class = PostEditForm
     template_name = 'post/post-edit.html'
 
     def get_success_url(self):
+        if user_is_admin_or_moderator(self.request.user):
+            return reverse_lazy('post-pending')
+
         return reverse_lazy('post-details', kwargs={'pk': self.object.pk})
 
+    def get_form_class(self):
+        if self.request.user.groups.filter(name='Moderator').exists() or self.request.user.groups.filter(name='Superadmin').exists():
+            return AdminPostEditForm
+        return PostEditForm
 
+    def get_initial(self):
+       return self.object.__dict__
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'post/post-delete.html'
     model = Post
