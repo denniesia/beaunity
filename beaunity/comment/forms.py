@@ -21,3 +21,7 @@ class CommentBaseForm(forms.ModelForm):
 
 class CommentCreateForm(CommentBaseForm):
     pass
+
+
+class CommentEditForm(CommentBaseForm):
+    pass

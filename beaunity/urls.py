@@ -24,5 +24,6 @@ urlpatterns = [
     path("accounts/", include("beaunity.accounts.urls")),
     path("category/", include("beaunity.category.urls")),
     path("post/", include("beaunity.post.urls")),
+    path("comment/", include("beaunity.comment.urls")),
 
 ]
