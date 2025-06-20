@@ -2,6 +2,8 @@ from django.db import models
 from beaunity.category.models import Category
 from beaunity.common.mixins import ContentMixin, CreatedByMixin, CreatedAtMixin, LastUpdatedMixin
 from django.core.validators import MinLengthValidator
+from django.contrib.contenttypes.fields import GenericRelation
+from beaunity.comment.models import Comment
 # Create your models here.
 class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, ContentMixin):
     banner = models.URLField(null=True, blank=True)
@@ -13,6 +15,8 @@ class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, ContentMixin):
     )
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts')
     is_approved = models.BooleanField(default=False)
+
+    comments = GenericRelation(Comment)
 
     class Meta:
         permissions = [

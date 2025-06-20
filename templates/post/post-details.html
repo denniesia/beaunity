@@ -71,16 +71,12 @@
                 <img src="{% static 'common/share.png' %}"> Share
             </a>
         </div>
-
-
-
         <!-- Divider -->
         <hr class="border-t border-gray-300 my-4">
 
         <!-- Comments Section -->
         <p class="text-sm font-semibold text-gray-800 mb-2 mt-4">Comments:</p>
-
-        {% for comment in post.comments.all %}
+        {% for comment in comments %}
         <div class="flex gap-3 items-start mb-3">
             <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 text-xs shadow-inner">
                 💬
@@ -92,18 +88,31 @@
             </div>
         </div>
         {% empty %}
-        <p class="text-xs text-gray-500">No comments yet. Be the first to comment!</p>
+        <p class="text-xs text-gray-500 mb-2">No comments yet. Be the first to comment!</p>
         {% endfor %}
 
-        <!-- Add Comment Form -->
-        <form method="post" action="#" class="mt-4">
+        <!-- Comment Form -->
+        <form method="post" id="comment-form">
             {% csrf_token %}
-            <div class="flex items-start gap-2">
-                <textarea name="content" rows="2" class="w-full text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-1 focus:ring-pink-400 resize-none" placeholder="Add a comment..."></textarea>
-                <button type="submit" class="bg-pink-500 text-white px-3 py-1 rounded-md text-sm hover:bg-pink-600 transition">Post</button>
-            </div>
+            {{ form.content}}
+            <button id="submit-btn" type="submit"
+                    class="bg-pink-500 text-white px-3 py-1 rounded-md text-sm hover:bg-pink-600 transition hidden">
+                Post
+            </button>
+            <script>
+                const textarea = document.querySelector('textarea[name="content"]');
+                const button = document.getElementById('submit-btn');
+
+                textarea.addEventListener('input', () => {
+                    if (textarea.value.trim().length >= 5) {
+                        button.classList.remove('hidden');
+                    } else {
+                        button.classList.add('hidden');
+                    }
+                });
+            </script>
         </form>
-      {% endif %}
+        {% endif %}
     </div>
 </div>
 

@@ -1,14 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, ListView
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from beaunity.category.models import Category
 from django.urls import reverse_lazy, reverse
 from .forms import PostCreateForm, PostEditForm
+from beaunity.comment.forms import CommentCreateForm
 from beaunity.post.models import Post
 
 from django.db.models import Q
-
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from beaunity.common.utils import user_is_admin_or_moderator
@@ -74,6 +75,30 @@ def post_confirmation(request):
 class PostDetailsView(DetailView):
     model = Post
     template_name = 'post/post-details.html'
+    context_object_name = 'post'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = CommentCreateForm()
+        context['comments'] = self.object.comments.all()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = CommentCreateForm(request.POST)
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.created_by = request.user
+
+            comment.content_type = ContentType.objects.get_for_model(self.object)
+            comment.object_id = self.object.pk
+            comment.save()
+            return redirect('post-details', pk = self.object.pk)
+
+        context = self.get_context_data(form=form)
+        return self.render_to_response(context)
+
 
 
 class PostEditView(LoginRequiredMixin, UpdateView):

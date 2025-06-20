@@ -1,60 +1,60 @@
 <div class="bg-white px-6 py-2 hover:bg-gray-50 ">
-                <div class=" grid-cols-3 gap-4 items-start py-2 border-b border-gray-200 ">
-                    {% if posts %}
-                        {% for post in posts %}
-                            <div>
-                                <a href="{% url 'post-details' post.pk %}" class="block text-lg text-gray-500 hover:text-pink-600 mb-1">
-                                    {{ post.title }}
-                                </a>
-                                <div class="flex justify-between text-xs mb-2 text-gray-500">
-                                    <a href="{% url 'profile-details' post.created_by.id %}" class=" flexhover:text-pink-500">
-                                        <span class="inline-flex items-center text-xs text-gray-500 px-2 py-0.5">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9 9 0 0112 15a9 9 0 016.879 2.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                <span>{{ category.created_by }}</span>
-                                            </svg>
+    <div class=" grid-cols-3 gap-4 items-start py-2 border-b border-gray-200 ">
+        {% if posts %}
+            {% for post in posts %}
+                <div>
+                    <a href="{% url 'post-details' post.pk %}" class="block text-lg text-gray-500 hover:text-pink-600 mb-1">
+                        {{ post.title }}
+                    </a>
+                    <div class="flex justify-between text-xs mb-2 text-gray-500">
+                        <a href="{% url 'profile-details' post.created_by.id %}" class=" flexhover:text-pink-500">
+                            <span class="inline-flex items-center text-xs text-gray-500 px-2 py-0.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9 9 0 0112 15a9 9 0 016.879 2.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <span>{{ category.created_by }}</span>
+                                </svg>
 
-                                        </span>
-                                    </a>
-                                     <span class="inline-flex items-center text-xs text-gray-500  px-2 py-0.5">
-                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                   d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                         </svg>
-                                          <span>{{ post.created_at|date:"F j, Y, H:i" }}</span>
-                                     </span>
-                                    <span class="inline-flex items-center text-xs text-gray-500 px-2 py-0.5">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-                                        </svg>
-                                        <span>Comemnts count:</span>
-                                     </span>
-                                    <span class="inline-flex items-center text-xs text-gray-500 px-2 py-0.5">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.77 9.77 0 01-4.55-1.055L3 21l1.707-4.293A8.963 8.963 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                                        </svg>
-                                        <span>Last comment:</span>
-                                    </span>
-
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <div>
-                            <p class="text-lg text-gray-500 hover:text-pink-900">No posts yet. </p>
-                        </div>
-                    {% endif %}
-                </div>
-                <div class="flex py-2 justify-between">
-                    {% if '/dashboard/' in request.path  %}
-                        <a href="{% url 'category-details' category.slug %}" class="text-sm  text-pink-500 hover:text-pink-700 underline">
-                            See More Posts in {{ category.title }}
+                            </span>
                         </a>
-                    {% endif %}
+                         <span class="inline-flex items-center text-xs text-gray-500  px-2 py-0.5">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                       d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                             </svg>
+                              <span>{{ post.created_at|date:"F j, Y, H:i" }}</span>
+                         </span>
+                        <span class="inline-flex items-center text-xs text-gray-500 px-2 py-0.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                            </svg>
+                            <span>Comemnts count:</span>
+                         </span>
+                        <span class="inline-flex items-center text-xs text-gray-500 px-2 py-0.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.77 9.77 0 01-4.55-1.055L3 21l1.707-4.293A8.963 8.963 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            </svg>
+                            <span>Last comment:</span>
+                        </span>
 
-                        <a  href="{% url 'post-create' %}?category={{ category.slug }}"  class="text-sm  text-pink-500 hover:text-pink-700 underline">
-                            + Create Post in {{ category.title }}
-                        </a>
-
+                    </div>
                 </div>
+            {% endfor %}
+        {% else %}
+            <div>
+                <p class="text-lg text-gray-500 hover:text-pink-900">No posts yet. </p>
             </div>
+        {% endif %}
+    </div>
+    <div class="flex py-2 justify-between">
+        {% if '/dashboard/' in request.path  %}
+            <a href="{% url 'category-details' category.slug %}" class="text-sm  text-pink-500 hover:text-pink-700 underline">
+                See More Posts in {{ category.title }}
+            </a>
+        {% endif %}
+
+            <a  href="{% url 'post-create' %}?category={{ category.slug }}"  class="text-sm  text-pink-500 hover:text-pink-700 underline">
+                + Create Post in {{ category.title }}
+            </a>
+
+    </div>
+</div>
