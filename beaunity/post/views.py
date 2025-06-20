@@ -82,7 +82,7 @@ class PostDetailsView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = CommentCreateForm()
-        comments = self.object.comments.all().order_by('-created_at')
+        comments = self.object.comments.all().order_by('created_at')
 
 
         paginator = Paginator(comments, 5)
