@@ -20,9 +20,12 @@
 
         <!-- Form Section -->
       <div class="space-y-6">
-        <form method="post" class="space-y-6">
+        <form method="post" class="space-y-6" enctype="multipart/form-data">
           {% csrf_token %}
-          {{ form.title.label_tag }}
+          {{ form.image.label_tag }}
+          {{ form.image }}
+
+            {{ form.title.label_tag }}
           {{ form.title }}
 
           {{ form.description.label_tag }}

@@ -1,10 +1,27 @@
 from django import forms
 from .models import Category
+from cloudinary.forms import CloudinaryFileField
+from django.forms import ClearableFileInput
 
 class CategoryBaseForm(forms.ModelForm):
     class Meta:
         model = Category
         exclude = ['created_by',]
+
+    image = CloudinaryFileField(
+        label='Image',
+        required=False,
+        options={
+            'folder': 'category_images',  # optional: where to store images in your Cloudinary account
+            'use_filename': True,
+            'unique_filename': True,
+        },
+        widget=ClearableFileInput(
+            attrs={
+                'class': 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
+            }
+        )
+    )
 
     title = forms.CharField(
         label='Title:',
