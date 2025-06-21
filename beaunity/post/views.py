@@ -84,7 +84,6 @@ class PostDetailsView(DetailView):
         context['form'] = CommentCreateForm()
         comments = self.object.comments.all().order_by('created_at')
 
-
         paginator = Paginator(comments, 5)
         page_number = self.request.GET.get('page')
         page_obj = paginator.get_page(page_number)
