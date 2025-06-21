@@ -6,7 +6,7 @@ from cloudinary.models import CloudinaryField
 # Create your models here.
 class Category(LastUpdatedMixin, CreatedAtMixin, CreatedByMixin):
     title = models.CharField(max_length=30, unique=True)
-    image = CloudinaryField(blank=True, null=True, default='',)
+    image = CloudinaryField()
     description = models.CharField(max_length=100)
     slug = models.SlugField(null=True, blank=True, unique=True, editable=False)
 
