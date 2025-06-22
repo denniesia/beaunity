@@ -14,7 +14,7 @@
         <div class="flex items-center justify-center space-x-4">
             <!-- Logo -->
             <a href="{% url 'index' %}" class="flex items-center space-x-2">
-                <img src="{% static 'common/beaunity_logo.png' %}" class="h-11" />
+                <img src="{% static 'common/beaunity_logo.png' %}" class="h-10" />
             </a>
 
             <!-- Search bar -->
@@ -24,7 +24,7 @@
                     name="query"
                     placeholder="Search..."
                     value=""
-                    class="w-65 px-3 bg-white py-2 border border-pink-300 rounded-full text-sm text-gray-700 placeholder-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition duration-200"
+                    class="w-9/10 px-3 bg-white py-2 border border-pink-300 rounded-full text-sm text-gray-700 placeholder-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition duration-200"
                 />
             </form>
         </div>
@@ -61,19 +61,15 @@
                 <a href="{% url 'register' %}" class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-md text-sm font-medium">Register</a>
             {% endif %}
         </div>
-
         <!-- Mobile menu toggle -->
-        <button data-collapse-toggle="navbar-menu" type="button"
-                class="md:hidden inline-flex items-center p-2 w-10 h-10 justify-center text-gray-500 rounded-lg hover:bg-pink-200 focus:outline-none"
-                aria-controls="navbar-menu" aria-expanded="false">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-                 viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M4 6h16M4 12h16M4 18h16" />
+        <button id="menu-toggle" class="md:hidden text-pink-600 focus:outline-none">
+            <!-- Icon or text -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                 viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
         </button>
     </div>
-
     <!-- Mobile Menu -->
     <div class="md:hidden hidden px-4 pb-4" id="navbar-menu">
         <ul class="space-y-2">
@@ -92,4 +88,13 @@
             {% endif %}
         </ul>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleBtn = document.getElementById("menu-toggle");
+            const menu = document.getElementById("navbar-menu");
+            toggleBtn.addEventListener("click", function () {
+            menu.classList.toggle("hidden");
+            });
+        });
+</script>
 </nav>
