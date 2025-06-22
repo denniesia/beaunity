@@ -1,0 +1,109 @@
+#details-wrapper {
+  background-color: var(--details-background);
+  color: var(--text-muted);
+  margin: 50px auto;
+  width: 50%;
+  border-radius: var(--border-radius-big); /* Big soft corners */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#details-wrapper:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 30px rgba(34, 211, 238, 0.4);
+}
+
+#details-wrapper img {
+  display: block;
+  margin: 20px auto;
+  height: 30vh;
+  width: 30vh;
+  object-fit: cover;
+  border-radius: var(--border-radius-big); /* Soft round image (not circular) */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#details-title {
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--h2-color);
+  margin-top: 10px;
+}
+
+#details-description {
+  width: 90%;
+  margin: 30px auto;
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+h4 {
+  text-align: center;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  color: var(--hover-background);
+  margin-top: 15px;
+}
+
+p {
+  text-align: center;
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+span {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--orange-background);
+}
+
+#action-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  gap: 20px;
+}
+
+#action-buttons a {
+  text-decoration: none;
+  font-size: 18px;
+  width: 130px;
+  text-align: center;
+  color: white;
+  background-color: var(--button-background);
+  border-radius: var(--border-radius-big); /* Rounded pill style */
+  padding: 10px;
+  font-family: var(--font-primary);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#action-buttons a:hover {
+  background-color: var(--button-hover);
+  font-weight: 700;
+  transform: scale(1.1);
+}
+
+#nutrition {
+  font-size: 22px;
+  font-weight: 600;
+  font-family: var(--font-primary);
+  color: var(--h2-color);
+}
+
+ul {
+  text-align: left;
+  width: 70%;
+  padding-inline-start: 5px;
+  margin: 0 auto;
+  color: var(--text-muted);
+}
+
+
+

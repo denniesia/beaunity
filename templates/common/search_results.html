@@ -1,0 +1,84 @@
+{% extends "common/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-6">
+
+    <h2 class="text-2xl font-bold text-pink-600 mb-6">
+        Search results for: "{{ query }}"
+    </h2>
+
+    {% if search_mode %}
+
+        <!-- Categories -->
+        <h3 class="text-xl font-semibold text-pink-500 mb-4">Matching Categories</h3>
+        {% if categories %}
+            <div class="space-y-4">
+                {% for category in categories %}
+                    <div class="border border-pink-200 rounded-xl p-5 hover:shadow-md transition-shadow">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-lg font-semibold text-pink-600">{{ category.title }}</h4>
+                                <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1">
+                                    <a href="{% url 'profile-details' category.created_by.id %}">
+                                        <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
+                                            Author: {{ category.created_by }}
+                                        </span>
+                                    </a>
+                                    <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
+                                        {{ category.created_at|date:"M d, Y" }}
+                                    </span>
+                                    <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
+                                        Updated {{ category.last_updated|timesince }} ago
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-3">{{ category.description }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-gray-500 mb-6">No categories found.</p>
+        {% endif %}
+
+
+        <!-- Posts -->
+        <h3 class="text-xl font-semibold text-pink-500 mt-10 mb-4">Matching Posts</h3>
+        {% if posts %}
+            <div class="space-y-4">
+                {% for post in posts %}
+                    <div class="border border-pink-200 rounded-xl p-5 hover:shadow-md transition-shadow">
+                        <h4 class="text-lg font-semibold text-pink-600">{{ post.title }}</h4>
+                        <p class="text-sm text-gray-600 mt-2">{{ post.content|truncatewords:30 }}</p>
+                        <div class="mt-2 text-xs text-gray-400">Published on {{ post.created_at|date:"M d, Y" }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-gray-500 mb-6">No posts found.</p>
+        {% endif %}
+
+
+        <!-- Users -->
+        <h3 class="text-xl font-semibold text-pink-500 mt-10 mb-4">Matching Users</h3>
+        {% if users %}
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {% for user in users %}
+                    <div class="border border-pink-200 rounded-xl p-4 hover:shadow-md transition-shadow">
+                        <a href="{% url 'profile-details' user.id %}" class="text-pink-600 font-semibold">
+                            {{ user.username }}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-gray-500">No users found.</p>
+        {% endif %}
+
+    {% else %}
+        <p class="text-gray-500">Please enter a search term to view results.</p>
+    {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+
+    <section id="edit">
+
+        <div class="form">
+            <!-- A default image -->
+            <img class="dell-img" src="{% static 'images/del.png' %}" alt="del" />
+            <h1>Do you like to delete your Organizer's Profile?</h1>
+            <p>*Note: If you have upcoming events, your profile will NOT be deleted!</p>
+
+            <!-- Delete Organizer's Profile Form -->
+            <form id='delete' class="register-form" method="POST" action="">
+                {% csrf_token %}
+                {{ form }}
+
+                <!-- Confirm Button -->
+                <button type="submit">Yes, delete it!</button>
+
+            </form>
+            <!-- End Delete Form -->
+        </div>
+
+    </section>
+
+{% endblock %}

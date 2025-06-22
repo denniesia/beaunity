@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+:root {
+    /* fonts */
+    --font-primary: 'Manrope', sans-serif;
+    --font-heading: 'Playfair Display', serif;
+    --font-accent: 'Quicksand', sans-serif;
+    --font-script: 'Quicksand', cursive;
+
+    /* Light & Minimal Theme Variables */
+    --white-color: #ffffff;
+    --body-bg: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    --primary-text: #333333;
+    --text-muted: #7d7d7d;
+
+    /* Headings and highlights */
+    --heading-color: #5e548e;
+    --h2-color: #9f86c0;
+
+    /* Cards & Panels */
+    --card-background: #ffffff;
+    --card-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+
+    /* Buttons */
+    --button-background: #f28482;
+    --button-hover: #e76f51;
+    --button-primary: #84a59d;
+    --button-primary-hover: #52796f;
+
+    /* Input & Forms */
+    --light-input-background: #f9f9f9;
+    --light-border: 1px solid #dddddd;
+    --readonly-background: #ede3e3;
+    --input-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    --placeholder-text-color: #aaaaaa;
+
+    /* Details and Containers */
+    --details-background: #fff6f6;
+    --form-background: #ffffff;
+    --form-border: 2px solid #e0e0e0;
+    --form-radius: 12px;
+    --border-radius-big: 100px;
+    --border-radius-round: 20px;
+    --large-border-radius: 30px;
+    --form-clip-path: none;
+
+    /* Accents */
+    --orange-background: #ffb4a2;
+    --hover-background: #ffe5d9;
+    --muted-message: #bdbdbd;
+    --error-text: #d62828;
+
+    /* Navigation & Footer */
+    --nav-link: #5e548e;
+    --nav-hover: #9f86c0;
+    --footer-bg: #f8f9fa;
+    --footer-text: #333333;
+}
