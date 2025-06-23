@@ -3,114 +3,21 @@
 
 {% block content %}
 
-<div class="flex justify-center items-center min-h-screen bg-pink-50 py-10">
-  <form class="bg-white rounded-2xl shadow-xl w-full max-w-6xl p-10 grid md:grid-cols-3 gap-6" method="POST" enctype="multipart/form-data">
+<div class="bg-pink-50 flex-grow flex items-center justify-center py-16">
+  <form method="POST" enctype="multipart/form-data"
+        class="bg-white border-2 border-pink-300 rounded-2xl shadow-xl w-full max-w-6xl p-10 grid md:grid-cols-3 gap-6">
+
     {% csrf_token %}
-    <!-- Paste generated LEFT column here -->
-      <div class="col-span-1 text-center space-y-4 border-2 border-pink-300 rounded-2xl p-6">
 
-        <!-- Profile Picture -->
-         <div class="flex flex-col items-center">
-        <!-- Profile Image Preview -->
-        <img id="profile-image-preview"
-             src="{{ form.instance.profile_picture.url|default:'https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg' }}"
-             class="w-32 h-32 rounded-full mx-auto"
-             alt="Profile Picture">
+    {{ user_form }}
+    {{ profile_form }}
 
-        <!-- Upload Button -->
-        <div class="mt-4 w-full">
-            <button  for="id_profile_picture" class="cursor-pointer inline-block bg-pink-600 text-white px-4 py-2 rounded-md shadow hover:bg-pink-700 transition">
-                Upload Picture
-            </button>
-            {{ form.profile_picture }}
-            {% if form.profile_picture.errors %}
-                <p class="mt-1 text-sm text-red-600">{{ form.profile_picture.errors }}</p>
-            {% endif %}
-        </div>
-    </div>
-        <!-- Email-->
-        <div class="mb-2">
-            <label class="block text-sm font-medium text-pink-600 mb-1">
-                Email:
-            </label>
-            {{ form.instance.user.email}}
-            {% if form.instance.user.email.errors %}
-                <p class="mt-1 text-sm text-red-600">{{ form.first_name.errors }}</p>
-            {% endif %}
-        </div>
-
-        <!-- First Name -->
-        <div class="mb-2">
-            <label class="block text-sm font-medium text-pink-600 mb-1">
-                {{ form.first_name.label }}
-            </label>
-            {{ form.first_name }}
-            {% if form.first_name.errors %}
-                <p class="mt-1 text-sm text-red-600">{{ form.first_name.errors }}</p>
-            {% endif %}
-        </div>
-
-        <!-- Last Name -->
-        <div class="mb-2">
-            <label class="block text-sm font-medium text-pink-600 mb-1">
-                {{ form.last_name.label }}
-            </label>
-            {{ form.last_name }}
-            {% if form.last_name.errors %}
-                <p class="mt-1 text-sm text-red-600">{{ form.last_name.errors }}</p>
-            {% endif %}
-        </div>
-
-        <!-- Bio -->
-        <div class="mb-2">
-            <label class="block text-sm font-medium text-pink-600 mb-1">
-                {{ form.bio.label }}
-            </label>
-            {{ form.bio }}
-            {% if form.bio.errors %}
-                <p class="mt-1 text-sm text-red-600">{{ form.bio.errors }}</p>
-            {% endif %}
-        </div>
-
-        <!-- Date of Birth -->
-        <div class="mb-2">
-            <label class="block text-sm font-medium text-pink-600 mb-1">
-                {{ form.date_of_birth.label }}
-            </label>
-            {{ form.date_of_birth }}
-            {% if form.date_of_birth.errors %}
-                <p class="mt-1 text-sm text-red-600">{{ form.date_of_birth.errors }}</p>
-            {% endif %}
-        </div>
-
-        <!-- Location -->
-        <div class="mb-2">
-            <label class="block text-sm font-medium text-pink-600 mb-1">
-                {{ form.location.label }}
-            </label>
-            {{ form.location }}
-            {% if form.location.errors %}
-                <p class="mt-1 text-sm text-red-600">{{ form.location.errors }}</p>
-            {% endif %}
-        </div>
-
-        <!-- Skin Type -->
-        <div class="mb-2">
-            <label class="block text-sm font-medium text-pink-600 mb-1">
-                {{ form.skin_type.label }}
-            </label>
-            {{ form.skin_type }}
-            {% if form.skin_type.errors %}
-                <p class="mt-1 text-sm text-red-600">{{ form.skin_type.errors }}</p>
-            {% endif %}
-        </div>
-
-        <!-- Submit Button -->
-        <div class="pt-2">
-            <button type="submit" class="bg-pink-600 text-white px-6 py-2 rounded-md shadow hover:bg-pink-700 transition">
-                Save Changes
-            </button>
-        </div>
+    <!-- Submit Button spans full width -->
+    <div class="md:col-span-3 pt-4">
+      <button type="submit"
+              class="bg-pink-600 text-white px-6 py-2 rounded-md shadow hover:bg-pink-700 transition">
+        Save Changes
+      </button>
     </div>
 
   </form>

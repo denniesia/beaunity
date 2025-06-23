@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from beaunity.common.mixins import LastUpdatedMixin
 from .choices import SkinTypeChoices
-
+from datetime import date
 from cloudinary.models import CloudinaryField
 
 UserModel = get_user_model()
@@ -51,3 +51,19 @@ class Profile(LastUpdatedMixin):
         choices=SkinTypeChoices,
     )
 
+    @property
+    def age(self):
+        if not self.date_of_birth:
+            return None
+
+        today = date.today()
+        return today.year - self.date_of_birth.year - ((today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day))
+
+    @property
+    def full_name(self):
+        if self.first_name and self.last_name:
+            return f"{self.first_name.capitalize()} {self.last_name.capitalize()}"
+        elif self.first_name:
+            return f"{self.first_name.capitalize()}"
+        elif self.last_name:
+            return f"{self.last_name.capitalize()}"

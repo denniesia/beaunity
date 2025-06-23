@@ -3,10 +3,13 @@ from django.contrib.auth import get_user_model
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Profile
-
+from beaunity.accounts.models.choices import SkinTypeChoices
+from cloudinary.forms import CloudinaryFileField
+from django.forms import ClearableFileInput
 
 UserModel = get_user_model()
 CLASS = 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
+
 class AppUserCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
@@ -71,4 +74,77 @@ class ProfileBaseForm(forms.ModelForm):
         exclude = ('user',)
 
 class ProfileEditForm(ProfileBaseForm):
-    pass
+    profile_pic =  CloudinaryFileField(
+        label='Profile Picture',
+        required=False,
+        options={
+            'folder': 'profile_pics',  # optional: where to store images in your Cloudinary account
+            'use_filename': True,
+            'unique_filename': True,
+        },
+        widget=ClearableFileInput(
+            attrs={
+                'class': CLASS
+            }
+        )
+    )
+    first_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': CLASS
+            }
+        )
+    )
+    last_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': CLASS
+            }
+        )
+    )
+    date_of_birth = forms.DateField(
+        widget=forms.DateInput(
+            attrs={
+                'class': CLASS,
+                'type': 'date'
+            },
+            format='%Y-%m-%d'
+        ),
+        input_formats=['%Y-%m-%d']
+    )
+    bio = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                'class': CLASS,
+            }
+        )
+    )
+    skin_type = forms.CharField(
+        widget=forms.Select(
+            attrs={
+                'class': CLASS,
+            },
+            choices = SkinTypeChoices
+        )
+    )
+    location = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': CLASS,
+            }
+        )
+    )
+
+class AppUserEditForm(forms.ModelForm):
+    class Meta:
+        model = UserModel
+        fields = ('email',)
+
+    email = forms.EmailField(
+        widget=forms.EmailInput(
+            attrs={
+                'class': CLASS
+            }
+        )
+    )
+

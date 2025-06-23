@@ -2,86 +2,86 @@
 {% load static %}
 {% block content %}
 
-<section class="flex justify-center items-center min-h-screen py-6">
-  <div class="bg-white rounded-2xl shadow-xl w-full max-w-6xl p-10 grid md:grid-cols-3 gap-6">
+<section class="bg-pink-50 flex-grow flex items-center justify-center py-16">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-6xl p-10 grid md:grid-cols-3 gap-6">
 
-    <!-- Left Column -->
-    <section class="col-span-1 relative text-center space-y-4 border-2 border-pink-300 rounded-2xl p-6">
-     <!-- Edit Button -->
-        {% if request.user == profile.user %}
-          <a href="{% url 'profile-edit' profile.pk %}" class="absolute top-4 right-4 bg-white hover:bg-pink-600 text-white text-xs px-3 py-1 rounded-full shadow-md">
-            <img src="{% static 'common/edit.png' %}">
-          </a>
-        {% endif %}
-      <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg" class="w-32 h-32 rounded-full mx-auto">
-      <h2 class="text-xl font-bold text-pink-600">Username: {{ profile.username }}</h2>
-      <p class="text-sm text-pink-600">First Name: {{ profile.first_name }} </p>
-      <p class="text-sm text-pink-600">Last Name: {{ profile.last_name }} </p>
-      <p class="text-sm text-pink-600">Email: {{ profile.user.email }} </p>
-      <p class="text-sm italic text-pink-500">Bio: {{ profile.bio }} </p>
+        <!-- Left Column -->
+        <section class="col-span-1 relative text-center space-y-4 border-2 border-pink-300 rounded-2xl p-6">
+            <!-- Edit Button -->
+            {% if request.user == profile.user %}
+                <a href="{% url 'profile-edit' profile.pk %}" class="absolute top-4 right-4 bg-white hover:bg-pink-600 text-white text-xs px-3 py-1 rounded-full shadow-md">
+                    <img src="{% static 'common/edit.png' %}">
+                </a>
+            {% endif %}
+            {% if profile.profile_pic.url %}
+                <img src="{{ profile.profile_pic.url }}" class="w-40 h-40 rounded-full mx-auto">
+            {% else %}
+                <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg" class="w-32 h-32 rounded-full mx-auto">
 
-      <div class="mt-4 space-y-1">
-        <p class="text-sm text-pink-600"><strong>Age:</strong> --- </p>
-        <p class="text-sm text-pink-600"><strong>Location:</strong> ---</p>
-        <p class="text-sm text-pink-600"><strong>Skin type:</strong> --- </p>
-      </div>
+            {% endif %}
+            <h2 class="text-xl font-bold text-pink-600"> {{ profile.user.username }}</h2>
+            <p class="text-sm text-pink-600"> {{ profile.full_name }} </p>
+            <p class="text-sm text-pink-600"> {{ profile.user.email }} </p>
+            <p class="text-sm italic text-pink-500">{{ profile.bio }} </p>
 
-    </section>
+            <div class="mt-2 space-y-1">
+                <p class="text-sm text-pink-600"><strong>Age:</strong> {{ profile.age }} </p>
+                <p class="text-sm text-pink-600"><strong>Location:</strong> {{ profile.location }}</p>
+                <p class="text-sm text-pink-600"><strong>Skin type:</strong> {{ profile.skin_type }} </p>
+            </div>
 
-    <!-- Middle Column -->
-    <section class="col-span-1 space-y-6 bg-pink-100 p-4 rounded-xl">
-      <div>
-        <h3 class="text-lg font-semibold text-pink-600 mb-1">Goals</h3>
-        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-          <li>To spend less time booking travel</li>
-          <li>To narrow her options quickly</li>
-        </ul>
-      </div>
+        </section>
 
-      <div>
-        <h3 class="text-lg font-semibold text-pink-600 mb-1">Morning Routine</h3>
-        <p class="text-sm text-gray-700">
+        <!-- Middle Column -->
+        <section class="col-span-1 space-y-6 bg-pink-100 p-4 rounded-xl">
+            <div>
+                <h3 class="text-lg font-semibold text-pink-600 mb-1">Goals</h3>
+                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                    <li>To spend less time booking travel</li>
+                    <li>To narrow her options quickly</li>
+                </ul>
+            </div>
 
-        </p>
-      </div>
+            <div>
+                <h3 class="text-lg font-semibold text-pink-600 mb-1">Morning Routine</h3>
+                <p class="text-sm text-gray-700">
 
-      <div>
-        <h3 class="text-lg font-semibold text-pink-600 mb-1">Night Routine</h3>
-        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-          <li>Too much time spent booking – she's busy!</li>
+                </p>
+            </div>
 
-        </ul>
-      </div>
-    </section>
+            <div>
+                <h3 class="text-lg font-semibold text-pink-600 mb-1">Night Routine</h3>
+                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                    <li>Too much time spent booking – she's busy!</li>
 
-    <!-- Right Column -->
-    <section class="col-span-1 space-y-6 bg-pink-100 p-4 rounded-xl">
-      <div>
-        <h3 class="text-lg font-semibold text-pink-600 mb-1">My Posts:</h3>
-        <div class="space-y-2 text-sm text-gray-700">
-          <p>Introvert ▭▭▭▭▮▮▮▮▮▮ Extrovert</p>
+                </ul>
+            </div>
+        </section>
 
-        </div>
-      </div>
+        <!-- Right Column -->
+        <section class="col-span-1 space-y-6 bg-pink-100 p-4 rounded-xl">
+            <div>
+                <h3 class="text-lg font-semibold text-pink-600 mb-1">My Posts:</h3>
+                <div class="space-y-2 text-sm text-gray-700">
+                    <p>Introvert ▭▭▭▭▮▮▮▮▮▮ Extrovert</p>
+                </div>
+            </div>
 
-      <div>
-        <h3 class="text-lg font-semibold text-pink-600 mb-1">My Challenges:</h3>
-        <div class="space-y-2 text-sm text-gray-700">
-          <p>Price ▮▮▮▭▭▭▭▭▭▭</p>
+            <div>
+                <h3 class="text-lg font-semibold text-pink-600 mb-1">My Challenges:</h3>
+                <div class="space-y-2 text-sm text-gray-700">
+                    <p>Price ▮▮▮▭▭▭▭▭▭▭</p>
+                </div>
+            </div>
 
-        </div>
-      </div>
-
-      <div>
-        <h3 class="text-lg font-semibold text-pink-600 mb-1">My Dairy:</h3>
-        <div class="flex flex-wrap gap-4 text-gray-600 text-sm">
-          <span>Adidas</span>
-
-        </div>
-      </div>
-    </section>
-
-  </div>
+            <div>
+                <h3 class="text-lg font-semibold text-pink-600 mb-1">My Dairy:</h3>
+                <div class="flex flex-wrap gap-4 text-gray-600 text-sm">
+                    <span>Adidas</span>
+                </div>
+            </div>
+        </section>
+    </div>
 </section>
 
 
