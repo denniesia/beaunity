@@ -43,10 +43,12 @@
             <div id="scroll-wrapper" class="relative overflow-x-auto whitespace-nowrap py-8 min-h-[100px]">
                 <div id="scroll-content" class="flex gap-6">
                     {% for category in object_list %}
-                        <div class="min-w-[200px] bg-white rounded-xl shadow-md text-center p-4 flex-shrink-0 transition-all duration-300 transform hover:scale-105 hover:shadow-pink-400 hover:shadow-lg">
-                            <img src="{{ category.image.url }}" class="object-cover mx-auto rounded-lg">
-                            <h3 class="text-xl font-semibold text-pink-600">{{ category.title }}</h3>
-                            <p class="text-sm text-gray-600">{{ category.description }}</p>
+                        <div class="min-w-[200px] bg-white rounded-xl shadow text-center p-4 flex-shrink-0 transition-all duration-300 transform cursor-pointer hover:scale-105 hover:shadow-pink-400 hover:shadow-lg">
+                            <a href="{% url 'category-details' category.slug %}">
+                                <img src="{{ category.image.url }}" class="object-cover mx-auto rounded-lg">
+                                <h3 class="text-xl font-semibold text-pink-600">{{ category.title }}</h3>
+                                <p class="text-sm text-gray-600">{{ category.description }}</p>
+                            </a>
                         </div>
                     {% endfor %}
                 </div>
