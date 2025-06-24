@@ -123,11 +123,12 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {% for event in events %}
                             <div class="relative bg-white border border-pink-200 rounded-2xl shadow-md overflow-hidden flex flex-col hover:-translate-y-1 hover:shadow-lg hover:shadow-pink-300">
-
                                 <!-- Label -->
+                                {% if event.created_by == user %}
                                 <div class="absolute top-3. right-2 text-pink-600 text-xs font-semibold px-5 py-2 rounded-full shadow-md z-10" style=" background-color: white">
                                     Your Event
                                 </div>
+                                {% else %}
 
                                 <img src="{{ event.poster_image.url }}" alt="Event Poster"
                                      class="w-100 h-40 object-cover rounded-t-2xl">
