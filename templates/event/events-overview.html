@@ -108,64 +108,57 @@
                  </div>
             </div>
         </div>
-        <div class="flex items-center justify-center my-8">
-  <hr class="flex-grow border-t border-pink-200" />
-  <span class="mx-4 text-sm text-pink-500 uppercase tracking-wider">Upcoming Events</span>
-  <hr class="flex-grow border-t border-pink-200" />
-</div>
-    <section class="py-12 mt-4">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-bold text-pink-600 mb-8 text-center">Upcoming Events</h2>
+        <hr class="my-8 border-t border-pink-200 mt-4" />
+        <section class="py-12 mt-2">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-2xl font-semibold text-pink-600 mb-8 text-center">Upcoming Events</h2>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Event Card -->
-      <div class="bg-white border border-pink-200 rounded-2xl shadow-md p-6 flex flex-col justify-between">
-        <div>
-          <h3 class="text-xl font-semibold text-pink-700 mb-2">Self-Care Sunday</h3>
-          <p class="text-sm text-gray-600 mb-3">Join us for a relaxing evening focused on self-love, skincare, and inner peace. 🧖‍♀️</p>
-          <p class="text-xs text-gray-500">Hosted by <strong>@wellness_guide</strong></p>
-        </div>
-        <div class="mt-4 text-sm text-gray-600">
-          <p><strong>Date:</strong> July 5, 2025</p>
-          <p><strong>Time:</strong> 6:00 PM - 8:00 PM</p>
-          <p><strong>Location:</strong> Online (Zoom)</p>
-        </div>
-        <button class="mt-6 bg-pink-500 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-pink-600 transition">Join Event</button>
-      </div>
+                {% if events %}
+                {% for event in events %}
 
-      <!-- Duplicate and modify the cards below for more events -->
-      <div class="bg-white border border-pink-200 rounded-2xl shadow-md p-6 flex flex-col justify-between">
-        <div>
-          <h3 class="text-xl font-semibold text-pink-700 mb-2">Mindset Reset Workshop</h3>
-          <p class="text-sm text-gray-600 mb-3">A mindfulness session with breathing exercises and goal alignment techniques. 🧠</p>
-          <p class="text-xs text-gray-500">Hosted by <strong>@coach_aria</strong></p>
-        </div>
-        <div class="mt-4 text-sm text-gray-600">
-          <p><strong>Date:</strong> July 12, 2025</p>
-          <p><strong>Time:</strong> 7:00 PM - 9:00 PM</p>
-          <p><strong>Location:</strong> Community Hall</p>
-        </div>
-        <button class="mt-6 bg-pink-500 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-pink-600 transition">Join Event</button>
-      </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Event Card -->
+                    <div class="bg-white border border-pink-200 rounded-2xl shadow-md overflow-hidden flex flex-col">
+                        <!-- Poster Image -->
+                        <img src="https://via.placeholder.com/600x300.png?text=Event+Poster" alt="Event Poster"
+                             class="w-full h-48 object-cover rounded-t-2xl">
 
-      <div class="bg-white border border-pink-200 rounded-2xl shadow-md p-6 flex flex-col justify-between">
-        <div>
-          <h3 class="text-xl font-semibold text-pink-700 mb-2">Ask the Community</h3>
-          <p class="text-sm text-gray-600 mb-3">Q&A session with experts to answer your skincare concerns. 💬</p>
-          <p class="text-xs text-gray-500">Hosted by <strong>@skinexperts</strong></p>
-        </div>
-        <div class="mt-4 text-sm text-gray-600">
-          <p><strong>Date:</strong> July 18, 2025</p>
-          <p><strong>Time:</strong> 5:30 PM - 7:00 PM</p>
-          <p><strong>Location:</strong> Online (YouTube Live)</p>
-        </div>
-        <button class="mt-6 bg-pink-500 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-pink-600 transition">Join Event</button>
-      </div>
-    </div>
-  </div>
-</section>
+                        <!-- Content -->
+                        <div class="p-5 flex flex-col flex-grow justify-between">
+                            <!-- Title & Host -->
+                            <div>
+                                <h3 class="text-xl font-semibold text-pink-700 mb-1">Self-Care Sunday</h3>
+                                <p class="text-xs text-gray-500 mb-3">Hosted by <strong>@wellness_guide</strong></p>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Join us for a relaxing evening focused on self-love, skincare, and inner peace. 🧖‍♀️
+                                </p>
+                            </div>
 
-
+                            <!-- Details -->
+                            <div class="text-sm text-gray-600 space-y-1 mb-4">
+                                <p><strong>Date:</strong> July 5, 2025</p>
+                                <p><strong>Time:</strong> 6:00 PM – 8:00 PM</p>
+                                <p><strong>Location:</strong> Online (Zoom)</p>
+                            </div>
+                            <!-- Categories -->
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-pink-100 text-pink-600 text-xs font-medium px-2 py-1 rounded-full">Self-Care</span>
+                                <span class="bg-pink-100 text-pink-600 text-xs font-medium px-2 py-1 rounded-full">Wellness</span>
+                            </div>
+                            <!-- Call to Action -->
+                            <button class="mt-auto bg-pink-500 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-pink-600 transition">
+                                See More
+                            </button>
+                            <button class="mt-auto bg-pink-500 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-pink-600 transition">
+                                Join Event
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </section>
     </div>
 {% endblock %}
 
