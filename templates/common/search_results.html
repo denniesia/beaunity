@@ -3,15 +3,16 @@
 
 {% block content %}
 <div class="max-w-4xl mx-auto px-4 py-6">
-
     <h2 class="text-2xl font-bold text-pink-600 mb-6">
         Search results for: "{{ query }}"
     </h2>
-
     {% if search_mode %}
-
         <!-- Categories -->
-        <h3 class="text-xl font-semibold text-pink-500 mb-4">Matching Categories</h3>
+        <div class="flex items-center justify-center my-10 mb-2 mt-4">
+            <hr class="flex-grow border-t border-pink-200" />
+            <span class="mx-4 text-lg text-pink-500 uppercase font-semibold tracking-wider">Categories</span>
+            <hr class="flex-grow border-t border-pink-200" />
+        </div>
         {% if categories %}
             <div class="space-y-4">
                 {% for category in categories %}
@@ -44,7 +45,11 @@
 
 
         <!-- Posts -->
-        <h3 class="text-xl font-semibold text-pink-500 mt-10 mb-4">Matching Posts</h3>
+        <div class="flex items-center justify-center my-10 mb-2">
+            <hr class="flex-grow border-t border-pink-200" />
+            <span class="mx-4 text-lg text-pink-500 uppercase font-semibold tracking-wider">Posts</span>
+            <hr class="flex-grow border-t border-pink-200" />
+        </div>
         {% if posts %}
             <div class="space-y-4">
                 {% for post in posts %}
@@ -61,7 +66,11 @@
 
 
         <!-- Users -->
-        <h3 class="text-xl font-semibold text-pink-500 mt-10 mb-4">Matching Users</h3>
+        <div class="flex items-center justify-center my-10 mb-2">
+            <hr class="flex-grow border-t border-pink-200" />
+            <span class="mx-4 text-lg text-pink-500 uppercase font-semibold tracking-wider">Users</span>
+            <hr class="flex-grow border-t border-pink-200" />
+        </div>
         {% if users %}
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {% for user in users %}
