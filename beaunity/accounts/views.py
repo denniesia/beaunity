@@ -58,6 +58,8 @@ class ProfileEditView(LoginRequiredMixin, View):   #LoginRequiredMixin, UserPass
             user_form.save()
             profile_form.save()
             return redirect(reverse_lazy('profile-details',kwargs={'pk': request.user.pk} ))
+        else:
+            print(user_form.errors, profile_form.errors)
 
         context = {
             'user_form': user_form,

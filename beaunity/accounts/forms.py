@@ -91,7 +91,8 @@ class ProfileEditForm(ProfileBaseForm):
     first_name = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'class': CLASS
+                'class': CLASS,
+
             }
         )
     )
@@ -116,6 +117,7 @@ class ProfileEditForm(ProfileBaseForm):
         widget=forms.Textarea(
             attrs={
                 'class': CLASS,
+                'rows': 4,
             }
         )
     )
