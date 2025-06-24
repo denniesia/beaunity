@@ -23,7 +23,7 @@ class Event(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
             MinLengthValidator(100)
         ]
     )
-    online = models.BooleanField()
+    is_online = models.BooleanField()
     city = models.CharField(
         max_length=100,
         validators=[

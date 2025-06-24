@@ -87,8 +87,8 @@
                         </label>
                     </div>
                 </div>
-                 <div class="relative group">
-                <button class="flex items-center gap-1 hover:text-pink-700">
+                <div class="relative group">
+                    <button class="flex items-center gap-1 hover:text-pink-700">
                         Categories
                         <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.1 1.02l-4.25 4.65a.75.75 0 01-1.1 0l-4.25-4.65a.75.75 0 01.02-1.06z" />
@@ -105,57 +105,68 @@
                             Medium
                         </label>
                     </div>
-                 </div>
+                </div>
+                <div class="relative group">
+                    <button class="flex items-center gap-1 hover:text-pink-700">
+                        Archived
+                    </button>
+                </div>
             </div>
         </div>
+
         <hr class="my-8 border-t border-pink-200 mt-4" />
         <section class="py-12 mt-2">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
                 <h2 class="text-2xl font-semibold text-pink-600 mb-8 text-center">Upcoming Events</h2>
 
                 {% if events %}
-                {% for event in events %}
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {% for event in events %}
+                            <div class="bg-white border border-pink-200 rounded-2xl shadow-md overflow-hidden flex flex-col">
+                                <img src="{{ event.poster_image.url }}" alt="Event Poster"
+                                     class="w-100 h-40 object-cover rounded-t-2xl">
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Event Card -->
-                    <div class="bg-white border border-pink-200 rounded-2xl shadow-md overflow-hidden flex flex-col">
-                        <!-- Poster Image -->
-                        <img src="https://via.placeholder.com/600x300.png?text=Event+Poster" alt="Event Poster"
-                             class="w-full h-48 object-cover rounded-t-2xl">
+                                <div class="p-5 flex flex-col flex-grow justify-between">
+                                    <div>
+                                        <h3 class="text-xl font-semibold text-pink-700 mb-1">{{ event.title }}</h3>
+                                        <p class="text-xs text-gray-500 mb-3">
+                                            Hosted by
+                                            <a href="{% url 'profile-details' event.created_by.id %}"><strong>@{{ event.created_by }}</strong>
+                                            </a>
+                                        </p>
+                                        <p class="text-sm text-gray-600 mt-2 mb-4">
+                                            {{ event.details|truncatechars:100 }}
+                                        </p>
+                                    </div>
+                                    <div class="text-sm text-gray-600 space-y-1 mb-2">
+                                        <p><strong>Date and Time:</strong> {{ event.start_time|date:"F j, Y, H:i"}}</p>
+                                        {% if event.is_online %}
+                                        	 <p><strong>Location:</strong> Online</p>
+                                        {% else %}
+                                             <p><strong>Location:</strong> {{ event.location }}</p>
+                                        {% endif %}
 
-                        <!-- Content -->
-                        <div class="p-5 flex flex-col flex-grow justify-between">
-                            <!-- Title & Host -->
-                            <div>
-                                <h3 class="text-xl font-semibold text-pink-700 mb-1">Self-Care Sunday</h3>
-                                <p class="text-xs text-gray-500 mb-3">Hosted by <strong>@wellness_guide</strong></p>
-                                <p class="text-sm text-gray-600 mb-4">
-                                    Join us for a relaxing evening focused on self-love, skincare, and inner peace. 🧖‍♀️
-                                </p>
-                            </div>
+                                    </div>
 
-                            <!-- Details -->
-                            <div class="text-sm text-gray-600 space-y-1 mb-4">
-                                <p><strong>Date:</strong> July 5, 2025</p>
-                                <p><strong>Time:</strong> 6:00 PM – 8:00 PM</p>
-                                <p><strong>Location:</strong> Online (Zoom)</p>
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        {% for category in event.categories.all %}
+                                            <a href="{% url 'category-details' category.slug %}"><span class="bg-pink-100 text-pink-600 text-xs font-medium px-2 py-1 rounded-full">{{ category.title }}</span></a>
+                                        {% endfor %}
+                                    </div>
+
+                                    <div class="mt-auto flex justify-between gap-4">
+                                        <button class="bg-pink-500 text-white text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-900 transition">
+                                            See More
+                                        </button>
+                                        <button class="text-white text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-500 transition" style="background-color:#9370DB">
+                                            Join Event
+                                        </button>
+                                    </div>
+
+                                </div>
                             </div>
-                            <!-- Categories -->
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="bg-pink-100 text-pink-600 text-xs font-medium px-2 py-1 rounded-full">Self-Care</span>
-                                <span class="bg-pink-100 text-pink-600 text-xs font-medium px-2 py-1 rounded-full">Wellness</span>
-                            </div>
-                            <!-- Call to Action -->
-                            <button class="mt-auto bg-pink-500 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-pink-600 transition">
-                                See More
-                            </button>
-                            <button class="mt-auto bg-pink-500 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-pink-600 transition">
-                                Join Event
-                            </button>
-                        </div>
+                        {% endfor %}
                     </div>
-                </div>
-                {% endfor %}
                 {% endif %}
             </div>
         </section>
