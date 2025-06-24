@@ -1,20 +1,24 @@
 from django.shortcuts import render
-from django.views.generic import ListView, TemplateView
+from django.views.generic import TemplateView
 from beaunity.category.models import Category
 from django.shortcuts import get_object_or_404, redirect
 from beaunity.post.models import Post
 from django.contrib.auth.decorators import login_required
 from beaunity.common.forms import SearchForm
 from beaunity.post.models import Post
+from beaunity.event.models import Event
 from beaunity.category.models import Category
 from beaunity.accounts.models import AppUser
 from django.db.models import Q
 # Create your views here.
-class IndexView(ListView):
+class IndexView(TemplateView):
     template_name = 'common/landing_page.html'
 
-    def get_queryset(self):
-        return Category.objects.all()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['events'] = Event.objects.all().order_by('-start_time')
+        return context
 
 class SearchView(TemplateView):
     template_name = 'common/search_results.html'
