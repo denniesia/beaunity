@@ -6,7 +6,7 @@
     <div class="bg-white rounded-2xl shadow-xl w-full max-w-6xl p-10 grid md:grid-cols-3 gap-6">
 
         <!-- Left Column -->
-        <section class="col-span-1 relative text-center space-y-4 border-2 border-pink-300 rounded-2xl p-6">
+        <section class="col-span-1 relative text-center space-y-4 border-2 border-pink-300 rounded-2xl p-6 mb-2">
             <!-- Edit Button -->
             {% if request.user == profile.user %}
                 <a href="{% url 'profile-edit' profile.pk %}" class="absolute top-4 right-4 bg-white hover:bg-pink-600 text-white text-xs px-3 py-1 rounded-full shadow-md">
@@ -62,7 +62,7 @@
             <div>
                 <h3 class="text-lg font-semibold text-pink-600 mb-1">My Posts:</h3>
                 <div class="space-y-2 text-sm text-gray-700">
-                    <p>Introvert ▭▭▭▭▮▮▮▮▮▮ Extrovert</p>
+                    <p>{{ profile.user.post_set.count }}</p>
                 </div>
             </div>
 

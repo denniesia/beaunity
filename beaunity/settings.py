@@ -40,6 +40,7 @@ MY_APPS = [
      'beaunity.category',
      'beaunity.post',
      'beaunity.comment',
+     'beaunity.event',
 ]
 # Application definition
 
