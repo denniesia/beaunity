@@ -13,25 +13,24 @@
             <!-- Profile Picture Upload -->
             <div>
                 <label class="block text-sm font-medium  text-gray-700 mb-1">Profile Picture:</label>
-                <div class="flex
-                    justify-center">
-                {% if request.user.profile.profile_pic %}
-                    <img src="{{ request.user.profile.profile_pic.url }}" alt="Profile Picture" class="w-40 h-40 rounded-full mx-auto">
-                {% else %}
-                    <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg" alt="Default Profile" class="w-40 h-40 rounded-full object-cover shadow-md">
-                {% endif %}
+                    <div class="flex justify-center">
+                        {% if request.user.profile.profile_pic %}
+                            <img src="{{ request.user.profile.profile_pic.url }}" alt="Profile Picture" class="w-40 h-40 rounded-full mx-auto">
+                        {% else %}
+                            <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg" alt="Default Profile" class="w-40 h-40 rounded-full object-cover shadow-md">
+                        {% endif %}
+                    </div>
+                    <div class="w-full">
+                        {{ profile_form.profile_pic }}
+                        {{ profile_form.profile_pic.errors }}
+                    </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Bio:</label>
+                    {{ profile_form.bio }}
+                    {{ profile_form.bio.errors }}
                 </div>
-                <div class="w-full">
-                    {{ profile_form.profile_pic }}</div>
-
             </div>
-
-
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Bio:</label>
-                {{ profile_form.bio }}
-            </div>
-    </div>
+         </div>
 
         <!-- RIGHT SIDE -->
         <div class="space-y-6">
@@ -39,38 +38,44 @@
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Email:</label>
                 {{ user_form.email }}
+                {{ user_form.email.errors }}
             </div>
             <!-- First Name -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">First Name:</label>
                 {{ profile_form.first_name }}
+                {{ profile_form.first_name.errors }}
             </div>
             <!-- Last Name -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Last Name:</label>
                 {{ profile_form.last_name }}
+                {{ profile_form.last_name.errors }}
             </div>
             <!-- Date of Birth -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Date of Birth:</label>
                 {{ profile_form.date_of_birth }}
+                {{ profile_form.date_of_birth.errors }}
             </div>
 
             <!-- Location -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Location:</label>
                 {{ profile_form.location }}
+                {{ profile_form.location.errors }}
             </div>
 
             <!-- Skin Type -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Skin Type:</label>
                 {{ profile_form.skin_type }}
+                {{ profile_form.skin_type.errors }}
             </div>
         </div>
 
         <!--  BUTTONS -->
-        <div class="md:col-span-2 flex gap-6 items-center pt-2">
+        <div class="md:col-span-2 flex gap-6 items-center">
             <a href="{% url 'profile-details' request.user.pk %}"
                class="px-7 py-2 text-sm font-medium text-pink-600 hover:text-pink-500 hover:bg-pink-100 border border-pink-200 rounded-lg transition">
                 Cancel
