@@ -13,20 +13,30 @@
                     <img src="{% static 'common/edit.png' %}">
                 </a>
             {% endif %}
+
             {% if profile.profile_pic.url %}
                 <img src="{{ profile.profile_pic.url }}" class="w-40 h-40 rounded-full mx-auto">
             {% else %}
                 <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg" class="w-32 h-32 rounded-full mx-auto">
             {% endif %}
+
             <h2 class="text-xl font-bold text-pink-600"> {{ profile.user.username }}</h2>
-            <p class="text-sm text-pink-600"> {{ profile.full_name }} </p>
+
+            {% if profile.full_name %}
+            	<p class="text-sm text-pink-600"> {{ profile.full_name }} </p>
+            {% endif %}
+
             <p class="text-sm text-pink-600"> {{ profile.user.email }} </p>
-            <p class="text-sm italic text-pink-500">{{ profile.bio }} </p>
+
+            {% if profile.bio %}
+            	<p class="text-sm italic text-pink-500">{{ profile.bio }} </p>
+            {% endif %}
+
 
             <div class="mt-2 space-y-1">
-                <p class="text-sm text-pink-600"><strong>Age:</strong> {{ profile.age }} </p>
-                <p class="text-sm text-pink-600"><strong>Location:</strong> {{ profile.location }}</p>
-                <p class="text-sm text-pink-600"><strong>Skin type:</strong> {{ profile.skin_type }} </p>
+                <p class="text-sm text-pink-600"><strong>Age:</strong> {{ profile.age|default:'' }} </p>
+                <p class="text-sm text-pink-600"><strong>Location:</strong> {{ profile.location|default:'' }}</p>
+                <p class="text-sm text-pink-600"><strong>Skin type:</strong> {{ profile.skin_type|default:'' }} </p>
             </div>
 
         </section>
