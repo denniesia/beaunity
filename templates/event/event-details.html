@@ -15,7 +15,12 @@
                 <h2 class="text-2xl font-bold text-pink-900 mb-4">{{ event.title }}</h2>
                 <!-- Host Info -->
                 <div class="flex items-center gap-4">
-                    <img src="{{ event.created_by.profile.profile_pic.url }}" alt="Host Profile Picture" class="w-12 h-12 rounded-full object-cover">
+                    {% if event.created_by.profile.profile_pic %}
+                        <img src="{{ event.created_by.profile.profile_pic.url }}"  class="w-12 h-12 rounded-full object-cover">
+                    {% else %}
+                        <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg"
+                             class="w-12 h-12 rounded-full object-cover">
+                    {% endif %}
                     <div>
                       <h3 class="text-md font-semibold text-pink-700">Hosted by: {{ event.created_by }}</h3>
                       <p class="text-sm font-medium text-gray-600">title</p>
@@ -43,21 +48,27 @@
                 <h4 class="text-lg font-semibold text-pink-700 mt-4">Attending: </h4>
                 <div class="flex items-center gap-3 mt-2">
                     {% if attendees %}
-                        {% for attendee in attendees %}
-                            {% if attendee.user.profile.profile_pic %}
-                            	  <img src="{{ attendee.profile_pic }}"
-                             alt="{{ attendee.username }}"
-                             class="w-12 h-12 rounded-full object-cover border border-pink-300">
-                            {% endif %} 
-
-                        {% endfor %}
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            {% for attendee in attendees %}
+                                {% if attendee.profile.profile_pic %}
+                                    <img src="{{ attendee.profile.profile_pic.url }}"
+                                         class="w-10 h-10 rounded-full object-cover border border-pink-300">
+                                {% else %}
+                                    <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg"
+                                         class="w-10 h-10 rounded-full object-cover border border-pink-300">
+                                {% endif %}
+                            {% empty %}
+                                <p class="text-sm text-gray-500">No attendees yet.</p>
+                            {% endfor %}
+                        </div>
+                    {% else %}
                         <p class="text-sm text-gray-500">No attendees yet.</p>
                     {% endif %}
                 </div>
-                <div class="flex items-center gap-3 mt-2">
+                <div class="flex flex-wrap items-center gap-3 mt-2">
                     {% for category in event.categories.all %}
                             <a href="{% url 'category-details' category.slug %}">
-                                <span class="bg-pink-100 text-pink-600 text-xs font-medium px-2 py-1 rounded-full">
+                                <span class="bg-pink-100 text-pink-600 text-xs  font-medium px-2 py-1 rounded-full">
                                     {{ category.title }}
                                 </span>
                             </a>

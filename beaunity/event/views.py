@@ -60,7 +60,7 @@ class EventDetailsView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        attendees = self.object.attendees.all()
+        attendees = self.object.attendees.all().select_related('profile')
         context['attendees'] = attendees
         print(attendees)
         return context
