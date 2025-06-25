@@ -27,92 +27,92 @@
                 </div>
             </div>
             <!-- Filter Bar -->
-            <div class="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm text-pink-500 font-semibold text-gray-800">
+            <form method="GET" class="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm font-semibold text-gray-800">
+                <!-- Sort By -->
                 <div class="relative group">
-                    <button class="flex items-center gap-1 hover:text-pink-700">
+                    <div class="flex items-center gap-1 cursor-pointer text-pink-500 hover:text-pink-700 select-none">
                         Sort By
                         <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.1 1.02l-4.25 4.65a.75.75 0 01-1.1 0l-4.25-4.65a.75.75 0 01.02-1.06z" />
                         </svg>
-                    </button>
-                    <!-- Dropdown -->
-                    <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-200 z-10">
-                        <label class="block px-4 py-2 hover:bg-gray-100">
-                            <input type="radio" name="sort" class="mr-2" />
-                           Date
-                        </label>
-                          <label class="block px-4 py-2 hover:bg-gray-100">
-                              <input type="radio" name="sort" class="mr-2" />
-                           Online
-                        </label>
-                        <label class="block px-4 py-2 hover:bg-gray-100">
-                            <input type="radio" name="sort" class="mr-2" />
-                           City
-                        </label>
-                        <label class="block px-4 py-2 hover:bg-gray-100">
-                            <input type="radio" name="sort" class="mr-2" />
-                           Popularity
-                        </label>
-                        <label class="block px-4 py-2 hover:bg-gray-100">
-                            <input type="radio" name="sort" class="mr-2" />
-                           Public events
-                        </label>
-                        <label class="block px-4 py-2 hover:bg-gray-100">
-                            <input type="radio" name="sort" class="mr-2" />
-                           Host
-                        </label>
-                        <label class="block px-4 py-2 hover:bg-gray-100">
-                            <input type="radio" name="sort" class="mr-2" />
-                           Categories
-                        </label>
+                    </div>
 
+                    <!-- Dropdown -->
+                    <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md opacity-0  invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200 z-10">
+                        <button type="submit" name="sort_by" value="Popularity" class="block w-full  text-left px-4 py-2 hover:bg-pink-100">Popularity</button>
+                        <button type="submit" name="sort_by" value="Online" class="block w-full text-left  px-4 py-2 hover:bg-pink-100">Online</button>
+                        <button type="submit" name="sort_by" value="Public_events" class="block w-full text-left  px-4 py-2 hover:bg-pink-100">Public events</button>
+                        <button type="submit" name="sort_by" value="Hosts" class="block w-full text-left px-4 py-2  hover:bg-pink-100">Hosts</button>
                     </div>
                 </div>
+
+                <!-- Cities -->
                 <div class="relative group">
-                    <button class="flex items-center gap-1 hover:text-pink-700">
+                    <div class="flex items-center gap-1 cursor-pointer text-pink-500 hover:text-pink-700 select-none">
                         Cities
                         <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.1 1.02l-4.25 4.65a.75.75 0 01-1.1 0l-4.25-4.65a.75.75 0 01.02-1.06z" />
                         </svg>
-                    </button>
+                    </div>
+
                     <!-- Dropdown -->
-                    <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-200 z-10">
-                        <label class="block px-4 py-2 hover:bg-gray-100">
-                            <input type="checkbox" class="mr-2" />
-                            Small
-                        </label>
-                        <label class="block px-4 py-2 hover:bg-gray-100">
-                            <input type="checkbox" class="mr-2" />
-                            Medium
-                        </label>
+                    <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200 z-10">
+                        {% for city in cities %}
+                            <button type="submit" name="city" value="{{ city }}" class="block w-full text-left px-4 py-2 hover:bg-pink-100">
+                                {{ city|capfirst }}
+                            </button>
+                        {% endfor %}
                     </div>
                 </div>
+
+                <!-- Categories -->
                 <div class="relative group">
-                    <button class="flex items-center gap-1 hover:text-pink-700">
+                    <div class="flex items-center gap-1 cursor-pointer text-pink-500 hover:text-pink-700 select-none">
                         Categories
                         <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.1 1.02l-4.25 4.65a.75.75 0 01-1.1 0l-4.25-4.65a.75.75 0 01.02-1.06z" />
                         </svg>
-                    </button>
+                    </div>
+
                     <!-- Dropdown -->
-                    <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-200 z-10">
-                        <label class="block px-4 py-2 hover:bg-gray-100">
-                            <input type="checkbox" class="mr-2" />
-                            Small
-                        </label>
-                        <label class="block px-4 py-2 hover:bg-gray-100">
-                            <input type="checkbox" class="mr-2" />
-                            Medium
-                        </label>
+                    <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200 z-10">
+                        {% for category in categories %}
+                            <button type="submit" name="category" value="{{ category }}" class="block w-full text-left px-4 py-2 hover:bg-pink-100">
+                                {{ category }}
+                            </button>
+                        {% endfor %}
                     </div>
                 </div>
-                <div class="relative group">
-                    <button class="flex items-center gap-1 hover:text-pink-700">
+
+                <!-- Archived Button -->
+                <div class="relative">
+                    <button type="submit" name="archived" value="true"
+                            class="flex items-center gap-1 text-pink-500 cursor-pointer hover:text-pink-700">
                         Archived
                     </button>
                 </div>
-            </div>
+
+            </form>
+
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <hr class="my-8 border-t border-pink-200 mt-4" />
         <section class="py-2">
@@ -178,6 +178,36 @@
             </div>
         </section>
     </div>
+
+
+
+{#    <script>#}
+{#  document.querySelectorAll('.option').forEach(option => {#}
+{#    option.addEventListener('click', () => {#}
+{#      // Update hidden input value#}
+{#      const hiddenInput = document.getElementById('sort_by');#}
+{#      hiddenInput.value = option.getAttribute('data-value');#}
+{##}
+{#      // Optionally update the label text (you can customize this part)#}
+{#      const label = hiddenInput.closest('.group').querySelector('label');#}
+{#      label.childNodes[0].nodeValue = 'Sort By: ' + option.textContent + ' ';#}
+{##}
+{#      // Optionally close the dropdown (not necessary because it's hover based)#}
+{#    });#}
+{#  });#}
+{#</script>#}
+
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}
 
 
