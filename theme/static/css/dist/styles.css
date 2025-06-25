@@ -457,6 +457,9 @@
   .h-auto {
     height: auto;
   }
+  .h-fit {
+    height: fit-content;
+  }
   .h-full {
     height: 100%;
   }
@@ -490,6 +493,9 @@
   .w-9\/10 {
     width: calc(9/10 * 100%);
   }
+  .w-10 {
+    width: calc(var(--spacing) * 10);
+  }
   .w-12 {
     width: calc(var(--spacing) * 12);
   }
@@ -516,6 +522,9 @@
   }
   .w-\[1200px\] {
     width: 1200px;
+  }
+  .w-fit {
+    width: fit-content;
   }
   .w-full {
     width: 100%;

@@ -83,13 +83,15 @@
         {% for comment in comments %}
         <div class="flex gap-3 items-start pb-4">
             <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 text-xs shadow-inner">
-                💬
+                <img src="{{ comment.created_by.profile.profile_pic.url }}" class="rounded-full w-fit h-fit mt-3">
             </div>
             <div class="flex-3 text-sm">
                 <!-- Author and Buttons on the Same Line -->
                 <div class="flex items-center justify-between">
                     <div class="flex">
-                    <p class="font-medium text-base text-gray-900">{{ comment.created_by }}
+                    <div>
+                    </div>
+                        <p class="font-medium text-base text-gray-900"><a href="{% url 'profile-details' comment.created_by_id %}">{{ comment.created_by }}</a>
                         <span class="text-xs text-gray-400 ml-1">| {{ comment.created_at|date:"F j, Y, H:i" }}</span>
                         {% if comment.created_at < comment.last_updated %}
                         	 <span class="text-xs text-gray-400 ml-1">| Edited: {{ comment.last_updated|date:"F j, Y, H:i" }}</span>

@@ -13,7 +13,7 @@
             <!-- Profile Picture Upload -->
             <div>
                 <label class="block text-sm font-medium  text-gray-700 mb-1">Profile Picture:</label>
-                    <div class="flex justify-center">
+                    <div class="flex justify-center mb-2">
                         {% if request.user.profile.profile_pic %}
                             <img src="{{ request.user.profile.profile_pic.url }}" alt="Profile Picture" class="w-40 h-40 rounded-full mx-auto">
                         {% else %}
