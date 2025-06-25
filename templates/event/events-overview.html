@@ -117,7 +117,21 @@
         <hr class="my-8 border-t border-pink-200 mt-4" />
         <section class="py-2">
             <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
-                <h2 class="text-2xl font-semibold text-pink-600 mb-8 text-center">Upcoming Events</h2>
+                {% if filter_mode %}
+                   <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
+                       <h2 class="text-2xl font-semibold text-pink-600 mb-8 text-center flex justify-center items-center">
+                           Showing filtered events:
+                           <a href="{% url 'events' %}" class="ml-3 text-sm text-pink-900 hover:underline flex items-center">
+                               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                               </svg>
+                               Clear filters
+                           </a>
+                       </h2>
+                   </div>
+                {% else %}
+                	 <h2 class="text-2xl font-semibold text-pink-600 mb-8 text-center">Upcoming Events</h2>
+                {% endif %}
 
                 {% if events %}
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -174,6 +188,8 @@
                             </div>
                         {% endfor %}
                     </div>
+                {% else %}
+                    <p class="text-pink-500 text-center py-1"> No events.</p>
                 {% endif %}
             </div>
         </section>
