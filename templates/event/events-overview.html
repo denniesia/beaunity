@@ -152,7 +152,10 @@
 
                                     <div class="flex flex-wrap gap-2 mb-4">
                                         {% for category in event.categories.all %}
-                                            <a href="{% url 'category-details' category.slug %}"><span class="bg-pink-100 text-pink-600 text-xs font-medium px-2 py-1 rounded-full">{{ category.title }}</span></a>
+                                            <a href="{% url 'category-details' category.slug %}"><span class="bg-pink-100 text-pink-600 text-xs font-medium px-2 py-1 rounded-full">
+                                                {{ category.title }}
+                                            </span>
+                                            </a>
                                         {% endfor %}
                                     </div>
 

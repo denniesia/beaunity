@@ -49,6 +49,7 @@ class EventsOverviewView(ListView):
             request.GET.get('sort_by'),
             request.GET.get('archived')
         ])
+
         context['filter_mode'] = filter_mode
         return context
 
@@ -56,3 +57,10 @@ class EventDetailsView(DetailView):
     model = Event
     context_object_name = 'event'
     template_name = 'event/event-details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        attendees = self.object.attendees.all()
+        context['attendees'] = attendees
+        print(attendees)
+        return context
