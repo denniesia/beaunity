@@ -95,25 +95,6 @@
             </form>
 
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <hr class="my-8 border-t border-pink-200 mt-4" />
         <section class="py-2">
             <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
@@ -176,9 +157,9 @@
                                     </div>
 
                                     <div class="mt-auto flex justify-between gap-4">
-                                        <button class="bg-pink-500 text-white text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-900 transition">
+                                        <a href="{% url 'event-details' event.pk %}" class="bg-pink-500 text-white text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-900 transition">
                                             See More
-                                        </button>
+                                        </a>
                                         <button class="text-white text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-500 transition" style="background-color:#9370DB">
                                             Join Event
                                         </button>
@@ -194,31 +175,6 @@
             </div>
         </section>
     </div>
-
-
-
-{#    <script>#}
-{#  document.querySelectorAll('.option').forEach(option => {#}
-{#    option.addEventListener('click', () => {#}
-{#      // Update hidden input value#}
-{#      const hiddenInput = document.getElementById('sort_by');#}
-{#      hiddenInput.value = option.getAttribute('data-value');#}
-{##}
-{#      // Optionally update the label text (you can customize this part)#}
-{#      const label = hiddenInput.closest('.group').querySelector('label');#}
-{#      label.childNodes[0].nodeValue = 'Sort By: ' + option.textContent + ' ';#}
-{##}
-{#      // Optionally close the dropdown (not necessary because it's hover based)#}
-{#    });#}
-{#  });#}
-{#</script>#}
-
-
-
-
-
-
-
 
 
 

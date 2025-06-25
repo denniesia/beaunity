@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from .models import Event
 from beaunity.category.models import Category
 
@@ -51,3 +51,8 @@ class EventsOverviewView(ListView):
         ])
         context['filter_mode'] = filter_mode
         return context
+
+class EventDetailsView(DetailView):
+    model = Event
+    context_object_name = 'event'
+    template_name = 'event/event-details.html'
