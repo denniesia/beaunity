@@ -4,35 +4,35 @@
 
 <div class="w-[800px] max-w-full min-w-[500px] lg:w-2/3 mx-auto">
     <!-- Unified Forum Post & Comments Container -->
-    <div class="bg-white rounded-2xl shadow-md border border-pink-300 mb-6 p-4 my-6 transition hover:shadow-lg">
-
-        <!-- User Info Header -->
-        <div class="flex items-start justify-between mb-4">
-
-            <!-- Event image -->
-            <img src="{{ event.poster_image.url }}" alt="Event Banner" class="w-full h-64 object-cover">
-            <!-- Content -->
-            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x">
-                <!-- Left Section -->
-                <div class="p-6">
-                    <h2 class="text-2xl font-bold text-pink-900">{{ event.title }}</h2>
-                    <!-- Host section with profile pic and name -->
-                    <div class="flex items-center gap-3 mt-2 mb-1">
-                        <img src="{{ event.created_by.profile.profile_pic.url }}" alt="Host Profile Picture" class="w-10 h-10 rounded-full object-cover border border-pink-200">
-                        <div>
-                            <h3 class="text-md font-semibold text-pink-700">Hosted by: {{ event.created_by }}</h3>
-                            <p class="text-sm font-medium text-gray-600">American Bar</p>
-                        </div>
+    <div class="bg-white mb-6 p-4 my-6 transition ">
+        <!-- Event image -->
+        <img src="{{ event.poster_image.url }}" alt="Event Banner" class="w-full h-64 object-cover">
+        <!-- Content -->
+        <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x">
+            <!-- Left Section -->
+            <div class="p-4 pl-6">
+                <h2 class="text-2xl font-bold text-pink-900">{{ event.title }}</h2>
+                <!-- Host section with profile pic and name -->
+                <div class="flex items-center gap-3 mt-2 mb-1">
+                    <img src="{{ event.created_by.profile.profile_pic.url }}" alt="Host Profile Picture" class="w-10 h-10 rounded-full object-cover border border-pink-200">
+                    <div>
+                        <h3 class="text-md font-semibold text-pink-700">Hosted by: {{ event.created_by }}</h3>
+                        <p class="text-sm font-medium text-gray-600">title</p>
                     </div>
+                </div>
+                <!-- Date & Time -->
+                <div class="flex items-center text-pink-700 gap-2 mt-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
 
-                    <!-- Date & Time -->
-                    <div class="flex items-center text-pink-700 gap-2 mt-4">
-                        <span>📅</span>
-                        <div>
-                            <p>{{ event.start_time }}</p>
-                            <p class="text-sm text-gray-500">{{ event.end_time }}</p>
-                        </div>
+
+                    <div>
+                        <p>{{ event.start_time }}</p>
+                        <p class="text-sm text-gray-500">{{ event.end_time }}</p>
                     </div>
+                </div>
+
                      <div class="flex items-center text-pink-700 gap-2">
                         <span>📍</span>
                         <a href="#" class="text-pink-600 underline hover:text-pink-800">
