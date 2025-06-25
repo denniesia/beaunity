@@ -10,6 +10,7 @@ from beaunity.event.models import Event
 from beaunity.category.models import Category
 from beaunity.accounts.models import AppUser
 from django.db.models import Q
+from django.db.models.functions import TruncDate
 # Create your views here.
 class IndexView(TemplateView):
     template_name = 'common/landing_page.html'
@@ -17,7 +18,9 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
-        context['events'] = Event.objects.all().order_by('-start_time')
+        context['events'] = Event.objects.annotate(
+            start_date_only=TruncDate('start_time')
+        ).order_by('start_date_only')[:3]
         return context
 
 class SearchView(TemplateView):

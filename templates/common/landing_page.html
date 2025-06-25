@@ -39,7 +39,7 @@
 </section>
     <section class="py-4 bg-pink-50 overflow-hidden">
         <div class="max-w-full mx-auto px-4">
-            <h2 class="text-xl font-bold text-pink-500 text-center">Explore Categories</h2>
+            <h2 class="text-2xl font-bold text-pink-500 text-center mt-2">Explore Categories</h2>
             <div id="scroll-wrapper" class="relative overflow-x-auto whitespace-nowrap py-8 min-h-[100px]">
                 <div id="scroll-content" class="flex gap-6">
                     {% for category in categories %}
@@ -84,29 +84,47 @@
                 </div>
             </div>
         </section>
-
-    <div class="max-w-full mx-auto px-4">
-        <h2 class="text-xl font-bold text-pink-500 text-center mb-6">Explore Upcoming Events</h2>
-
-        <!-- Events List Container -->
-        <div class="overflow-x-auto whitespace-nowrap py-8 min-h-[100px]">
-            <!-- Event 1 -->
-            <div class="bg-white w-3/4 p-4 rounded-lg shadow-sm border-l-4 border-pink-500 ">
-                <div class="flex items-start">
-                    <span class="bg-pink-100 text-pink-800 text-xs font-medium px-2 py-0.5 rounded mr-2">Your event</span>
-                    <div>
-                        <h2 class="font-medium text-gray-800">Inclusive Community Volunteer Day</h2>
-                        <p class="text-sm text-gray-500">Hosted by: Andy Kostadinov</p>
-                        <p class="text-sm text-gray-500 mt-1">June 28, 2025, 9 a.m.</p>
+        <div class="max-w-full mx-auto px-4">
+            <h2 class="text-2xl font-bold text-pink-500 text-center mt-4">Explore Events</h2>
+            <div class="relative overflow-x-auto py-8 pl-8">
+                <div class="flex justify-center gap-6 pl-8">
+                    {% for event in events %}
+                        <div class="w-full sm:w-80 md:w-96 lg:w-100 bg-white relative rounded-2xl shadow text-left flex-shrink-0 transition-all duration-300 transform cursor-pointer hover:scale-105 hover:shadow-pink-400 hover:shadow-lg">
+                            <a href="" >
+                                {% if event.created_by == user %}
+                                    <div class="absolute top-1 right-2 text-pink-600 text-xs font-semibold px-5 py-2 rounded-full shadow-md z-10" style=" background-color: white">
+                                        Your Event
+                                    </div>
+                                {% endif %}
+                                <img src="{{ event.poster_image.url }}" alt="Event Image" class="w-full h-40 object-cover rounded-t-2xl">
+                                <div class="p-4">
+                                    <h3 class="text-lg font-semibold text-pink-600">{{ event.title }}</h3>
+                                    <p class="text-xs text-gray-500 mb-3">
+                                        Hosted by
+                                        <a href="{% url 'profile-details' event.created_by.id %}"><strong>@{{ event.created_by }}</strong>
+                                        </a>
+                                    <p class="text-sm text-gray-600 mb-2">{{ event.details|truncatechars:90 }}</p>
+                                    <p class="text-sm text-gray-500">{{ event.start_time|date:"F j, Y, H:i" }}</p>
+                                    <p class="text-sm text-gray-500">Going: </p>
+                                    <p class="text-sm text-gray-500">See More: </p>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                    <div class="flex mr-10 ">
+                        <a href="{% url 'events' %}" class="text-pink-600 font-medium hover:underline  flex items-center gap-1">
+                            See all
+                            <svg class="w-8 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
-            <!-- See All Button -->
-            <div class="text-center pt-4">
-            <a href="#" class="text-pink-600 hover:text-pink-800 font-medium hover:underline">See all events</a>
         </div>
-    </div>
-</div>
+
+
+
 
 
 
