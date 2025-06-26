@@ -114,74 +114,11 @@
                 	 <h2 class="text-2xl font-semibold text-pink-600 mb-8 text-center">Upcoming Events</h2>
                 {% endif %}
 
-                {% if events %}
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {% for event in events %}
-                            <div class="relative bg-white border border-pink-200 rounded-2xl shadow-md overflow-hidden flex flex-col hover:-translate-y-1 hover:shadow-lg hover:shadow-pink-300">
-                                <!-- Label -->
-                                {% if event.created_by == user %}
-                                <div class="absolute top-3 right-2 text-pink-600 text-xs font-semibold px-5 py-2 rounded-full shadow-md z-10" style=" background-color: white">
-                                    Your Event
-                                </div>
-                                {% endif %}
-                                <img src="{{ event.poster_image.url }}" alt="Event Poster"
-                                     class="w-100 h-40 object-cover rounded-t-2xl">
+                {% include 'event/events.html' %}
 
-
-                                <div class="p-5 flex flex-col flex-grow justify-between">
-                                    <div>
-                                        <h3 class="text-xl font-semibold text-pink-700 mb-1">{{ event.title }}</h3>
-                                        <p class="text-xs text-gray-500 mb-3">
-                                            Hosted by
-                                            <a href="{% url 'profile-details' event.created_by.id %}"><strong>@{{ event.created_by }}</strong>
-                                            </a>
-                                        </p>
-                                        <p class="text-sm text-gray-600 mt-2 mb-4">
-                                            {{ event.details|truncatechars:100 }}
-                                        </p>
-                                    </div>
-                                    <div class="text-sm text-gray-600 space-y-1 mb-2">
-                                        <p><strong>Date and Time:</strong> {{ event.start_time|date:"F j, Y, H:i"}}</p>
-                                        {% if event.is_online %}
-                                        	 <p><strong>Location:</strong> Online</p>
-                                        {% else %}
-                                             <p><strong>Location:</strong> {{ event.location }}</p>
-                                        {% endif %}
-
-                                    </div>
-
-                                    <div class="flex flex-wrap gap-2 mb-4">
-                                        {% for category in event.categories.all %}
-                                            <a href="{% url 'category-details' category.slug %}"><span class="bg-pink-100 text-pink-600 text-xs font-medium px-2 py-1 rounded-full">
-                                                {{ category.title }}
-                                            </span>
-                                            </a>
-                                        {% endfor %}
-                                    </div>
-
-                                    <div class="mt-auto flex justify-between gap-4">
-                                        <a href="{% url 'event-details' event.pk %}" class="bg-pink-500 text-white text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-900 transition">
-                                            See More
-                                        </a>
-                                        <button class="text-white text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-500 transition" style="background-color:#9370DB">
-                                            Join Event
-                                        </button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    <p class="text-pink-500 text-center py-1"> No events.</p>
-                {% endif %}
             </div>
         </section>
     </div>
-
-
-
-
 
 {% endblock %}
 
