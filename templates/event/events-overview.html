@@ -27,98 +27,106 @@
                 </div>
             </div>
             <!-- Filter Bar -->
-            <form method="GET" class="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm font-semibold text-gray-800">
-                <!-- Sort By -->
-                <div class="relative group">
-                    <div class="flex items-center gap-1 cursor-pointer text-pink-500 hover:text-pink-700 select-none">
-                        Sort By
-                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.1 1.02l-4.25 4.65a.75.75 0 01-1.1 0l-4.25-4.65a.75.75 0 01.02-1.06z" />
-                        </svg>
-                    </div>
-
-                    <!-- Dropdown -->
-                    <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md opacity-0  invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200 z-10">
-                        <button type="submit" name="sort_by" value="Popularity" class="block w-full  text-left px-4 py-2 hover:bg-pink-100">Popularity</button>
-                        <button type="submit" name="sort_by" value="Online" class="block w-full text-left  px-4 py-2 hover:bg-pink-100">Online</button>
-                        <button type="submit" name="sort_by" value="Public events" class="block w-full text-left  px-4 py-2 hover:bg-pink-100">Public events</button>
-                        <button type="submit" name="sort_by" value="Hosts" class="block w-full text-left px-4 py-2  hover:bg-pink-100">Hosts</button>
-                    </div>
-                </div>
-
-                <!-- Cities -->
-                <div class="relative group">
-                    <div class="flex items-center gap-1 cursor-pointer text-pink-500 hover:text-pink-700 select-none">
-                        Cities
-                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.1 1.02l-4.25 4.65a.75.75 0 01-1.1 0l-4.25-4.65a.75.75 0 01.02-1.06z" />
-                        </svg>
-                    </div>
-
-                    <!-- Dropdown -->
-                    <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200 z-10">
-                        {% for city in cities %}
-                            <button type="submit" name="city" value="{{ city }}" class="block w-full text-left px-4 py-2 hover:bg-pink-100">
-                                {{ city|capfirst }}
-                            </button>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <!-- Categories -->
-                <div class="relative group">
-                    <div class="flex items-center gap-1 cursor-pointer text-pink-500 hover:text-pink-700 select-none">
-                        Categories
-                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.1 1.02l-4.25 4.65a.75.75 0 01-1.1 0l-4.25-4.65a.75.75 0 01.02-1.06z" />
-                        </svg>
-                    </div>
-
-                    <!-- Dropdown -->
-                    <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200 z-10">
-                        {% for category in categories %}
-                            <button type="submit" name="category" value="{{ category }}" class="block w-full text-left px-4 py-2 hover:bg-pink-100">
-                                {{ category }}
-                            </button>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <!-- Archived Button -->
-                <div class="relative">
-                    <button type="submit" name="archived" value="true"
-                            class="flex items-center gap-1 text-pink-500 cursor-pointer hover:text-pink-700">
-                        Archived
-                    </button>
-                </div>
-
-            </form>
-
-        </div>
-        <hr class="my-8 border-t border-pink-200 mt-4" />
-        <section class="py-2">
-            <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
-                {% if filter_mode %}
-                   <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
-                       <h2 class="text-2xl font-semibold text-pink-600 mb-8 text-center flex justify-center items-center">
-                           Showing filtered events:
-                           <a href="{% url 'events' %}" class="ml-3 text-sm text-pink-900 hover:underline flex items-center">
-                               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                               </svg>
-                               Clear filters
-                           </a>
-                       </h2>
+           <form method="GET" class="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm font-semibold text-gray-800">
+               <!-- Sort By -->
+               <div class="relative">
+                   <div onclick="toggleDropdown('sortDropdown')" class="flex items-center gap-1 cursor-pointer text-pink-500 hover:text-pink-700 select-none">
+                       Sort By
+                       <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                           <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.1 1.02l-4.25 4.65a.75.75 0 01-1.1 0l-4.25-4.65a.75.75 0 01.02-1.06z" />
+                       </svg>
                    </div>
-                {% else %}
-                	 <h2 class="text-2xl font-semibold text-pink-600 mb-8 text-center">Upcoming Events</h2>
-                {% endif %}
+                   <div id="sortDropdown" class="dropdown hidden absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md z-10">
+                       <button type="submit" name="sort_by" value="Popularity" class="block w-full text-left px-4 py-2 hover:bg-pink-100">Popularity</button>
+                       <button type="submit" name="sort_by" value="Online" class="block w-full text-left px-4 py-2 hover:bg-pink-100">Online</button>
+                       <button type="submit" name="sort_by" value="Public events" class="block w-full text-left px-4 py-2 hover:bg-pink-100">Public events</button>
+                       <button type="submit" name="sort_by" value="Hosts" class="block w-full text-left px-4 py-2 hover:bg-pink-100">Hosts</button>
+                   </div>
+               </div>
+               <!-- Cities -->
+               <div class="relative">
+                   <div onclick="toggleDropdown('cityDropdown')" class="flex items-center gap-1 cursor-pointer text-pink-500 hover:text-pink-700 select-none">
+                       Cities
+                       <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                           <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.1 1.02l-4.25 4.65a.75.75 0 01-1.1 0l-4.25-4.65a.75.75 0 01.02-1.06z" />
+                       </svg>
+                   </div>
+                   <div id="cityDropdown" class="dropdown hidden absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md z-10">
+                       {% for city in cities %}
+                           <button type="submit" name="city" value="{{ city }}" class="block w-full text-left px-4 py-2 hover:bg-pink-100">
+                               {{ city|capfirst }}
+                           </button>
+                       {% endfor %}
+                   </div>
+               </div>
 
-                {% include 'event/events.html' %}
+               <!-- Categories -->
+               <div class="relative">
+                   <div onclick="toggleDropdown('categoryDropdown')" class="flex items-center gap-1 cursor-pointer text-pink-500 hover:text-pink-700 select-none">
+                       Categories
+                       <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                           <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.1 1.02l-4.25 4.65a.75.75 0 01-1.1 0l-4.25-4.65a.75.75 0 01.02-1.06z" />
+                       </svg>
+                   </div>
+                   <div id="categoryDropdown" class="dropdown hidden absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md z-10">
+                       {% for category in categories %}
+                           <button type="submit" name="category" value="{{ category }}" class="block w-full text-left px-4 py-2 hover:bg-pink-100">
+                               {{ category }}
+                           </button>
+                       {% endfor %}
+                   </div>
+               </div>
 
-            </div>
-        </section>
-    </div>
+               <!-- Archived Button -->
+               <div class="relative">
+                   <button type="submit" name="archived" value="true"
+                           class="flex items-center gap-1 text-pink-500 cursor-pointer hover:text-pink-700">
+                       Archived
+                   </button>
+               </div>
+           </form>
+            <hr class="my-8 border-t border-pink-200 mt-4" />
+
+            <section class="py-2">
+                <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
+                    {% if filter_mode %}
+                        <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
+                            <h2 class="text-2xl font-semibold text-pink-600 mb-8 text-center flex justify-center items-center">
+                                Showing filtered events:
+                                <a href="{% url 'events' %}" class="ml-3 text-sm text-pink-900 hover:underline flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                    Clear filters
+                                </a>
+                            </h2>
+                        </div>
+                    {% else %}
+                        <h2 class="text-2xl font-semibold text-pink-600 mb-8 text-center">Upcoming Events</h2>
+                    {% endif %}
+                    {% include 'event/events.html' %}
+
+                </div>
+            </section>
+        </div>
+
+    <script>
+        function toggleDropdown(id) {
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                if (dropdown.id !== id) dropdown.classList.add('hidden');
+            });
+            const el = document.getElementById(id);
+            el.classList.toggle('hidden');
+        }
+
+        // Optional: Close dropdowns if clicking outside
+        document.addEventListener('click', function (event) {
+        const isDropdown = event.target.closest('.relative');
+        if (!isDropdown) {
+            document.querySelectorAll('.dropdown').forEach(dropdown => dropdown.classList.add('hidden'));
+        }
+        });
+    </script>
 
 {% endblock %}
 
