@@ -5,6 +5,8 @@ from beaunity.category.models import Category
 from django.db.models import Q
 from django.db.models import Count
 from django.utils.timezone import now
+
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 # Create your views here.
 class EventsOverviewView(ListView):
     template_name = 'event/events-overview.html'
@@ -60,22 +62,24 @@ class EventsOverviewView(ListView):
         context['filter_mode'] = filter_mode
         return context
 
-class EventDetailsView(DetailView):
+class EventDetailsView(LoginRequiredMixin, DetailView):
     model = Event
     context_object_name = 'event'
     template_name = 'event/event-details.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        attendees = self.object.attendees.all().select_related('profile')
+        attendees = self.object.attendees.select_related('profile')[:6]
         context['attendees'] = attendees
         print(attendees)
         return context
 
-class MyEventsView(ListView):
+class MyEventsView(LoginRequiredMixin, PermissionRequiredMixin,ListView):
     model = Event
     context_object_name = 'events'
     template_name = 'event/my-events.html'
+    permission_required = 'event.change_event'
+    raise_exception = True
 
     def get_queryset(self):
         self.archived = self.request.GET.get('archived', 'false').lower() == 'true'

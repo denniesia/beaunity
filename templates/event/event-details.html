@@ -48,7 +48,7 @@
             </div>
             <!-- Right: Event Media -->
             <div>
-                <h4 class="text-lg font-semibold text-pink-700 mt-4">Attending: {{ attendees.count }}</h4>
+                <h4 class="text-lg font-semibold text-pink-700 mt-4">Attending:</h4>
                 <div class="flex items-center gap-3 mt-2">
                     {% if attendees %}
                         <div class="flex flex-wrap gap-2 mb-4">
@@ -57,6 +57,7 @@
                             {% empty %}
                                 <p class="text-sm text-gray-500">No attendees yet.</p>
                             {% endfor %}
+                            <p class="text-pink-700 text-bold text-3xl">...</p>
                         </div>
                     {% else %}
                         <p class="text-sm text-gray-500">No attendees yet.</p>
