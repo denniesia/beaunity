@@ -52,10 +52,6 @@ class Event(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
     categories = models.ManyToManyField(Category, related_name='events')
     attendees = models.ManyToManyField(UserModel, related_name='events_attendees', blank=True)
 
-    @property
-    def is_archived(self):
-        return self.end_time < now()
-
 
     class Meta:
         verbose_name_plural = 'Events'

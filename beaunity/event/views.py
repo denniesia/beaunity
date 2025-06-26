@@ -12,14 +12,17 @@ class EventsOverviewView(ListView):
     context_object_name = 'events'
 
     def get_queryset(self):
+        current_datetime = now()
+        archived = self.request.GET.get('archived', '').lower() == 'true'
 
-        queryset = Event.objects.filter(
-            is_archived=False,
-        ).order_by('start_time')
+        if archived:
+            queryset = Event.objects.filter(end_time__lt=current_datetime)
+        else:
+            queryset = Event.objects.filter(end_time__gte=current_datetime)
+
         city = self.request.GET.get('city')
         category = self.request.GET.get('category')
         sort_by = self.request.GET.get('sort_by')
-        archived = self.request.GET.get('archived')
 
         if city:
             queryset = queryset.filter(city=city)
@@ -31,16 +34,14 @@ class EventsOverviewView(ListView):
             queryset = queryset.annotate(popularity=Count('attendees')).order_by('-popularity')
         elif sort_by == 'Online':
             queryset = queryset.filter(is_online=True)
-        elif sort_by == 'Public_events':
+        elif sort_by == 'Public events':
             queryset = queryset.filter(is_public=True)
         elif sort_by == 'Hosts':
             queryset = queryset.order_by('created_by__username')
-        if archived:
-            queryset = queryset.filter(
-            is_archived=True,
-            ).order_by('start_time')
-        print(current_date)
-        print(current_datetime)
+
+        if sort_by not in ['Popularity', 'Hosts']:
+            queryset = queryset.order_by('start_time')
+
         return queryset.distinct()
 
     def get_context_data(self, **kwargs):
