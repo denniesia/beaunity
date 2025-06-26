@@ -1,20 +1,19 @@
 {% extends 'common/base.html' %}
-
+{% load static %}
 {% block content %}
 
 <div class="w-[800px] max-w-full min-w-[500px] lg:w-2/3 mx-auto">
-    <!-- Unified Forum Post & Comments Container -->
     <div class="bg-white mb-6 p-4 my-6 transition ">
         <!-- Event image -->
         <img src="{{ event.poster_image.url }}" alt="Event Banner" class="w-full h-64 object-cover rounded">
         <!-- Details -->
-        <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="mt-2 grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Left: Title + Host Info -->
             <div class="md:col-span-2 ml-4 ">
                 <!-- Event Title -->
                 <h2 class="text-2xl font-bold text-pink-900 mb-4">{{ event.title }}</h2>
                 <!-- Host Info -->
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-4 ml-4">
                     {% if event.created_by.profile.profile_pic %}
                         <img src="{{ event.created_by.profile.profile_pic.url }}"  class="w-12 h-12 rounded-full object-cover">
                     {% else %}
@@ -22,8 +21,12 @@
                              class="w-12 h-12 rounded-full object-cover">
                     {% endif %}
                     <div>
-                      <h3 class="text-md font-semibold text-pink-700">Hosted by: {{ event.created_by }}</h3>
-                      <p class="text-sm font-medium text-gray-600">title</p>
+                      <h3 class="text-md font-semibold text-pink-700">
+                          Hosted by:
+                          <a href="{% url 'profile-details' event.created_by.id %}" class="hover:text-blue-700">
+                          {{ event.created_by }}
+                          </a>
+                      </h3>
                     </div>
                 </div>
                 <div class="flex items-center text-pink-700 gap-2 mt-2 pl-6">
@@ -67,10 +70,7 @@
                                 </span>
                             </a>
                         {% endfor %}
-
                 </div>
-
-
             </div>
         </div>
         <div class="items-center gap-5 mb-1 ml-6">
@@ -85,6 +85,15 @@
                 {{ event.details }}
             </p>
         </div>
+        <div class="flex items-start text-pink-500 space-x-4 text-sm mb-2 mt-4 ml-10">
+            <a class="flex items-center text-4xs cursor-pointer gap-1">
+                <img src="{% static 'common/heart_big.png' %}" class="w-6 h-6"> Like
+            </a>
+            <a class="flex items-center text-4xs cursor-pointer gap-1">
+                <img src="{% static 'common/share-big.png' %}" class="w-6 h-6"> Share
+            </a>
+        </div>
+       <hr class="border-t border-gray-300 my-4">
 
 
 

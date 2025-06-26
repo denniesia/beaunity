@@ -64,3 +64,24 @@ class EventDetailsView(DetailView):
         context['attendees'] = attendees
         print(attendees)
         return context
+
+class MyEventsView(ListView):
+    model = Event
+    context_object_name = 'events'
+    template_name = 'event/my-events.html'
+
+    def get_queryset(self):
+        self.archived = self.request.GET.get('archived', 'false').lower() == 'true'
+        queryset = Event.objects.filter(created_by=self.request.user)
+
+        if self.archived:
+            queryset = queryset.filter(end_time__lt=now())
+        else:
+            queryset = queryset.filter(end_time__gte=now())
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['archived'] = self.archived  # Pass boolean, not string
+        return context
