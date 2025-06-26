@@ -90,7 +90,7 @@
                 <div class="flex justify-center gap-6 pl-8">
                     {% for event in events %}
                         <div class="w-full sm:w-80 md:w-96 lg:w-100 bg-white relative rounded-2xl shadow text-left flex-shrink-0 transition-all duration-300 transform cursor-pointer hover:scale-105 hover:shadow-pink-400 hover:shadow-lg">
-                            <a href="" >
+                            <a href="{% url 'event-details' event.pk %}" >
                                 {% if event.created_by == user %}
                                     <div class="absolute top-1 right-2 text-pink-600 text-xs font-semibold px-5 py-2 rounded-full shadow-md z-10" style=" background-color: white">
                                         Your Event
@@ -105,8 +105,24 @@
                                         </a>
                                     <p class="text-sm text-gray-600 mb-2">{{ event.details|truncatechars:90 }}</p>
                                     <p class="text-sm text-gray-500">{{ event.start_time|date:"F j, Y, H:i" }}</p>
-                                    <p class="text-sm text-gray-500">Going: </p>
-                                    <p class="text-sm text-gray-500">See More: </p>
+                                    <div class="flex">
+                                        <p class="text-sm text-gray-500 mt-4">
+                                            Going:
+                                        </p>
+                                        {% if user.is_authenticated%}
+                                            {% if event.attendees %}
+                                                <div class="flex flex-wrap gap-2 mt-2 ml-2">
+                                                    {% for attendee in event.attendees.all %}
+                                                        <a href="{% url 'profile-details' attendee.profile.pk %}"><img src="{{ attendee.profile.profile_pic.url|default:'https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg' }}" class="w-10 h-10 rounded-full object-cover border border-pink-300"></a>
+                                                    {% empty %}
+                                                        <p class="text-sm text-gray-500">No attendees yet.</p>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                         {% else %}
+                                            <p class="text-sm text-gray-500 italic mt-4 ml-2">Login to see who is going.</p>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </a>
                         </div>
