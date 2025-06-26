@@ -1,0 +1,14 @@
+{% load static %}
+
+<a class="flex items-center text-2xs cursor-pointer gap-1" onclick="copyPageLink()">
+    <img src="{% static 'common/share.png' %}"> Share
+</a>
+
+<script>
+     function copyPageLink() {
+         const url = window.location.href;
+         navigator.clipboard.writeText(url)
+             .then(() => alert("Link copied to clipboard!"))
+             .catch(() => alert("Failed to copy link."));
+     }
+ </script>

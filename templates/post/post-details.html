@@ -12,7 +12,7 @@
             <div class="flex items-center space-x-4">
                 <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 font-semibold text-sm shadow-inner">
                     {% if post.created_by.profile.profile_pic %}
-                        <img src="{{ post.created_by.profile.profile_pic.url }}" class="rounded-full w-fit h-fit mt-3">
+                        <img src="{{ post.created_by.profile.profile_pic.url }}" class="rounded-full w-fit h-fit">
                     {% else %}
                         <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg" alt="Default Profile" class="w-fit h-fit rounded-full">
                     {% endif %}
@@ -75,9 +75,8 @@
             <a class="flex items-center text-2xs cursor-pointer gap-1">
                 <img src="{% static 'common/dislike.png' %}"> Dislike
             </a>
-            <a class="flex items-center text-2xs cursor-pointer gap-1">
-                <img src="{% static 'common/share.png' %}"> Share
-            </a>
+            <!-- Share finctionality -->
+            {% include 'common/share.html' %}
         </div>
         <!-- Divider -->
         <hr class="border-t border-gray-300 my-4">
@@ -88,7 +87,7 @@
         <div class="flex gap-3 items-start pb-4">
             <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 text-xs shadow-inner">
                 {% if comment.created_by.profile.profile_pic %}
-                	 <img src="{{ comment.created_by.profile.profile_pic.url }}" class="rounded-full w-fit h-fit mt-3">
+                	 <img src="{{ comment.created_by.profile.profile_pic.url }}" class="rounded-full w-fit h-fit">
                 {% else %}
                     <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg" alt="Default Profile" class="w-fit h-fit rounded-full">
                 {% endif %}
@@ -181,6 +180,7 @@
         </svg>
     </a>
 </div>
+   
 
 
 {% endblock %}
