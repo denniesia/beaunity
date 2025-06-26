@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.contenttypes.models import ContentType
-from .models import Like, Dislike
+from .models import Like
 
 # Create your views here.
 

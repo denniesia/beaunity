@@ -66,15 +66,18 @@
             {{ post.content }}
         </div>
 
-        {% if post.is_approved %}
-        <!-- Interaction Buttons -->
-        <div class="flex items-start text-pink-500 space-x-4 text-sm mb-2 mt-2">
+        {% if post.is_approved  %}
 
-            {% include 'interaction/like.html' with obj=post model_name='post' %}
+            <!-- Interaction Buttons -->
+            {% if user.is_authenticated %}
+                <div class="flex items-start text-pink-500 space-x-4 text-sm mb-2 mt-2">
+                    <!-- Like finctionality -->
+                    {% include 'interaction/like.html' with obj=post model_name='post' %}
+                    <!-- Share finctionality -->
+                    {% include 'interaction/share.html'%}
+                </div>
+            {% endif %}
 
-            <!-- Share finctionality -->
-            {% include 'interaction/share.html'%}
-        </div>
         <!-- Divider -->
         <hr class="border-t border-gray-300 my-4">
 
@@ -88,7 +91,6 @@
                 {% else %}
                     <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg" alt="Default Profile" class="w-fit h-fit rounded-full">
                 {% endif %}
-
             </div>
             <div class="flex-3 text-sm">
                 <!-- Author and Buttons on the Same Line -->
@@ -130,7 +132,7 @@
             </div>
         </div>
         {% empty %}
-        <p class="text-xs text-gray-500 mb-2">No comments yet. Be the first to comment!</p>
+        <p class="text-xs text-gray-500  mb-2">No comments yet. Be the first to comment!</p>
         {% endfor %}
 
         <!-- Comment Form -->
