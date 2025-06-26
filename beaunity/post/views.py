@@ -7,7 +7,7 @@ from django.urls import reverse_lazy, reverse
 from .forms import PostCreateForm, PostEditForm, AdminPostEditForm
 from beaunity.comment.forms import CommentCreateForm
 from beaunity.post.models import Post
-
+from beaunity.interaction.models import Like, Dislike
 from django.db.models import Q
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -87,6 +87,7 @@ class PostDetailsView(DetailView):
         paginator = Paginator(comments, 5)
         page_number = self.request.GET.get('page')
         page_obj = paginator.get_page(page_number)
+
         context['comments'] = page_obj
 
         return context

@@ -69,14 +69,11 @@
         {% if post.is_approved %}
         <!-- Interaction Buttons -->
         <div class="flex items-start text-pink-500 space-x-4 text-sm mb-2 mt-2">
-            <a class="flex items-center text-2xs cursor-pointer gap-1">
-                <img src="{% static 'common/like.png' %}"> Like
-            </a>
-            <a class="flex items-center text-2xs cursor-pointer gap-1">
-                <img src="{% static 'common/dislike.png' %}"> Dislike
-            </a>
+
+            {% include 'interaction/like.html' with obj=post model_name='post' %}
+
             <!-- Share finctionality -->
-            {% include 'common/share.html' %}
+            {% include 'interaction/share.html'%}
         </div>
         <!-- Divider -->
         <hr class="border-t border-gray-300 my-4">

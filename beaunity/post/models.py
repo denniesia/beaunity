@@ -4,6 +4,8 @@ from beaunity.common.mixins import ContentMixin, CreatedByMixin, CreatedAtMixin,
 from django.core.validators import MinLengthValidator
 from django.contrib.contenttypes.fields import GenericRelation
 from beaunity.comment.models import Comment
+from beaunity.interaction.models import Like, Dislike
+
 # Create your models here.
 class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, ContentMixin):
     banner = models.URLField(null=True, blank=True)
@@ -17,6 +19,8 @@ class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, ContentMixin):
     is_approved = models.BooleanField(default=False)
 
     comments = GenericRelation(Comment)
+    likes = GenericRelation(Like)
+    dislikes = GenericRelation(Dislike)
 
     class Meta:
         permissions = [

@@ -41,6 +41,7 @@ MY_APPS = [
      'beaunity.post',
      'beaunity.comment',
      'beaunity.event',
+     'beaunity.interaction',
 ]
 # Application definition
 
