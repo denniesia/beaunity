@@ -89,6 +89,7 @@ class ProfileEditForm(ProfileBaseForm):
         )
     )
     first_name = forms.CharField(
+        required=False,
         widget=forms.TextInput(
             attrs={
                 'class': CLASS,
@@ -97,6 +98,7 @@ class ProfileEditForm(ProfileBaseForm):
         )
     )
     last_name = forms.CharField(
+        required=False,
         widget=forms.TextInput(
             attrs={
                 'class': CLASS
@@ -104,6 +106,7 @@ class ProfileEditForm(ProfileBaseForm):
         )
     )
     date_of_birth = forms.DateField(
+        required=False,
         widget=forms.DateInput(
             attrs={
                 'class': CLASS,
@@ -114,6 +117,7 @@ class ProfileEditForm(ProfileBaseForm):
         input_formats=['%Y-%m-%d']
     )
     bio = forms.CharField(
+        required=False,
         widget=forms.Textarea(
             attrs={
                 'class': CLASS,
@@ -122,6 +126,7 @@ class ProfileEditForm(ProfileBaseForm):
         )
     )
     skin_type = forms.CharField(
+        required=False,
         widget=forms.Select(
             attrs={
                 'class': CLASS,
@@ -130,6 +135,7 @@ class ProfileEditForm(ProfileBaseForm):
         )
     )
     location = forms.CharField(
+        required=False,
         widget=forms.TextInput(
             attrs={
                 'class': CLASS,
