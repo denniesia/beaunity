@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import Event
 from beaunity.category.models import Category
-
+from django.db.models import Q
 from django.db.models import Count
 from django.utils.timezone import now
 # Create your views here.
@@ -12,7 +12,10 @@ class EventsOverviewView(ListView):
     context_object_name = 'events'
 
     def get_queryset(self):
-        queryset = Event.objects.all()
+
+        queryset = Event.objects.filter(
+            is_archived=False,
+        ).order_by('start_time')
         city = self.request.GET.get('city')
         category = self.request.GET.get('category')
         sort_by = self.request.GET.get('sort_by')
@@ -25,7 +28,7 @@ class EventsOverviewView(ListView):
             queryset = queryset.filter(categories__title=category)
 
         if sort_by == 'Popularity':
-            queryset = queryset.annotate(popularity=Count('events')).order_by('-popularity')
+            queryset = queryset.annotate(popularity=Count('attendees')).order_by('-popularity')
         elif sort_by == 'Online':
             queryset = queryset.filter(is_online=True)
         elif sort_by == 'Public_events':
@@ -33,8 +36,11 @@ class EventsOverviewView(ListView):
         elif sort_by == 'Hosts':
             queryset = queryset.order_by('created_by__username')
         if archived:
-            queryset = queryset.filter(end_time__lt=now())
-
+            queryset = queryset.filter(
+            is_archived=True,
+            ).order_by('start_time')
+        print(current_date)
+        print(current_datetime)
         return queryset.distinct()
 
     def get_context_data(self, **kwargs):

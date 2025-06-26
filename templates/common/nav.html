@@ -48,10 +48,12 @@
                             <a href="{% url 'category-overview' %}" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Categories</a>
                             <a href="#" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Challenges</a>
                             <a href="{% url 'post-pending' %}" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Posts</a>
+                        {% endif %}
+
+                        {% if perms.event.change_event %}
                             <a href="" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Events</a>
-                        {% elif perms.event.change_event %}
-                                <a href="" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Add New Event</a>
-                                <a href="{% url 'my-events' %}" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">My Events</a>
+                            <a href="" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Add New Event</a>
+                            <a href="{% url 'my-events' %}" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">My Events</a>
                         {% endif %}
                         </div>
                     </div>
