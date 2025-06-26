@@ -1,0 +1,41 @@
+{% extends 'common/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <section class="flex-grow flex items-center justify-center py-16">
+        <div class="bg-white shadow-xl rounded-2xl w-full max-w-md p-8">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-pink-600">Welcome Back</h2>
+                <p class="text-gray-600 text-sm mt-1">Log in to continue your glow up journey ✨</p>
+            </div>
+
+            <form method="post" class="space-y-5">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+
+                <div>
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                </div>
+
+                <div>
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                </div>
+
+                <button type="submit"
+                        class="w-full bg-pink-500 hover:bg-pink-600 text-white py-2 rounded-md font-semibold transition">
+                    Log In
+                </button>
+            </form>
+
+            <p class="text-sm text-center text-gray-600 mt-4">
+                Don't have an account?
+                <a href="{% url 'register' %}" class="text-pink-600 hover:underline font-medium">Sign up</a>
+            </p>
+        </div>
+    </section>
+
+
+{% endblock %}

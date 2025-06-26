@@ -14,7 +14,7 @@ UserModel = get_user_model()
 class AppUserRegisterView(CreateView):
     model = UserModel
     form_class = AppUserCreationForm
-    template_name = 'accounts/register-page.html'
+    template_name = 'accounts/register.html'
     success_url = reverse_lazy('landing_page')
 
     def form_valid(self, form):
@@ -24,19 +24,19 @@ class AppUserRegisterView(CreateView):
         return response
 
 class AppUserLoginView(LoginView):
-    template_name = 'accounts/login-page.html'
+    template_name = 'accounts/login.html'
     form_class = AppUserLoginForm
 
 
 #Profile Views
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
-    template_name = 'accounts/profile-details-page.html'
+    template_name = 'accounts/profile-details.html'
     model = Profile
     context_object_name = 'profile'
 
 class ProfileEditView(LoginRequiredMixin, View):   #LoginRequiredMixin, UserPassesTestMixin
-    template_name = 'accounts/profile-edit-page.html'
+    template_name = 'accounts/profile-edit.html'
 
     def get_success_url(self):
         return reverse_lazy('profile-details', kwargs={'pk': request.user.pk})
