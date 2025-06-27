@@ -1,13 +1,9 @@
 {% load interaction_tags %}
 
-
 {% has_joined request.user.profile event as joined %}
+
 {% if joined %}
-	<a href="{% url 'event-join' event.pk %}" class="text-white text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-500 transition" style="background-color:#FBB106">
-     Joined
-    </a>
-    {% else %}
-    <a href="{% url 'event-join' event.pk %}" class="text-white text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-500 transition" style="background-color:#9370DB">
-     Join
-    </a>
-{% endif %} 
+    <a  href="{% url 'event-join' event.pk %}">Joined</a>
+{% else %}
+    <a href="{% url 'event-join' event.pk %}">Join</a>
+{% endif %}
