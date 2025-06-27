@@ -4,7 +4,7 @@ from beaunity.common.mixins import ContentMixin, CreatedByMixin, CreatedAtMixin,
 from django.core.validators import MinLengthValidator
 from django.contrib.contenttypes.fields import GenericRelation
 from beaunity.comment.models import Comment
-from beaunity.interaction.models import Like
+from beaunity.interaction.models import Like, Favourite
 
 # Create your models here.
 class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, ContentMixin):
@@ -20,6 +20,7 @@ class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, ContentMixin):
 
     comments = GenericRelation(Comment)
     likes = GenericRelation(Like)
+    favourites = GenericRelation(Favourite)
 
     class Meta:
         permissions = [

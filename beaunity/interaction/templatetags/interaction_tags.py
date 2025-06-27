@@ -1,6 +1,6 @@
 from django import template
 from django.contrib.contenttypes.models import ContentType
-from beaunity.interaction.models import Like
+from beaunity.interaction.models import Like, Favourite
 
 register = template.Library()
 
@@ -20,3 +20,12 @@ def total_likes(obj):
         content_type=content_type,
         object_id=obj.id
     ).count()
+
+@register.filter
+def is_favourited_by_user(obj, user):
+    content_type = ContentType.objects.get_for_model(obj)
+    return Favourite.objects.filter(
+        user=user,
+        content_type=content_type,
+        object_id=obj.id
+    ).exists()
