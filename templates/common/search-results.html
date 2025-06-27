@@ -20,19 +20,6 @@
                         <div class="flex justify-between items-start">
                             <div>
                                 <h4 class="text-lg font-semibold text-pink-600">{{ category.title }}</h4>
-                                <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1">
-                                    <a href="{% url 'profile-details' category.created_by.id %}">
-                                        <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
-                                            Author: {{ category.created_by }}
-                                        </span>
-                                    </a>
-                                    <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
-                                        {{ category.created_at|date:"M d, Y" }}
-                                    </span>
-                                    <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
-                                        Updated {{ category.last_updated|timesince }} ago
-                                    </span>
-                                </div>
                             </div>
                         </div>
                         <p class="text-sm text-gray-600 mt-3">{{ category.description }}</p>
@@ -53,10 +40,13 @@
         {% if posts %}
             <div class="space-y-4">
                 {% for post in posts %}
-                    <div class="border border-pink-200 rounded-xl p-5 hover:shadow-md transition-shadow">
-                        <h4 class="text-lg font-semibold text-pink-600">{{ post.title }}</h4>
-                        <p class="text-sm text-gray-600 mt-2">{{ post.content|truncatewords:30 }}</p>
-                        <div class="mt-2 text-xs text-gray-400">Published on {{ post.created_at|date:"M d, Y" }}</div>
+                    <div class="flex flex-col border border-pink-200 rounded-xl p-5 hover:shadow-md transition-shadow">
+                        <a href="{% url 'post-details' post.pk %}">
+                            <span class="text-lg font-semibold text-pink-600">{{ post.title }}</span>
+                        </a>
+                        <span class="text-sm text-gray-600 mt-2">{{ post.content|truncatewords:30 }}</span>
+                        <span class="mt-1 text-xs text-gray-400">Author: <a href="{% url 'profile-details' post.created_by.pk %}" class="hover:text-pink-600">{{ post.created_by }}</a></span>
+                        <span class="mt-1 text-xs text-gray-400">Published on {{ post.created_at|date:"M d, Y, H:m" }}</span>
                     </div>
                 {% endfor %}
             </div>

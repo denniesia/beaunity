@@ -161,9 +161,9 @@ STATIC_ROOT = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_REDIRECT_URL = 'landing_page'
+LOGIN_REDIRECT_URL = 'landing-page'
 
-LOGOUT_REDIRECT_URL = 'landing_page'
+LOGOUT_REDIRECT_URL = 'landing-page'
 
 AUTH_USER_MODEL = 'accounts.AppUser'
 

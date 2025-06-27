@@ -13,7 +13,7 @@ from django.db.models import Q
 from django.utils.timezone import now
 # Create your views here.
 class IndexView(TemplateView):
-    template_name = 'common/landing_page.html'
+    template_name = 'common/landing-page.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -26,7 +26,7 @@ class IndexView(TemplateView):
         return context
 
 class SearchView(TemplateView):
-    template_name = 'common/search_results.html'
+    template_name = 'common/search-results.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
