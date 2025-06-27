@@ -1,0 +1,107 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<div class="max-w-full lg:w-2/3 mx-auto">
+  <h1 class="text-3xl md:text-4xl font-extrabold text-pink-500 text-center mt-8 mb-4">Edit Event</h1>
+
+  <div class="bg-white rounded-xl shadow-md overflow-hidden">
+
+    <!-- Poster Image Preview -->
+    <div class="relative w-full h-56 md:h-72">
+      <img src="{{ event.poster_image.url }}" alt="Event Banner" class="w-full h-full object-cover object-center">
+    </div>
+
+    <form method="POST" enctype="multipart/form-data" class="p-6 md:p-8">
+      {% csrf_token %}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Left Column -->
+        <div class="space-y-4">
+          <div>
+            {{ form.poster_image }}
+            {{ form.poster_image.errors }}
+          </div>
+
+          <div>
+            {{ form.title.label }}
+            {{ form.title }}
+            {{ form.title.errors }}
+          </div>
+
+          <div>
+            {{ form.details.label }}
+            {{ form.details }}
+              <div>
+                  <span class="text-sm text-gray-500 italic ml-2">{{ form.details.help_text }}</span>
+              </div>
+            {{ form.details.errors }}
+
+          </div>
+
+          <div>
+            {{ form.is_online.label }}
+            {{ form.is_online }}
+          </div>
+
+          <div>
+            {{ form.city.label }}
+            {{ form.city }}
+            {{ form.city.errors }}
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="space-y-4">
+          <div>
+            {{ form.location.label }}
+            {{ form.location }}
+            <small class="text-gray-500 italic text-sm">{{ form.location.help_text }}</small>
+            {{ form.location.errors }}
+          </div>
+
+          <div>
+            {{ form.meeting_link.label }}
+            {{ form.meeting_link }}
+            {{ form.meeting_link.errors }}
+          </div>
+
+          <div>
+            {{ form.start_time.label }}
+            {{ form.start_time }}
+            {{ form.start_time.errors }}
+          </div>
+
+          <div>
+            {{ form.end_time.label }}
+            {{ form.end_time }}
+            {{ form.end_time.errors }}
+          </div>
+
+          <div>
+            {{ form.categories.label }}
+            {{ form.categories }}
+              <small class="text-gray-500 italic text-sm">{{ form.categories.help_text }}</small>
+            {{ form.categories.errors }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="mt-8 text-center">
+        <button type="submit" class="bg-pink-500 text-white px-6 py-2 rounded-xl font-semibold hover:bg-pink-600 transition shadow">
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+
+

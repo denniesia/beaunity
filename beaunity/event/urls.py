@@ -5,5 +5,6 @@ urlpatterns = [
     path('my-events/', views.MyEventsView.as_view(), name='my-events'),
     path('<int:pk>/', include([
         path('', views.EventDetailsView.as_view(), name='event-details'),
+        path('/edit', views.EventEditView.as_view(), name='event-edit'),
     ])),
 ]

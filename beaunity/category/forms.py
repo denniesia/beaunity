@@ -3,6 +3,7 @@ from .models import Category
 from cloudinary.forms import CloudinaryFileField
 from django.forms import ClearableFileInput
 
+CLASS = 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
 class CategoryBaseForm(forms.ModelForm):
     class Meta:
         model = Category
@@ -18,7 +19,7 @@ class CategoryBaseForm(forms.ModelForm):
         },
         widget=ClearableFileInput(
             attrs={
-                'class': 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
+                'class': CLASS
             }
         )
     )
@@ -27,7 +28,7 @@ class CategoryBaseForm(forms.ModelForm):
         label='Title:',
         widget=forms.TextInput(
             attrs={
-                'class': 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
+                'class': CLASS
             }
         ),
     )
@@ -35,7 +36,7 @@ class CategoryBaseForm(forms.ModelForm):
         label='Description:',
         widget=forms.TextInput(
             attrs={
-                'class': 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
+                'class': CLASS
             }
         ),
     )
