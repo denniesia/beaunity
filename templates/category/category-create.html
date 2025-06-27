@@ -3,37 +3,40 @@
 {% block content %}
 
 <section class="flex-grow flex items-center justify-center py-16 ">
-  <div class="bg-white rounded-2xl shadow-xl w-full max-w-3xl p-8">
-
-    <!-- Header Section -->
-    <div class="flex justify-between items-center mb-8 pb-4 border-b border-pink-200">
-      <div>
-        <h2 class="text-2xl font-bold text-pink-600">Create New Category</h2>
-      </div>
-    </div>
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-3xl p-8">
+        <!-- Header Section -->
+        <div class="flex justify-between items-center mb-8 pb-4 border-b border-pink-200">
+            <div>
+                <h2 class="text-2xl font-bold text-pink-600">Create New Category</h2>
+            </div>
+        </div>
         <!-- Form Section -->
-      <div class="space-y-6">
-        <form method="post" class="space-y-6">
-          {% csrf_token %}
-             {{ form.image.label_tag }}
-          {{ form.image }}
+        <div class="space-y-6">
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                {{ form.image.label_tag }}
+                {{ form.image }}
+                {{ form.image.erors }}
 
-          {{ form.title.label_tag }}
-          {{ form.title }}
+                {{ form.title.label_tag }}
+                {{ form.title }}
+                {{ form.title.errors }}
 
-          {{ form.description.label_tag }}
-          {{ form.description }}
-          <!-- Form Actions -->
-          <div class="flex justify-end space-x-3 pt-4">
-            <a href="{% url 'category-overview' %}" class="px-5 py-2 text-sm font-medium text-pink-600 hover:text-pink-700 border border-pink-200 rounded-lg transition-colors">
-              Cancel
-            </a>
-            <button type="submit" class="px-5 py-2 text-sm font-medium text-white bg-pink-500 hover:bg-pink-600 rounded-lg shadow-md transition-colors">
-              Create Category
-            </button>
-          </div>
-        </form>
-      </div>
+                {{ form.description.label_tag }}
+                {{ form.description }}
+                {{ form.description.errors }}
+
+                <!-- Form Actions -->
+                <div class="flex justify-end space-x-3 pt-4">
+                    <a href="{% url 'category-overview' %}" class="px-5 py-2 text-sm font-medium text-pink-600 hover:text-pink-700 border border-pink-200 rounded-lg transition-colors">
+                        Cancel
+                    </a>
+                    <button type="submit" class="px-5 py-2 text-sm font-medium text-white bg-pink-500 hover:bg-pink-600 rounded-lg shadow-md transition-colors">
+                        Create Category
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </section>
 

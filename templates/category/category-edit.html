@@ -3,46 +3,50 @@
 {% block content %}
 
 <section class="flex-grow flex items-center justify-center py-16 ">
-  <div class="bg-white rounded-2xl shadow-xl w-full max-w-3xl p-8">
+      <div class="bg-white rounded-2xl shadow-xl w-full max-w-3xl p-8">
 
-    <!-- Header Section -->
-      <div class="flex justify-between items-center mb-8 pb-4 border-b border-pink-200">
-          <!-- Left: Heading -->
-          <h2 class="text-2xl font-bold text-pink-600">Edit Category</h2>
-          <!-- Right: Delete Icon -->
-          <a href="{% url 'category-delete' category.slug %}" class="text-red-500 hover:text-red-700">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-              </svg>
-          </a>
-      </div>
-
-        <!-- Form Section -->
-      <div class="space-y-6">
-        <form method="post" class="space-y-6" enctype="multipart/form-data">
-          {% csrf_token %}
-          {{ form.image.label_tag }}
-          {{ form.image }}
-
-            {{ form.title.label_tag }}
-          {{ form.title }}
-
-          {{ form.description.label_tag }}
-          {{ form.description }}
-
-          <!-- Form Actions -->
-          <div class="flex justify-end space-x-3 pt-4">
-            <a href="{% url 'category-overview' %}" class="px-5 py-2 text-sm font-medium text-pink-600 hover:text-pink-500 hover:bg-pink-100 border border-pink-200 rounded-lg transition-colors">
-              Cancel
-            </a>
-            <button type="submit" class="px-5 py-2 text-sm font-medium text-white bg-pink-500 hover:bg-pink-600 rounded-lg cursor-pointer shadow-md transition-colors">
-              Save Changes
-            </button>
+        <!-- Header Section -->
+          <div class="flex justify-between items-center mb-8 pb-4 border-b border-pink-200">
+              <!-- Left: Heading -->
+              <h2 class="text-2xl font-bold text-pink-600">Edit Category</h2>
+              <!-- Right: Delete Icon -->
+              <a href="{% url 'category-delete' category.slug %}" class="text-red-500 hover:text-red-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+              </a>
           </div>
-        </form>
+
+
+          <!-- Form Section -->
+          <div class="space-y-6">
+              <form method="post" class="space-y-6" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ form.image.label_tag }}
+                  {{ form.image }}
+                  {{ form.image.errors }}
+
+                  {{ form.title.label_tag }}
+                  {{ form.title }}
+                  {{ form.title.errors }}
+
+                  {{ form.description.label_tag }}
+                  {{ form.description }}
+                  {{ form.description.errors }}
+
+                  <!-- Form Actions -->
+                  <div class="flex justify-end space-x-3 pt-4">
+                      <a href="{% url 'category-overview' %}" class="px-5 py-2 text-sm font-medium text-pink-600 hover:text-pink-500 hover:bg-pink-100 border border-pink-200 rounded-lg transition-colors">
+                          Cancel
+                      </a>
+                      <button type="submit" class="px-5 py-2 text-sm font-medium text-white bg-pink-500 hover:bg-pink-600 rounded-lg cursor-pointer shadow-md transition-colors">
+                          Save Changes
+                      </button>
+                  </div>
+              </form>
+          </div>
       </div>
-    </div>
 </section>
 
 {% endblock %}

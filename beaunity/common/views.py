@@ -58,7 +58,7 @@ class SearchView(TemplateView):
         return context
 
 def custom_permission_denied_view(request, exception=None):
-    return render(request, "403.html", status=403)
+    return render(request, "common/403.html", status=403)
 
 
 #TODO - Challenge and Events logic

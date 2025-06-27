@@ -4,147 +4,141 @@
 
 
 <section class="flex-grow flex items-center justify-center py-16">
-  <div class="bg-white rounded-2xl shadow-xl w-full max-w-3xl p-8">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-3xl p-8">
 
-    <!-- Header with title and create button -->
-    <div class="  items-center mb-2 pb-4 border-b border-pink-200">
-      <h2 class="text-2xl font-bold text-pink-600">Search Results for "{{ query }}"</h2>
-        <form method="get" action="" class="mt-2">
-          <input
-            type="text"
-            name="query"
-            placeholder="Search categories and posts..."
-            class="w-full md:w-96 px-3 py-2 border border-pink-300 rounded-full text-sm text-gray-700 placeholder-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition duration-200"
-          />
-        </form>
-    </div>
-    {% if categories %}
-        <div>
-            <h3 class="text-2xl mb-2 text-pink-600">
-                Categories:
-            </h3>
+        <!-- Header with title and create button -->
+        <div class="  items-center mb-2 pb-4 border-b border-pink-200">
+            <h2 class="text-2xl font-bold text-pink-600">Search Results for "{{ query }}"</h2>
+            <form method="get" action="" class="mt-2">
+                <input
+                        type="text"
+                        name="query"
+                        placeholder="Search categories and posts..."
+                        class="w-full md:w-96 px-3 py-2 border border-pink-300 rounded-full text-sm text-gray-700 placeholder-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition duration-200"
+                />
+            </form>
         </div>
-
-    {% for category in  categories %}
-    <!-- Category List -->
-    <div class="space-y-4">
-        <!-- Category Item  -->
-        <div class="border border-pink-200 rounded-xl p-5 hover:shadow-md transition-shadow">
-            <div class="flex justify-between items-start">
-                <div>
-                    <h3 class="text-lg font-semibold text-pink-600 cursor-pointer">{{ category.title }}</h3>
-                    <!-- Timestamp information row -->
-                    <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1">
-                        <a href="{% url 'profile-details' category.created_by.id %}">
-                            <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
-                                Author: {{ category.created_by }}
-                            </span>
-                        </a>
-                        {% if perms.category.change_category %}
-
-                        <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            {{ category.created_at|date:"M d, Y" }}
-                        </span>
-                        <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            Updated {{ category.last_updated|timesince }} ago
-                        </span>
-                         {% endif %}
-                    </div>
-                </div>
-                {% if perms.category.change_category %}
-                <!-- Edit/Delete Buttons -->
-                <div class="flex gap-2">
-                    <a class="text-pink-500 hover:text-pink-700" href="{% url 'category-edit' category.slug %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                        </svg>
-                    </a>
-                    <a class="text-red-500 hover:text-red-700" href="{% url 'category-delete' category.slug %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg>
-                    </a>
-                </div>
-                {% endif %}
-            </div>
-            <p class="text-sm text-gray-600 mt-3">{{ category.description }}</p>
-        </div>
-    {% endfor %}
-        {% if posts %}
+        {% if categories %}
             <div>
-            <h3 class="text-2xl mb-2 text-pink-600">
-                Posts:
-            </h3>
-            {% for post in posts %}
-        	    <div class="space-y-4">
-        <div class="border border-pink-200 rounded-xl p-5 hover:shadow-md transition-shadow">
-            <div class="flex justify-between items-start">
-                <div>
-                    <a href="{% url 'post-details' post.id %}">
-                        <h3 class="text-lg font-semibold text-pink-600 cursor-pointer">{{ post.title }}</h3>
-                    </a>
-
-                    <!-- Timestamp information row -->
-                    <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1">
-                        <a href="{% url 'profile-details' post.category.created_by.id %}">
-                            <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
-                                Author: {{ post.created_by }}
-                            </span>
-                        </a>
-                        {% if perms.category.change_category %}
-
-                        <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            {{ post.created_at|date:"M d, Y" }}
-                        </span>
-                        <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            Updated {{ post.last_updated|timesince }} ago
-                        </span>
-                         {% endif %}
-                    </div>
-                </div>
-                {% if request.user == post.created_by %}
-                <!-- Edit/Delete Buttons -->
-                <div class="flex gap-2">
-                    <a class="text-pink-500 hover:text-pink-700" href="{% url 'category-edit' post.category.slug %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                        </svg>
-                    </a>
-                    <a class="text-red-500 hover:text-red-700" href="{% url 'category-delete' post.category.slug %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg>
-                    </a>
-                </div>
-                {% endif %}
+                <h3 class="text-2xl mb-2 text-pink-600">
+                Categories:
+                </h3>
             </div>
-            <p class="text-sm text-gray-600 mt-3">{{ post.content }}</p>
-        </div>
+
+            {% for category in  categories %}
+                <!-- Category List -->
+                <div class="space-y-4">
+                <!-- Category Item  -->
+                <div class="border border-pink-200 rounded-xl p-5 hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-semibold text-pink-600 cursor-pointer">{{ category.title }}</h3>
+                            <!-- Timestamp information row -->
+                            <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1">
+                                <a href="{% url 'profile-details' category.created_by.id %}">
+                                    <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
+                                        Author: {{ category.created_by }}
+                                    </span>
+                                </a>
+                                {% if perms.category.change_category %}
+                                    <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                        {{ category.created_at|date:"M d, Y" }}
+                                    </span>
+                                    <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        Updated {{ category.last_updated|timesince }} ago
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% if perms.category.change_category %}
+                            <!-- Edit/Delete Buttons -->
+                            <div class="flex gap-2">
+                                <a class="text-pink-500 hover:text-pink-700" href="{% url 'category-edit' category.slug %}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                    </svg>
+                                </a>
+                                <a class="text-red-500 hover:text-red-700" href="{% url 'category-delete' category.slug %}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <p class="text-sm text-gray-600 mt-3">{{ category.description }}</p>
+                </div>
             {% endfor %}
-        </div>
+            {% if posts %}
+                <div>
+                <h3 class="text-2xl mb-2 text-pink-600">
+                    Posts:
+                </h3>
+                {% for post in posts %}
+                    <div class="space-y-4">
+                    <div class="border border-pink-200 rounded-xl p-5 hover:shadow-md transition-shadow">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <a href="{% url 'post-details' post.id %}">
+                                    <h3 class="text-lg font-semibold text-pink-600 cursor-pointer">{{ post.title }}</h3>
+                                </a>
+                                <!-- Timestamp information row -->
+                                <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1">
+                                    <a href="{% url 'profile-details' post.category.created_by.id %}">
+                                        <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
+                                            Author: {{ post.created_by }}
+                                        </span>
+                                    </a>
+                                    {% if perms.category.change_category %}
+                                        <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                            {{ post.created_at|date:"M d, Y" }}
+                                        </span>
+                                        <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            Updated {{ post.last_updated|timesince }} ago
+                                        </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% if request.user == post.created_by %}
+                                <!-- Edit/Delete Buttons -->
+                                <div class="flex gap-2">
+                                    <a class="text-pink-500 hover:text-pink-700" href="{% url 'category-edit' post.category.slug %}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
+                                    </a>
+                                    <a class="text-red-500 hover:text-red-700" href="{% url 'category-delete' post.category.slug %}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <p class="text-sm text-gray-600 mt-3">{{ post.content }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
 
-
+        {% else %}
+            <p class="text-gray-500">No categories and posts found matching your search.</p>
         {% endif %}
-
-
-
-    {% else %}
-        <p class="text-gray-500">No categories and posts found matching your search.</p>
-    {% endif %}
-      </div>
-  </div>
+        </div>
+        </div>
+    </div>
 </section>
 
 {% endblock %}
