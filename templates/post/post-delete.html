@@ -38,13 +38,13 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="flex items-center justify-start gap-4 mt-6">
-                    <button type="submit" class="bg-red text-red px-6 py-2 rounded-lg shadow hover:bg-red-700 cursor-pointer ">
+                    <button type="submit" class="bg-pink-500 text-white px-6 py-2 rounded-xl font-semibold hover:bg-pink-600 transition shadow">
                         Confirm Delete
                     </button>
 
-                    <a href="{% url 'post-details' post.pk %}" class="bg-gray-100 text-gray-700 px-6 py-2 rounded-lg shadow hover:bg-gray-200 ">
-                        Cancel
-                    </a>
+                     <a href="javascript:history.back()" class="bg-gray-100 text-gray-700 px-10 py-2 rounded-xl font-semibold border cursor-pointer shadow hover:bg-gray-200 transition">
+                         Cancel
+                     </a>
                 </div>
             </form>
 
