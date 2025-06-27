@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView,CreateView,  DetailView, UpdateView, DeleteView
 from .models import Event
 from beaunity.category.models import Category
 from django.db.models import Q
 from django.db.models import Count
 from django.utils.timezone import now
-from .forms import EventEditForm
+from .forms import EventCreateForm, EventEditForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 # Create your views here.
 class EventsOverviewView(ListView):
@@ -96,6 +96,17 @@ class MyEventsView(LoginRequiredMixin, PermissionRequiredMixin,ListView):
         context = super().get_context_data(**kwargs)
         context['archived'] = self.archived  # Pass boolean, not string
         return context
+
+class EventCreateView(CreateView):
+    model = Event
+    form_class = EventCreateForm
+    template_name = 'event/event-create.html'
+    success_url = reverse_lazy('events')
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
+
 
 
 class EventEditView(UpdateView):

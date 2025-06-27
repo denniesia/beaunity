@@ -45,7 +45,8 @@ class EventBaseForm(forms.ModelForm):
         help_text='Please enter at least 100 characters describing the event.',
     )
     is_online = forms.BooleanField(
-        label='Online event:  ',
+        label='Online event:',
+        required=False,
         widget=forms.CheckboxInput(
         )
     )
@@ -108,6 +109,10 @@ class EventBaseForm(forms.ModelForm):
         ),
         help_text="Select one or more categories that apply to this event."
     )
+
+class EventCreateForm(EventBaseForm):
+    pass
+
 
 class EventEditForm(EventBaseForm):
     pass
