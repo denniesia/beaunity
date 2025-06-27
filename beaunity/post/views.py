@@ -10,7 +10,7 @@ from beaunity.post.models import Post
 from beaunity.interaction.models import Like
 from django.db.models import Q
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
 from beaunity.common.utils import user_is_admin_or_moderator
 
@@ -127,6 +127,7 @@ class PostEditView(LoginRequiredMixin, UpdateView):
 
     def get_initial(self):
        return self.object.__dict__
+
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'post/post-delete.html'
     model = Post
@@ -134,15 +135,17 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 
 
 
-class PendingPostsView(LoginRequiredMixin, ListView):
+class PendingPostsView(LoginRequiredMixin,PermissionRequiredMixin, ListView):
     model = Post
     template_name = 'post/pending-posts.html'
+    permission_required = 'post.can_approve_post'
+
 
     def get_queryset(self):
         posts = Post.objects.filter(is_approved=False).order_by('-created_at')
         return posts
 
-
+@login_required(login_url='login')
 def forum_search(request):
     query = request.GET.get('query')
 

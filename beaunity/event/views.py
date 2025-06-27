@@ -71,7 +71,6 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         attendees = self.object.attendees.select_related('profile')[:6]
         context['attendees'] = attendees
-        print(attendees)
         return context
 
 class MyEventsView(LoginRequiredMixin, PermissionRequiredMixin,ListView):
