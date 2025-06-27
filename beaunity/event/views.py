@@ -6,7 +6,7 @@ from beaunity.category.models import Category
 from django.db.models import Q
 from django.db.models import Count
 from django.utils.timezone import now
-from .forms import EventCreateForm, EventEditForm
+from .forms import EventCreateForm, EventEditForm, EventDeleteForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 # Create your views here.
 class EventsOverviewView(ListView):
@@ -118,3 +118,30 @@ class EventEditView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('event-details', kwargs={'pk': self.object.pk})
+
+class EventDeleteView(DeleteView):
+    model = Event
+    template_name = 'event/event-delete.html'
+    form_class = EventDeleteForm
+    success_url = reverse_lazy('events')
+
+    def get_initial(self):
+        return self.object.__dict__
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({
+            'data': self.get_initial(),
+        })
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        event = self.get_object()
+        context['categories'] = event.categories.all()
+        return context
+
+
+
+
+
