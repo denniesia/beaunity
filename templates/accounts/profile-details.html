@@ -59,6 +59,8 @@
                                 {{ event.title }}
                             </a>
                         </li>
+                        {% empty %}
+                        <li class="text-gray-700 italic">No fav events yet.</li>
                     {% endfor %}
                 </ul>
             </div>
@@ -71,6 +73,8 @@
                                 {{ post.title }}
                             </a>
                         </li>
+                     {% empty %}
+                        <li class="text-gray-700 italic">No fav posts yet.</li>
                     {% endfor %}
                 </ul>
             </div>
@@ -96,15 +100,25 @@
                                 {{ post.title }}
                             </a>
                         </li>
+                    {% empty %}
+                        <li class="text-gray-700 italic">No posts yet.</li>
                     {% endfor %}
                 </ul>
             </div>
 
-            <div>
-                <h3 class="text-lg font-semibold text-pink-600 mb-1">My Challenges:</h3>
-                <div class="space-y-2 text-sm text-gray-700">
-                    <p>Price ▮▮▮▭▭▭▭▭▭▭</p>
-                </div>
+            <div class="fav-events-container">
+                <h3 class="text-lg font-semibold text-pink-600 mb-1">Joined Events</h3>
+                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 max-h-40 overflow-y-auto">
+                    {% for event in profile.joined_events.all %}
+                        <li class="hover:underline hover:text-pink-600 cursor-pointer">
+                            <a href="{% url 'event-details' event.pk %}">
+                                {{ event.title }}
+                            </a>
+                        </li>
+                    {% empty %}
+                        <li class="text-gray-700 italic">No joined events yet.</li>
+                    {% endfor %}
+                </ul>
             </div>
 
             <div>
