@@ -107,6 +107,8 @@ class EventCreateView(CreateView):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
 
+    def get_success_url(self):
+        return reverse_lazy('event-details', kwargs={'pk': self.object.pk})
 
 
 class EventEditView(UpdateView):
@@ -115,4 +117,4 @@ class EventEditView(UpdateView):
     template_name = 'event/event-edit.html'
 
     def get_success_url(self):
-        return reverse_lazy('event-edit', kwargs={'pk': self.object.pk})
+        return reverse_lazy('event-details', kwargs={'pk': self.object.pk})
