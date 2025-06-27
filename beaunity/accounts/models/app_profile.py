@@ -2,6 +2,7 @@ from .app_user import AppUser
 from django.contrib.auth import get_user_model
 from django.db import models
 from beaunity.common.mixins import LastUpdatedMixin
+from beaunity.event.models import Event
 from .choices import SkinTypeChoices
 from datetime import date
 from cloudinary.models import CloudinaryField
@@ -50,6 +51,8 @@ class Profile(LastUpdatedMixin):
         blank=True,
         choices=SkinTypeChoices,
     )
+
+    joined_events = models.ManyToManyField(Event, blank=True, null=True, related_name="event_attendees")
 
     @property
     def age(self):

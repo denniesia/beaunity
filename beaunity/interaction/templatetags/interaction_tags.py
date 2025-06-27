@@ -29,3 +29,7 @@ def is_favourited_by_user(obj, user):
         content_type=content_type,
         object_id=obj.id
     ).exists()
+
+@register.simple_tag
+def has_joined(user, obj):
+    return user.joined_events.filter(pk=obj.pk).exists()
