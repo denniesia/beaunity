@@ -15,9 +15,12 @@
                         Passed Event
                       </div>
                 {% endif %}
-                 <div class="absolute top-30 right-2 text-pink-600 text-xs font-semibold px-5 py-2 rounded-full shadow-md z-10 bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300" >
+                {% if user.is_authenticated %}
+                	<div class="absolute top-30 right-2 text-pink-600 text-xs font-semibold px-5 py-2 rounded-full shadow-md z-10 bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300" >
                        {% include 'interaction/favourite.html' with obj=event model_name='event' %}
                  </div>
+                {% endif %}
+
 
                 <img src="{{ event.poster_image.url }}" alt="Event Poster" class="w-100 h-40 object-cover rounded-t-2xl">
                 <div id="{{ event.pk }}"  class="p-5 flex flex-col flex-grow justify-between">
@@ -54,9 +57,11 @@
                         <a href="{% url 'event-details' event.pk %}" class="bg-pink-500 text-white text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-900 transition">
                             See More
                         </a>
-                        <div href="{% url 'event-join' event.pk %}" class="bg-pink-500 text-white text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-900 transition" style="background-color: #EBB1F5">
-                           {% include 'interaction/join.html' %}
-                        </div>
+                        {% if user.is_authenticated %}
+                            <div href="{% url 'event-join' event.pk %}" class="bg-pink-500 text-white text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-900 transition" style="background-color: #EBB1F5">
+                               {% include 'interaction/join.html' %}
+                            </div>
+                        {% endif %}
 
                     </div>
                 </div>

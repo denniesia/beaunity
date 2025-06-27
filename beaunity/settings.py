@@ -33,6 +33,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 2 #google login
+
 MY_APPS = [
     'beaunity.accounts',
     'beaunity.common',
@@ -52,12 +54,28 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
 
     'tailwind',
     'theme',
     'django_browser_reload',
     'cloudinary',
 ] + MY_APPS
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {'access_type': 'online'}
+    }
+}
 
 TAILWIND_APP_NAME = 'theme'
 
@@ -76,6 +94,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 
 ]
 
@@ -134,6 +153,8 @@ DATABASES = {
 
 AUTHENTICATION_BACKENDS = [
     'beaunity.accounts.backends.EmailOrUsernameModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+
 ]
 
 
@@ -178,5 +199,7 @@ cloudinary.config(
     api_key=config('CLOUDINARY_API_KEY'),
     api_secret=config('CLOUDINARY_API_SECRET')
 )
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

@@ -22,6 +22,7 @@ urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     path("", include("beaunity.common.urls")),
     path("accounts/", include("beaunity.accounts.urls")),
+    path("accounts/", include("allauth.urls")),
     path("category/", include("beaunity.category.urls")),
     path("post/", include("beaunity.post.urls")),
     path("comment/", include("beaunity.comment.urls")),
@@ -29,3 +30,4 @@ urlpatterns = [
     path("interaction/", include("beaunity.interaction.urls")),
 
 ]
+

@@ -1,6 +1,7 @@
 {% extends 'common/base.html' %}
 
 {% load static %}
+{% load socialaccount %}
 
 {% block content %}
     <section class="flex-grow flex items-center justify-center py-16">
@@ -29,10 +30,18 @@
                     Log In
                 </button>
             </form>
+            <div class="w-full flex justify-center mt-4">
+                <a href="{% provider_login_url 'google' %}?next="
+                   class="w-full flex items-center gap-2 px-4 py-2 bg-white text-gray-700 justify-center border border-gray-300 rounded shadow hover:shadow-md transition duration-200">
+                    <img src="https://developers.google.com/identity/images/g-logo.png"
+                         alt="Google logo" class="w-5 h-5">
+                    <span class="text-sm font-medium">Sign with Google</span>
+                </a>
+            </div>
 
             <p class="text-sm text-center text-gray-600 mt-4">
                 Don't have an account?
-                <a href="{% url 'register' %}" class="text-pink-600 hover:underline font-medium">Sign up</a>
+                <a href="{% url 'register' %}" class="text-pink-600 hover:underline font-medium">Register</a>
             </p>
         </div>
     </section>

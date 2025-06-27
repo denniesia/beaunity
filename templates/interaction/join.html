@@ -1,9 +1,11 @@
 {% load interaction_tags %}
 
-{% has_joined request.user.profile event as joined %}
+{% if user.is_authenticated %}
+    {% has_joined request.user.profile event as joined %}
 
-{% if joined %}
-    <a  href="{% url 'event-join' event.pk %}">Joined</a>
-{% else %}
-    <a href="{% url 'event-join' event.pk %}">Join</a>
+    {% if joined %}
+        <a  href="{% url 'event-join' event.pk %}">Joined</a>
+    {% else %}
+        <a href="{% url 'event-join' event.pk %}">Join</a>
+    {% endif %}
 {% endif %}
