@@ -50,13 +50,31 @@
                     <li>To narrow her options quickly</li>
                 </ul>
             </div>
-
-            <div>
-                <h3 class="text-lg font-semibold text-pink-600 mb-1">Morning Routine</h3>
-                <p class="text-sm text-gray-700">
-
-                </p>
+            <div class="fav-events-container">
+                <h3 class="text-lg font-semibold text-pink-600 mb-1">Fav Events</h3>
+                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 max-h-40 overflow-y-auto">
+                    {% for event in fav_events %}
+                        <li class="hover:underline hover:text-pink-600 cursor-pointer">
+                            <a href="{% url 'event-details' event.pk %}">
+                                {{ event.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
+            <div class="fav-events-container">
+                <h3 class="text-lg font-semibold text-pink-600 mb-1">Fav Posts</h3>
+                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 max-h-40 overflow-y-auto">
+                    {% for post in fav_posts %}
+                        <li class="hover:underline hover:text-pink-600 cursor-pointer">
+                            <a href="{% url 'post-details' post.pk %}">
+                                {{ post.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
 
             <div>
                 <h3 class="text-lg font-semibold text-pink-600 mb-1">Night Routine</h3>
@@ -69,11 +87,17 @@
 
         <!-- Right Column -->
         <section class="col-span-1 space-y-6 bg-pink-100 p-4 rounded-xl">
-            <div>
-                <h3 class="text-lg font-semibold text-pink-600 mb-1">My Posts:</h3>
-                <div class="space-y-2 text-sm text-gray-700">
-                    <p>{{ profile.user.post_set.count }}</p>
-                </div>
+            <div class="fav-events-container">
+                <h3 class="text-lg font-semibold text-pink-600 mb-1">My Posts</h3>
+                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 max-h-40 overflow-y-auto">
+                    {% for post in my_posts %}
+                        <li class="hover:underline hover:text-pink-600 cursor-pointer">
+                            <a href="{% url 'post-details' post.pk %}">
+                                {{ post.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
 
             <div>

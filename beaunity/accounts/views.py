@@ -5,7 +5,10 @@ from .forms import AppUserCreationForm, AppUserLoginForm, ProfileEditForm, AppUs
 from django.urls import reverse_lazy
 from django.contrib.auth.views import  LoginView
 from .models import Profile
-
+from beaunity.interaction.models import Favourite
+from beaunity.event.models import Event
+from beaunity.post.models import Post
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
@@ -34,6 +37,27 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
     template_name = 'accounts/profile-details.html'
     model = Profile
     context_object_name = 'profile'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        event_content_type = ContentType.objects.get_for_model(Event)
+        fav_events = Event.objects.filter(
+            id__in=Favourite.objects.filter(
+                user=self.request.user,
+                content_type=event_content_type,
+            ).values_list('object_id', flat=True)
+        )
+        post_event_type = ContentType.objects.get_for_model(Post)
+        fav_posts = Post.objects.filter(
+            id__in=Favourite.objects.filter(
+                user=self.request.user,
+                content_type=post_event_type,
+            ).values_list('object_id', flat=True)
+        )
+        context['fav_events'] = fav_events
+        context['fav_posts'] = fav_posts
+        context['my_posts'] = Post.objects.filter(created_by=self.request.user).order_by('-created_at')
+        return context
 
 class ProfileEditView(LoginRequiredMixin, View):   #LoginRequiredMixin, UserPassesTestMixin
     template_name = 'accounts/profile-edit.html'
