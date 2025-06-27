@@ -16,7 +16,14 @@
             </div>
         {% endif %}
         <!-- Event image -->
-        <img src="{{ event.poster_image.url }}" alt="Event Banner" class="w-full h-64 object-cover rounded">
+        <div class="relative w-full h-64 rounded overflow-hidden">
+            <img src="{{ event.poster_image.url }}" alt="Event Banner" class="w-full h-full object-cover">
+
+            <div class="absolute top-2 left-4 text-normal text-pink-600 font-semibold px-8 py-4 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300"">
+                {% include 'interaction/favourite.html' with obj=event model_name='event' %}
+            </div>
+        </div>
+
         <!-- Details -->
 
         <div class="mt-2 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -66,7 +73,7 @@
             </div>
             <!-- Right: Event Media -->
             <div>
-                <h4 class="text-lg font-semibold text-pink-700 mt-4">Attending:</h4>
+                <h4 class="text-lg font-semibold text-pink-700 mt-2">Attending:</h4>
                 <div class="flex items-center gap-3 mt-2">
                     {% if attendees %}
                         <div class="flex flex-wrap gap-2 mb-4">

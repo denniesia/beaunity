@@ -96,9 +96,12 @@
                                         Your Event
                                     </div>
                                 {% endif %}
+
                                 <img src="{{ event.poster_image.url }}" alt="Event Image" class="w-full h-40 object-cover rounded-t-2xl">
                                 <div class="p-4">
-                                    <h3 class="text-lg font-semibold text-pink-600">{{ event.title }}</h3>
+                                    <a href="{% url 'event-details' event.pk %}" >
+                                        <span class="text-lg font-semibold text-pink-600">{{ event.title }}</span>
+                                    </a>
                                     <p class="text-xs text-gray-500 mb-3">
                                         Hosted by
                                         <a href="{% url 'profile-details' event.created_by.id %}"><strong>@{{ event.created_by }}</strong>
