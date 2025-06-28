@@ -4,4 +4,6 @@ from .models import Comment
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('content', 'content_type', 'object_id', 'content_object', 'created_by', )
+    list_display = ('content', 'content_object', 'created_by', )
+    search_fields = ['content','created_by',]
+    ordering = ('-created_at',)
