@@ -12,7 +12,7 @@ class CommentBaseForm(forms.ModelForm):
             'content': forms.Textarea(
                 attrs={
                     'class': CLASS,
-                    'placeholder': 'Comments must be longer than 5 characters...',
+                    'placeholder': 'Comments must be at least 5 characters long...',
                     'rows': 3,
                 }
             )
@@ -22,6 +22,11 @@ class CommentBaseForm(forms.ModelForm):
 class CommentCreateForm(CommentBaseForm):
     pass
 
+    def clean_content(self):
+        content = self.cleaned_data.get('content', '').strip()
+        if len(content) < 5:
+            raise forms.ValidationError('Comments must be at least 5 characters.')
+        return content
 
 class CommentEditForm(CommentBaseForm):
     pass

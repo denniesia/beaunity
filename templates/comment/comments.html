@@ -59,32 +59,34 @@
 <form method="post" id="comment-form" class="flex items-center justify-between gap-2">
     {% csrf_token %}
     {{ form.content }}
+    {{ form.content.errors }}
 
-    <button id="submit-btn" type="submit"
-            class="text-gray-400 hover:text-pink-600 transition duration-200">
-        <!-- SVG: paper plane -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M4 4l16 8-16 8v-6l10-2-10-2V4z"/>
-        </svg>
-    </button>
+    <div class="w-[30px]">
+
+        <button id="submit-btn" type="submit"
+                class="text-pink-500 transition duration-200"
+                style="display: none;">
+
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 cursor-pointer" fill="none"
+                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M4 4l16 8-16 8v-6l10-2-10-2V4z"/>
+            </svg>
+        </button>
+    </div>
 </form>
-
 
 <script>
     const commentInput = document.querySelector('#id_content');
     const submitBtn = document.querySelector('#submit-btn');
+    const form = document.querySelector('#comment-form');
 
     commentInput.addEventListener('input', () => {
-        if (commentInput.value.trim().length > 5) {
-            submitBtn.classList.remove('text-gray-400');
-            submitBtn.classList.add('text-pink-500');
+        if (commentInput.value.trim().length >= 5) {
+            submitBtn.style.display = 'inline-flex';  // show button
         } else {
-            submitBtn.classList.remove('text-pink-500');
-            submitBtn.classList.add('text-gray-400');
+            submitBtn.style.display = 'none'; // hide button
         }
     });
+
 </script>
-
-

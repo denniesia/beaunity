@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.views.generic import ListView,CreateView,  DetailView, UpdateView, DeleteView
 from .models import Event
@@ -92,7 +92,9 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
             comment.object_id = self.object.id
             comment.save()
             return redirect(request.META.get('HTTP_REFERER') + f"#{self.object.id}")
-        return reverse_lazy('event-details', kwargs={'object_id': self.object.id})
+
+        return redirect(reverse('event-details', kwargs={'pk': self.object.id}))
+
 
 
 class EventCreateView(CreateView):
