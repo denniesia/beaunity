@@ -75,15 +75,17 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         attendees = self.object.attendees.select_related('profile')[:6]
-        context['attendees'] = attendees
         comments = self.object.comments.all().order_by('created_at')
-
-        context['form'] = CommentCreateForm()
 
         paginator = Paginator(comments, 5)
         page_number = self.request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-        context['comments'] = page_obj
+
+        context = {
+            'attendees': attendees,
+            'form': CommentCreateForm(),
+            'comments': page_obj,
+        }
         return context
 
     def post(self, request, *args, **kwargs):
@@ -103,10 +105,11 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
 
 
 
-class EventCreateView(CreateView):
+class EventCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Event
     form_class = EventCreateForm
     template_name = 'event/event-create.html'
+    permission_required = 'event.add_event'
     success_url = reverse_lazy('events')
 
     def form_valid(self, form):
@@ -117,18 +120,20 @@ class EventCreateView(CreateView):
         return reverse_lazy('event-details', kwargs={'pk': self.object.pk})
 
 
-class EventEditView(UpdateView):
+class EventEditView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Event
     form_class = EventEditForm
+    permission_required = 'event.change_event'
     template_name = 'event/event-edit.html'
 
     def get_success_url(self):
         return reverse_lazy('event-details', kwargs={'pk': self.object.pk})
 
-class EventDeleteView(DeleteView):
+class EventDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Event
     template_name = 'event/event-delete.html'
     form_class = EventDeleteForm
+    permission_required = 'event.delete_event'
     success_url = reverse_lazy('events')
 
     def get_initial(self):
@@ -152,7 +157,7 @@ class MyEventsView(LoginRequiredMixin, PermissionRequiredMixin,ListView):
     model = Event
     context_object_name = 'events'
     template_name = 'event/my-events.html'
-    permission_required = 'event.change_event'
+    permission_required = 'event.add_event'
     raise_exception = True
 
     def get_queryset(self):
@@ -168,7 +173,7 @@ class MyEventsView(LoginRequiredMixin, PermissionRequiredMixin,ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['archived'] = self.archived  # Pass boolean, not string
+        context['archived'] = self.archived
         return context
 
 
