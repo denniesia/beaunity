@@ -103,11 +103,9 @@ class PostDetailsView(DetailView):
             comment.content_type = ContentType.objects.get_for_model(self.object)
             comment.object_id = self.object.pk
             comment.save()
-            return redirect('post-details', pk = self.object.pk)
+            return reverse(request.META.get('HTTP_REFERER') + f"#{self.object.id}")
 
-        context = self.get_context_data(form=form)
-        return self.render_to_response(context)
-
+        return redirect(reverse('post-details', kwargs={'pk': self.object.id}))
 
 
 class PostEditView(LoginRequiredMixin, UpdateView):

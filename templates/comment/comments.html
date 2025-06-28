@@ -47,13 +47,16 @@
 
             </div>
             <!-- Comment Content -->
-            <p class="text-gray-700">{{ comment.content }}</p>
+            <p id="{{ object.id }}" class="text-gray-700">{{ comment.content }}</p>
 
         </div>
     </div>
 {% empty %}
     <p class="text-xs text-gray-500  mb-2">No comments yet. Be the first to comment!</p>
 {% endfor %}
+
+{% if not comments.has_next %}
+
 
 <!-- Comment Form -->
 <form method="post" id="comment-form" class="flex items-center justify-between gap-2">
@@ -75,6 +78,8 @@
         </button>
     </div>
 </form>
+{% endif %}
+
 
 <script>
     const commentInput = document.querySelector('#id_content');

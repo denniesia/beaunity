@@ -11,6 +11,7 @@ from beaunity.comment.forms import  CommentCreateForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 
+from django.core.paginator import Paginator
 # Create your views here.
 class EventsOverviewView(ListView):
     template_name = 'event/events-overview.html'
@@ -75,9 +76,14 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         attendees = self.object.attendees.select_related('profile')[:6]
         context['attendees'] = attendees
-        context['comments'] = self.object.comments.all()
+        comments = self.object.comments.all().order_by('created_at')
 
         context['form'] = CommentCreateForm()
+
+        paginator = Paginator(comments, 5)
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        context['comments'] = page_obj
         return context
 
     def post(self, request, *args, **kwargs):

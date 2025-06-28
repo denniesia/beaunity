@@ -6,7 +6,7 @@
 {% block content %}
 
 <div class="w-[800px] max-w-full min-w-[500px] lg:w-2/3 mx-auto">
-    <div class="bg-white mb-6 p-2 my-6 transition ">
+    <div class="bg-white mb-2 p-2 my-4 transition ">
         {% if event.end_time|is_past %}
             <div class="max-w-xl mx-auto mb-4 bg-red-100 text-red-800 border border-red-300 rounded-xl p-2 text-center shadow-md">
                 <h1 class="text-2xl font-semibold">This event has passed</h1>
@@ -152,6 +152,19 @@
       <!-- Comments Section -->
         <p class="text-normal font-semibold text-gray-800 mb-4">Discussion Section:</p>
         {% include 'comment/comments.html' %}
+
     </div>
+
+  {% include 'common/paginator.html' %}
+
 </div>
+
+<div class="text-pink-400 text-base text-center font-semibold" >
+    <a href="javascript:history.back()" class="inline-flex hover:text-pink-500">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061A1.125 1.125 0 0 1 21 8.689v8.122ZM11.25 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061a1.125 1.125 0 0 1 1.683.977v8.122Z" />
+        </svg>
+    </a>
+</div>
+
 {% endblock %}
