@@ -1,7 +1,9 @@
 {% extends 'common/base.html' %}
 {% load static %}
-{% block content %}
 {% load is_passed %}
+
+
+{% block content %}
 
 <div class="w-[800px] max-w-full min-w-[500px] lg:w-2/3 mx-auto">
     <div class="bg-white mb-6 p-2 my-6 transition ">
@@ -71,6 +73,7 @@
                         <p class="text-sm text-gray-700">{{ event.created_by.email }}</p>
                     </div>
                 </div>
+
                 <div class="flex items-center text-pink-700 gap-2 mt-2 pl-6">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -80,6 +83,7 @@
                         <p class="text-sm text-gray-500">{{ event.end_time|date:"F j, Y, H:i" }}</p>
                     </div>
                 </div>
+
                 <div class="flex items-center text-pink-700 gap-2 pl-6">
                     <span>📍</span>
                     <a href="#" class="text-pink-600 ">
@@ -121,18 +125,21 @@
                 </div>
             </div>
         </div>
+
         <div class="items-center gap-5 mb-1 ml-6">
             <h3 class="text-lg font-semibold text-pink-700 ml-4">Event Details</h3>
             <p class="text-medium font-medium text-gray-600 ml-4 ">
                 {{ event.details }}
             </p>
         </div>
-           <div class="items-center gap-5 mb-1 ml-6">
+
+        <div class="items-center gap-5 mb-1 ml-6">
             <h3 class="text-lg font-semibold text-pink-700 ml-4">Location</h3>
             <p class="text-medium font-medium text-gray-600 ml-4 ">
                 {{ event.details }}
             </p>
         </div>
+
         <div class="flex items-start text-pink-500 space-x-4 text-sm mb-2 mt-4 ml-10">
             <!-- Like finctionality -->
             {% include 'interaction/like.html' with obj=event model_name='event' %}
@@ -143,80 +150,8 @@
        <hr class="border-t border-gray-300 my-4">
 
       <!-- Comments Section -->
-        <p class="text-normal font-semibold text-gray-800 ml-4 mb-2 mt-4">Discussion Section:</p>
-        {% for comment in comments %}
-        <div class="flex gap-3 items-start pb-4">
-            <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 text-xs shadow-inner">
-                {% if comment.created_by.profile.profile_pic %}
-                	 <img src="{{ comment.created_by.profile.profile_pic.url }}" class="rounded-full w-fit h-fit">
-                {% else %}
-                    <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg" alt="Default Profile" class="w-fit h-fit rounded-full">
-                {% endif %}
-            </div>
-            <div class="flex-3 text-sm">
-                <!-- Author and Buttons on the Same Line -->
-                <div class="flex items-center justify-between">
-                    <div class="flex">
-                    <div>
-                    </div>
-                        <p class="font-medium text-base text-gray-900"><a href="{% url 'profile-details' comment.created_by_id %}">{{ comment.created_by }}</a>
-                        <span class="text-xs text-gray-400 ml-1">| {{ comment.created_at|date:"F j, Y, H:i" }}</span>
-                        {% if comment.created_at < comment.last_updated %}
-                        	 <span class="text-xs text-gray-400 ml-1">| Edited: {{ comment.last_updated|date:"F j, Y, H:i" }}</span>
-                        {% endif %}
-                    </p>
-
-                    </div>
-                    <!-- Edit and Delete -->
-                    {% if comment.created_by_id == request.user.id %}
-                        <div class="flex gap-2">
-                            <a class="text-pink-500 hover:text-pink-700" href="{% url 'comment-edit'  comment.pk %}">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                </svg>
-                            </a>
-
-                            <form method="post" action="{% url 'comment-delete' comment.pk %}" >
-                                {% csrf_token %}
-                                <button type="submit" class="text-red-500 hover:text-red-700 p-0 m-0 border-0 bg-transparent cursor-pointer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                    </svg>
-                                </button>
-                            </form>
-                        </div>
-                     {% endif %}
-                </div>
-                <!-- Comment Content -->
-                <p class="text-gray-700">{{ comment.content }}</p>
-
-            </div>
-        </div>
-        {% empty %}
-        <p class="text-xs text-gray-500  mb-2">No comments yet. Be the first to comment!</p>
-        {% endfor %}
-
-        <!-- Comment Form -->
-        <form method="post" id="comment-form">
-            {% csrf_token %}
-            {{ form.content}}
-            <button id="submit-btn" type="submit"
-                    class="bg-pink-500 text-white px-3 py-1 rounded-md text-sm hover:bg-pink-600 transition hidden">
-                Post
-            </button>
-            <script>
-                const textarea = document.querySelector('textarea[name="content"]');
-                const button = document.getElementById('submit-btn');
-
-                textarea.addEventListener('input', () => {
-                    if (textarea.value.trim().length >= 5) {
-                        button.classList.remove('hidden');
-                    } else {
-                        button.classList.add('hidden');
-                    }
-                });
-            </script>
-        </form>
-
+        <p class="text-normal font-semibold text-gray-800 mb-4">Discussion Section:</p>
+        {% include 'comment/comments.html' %}
     </div>
+</div>
 {% endblock %}
