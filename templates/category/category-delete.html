@@ -13,6 +13,11 @@
         </div>
         <!-- Form Section -->
         <div class="space-y-6">
+            <div class="flex gap-4">
+                 <p>Category Image:</p>
+                <img src="{{ category.image.url }}" class="h-6 w-6">
+            </div>
+
             <form method="post" class="space-y-6">
                 {% csrf_token %}
                 {{ form.title.label_tag }}
