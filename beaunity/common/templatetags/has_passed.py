@@ -4,5 +4,5 @@ from django.utils.timezone import now
 register = template.Library()
 
 @register.filter
-def is_past(obj_date):
-    return obj_date < now()
+def has_passd(obj_datetime):
+    return obj_datetime < now()

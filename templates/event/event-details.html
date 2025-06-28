@@ -1,13 +1,13 @@
 {% extends 'common/base.html' %}
 {% load static %}
-{% load is_passed %}
+{% load has_passed %}
 
 
 {% block content %}
 
 <div class="w-[800px] max-w-full min-w-[500px] lg:w-2/3 mx-auto">
     <div class="bg-white mb-2 p-2 my-4 transition ">
-        {% if event.end_time|is_past %}
+        {% if event.end_time|has_passd %}
             <div class="max-w-xl mx-auto mb-4 bg-red-100 text-red-800 border border-red-300 rounded-xl p-2 text-center shadow-md">
                 <h1 class="text-2xl font-semibold">This event has passed</h1>
             </div>

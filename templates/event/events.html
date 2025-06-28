@@ -1,5 +1,6 @@
-{% load is_passed %}
+
 {% load static %}
+{% load has_passed %}
 {% if events %}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {% for event in events %}
@@ -18,7 +19,7 @@
 
 
                 {% endif %}
-                {% if event.end_time|is_past %}
+                {% if event.end_time|has_passed %}
                       <div class="absolute top-3 left-2 text-red-700 text-xs font-bold px-5 py-2 rounded-full shadow-md z-10" style=" background-color: white">
                         Passed Event
                       </div>
