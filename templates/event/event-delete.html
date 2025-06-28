@@ -60,7 +60,7 @@
 
                         <div>
                             <p>Categories:</p>
-                            {% for category in categories %}
+                            {% for category in event.categories.all %}
                                 <p class="flex items-center  text-gray-800">
                                     <span class="text-pink-500 text-lg mr-2">•</span> {{ category }}
                                 </p>

@@ -81,11 +81,12 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
         page_number = self.request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
-        context = {
+
+        context.update({
             'attendees': attendees,
             'form': CommentCreateForm(),
             'comments': page_obj,
-        }
+        })
         return context
 
     def post(self, request, *args, **kwargs):
@@ -145,12 +146,6 @@ class EventDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
             'data': self.get_initial(),
         })
         return kwargs
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        event = self.get_object()
-        context['categories'] = event.categories.all()
-        return context
 
 
 class MyEventsView(LoginRequiredMixin, PermissionRequiredMixin,ListView):

@@ -26,7 +26,7 @@
                 {% endif %}
                 {% if user.is_authenticated %}
                 	<div class="absolute top-30 right-2 text-pink-600 text-xs font-semibold px-5 py-2 rounded-full shadow-md z-10 bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300" >
-                       {% include 'interaction/favourite.html' with obj=event model_name='event' %}
+                       {% include 'interaction/favourite.html' with model_name='event' object_id=event.pk %}
                  </div>
                 {% endif %}
 

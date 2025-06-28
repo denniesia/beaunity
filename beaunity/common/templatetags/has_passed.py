@@ -5,4 +5,5 @@ register = template.Library()
 
 @register.filter
 def has_passed(obj_datetime):
-    return obj_datetime < now()
+    if obj_datetime:
+        return obj_datetime < now()
