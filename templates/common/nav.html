@@ -59,9 +59,9 @@
                     </div>
                 {% endif %}
 
-                <form action="{% url 'logout' %}" method="post" class="text-gray-800 hover:text-pink-600 font-medium">
+                <form action="{% url 'logout' %}" method="post" class="text-gray-800 hover:text-pink-600 cursor-pointer font-medium">
                     {% csrf_token %}
-                    <button type="submit">Logout</button>
+                    <button type="submit" class="cursor-pointer">Logout</button>
                 </form>
             {% else %}
                 <a href="{% url 'login' %}" class="text-gray-800 hover:text-pink-600 font-medium">Login</a>
