@@ -9,6 +9,7 @@ from cloudinary.models import CloudinaryField
 from beaunity.common.mixins import CreatedByMixin, CreatedAtMixin, LastUpdatedMixin
 from beaunity.category.models import Category
 from beaunity.interaction.models import Like
+from beaunity.comment.models import Comment
 # Create your models here.
 
 UserModel = get_user_model()
@@ -50,6 +51,7 @@ class Event(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
     categories = models.ManyToManyField(Category, related_name='events')
     attendees = models.ManyToManyField(UserModel, related_name='events_attendees', blank=True)
     likes = GenericRelation(Like)
+    comments = GenericRelation(Comment)
 
     class Meta:
         verbose_name_plural = 'Events'

@@ -193,13 +193,30 @@
             </div>
         </div>
         {% empty %}
-        <p class="text-xs text-gray-500 ml-4 mb-2">No comments yet. Be the first to comment!</p>
+        <p class="text-xs text-gray-500  mb-2">No comments yet. Be the first to comment!</p>
         {% endfor %}
 
+        <!-- Comment Form -->
+        <form method="post" id="comment-form">
+            {% csrf_token %}
+            {{ form.content}}
+            <button id="submit-btn" type="submit"
+                    class="bg-pink-500 text-white px-3 py-1 rounded-md text-sm hover:bg-pink-600 transition hidden">
+                Post
+            </button>
+            <script>
+                const textarea = document.querySelector('textarea[name="content"]');
+                const button = document.getElementById('submit-btn');
 
+                textarea.addEventListener('input', () => {
+                    if (textarea.value.trim().length >= 5) {
+                        button.classList.remove('hidden');
+                    } else {
+                        button.classList.add('hidden');
+                    }
+                });
+            </script>
+        </form>
 
-
-
-
-
+    </div>
 {% endblock %}

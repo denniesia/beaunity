@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView,CreateView,  DetailView, UpdateView, DeleteView
 from .models import Event
@@ -7,7 +7,10 @@ from django.db.models import Q
 from django.db.models import Count
 from django.utils.timezone import now
 from .forms import EventCreateForm, EventEditForm, EventDeleteForm
+from beaunity.comment.forms import  CommentCreateForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.contenttypes.models import ContentType
+
 # Create your views here.
 class EventsOverviewView(ListView):
     template_name = 'event/events-overview.html'
@@ -72,30 +75,25 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         attendees = self.object.attendees.select_related('profile')[:6]
         context['attendees'] = attendees
+        context['comments'] = self.object.comments.all()
+
+        context['form'] = CommentCreateForm()
         return context
 
-class MyEventsView(LoginRequiredMixin, PermissionRequiredMixin,ListView):
-    model = Event
-    context_object_name = 'events'
-    template_name = 'event/my-events.html'
-    permission_required = 'event.change_event'
-    raise_exception = True
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = CommentCreateForm(request.POST)
 
-    def get_queryset(self):
-        self.archived = self.request.GET.get('archived', 'false').lower() == 'true'
-        queryset = Event.objects.filter(created_by=self.request.user)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.created_by = request.user
 
-        if self.archived:
-            queryset = queryset.filter(end_time__lt=now())
-        else:
-            queryset = queryset.filter(end_time__gte=now())
+            comment.content_type = ContentType.objects.get_for_model(self.model)
+            comment.object_id = self.object.id
+            comment.save()
+            return redirect(request.META.get('HTTP_REFERER') + f"#{self.object.id}")
+        return reverse_lazy('event-details', kwargs={'object_id': self.object.id})
 
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['archived'] = self.archived  # Pass boolean, not string
-        return context
 
 class EventCreateView(CreateView):
     model = Event
@@ -142,6 +140,27 @@ class EventDeleteView(DeleteView):
         return context
 
 
+class MyEventsView(LoginRequiredMixin, PermissionRequiredMixin,ListView):
+    model = Event
+    context_object_name = 'events'
+    template_name = 'event/my-events.html'
+    permission_required = 'event.change_event'
+    raise_exception = True
 
+    def get_queryset(self):
+        self.archived = self.request.GET.get('archived', 'false').lower() == 'true'
+        queryset = Event.objects.filter(created_by=self.request.user)
+
+        if self.archived:
+            queryset = queryset.filter(end_time__lt=now())
+        else:
+            queryset = queryset.filter(end_time__gte=now())
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['archived'] = self.archived  # Pass boolean, not string
+        return context
 
 
