@@ -336,9 +336,6 @@
   .mx-auto {
     margin-inline: auto;
   }
-  .my-2 {
-    margin-block: calc(var(--spacing) * 2);
-  }
   .my-4 {
     margin-block: calc(var(--spacing) * 4);
   }
@@ -468,9 +465,6 @@
   .h-6 {
     height: calc(var(--spacing) * 6);
   }
-  .h-7 {
-    height: calc(var(--spacing) * 7);
-  }
   .h-8 {
     height: calc(var(--spacing) * 8);
   }
@@ -537,9 +531,6 @@
   .w-6 {
     width: calc(var(--spacing) * 6);
   }
-  .w-7 {
-    width: calc(var(--spacing) * 7);
-  }
   .w-8 {
     width: calc(var(--spacing) * 8);
   }
@@ -573,11 +564,14 @@
   .w-100 {
     width: calc(var(--spacing) * 100);
   }
-  .w-\[20px\] {
-    width: 20px;
+  .w-\[10px\] {
+    width: 10px;
   }
   .w-\[30px\] {
     width: 30px;
+  }
+  .w-\[100px\] {
+    width: 100px;
   }
   .w-\[800px\] {
     width: 800px;
@@ -623,9 +617,6 @@
   }
   .min-w-\[500px\] {
     min-width: 500px;
-  }
-  .flex-1 {
-    flex: 1;
   }
   .flex-3 {
     flex: 3;
@@ -1283,12 +1274,6 @@
     }
   }
   @media (hover: hover) {
-    .hover\:shadow-sm:hover {
-      --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
-      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-    }
-  }
-  @media (hover: hover) {
     .hover\:shadow-pink-300:hover {
       --tw-shadow-color: oklch(82.3% 0.12 346.018);
     }
@@ -1305,26 +1290,6 @@
     @supports (color: color-mix(in lab, red, red)) {
       .hover\:shadow-pink-400:hover {
         --tw-shadow-color: color-mix(in oklab, var(--color-pink-400) var(--tw-shadow-alpha), transparent);
-      }
-    }
-  }
-  @media (hover: hover) {
-    .hover\:shadow-pink-600:hover {
-      --tw-shadow-color: oklch(59.2% 0.249 0.584);
-    }
-    @supports (color: color-mix(in lab, red, red)) {
-      .hover\:shadow-pink-600:hover {
-        --tw-shadow-color: color-mix(in oklab, var(--color-pink-600) var(--tw-shadow-alpha), transparent);
-      }
-    }
-  }
-  @media (hover: hover) {
-    .hover\:shadow-pink-900:hover {
-      --tw-shadow-color: oklch(40.8% 0.153 2.432);
-    }
-    @supports (color: color-mix(in lab, red, red)) {
-      .hover\:shadow-pink-900:hover {
-        --tw-shadow-color: color-mix(in oklab, var(--color-pink-900) var(--tw-shadow-alpha), transparent);
       }
     }
   }

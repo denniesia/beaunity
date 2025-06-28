@@ -52,7 +52,7 @@ class Profile(LastUpdatedMixin):
         choices=SkinTypeChoices,
     )
 
-    joined_events = models.ManyToManyField(Event, blank=True, null=True, related_name="event_attendees")
+    joined_events = models.ManyToManyField(Event, related_name="event_attendees")
 
     @property
     def age(self):
