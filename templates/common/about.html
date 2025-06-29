@@ -1,0 +1,89 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- Hero Section -->
+<section class="bg-pink-100 py-4 px-4 text-center">
+
+  <!-- Top centered animation -->
+  <div class="mb-2">
+    <lottie-player
+      src="{% static 'common/hello2.json' %}"
+      background="transparent"
+      speed="1"
+      class="mx-auto w-60 h-30"
+      loop
+      autoplay>
+    </lottie-player>
+  </div>
+
+  <!-- Two-column layout -->
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 items-center text-center md:text-left">
+
+    <!-- Left: Heading + Text -->
+    <div>
+      <h2 class="text-4xl font-bold text-pink-700 mb-4">We’re passionate about what we do</h2>
+      <p class="text-lg text-pink-800 max-w-md mx-auto md:mx-0">
+        Our mission is to build beautiful experiences and create value for our users with every line of code.
+      </p>
+    </div>
+
+    <!-- Right: Second animation -->
+    <div>
+      <lottie-player
+        src="{% static 'common/lama.json' %}"
+        background="transparent"
+        speed="1"
+        class="mx-auto w-65 h-72"
+        loop
+        autoplay>
+      </lottie-player>
+    </div>
+
+  </div>
+</section>
+
+
+
+  <!-- About Content -->
+  <section class="max-w-5xl mx-auto px-4 py-16">
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+      <img src="https://via.placeholder.com/400x300" alt="Team" class="rounded-2xl shadow-lg">
+      <div>
+        <h3 class="text-2xl font-semibold text-pink-700 mb-4">Who We Are</h3>
+        <p class="text-pink-900 mb-4">
+          We're a small team of creatives, developers, and dreamers who believe in the power of technology and design.
+        </p>
+        <p class="text-pink-900">
+          From humble beginnings to exciting new challenges, our journey is all about collaboration, learning, and continuous improvement.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="bg-pink-100 py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h3 class="text-3xl text-center font-bold text-pink-700 mb-10">Meet the Team</h3>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-xl shadow-md p-6 text-center">
+          <img class="w-24 h-24 mx-auto rounded-full mb-4" src="https://via.placeholder.com/100" alt="Team Member">
+          <h4 class="text-lg font-semibold text-pink-700">Alex</h4>
+          <p class="text-pink-800">Frontend Developer</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-md p-6 text-center">
+          <img class="w-24 h-24 mx-auto rounded-full mb-4" src="https://via.placeholder.com/100" alt="Team Member">
+          <h4 class="text-lg font-semibold text-pink-700">Sam</h4>
+          <p class="text-pink-800">UI/UX Designer</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-md p-6 text-center">
+          <img class="w-24 h-24 mx-auto rounded-full mb-4" src="https://via.placeholder.com/100" alt="Team Member">
+          <h4 class="text-lg font-semibold text-pink-700">Jamie</h4>
+          <p class="text-pink-800">Backend Engineer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+{% endblock %}

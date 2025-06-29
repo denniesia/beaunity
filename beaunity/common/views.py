@@ -25,6 +25,10 @@ class IndexView(TemplateView):
         ).order_by('start_time').prefetch_related( 'attendees')[:3]
         return context
 
+class AboutView(TemplateView):
+    template_name = 'common/about.html'
+
+
 class SearchView(TemplateView):
     template_name = 'common/search-results.html'
 
