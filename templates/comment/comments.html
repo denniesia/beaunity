@@ -1,5 +1,5 @@
 
-{% for comment in comments %}
+{% for comment in page_obj %}
     <div id="{{ comment.pk }}"  class="flex gap-3 items-start pb-4">
 
         <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 text-xs shadow-inner">
@@ -55,7 +55,7 @@
     <p class="text-xs text-gray-500  mb-2">No comments yet. Be the first to comment!</p>
 {% endfor %}
 
-{% if not comments.has_next %}
+{% if not page_obj.has_next %}
 
 
 <!-- Comment Form -->

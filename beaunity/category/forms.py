@@ -11,7 +11,6 @@ class CategoryBaseForm(forms.ModelForm):
 
     image = CloudinaryFileField(
         label='Image',
-        required=False,
         options={
             'folder': 'category_images',  # optional: where to store images in your Cloudinary account
             'use_filename': True,

@@ -20,6 +20,7 @@ class EventsOverviewView(ListView):
     template_name = 'event/events-overview.html'
     ordering = ['-start_time']
     context_object_name = 'events'
+    paginate_by = 3
 
     def get_queryset(self):
         current_datetime = now()
@@ -56,8 +57,6 @@ class EventsOverviewView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        context['cities'] = Event.objects.values_list('city', flat=True).distinct()
 
         request = self.request
         filter_mode = any([
@@ -66,8 +65,10 @@ class EventsOverviewView(ListView):
             request.GET.get('sort_by'),
             request.GET.get('archived')
         ])
-
         context['filter_mode'] = filter_mode
+
+        context['categories'] = Category.objects.all()
+        context['cities'] = Event.objects.values_list('city', flat=True).distinct()
         return context
 
 class EventDetailsView(LoginRequiredMixin, DetailView):

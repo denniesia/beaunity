@@ -1,13 +1,13 @@
 <!--Paginator -->
     <div class="text-sm font-medium text-pink-500 ml-2">
-        {% if comments.has_previous %}
+        {% if page_obj.has_previous %}
             <a href="?page=1" class="hover:text-blue-700">First</a>
-            <a href="?page={{ comments.previous_page_number }}" class="hover:text-blue-700">Previous</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="hover:text-blue-700">Previous</a>
         {% endif %}
-        <span class="text-gray-700">Page {{ comments.number }} of {{ comments.paginator.num_pages }}</span>
-        {% if comments.has_next %}
-            <a href="?page={{ comments.next_page_number }}" class="hover:text-blue-700">Next</a>
-            <a href="?page={{ comments.paginator.num_pages }}" class="hover:text-blue-700">Last</a>
+        <span class="text-gray-700">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="hover:text-blue-700">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="hover:text-blue-700">Last</a>
         {% endif %}
     </div>
 

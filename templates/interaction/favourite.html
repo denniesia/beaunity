@@ -4,14 +4,14 @@
 {% if user.is_authenticated %}
 <a id="{{ post.id }}" href="{% url 'favourite' model_name obj.id %}" class="flex items-center text-2xs cursor-pointer gap-1">
     {% if obj|is_favourited_by_user:user %}
-         {% if '/dashboard/' in request.path  or '/overview/' in request.path or '/event/' in request.path %}
+         {% if '/overview/' in request.path or '/event/' in request.path %}
              <img src="{% static 'common/fav-fill.png' %}" class="w-5 h-5">
          {% else %}
               <img src="{% static 'common/fav-fill.png' %}"> Unfav
 
          {% endif %}
     {% else %}
-         {% if '/dashboard/' in request.path  or '/overview/' in request.path or '/event/' in request.path %}
+         {% if '/overview/' in request.path or '/event/' in request.path %}
              <img src="{% static 'common/fav.png' %}" class="w-5 h-5">
          {% else %}
              <img src="{% static 'common/fav.png' %}"> Fav
