@@ -142,6 +142,9 @@ class ProfileEditForm(ProfileBaseForm):
             }
         )
     )
+    joined_events = forms.CharField(
+        required=False,
+    )
 
 class AppUserEditForm(forms.ModelForm):
     class Meta:
