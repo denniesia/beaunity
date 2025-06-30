@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.views.generic import ListView,CreateView,  DetailView, UpdateView, DeleteView
+from django_browser_reload.views import events
+
 from .models import Event
 from beaunity.category.models import Category
 from django.db.models import Q
@@ -10,6 +12,7 @@ from .forms import EventCreateForm, EventEditForm, EventDeleteForm
 from beaunity.comment.forms import  CommentCreateForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.contenttypes.models import ContentType
+from django.contrib import messages
 
 from django.core.paginator import Paginator
 # Create your views here.
@@ -74,8 +77,10 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        attendees = self.object.attendees.select_related('profile')[:6]
-        comments = self.object.comments.all().order_by('created_at')
+        event = self.object
+        attendees = event.attendees.select_related('profile')[:6]
+        comments = event.comments.all().order_by('created_at')
+        has_joined = event in self.request.user.profile.joined_events.all()
 
         paginator = Paginator(comments, 5)
         page_number = self.request.GET.get('page')
@@ -86,11 +91,14 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
             'attendees': attendees,
             'form': CommentCreateForm(),
             'comments': page_obj,
+            'has_joined': has_joined,
         })
         return context
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
+
+
         form = CommentCreateForm(request.POST)
 
         if form.is_valid():

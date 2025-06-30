@@ -45,8 +45,8 @@ class Event(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
         null=True
     )
     start_time = models.DateTimeField()
-    end_time = models.DateTimeField(
-    )
+    end_time = models.DateTimeField()
+    is_public = models.BooleanField(default=True)
 
     categories = models.ManyToManyField(Category, related_name='events')
     attendees = models.ManyToManyField(UserModel, related_name='events_attendees', blank=True)
