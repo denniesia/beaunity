@@ -65,7 +65,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         
         post.created_by = self.request.user
 
-        if user_is_admin_or_moderator(self.request.user):
+        if self.request.user.has_perm('post.can_approve_post'):
             post.is_approved = True
 
         post.save()
