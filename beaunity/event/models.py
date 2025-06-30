@@ -28,6 +28,7 @@ class Event(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
         ]
     )
     is_online = models.BooleanField()
+    is_public = models.BooleanField()
     city = models.CharField(
         max_length=100,
         validators=[
@@ -46,7 +47,7 @@ class Event(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
     )
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    is_public = models.BooleanField(default=True)
+
 
     categories = models.ManyToManyField(Category, related_name='events')
     attendees = models.ManyToManyField(UserModel, related_name='events_attendees', blank=True)

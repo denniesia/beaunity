@@ -11,7 +11,8 @@ class EventBaseForm(forms.ModelForm):
         model = Event
         fields = ['poster_image',
                   'title', 'details',
-                  'is_online','city', 'location',
+                  'is_online', 'is_public',
+                  'city', 'location',
                   'meeting_link', 'start_time',
                   'end_time', 'categories']
 
@@ -47,8 +48,13 @@ class EventBaseForm(forms.ModelForm):
     is_online = forms.BooleanField(
         label='Online event:',
         required=False,
-        widget=forms.CheckboxInput(
-        )
+        widget=forms.CheckboxInput()
+    )
+    is_public = forms.BooleanField(
+        label='Public event:',
+        required=False,
+        widget=forms.CheckboxInput(),
+        initial=True
     )
     city = forms.CharField(
         label='City:',
