@@ -12,7 +12,7 @@ from django.db.models import Q
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
-from beaunity.common.utils import user_is_admin_or_moderator
+
 
 from django.core.paginator import Paginator
 
@@ -39,7 +39,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     template_name = 'post/post-create.html'
 
     def get_success_url(self):
-        if user_is_admin_or_moderator(self.request.user):
+        if self.request.user.has_perm('post.add_category'):
             return reverse('category-details', kwargs={'category_slug': self.object.category.slug})
         else:
             return reverse_lazy('post-confirmation')

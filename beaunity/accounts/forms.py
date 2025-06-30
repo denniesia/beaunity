@@ -6,6 +6,8 @@ from .models import Profile
 from beaunity.accounts.models.choices import SkinTypeChoices
 from cloudinary.forms import CloudinaryFileField
 from django.forms import ClearableFileInput
+from beaunity.common.utils.validators import cloudinary_file_validator
+
 
 UserModel = get_user_model()
 CLASS = 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
@@ -73,10 +75,16 @@ class ProfileBaseForm(forms.ModelForm):
         model = Profile
         exclude = ('user',)
 
+    def clean_profile_pic(self):
+        profile_pic = self.cleaned_data['profile_pic']
+        cloudinary_file_validator(profile_pic)
+        return profile_pic
+
 class ProfileEditForm(ProfileBaseForm):
-    profile_pic =  CloudinaryFileField(
+    profile_pic = CloudinaryFileField(
         label='Profile Picture',
         required=False,
+        help_text='Allowed profile pic extentions are -.jpg, .jpeg, .png, .gif, .pdf,.mp4. Allowed size is 5MB.',
         options={
             'folder': 'profile_pics',  # optional: where to store images in your Cloudinary account
             'use_filename': True,

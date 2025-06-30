@@ -22,6 +22,9 @@
                     </div>
                     <div class="w-full">
                         {{ profile_form.profile_pic }}
+                        <p class="text-sm italic">
+                            {{ profile_form.profile_pic.help_text }}
+                        </p>
                         {{ profile_form.profile_pic.errors }}
                     </div>
                 <div>
