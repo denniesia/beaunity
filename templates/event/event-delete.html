@@ -1,5 +1,5 @@
 {% extends 'common/base.html' %}
-
+{% load static %}
 {% block content %}
     <div class="max-w-full lg:w-2/3 mx-auto">
         <h1 class="text-3xl md:text-4xl font-extrabold text-pink-500 text-center mt-8 mb-4">Delete Event</h1>
@@ -23,7 +23,11 @@
                         </div>
                         <div>
                             {{ form.details.label }}
-                            {{ form.details }}
+                            <div class="w-full">
+                                {{ form.details }}
+                                {{ form.media }}
+                            </div>
+
                         </div>
                         <div>
                             {{ form.is_online.label }}

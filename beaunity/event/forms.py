@@ -1,5 +1,7 @@
 from django import forms
 from .models import Event
+import re
+from ckeditor.widgets import CKEditorWidget
 from beaunity.category.models import Category
 from cloudinary.forms import CloudinaryFileField
 from django.forms import ClearableFileInput
@@ -38,9 +40,10 @@ class EventBaseForm(forms.ModelForm):
     )
     details = forms.CharField(
         label='Details:',
-        widget=forms.Textarea(
+        widget=CKEditorWidget(
             attrs={
                 'class': CLASS,
+                'rows': 11,
             }
         ),
         help_text='Please enter at least 100 characters describing the event.',
@@ -115,6 +118,13 @@ class EventBaseForm(forms.ModelForm):
         ),
         help_text="Select one or more categories that apply to this event."
     )
+
+    def clean_details(self):
+        raw = self.cleaned_data['details']
+        plain_text = re.sub('<[^<]+?>', '', raw)
+        if len(plain_text.strip()) < 100:
+            raise forms.ValidationError("Description must be at least 100 characters (excluding formatting).")
+        return raw
 
 class EventCreateForm(EventBaseForm):
     pass

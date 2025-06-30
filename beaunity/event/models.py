@@ -10,6 +10,8 @@ from beaunity.common.mixins import CreatedByMixin, CreatedAtMixin, LastUpdatedMi
 from beaunity.category.models import Category
 from beaunity.interaction.models import Like
 from beaunity.comment.models import Comment
+
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 UserModel = get_user_model()
@@ -22,11 +24,7 @@ class Event(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
             MinLengthValidator(10)
         ]
     )
-    details = models.TextField(
-        validators=[
-            MinLengthValidator(100)
-        ]
-    )
+    details = RichTextField()
     is_online = models.BooleanField()
     is_public = models.BooleanField()
     city = models.CharField(

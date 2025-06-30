@@ -63,11 +63,11 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
-
     'tailwind',
     'theme',
     'django_browser_reload',
     'cloudinary',
+    'ckeditor',
 ] + MY_APPS
 
 SOCIALACCOUNT_PROVIDERS = {

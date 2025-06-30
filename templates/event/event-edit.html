@@ -34,12 +34,16 @@
                         </div>
                         <div>
                             {{ form.details.label }}
-                            {{ form.details }}
+                            <div class="w-full">
+                                {{ form.details }}
+                                {{ form.media }}
+                            </div>
                             <div>
                                 <span class="text-sm text-gray-500 italic ml-2">{{ form.details.help_text }}</span>
                             </div>
                             {{ form.details.errors }}
                         </div>
+
                         <div>
                             {{ form.is_online.label }}
                             {{ form.is_online }}
