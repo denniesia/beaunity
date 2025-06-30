@@ -1,10 +1,12 @@
 from django import forms
 from .models import Event
-import re
+
 from ckeditor.widgets import CKEditorWidget
+import bleach
 from beaunity.category.models import Category
 from cloudinary.forms import CloudinaryFileField
 from django.forms import ClearableFileInput
+
 
 CLASS = 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
 
@@ -121,7 +123,7 @@ class EventBaseForm(forms.ModelForm):
 
     def clean_details(self):
         raw = self.cleaned_data['details']
-        plain_text = re.sub('<[^<]+?>', '', raw)
+        plain_text = bleach.clean(raw, tags=[], strip=True)
         if len(plain_text.strip()) < 100:
             raise forms.ValidationError("Description must be at least 100 characters (excluding formatting).")
         return raw

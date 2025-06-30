@@ -39,7 +39,7 @@
                     {% include 'interaction/join.html'  %}
                 </div>
             </div>
-             {% if perms.event.change_category %}
+             {% if perms.event.add_event %}
              <div class="absolute top-2 right-1 text-normal text-pink-600 font-semibold px-6 py-3 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">
                 <div class="flex items-center text-2xs cursor-pointer gap-4">
                     <a href="{% url 'event-edit' event.pk %}">
@@ -140,14 +140,13 @@
         <div class="flex flex-col md:flex-row justify-between items-start gap-10 ml-6 mb-6">
             <!-- Left -->
             <div class="flex-[2]">
-                <h3 class="text-lg font-semibold text-pink-700 ml-4">Event Details</h3>
+                <h3 class="text-lg font-semibold text-pink-700 mb-2">Event Details</h3>
                 <p class="text-medium font-medium text-gray-600 ml-4">
-                    {{ event.details }}
+                    {{ event.details|safe  }}
                 </p>
             </div>
 
             <!-- Right: Location / Map (smaller) -->
-
             <div class="flex-1">
                 {% if event.is_online %}
                     <p class="text-sm font-semibold text-pink-700">Meeting Link:</p>
@@ -175,7 +174,7 @@
             </div>
         </div>
 
-        <div class="flex items-start text-pink-500 space-x-4 text-sm mb-2 mt-4 ml-10">
+        <div class="flex items-start text-pink-500 space-x-4 text-sm mb-2 mt-2 ml-6">
             <!-- Like finctionality -->
             {% include 'interaction/like.html' with obj=event model_name='event' %}
             <!-- Share finctionality -->

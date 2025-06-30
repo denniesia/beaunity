@@ -91,7 +91,7 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
         context.update({
             'attendees': attendees,
             'form': CommentCreateForm(),
-            'comments': page_obj,
+            'page_obj': page_obj,
             'has_joined': has_joined,
         })
         return context
