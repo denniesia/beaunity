@@ -95,18 +95,19 @@
 
                 <div class="flex items-center text-pink-700 gap-2 pl-6">
                     <span>📍</span>
-                    <a href="#" class="text-pink-600 ">
-                        {{ event.location }}
-                    </a>
+                    {% if event.is_online%}
+                        <p class="text-pink-600 ">
+                            Online
+                        </p>
+                    {% else %}
+                        <p class="text-pink-600 ">
+                            {{ event.location }}
+                        </p>
+                    {% endif %}
                 </div>
 
-                {% if event.meeting_link %}
-                    <p class="text-sm text-pink-500 pl-6 pt-2">Meeting Link:</p>
-                {% endif %}
-
-                <hr class="border-t border-gray-300 my-4" />
             </div>
-            <!-- Right: Event Media -->
+            <!-- Right -->
             <div>
                 <h4 class="text-lg font-semibold text-pink-700 mt-2">Attending:</h4>
                 <div class="flex items-center gap-3 mt-2">
@@ -134,19 +135,44 @@
                 </div>
             </div>
         </div>
+        <hr class="border-t border-gray-300 my-4" />
 
-        <div class="items-center gap-5 mb-1 ml-6">
-            <h3 class="text-lg font-semibold text-pink-700 ml-4">Event Details</h3>
-            <p class="text-medium font-medium text-gray-600 ml-4 ">
-                {{ event.details }}
-            </p>
-        </div>
+        <div class="flex flex-col md:flex-row justify-between items-start gap-10 ml-6 mb-6">
+            <!-- Left -->
+            <div class="flex-[2]">
+                <h3 class="text-lg font-semibold text-pink-700 ml-4">Event Details</h3>
+                <p class="text-medium font-medium text-gray-600 ml-4">
+                    {{ event.details }}
+                </p>
+            </div>
 
-        <div class="items-center gap-5 mb-1 ml-6">
-            <h3 class="text-lg font-semibold text-pink-700 ml-4">Location</h3>
-            <p class="text-medium font-medium text-gray-600 ml-4 ">
-                {{ event.details }}
-            </p>
+            <!-- Right: Location / Map (smaller) -->
+
+            <div class="flex-1">
+                {% if event.is_online %}
+                    <p class="text-sm font-semibold text-pink-700">Meeting Link:</p>
+                    <a href="{{ event.meeting_link }}" class="text-sm text-gray-700 hover:underline hover:text-blue-600">{{ event.meeting_link }}</a>
+                {% else %}
+                    <div class="flex items-center gap-2 ml-4">
+                        <p class="text-sm font-semibold text-pink-700">Location:</p>
+                        <p class="text-sm text-gray-700">{{ event.location }}</p>
+                    </div>
+                    <div class="text-medium font-medium text-gray-600 ml-4">
+                        <div class="rounded-xl overflow-hidden w-full h-[200px]">
+                            <iframe
+                                        width="100%"
+                                        height="100%"
+                                        class="w-full h-full"
+                                        style="border:0"
+                                        loading="lazy"
+                                        allowfullscreen
+                                        referrerpolicy="no-referrer-when-downgrade"
+                                        src="https://www.google.com/maps?q={{ event.location|urlencode }}&output=embed">
+                            </iframe>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
         </div>
 
         <div class="flex items-start text-pink-500 space-x-4 text-sm mb-2 mt-4 ml-10">

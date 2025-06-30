@@ -25,27 +25,30 @@ class Event(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
         ]
     )
     details = RichTextField()
-    is_online = models.BooleanField()
+    is_online = models.BooleanField(default=False)
+    meeting_link = models.URLField(
+        blank=True,
+        null=True
+    )
     is_public = models.BooleanField()
     city = models.CharField(
+        null=True,
+        blank=True,
         max_length=100,
         validators=[
             MinLengthValidator(2)
         ]
     )
     location = models.CharField(
-        max_length=100,
+        max_length=200,
+        blank=True,
+        null=True,
         validators=[
             MinLengthValidator(10)
         ]
     )
-    meeting_link = models.URLField(
-        blank=True,
-        null=True
-    )
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-
 
     categories = models.ManyToManyField(Category, related_name='events')
     attendees = models.ManyToManyField(UserModel, related_name='events_attendees', blank=True)
@@ -62,3 +65,15 @@ class Event(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
 
     def __str__(self):
         return self.title
+
+    def clean(self):
+        if self.is_online:
+            if not self.meeting_link:
+                raise ValidationError("Online events must have a meeting link.")
+            if self.location:
+                raise ValidationError("Online events should not have a physical location.")
+        else:
+            if not self.location:
+                raise ValidationError("Offline events must have a location.")
+            if self.meeting_link:
+                raise ValidationError("Offline events should not have a meeting link.")

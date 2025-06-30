@@ -20,7 +20,7 @@ class EventsOverviewView(ListView):
     template_name = 'event/events-overview.html'
     ordering = ['-start_time']
     context_object_name = 'events'
-    paginate_by = 3
+    paginate_by = 9
 
     def get_queryset(self):
         current_datetime = now()
