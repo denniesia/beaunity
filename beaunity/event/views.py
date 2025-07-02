@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.views.generic import ListView,CreateView,  DetailView, UpdateView, DeleteView
 from django_browser_reload.views import events
+from markdown_it.rules_core import inline
 
 from .models import Event
 from beaunity.category.models import Category
@@ -34,17 +35,18 @@ class EventsOverviewView(ListView):
         city = self.request.GET.get('city')
         category = self.request.GET.get('category')
         sort_by = self.request.GET.get('sort_by')
+        online = self.request.GET.get('online')
 
         if city:
             queryset = queryset.filter(city=city)
 
         if category:
             queryset = queryset.filter(categories__title=category)
+        if online:
+            queryset = queryset.filter(is_online=True)
 
         if sort_by == 'Popularity':
             queryset = queryset.annotate(popularity=Count('attendees')).order_by('-popularity')
-        elif sort_by == 'Online':
-            queryset = queryset.filter(is_online=True)
         elif sort_by == 'Public events':
             queryset = queryset.filter(is_public=True)
         elif sort_by == 'Hosts':
@@ -63,12 +65,13 @@ class EventsOverviewView(ListView):
             request.GET.get('city'),
             request.GET.get('category'),
             request.GET.get('sort_by'),
+            request.GET.get('online'),
             request.GET.get('archived')
         ])
         context['filter_mode'] = filter_mode
 
         context['categories'] = Category.objects.all()
-        context['cities'] = Event.objects.exclude(city__isnull=True).values_list('city', flat=True).distinct()
+        context['cities'] = Event.objects.exclude(city='').values_list('city', flat=True).distinct()
         return context
 
 class EventDetailsView(LoginRequiredMixin, DetailView):

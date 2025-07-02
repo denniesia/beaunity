@@ -58,9 +58,8 @@ class Event(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
     class Meta:
         verbose_name_plural = 'Events'
         permissions = [
-            ("can_approve_event", "Can approve events"),
             ("can_join_event", "Can join events"),
-            ("can_host_event", "Can host events"),
+
         ]
 
     def __str__(self):

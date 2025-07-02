@@ -43,7 +43,6 @@
                    </div>
                    <div id="sortDropdown" class="dropdown hidden absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md z-10">
                        <button type="submit" name="sort_by" value="Popularity" class="block w-full text-left px-4 py-2 hover:bg-pink-100">Popularity</button>
-                       <button type="submit" name="sort_by" value="Online" class="block w-full text-left px-4 py-2 hover:bg-pink-100">Online</button>
                        <button type="submit" name="sort_by" value="Public events" class="block w-full text-left px-4 py-2 hover:bg-pink-100">Public events</button>
                        <button type="submit" name="sort_by" value="Hosts" class="block w-full text-left px-4 py-2 hover:bg-pink-100">Hosts</button>
                    </div>
@@ -81,6 +80,14 @@
                        {% endfor %}
                    </div>
                </div>
+
+               <div class="relative">
+                   <button type="submit" name="online" value="true"
+                           class="flex items-center gap-1 text-pink-500 cursor-pointer hover:text-pink-700">
+                       Online
+                   </button>
+               </div>
+
 
                <!-- Archived Button -->
                <div class="relative">
