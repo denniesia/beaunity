@@ -39,7 +39,7 @@ def about_view(request):
             subject = form.cleaned_data['subject']
             content = form.cleaned_data['content']
 
-            full_message = f"Message from {name} ({email}):\n\n{content}"
+            full_message = f"Message from {name} ({email}) on beaunity :\n\n{content}"
 
             send_mail(
                 subject,

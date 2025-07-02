@@ -6,7 +6,7 @@ import bleach
 from beaunity.category.models import Category
 from cloudinary.forms import CloudinaryFileField
 from django.forms import ClearableFileInput
-
+from beaunity.common.utils.validators import cloudinary_file_validator
 
 CLASS = 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
 
@@ -21,6 +21,8 @@ class EventBaseForm(forms.ModelForm):
                   'end_time', 'categories']
 
     poster_image = CloudinaryFileField(
+        label='Poster Image:',
+        help_text='Allowed poster image extentions are -.jpg, .jpeg, .png, .gif, .pdf, .mp4. Allowed size is 5MB.',
         options={
             'folder': 'event_images',
             'use_filename': True,
@@ -127,6 +129,12 @@ class EventBaseForm(forms.ModelForm):
         if len(plain_text.strip()) < 100:
             raise forms.ValidationError("Description must be at least 100 characters (excluding formatting).")
         return raw
+
+    def clean_poster_image(self):
+        poster_image = self.cleaned_data['poster_image']
+        cloudinary_file_validator(poster_image)
+        return poster_image
+
 
 class EventCreateForm(EventBaseForm):
     pass

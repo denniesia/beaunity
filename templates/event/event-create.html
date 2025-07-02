@@ -12,7 +12,9 @@
                 <!-- Left Column -->
                 <div class="space-y-4">
                     <div>
+                        {{ form.poster_image.label }}
                         {{ form.poster_image }}
+                        <span class="text-sm italic text-gray-500">{{ form.poster_image.help_text }}</span>
                         {{ form.poster_image.errors }}
                     </div>
                     <div>

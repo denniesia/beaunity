@@ -2,6 +2,8 @@ from django import forms
 from .models import Category
 from cloudinary.forms import CloudinaryFileField
 from django.forms import ClearableFileInput
+from beaunity.common.utils.validators import cloudinary_file_validator
+
 
 CLASS = 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
 class CategoryBaseForm(forms.ModelForm):
@@ -11,11 +13,13 @@ class CategoryBaseForm(forms.ModelForm):
 
     image = CloudinaryFileField(
         label='Image',
+        help_text='Allowed image extentions are -.jpg, .jpeg, .png, .gif, .pdf, .mp4. Allowed size is 5MB.',
         options={
             'folder': 'category_images',  # optional: where to store images in your Cloudinary account
             'use_filename': True,
             'unique_filename': True,
         },
+
         widget=ClearableFileInput(
             attrs={
                 'class': CLASS
@@ -47,6 +51,12 @@ class CategoryBaseForm(forms.ModelForm):
     def clean_description(self):
         description = self.cleaned_data['description']
         return description[0].upper() + description[1:] if description else description
+
+    def clean_image(self):
+        image = self.cleaned_data['image']
+        cloudinary_file_validator(profile_pic)
+        return image
+
 
 class CategoryCreateForm(CategoryBaseForm):
     pass
