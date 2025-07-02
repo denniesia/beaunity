@@ -64,16 +64,16 @@
                             </a>
                         {% endfor %}
                     </div>
-                    <div class="mt-auto justify-center text-center">
+                    <div class="mt-auto flex text-center gap-6">
 
                         {% if user.is_authenticated %}
-                            <div class="w-full bg-pink-500 text-white mb-2 bg-pink-600 text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-900 transition">
+                            <div class="w-full bg-pink-500 text-white bg-pink-600 text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-900 transition">
                                 <a href="{% url 'event-details' event.pk %}" >
                                     <p>See More</p>
                                 </a>
                             </div>
 
-                            <div class="w-full bg-purple-500 text-white bg-pink-600 text-sm font-medium px-10 py-2 rounded-lg hover:bg-purple-00 transition">
+                            <div class="w-full bg-purple-500 text-white bg-pink-600 text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-900 transition">
                                {% include 'interaction/join.html' %}
                             </div>
                         {% endif %}

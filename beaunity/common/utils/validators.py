@@ -1,9 +1,13 @@
 from django.core.exceptions import ValidationError
 import os
+from cloudinary.models import CloudinaryResource
 
 def cloudinary_file_validator(file):
     max_size_mb = 5
     allowed_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.pdf', '.mp4']
+
+    if isinstance(file, CloudinaryResource):
+        return
 
     if file.size > max_size_mb * 1024 * 1024:
         raise ValidationError(f"File size must be under {max_size_mb} MB.")

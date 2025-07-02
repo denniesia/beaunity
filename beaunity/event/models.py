@@ -5,7 +5,7 @@ from django.utils import timezone
 from datetime import datetime
 from django.contrib.contenttypes.fields import GenericRelation
 from cloudinary.models import CloudinaryField
-
+from django.core.exceptions import ValidationError
 from beaunity.common.mixins import CreatedByMixin, CreatedAtMixin, LastUpdatedMixin
 from beaunity.category.models import Category
 from beaunity.interaction.models import Like
@@ -66,14 +66,3 @@ class Event(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
     def __str__(self):
         return self.title
 
-    def clean(self):
-        if self.is_online:
-            if not self.meeting_link:
-                raise ValidationError("Online events must have a meeting link.")
-            if self.location:
-                raise ValidationError("Online events should not have a physical location.")
-        else:
-            if not self.location:
-                raise ValidationError("Offline events must have a location.")
-            if self.meeting_link:
-                raise ValidationError("Offline events should not have a meeting link.")

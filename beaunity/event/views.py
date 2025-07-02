@@ -68,7 +68,7 @@ class EventsOverviewView(ListView):
         context['filter_mode'] = filter_mode
 
         context['categories'] = Category.objects.all()
-        context['cities'] = Event.objects.values_list('city', flat=True).distinct()
+        context['cities'] = Event.objects.exclude(city__isnull=True).values_list('city', flat=True).distinct()
         return context
 
 class EventDetailsView(LoginRequiredMixin, DetailView):

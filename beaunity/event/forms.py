@@ -1,4 +1,6 @@
 from django import forms
+from markdown_it.rules_core import inline
+
 from .models import Event
 
 from ckeditor.widgets import CKEditorWidget
@@ -65,6 +67,7 @@ class EventBaseForm(forms.ModelForm):
     )
     city = forms.CharField(
         label='City:',
+        required=False,
         widget=forms.TextInput(
             attrs={
                 'class': CLASS,
@@ -73,6 +76,7 @@ class EventBaseForm(forms.ModelForm):
     )
     location = forms.CharField(
         label='Location:',
+        required=False,
         widget=forms.TextInput(
             attrs={
                 'class': CLASS,
@@ -134,6 +138,18 @@ class EventBaseForm(forms.ModelForm):
         poster_image = self.cleaned_data['poster_image']
         cloudinary_file_validator(poster_image)
         return poster_image
+
+    def clean(self):
+        cleaned_data = super().clean()
+        online = cleaned_data.get('is_online')
+        location = cleaned_data.get('location')
+        meeting_link = cleaned_data.get('meeting_link')
+        if not online and not location:
+            self.add_error('location', 'Location is required if the event is not online.')
+
+        if online and not meeting_link:
+            self.add_error('meeting_link', 'Meeting link is required if the event is online.')
+        return cleaned_data
 
 
 class EventCreateForm(EventBaseForm):

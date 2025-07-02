@@ -4,13 +4,15 @@
         {% if posts %}
             {% for post in posts %}
                 <div >
-                    <div  class="flex justify-between text-xs text-gray-500">
+                    <div id="{{ post.pk }}" class="flex justify-between text-xs text-gray-500">
                         <a  href="{% url 'post-details' post.pk %}" class="block text-lg text-gray-500 hover:text-pink-600 mb-1">
                             {{ post.title }}
                         </a>
                           <!-- Fav Functionality -->
                         {% if user.is_authenticated %}
+
                             {% include 'interaction/favourite.html' with obj=post model_name='post' %}
+
                         {% endif %}
 
 

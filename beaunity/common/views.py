@@ -13,6 +13,8 @@ from django.db.models import Q
 from django.utils.timezone import now
 from django.core.mail import send_mail
 from django.conf import settings
+import requests
+
 # Create your views here.
 class IndexView(TemplateView):
     template_name = 'common/landing-page.html'
@@ -105,5 +107,6 @@ def disapprove_functionality(request, pk: int):
     if request.user.has_perm('post.can_approve_post'):
         declined_object.delete()
         return redirect('post-pending')
+
 
 
