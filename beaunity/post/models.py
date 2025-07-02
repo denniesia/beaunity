@@ -25,6 +25,7 @@ class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, ContentMixin):
     class Meta:
         permissions = [
             ("can_approve_post", "Can approve posts"),
+            ('can_post_without_approval', 'Can post without approval'),
         ]
         ordering = ['-created_at']
 
