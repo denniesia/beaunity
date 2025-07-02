@@ -15,6 +15,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 UserModel = get_user_model()
 
 class AppUserRegisterView(CreateView):
+    #uses signal to create Profile
     model = UserModel
     form_class = AppUserCreationForm
     template_name = 'accounts/register.html'

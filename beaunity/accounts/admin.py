@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 from unfold.admin import ModelAdmin
 from django.utils.translation import gettext_lazy as _
+from .forms import AppUserCreationForm
 # Register your models here
 
 
@@ -12,6 +13,7 @@ UserModel = get_user_model()
 class Admin(ModelAdmin):
     list_display = ('username', 'email', 'is_staff', 'is_superuser', )
     search_fields = ('username', 'email')
+    add_form = AppUserCreationForm
 
     fieldsets = (
         (None, {"fields": ("username", "password")}),

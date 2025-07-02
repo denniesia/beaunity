@@ -4,13 +4,15 @@ from beaunity.category.models import Category
 from django.shortcuts import get_object_or_404, redirect
 from beaunity.post.models import Post
 from django.contrib.auth.decorators import login_required
-from beaunity.common.forms import SearchForm
+from beaunity.common.forms import SearchForm, ContactForm
 from beaunity.post.models import Post
 from beaunity.event.models import Event
 from beaunity.category.models import Category
 from beaunity.accounts.models import AppUser
 from django.db.models import Q
 from django.utils.timezone import now
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 class IndexView(TemplateView):
     template_name = 'common/landing-page.html'
@@ -25,10 +27,29 @@ class IndexView(TemplateView):
         ).order_by('start_time').prefetch_related( 'attendees')[:3]
         return context
 
-class AboutView(TemplateView):
-    template_name = 'common/about.html'
 
 
+def about_view(request):
+    form = ContactForm()
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            subject = form.cleaned_data['subject']
+            content = form.cleaned_data['content']
+
+            full_message = f"Message from {name} ({email}):\n\n{content}"
+
+            send_mail(
+                subject,
+                full_message,
+                settings.EMAIL_HOST_USER,
+                [settings.EMAIL_HOST_USER],  # you can change to another email
+                fail_silently=False,
+            )
+            return render(request, 'common/email_confirmation.html')
+    return render(request, 'common/about.html', {'form': form})
 class SearchView(TemplateView):
     template_name = 'common/search-results.html'
 

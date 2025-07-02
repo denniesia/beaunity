@@ -31,9 +31,18 @@ SECRET_KEY = config('THE_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.ngrok.io', '']
+
+CSRF_TRUSTED_ORIGINS = []
 
 SITE_ID = 2 #google login
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = 'dennie.sureva@gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 MY_APPS = [
     'beaunity.accounts',
@@ -68,6 +77,7 @@ INSTALLED_APPS = [
     'django_browser_reload',
     'cloudinary',
     'ckeditor',
+
 ] + MY_APPS
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -157,7 +167,6 @@ DATABASES = {
 AUTHENTICATION_BACKENDS = [
     'beaunity.accounts.backends.EmailOrUsernameModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
-
 ]
 
 
