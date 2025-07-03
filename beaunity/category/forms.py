@@ -4,12 +4,16 @@ from cloudinary.forms import CloudinaryFileField
 from django.forms import ClearableFileInput
 from beaunity.common.utils.validators import cloudinary_file_validator
 
-
 CLASS = 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
 class CategoryBaseForm(forms.ModelForm):
     class Meta:
         model = Category
         exclude = ['created_by',]
+        error_messages = {
+            'title': {
+                'unique': 'Such title already exists.'
+            }
+        }
 
     image = CloudinaryFileField(
         label='Image',
@@ -34,6 +38,7 @@ class CategoryBaseForm(forms.ModelForm):
                 'class': CLASS
             }
         ),
+
     )
     description = forms.CharField(
         label='Description:',

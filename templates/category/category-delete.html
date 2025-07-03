@@ -22,11 +22,16 @@
                 {% csrf_token %}
                 {{ form.title.label_tag }}
                 {{ form.title }}
-                {{ form.title.errors }}
+                <span class="text-sm text-red-500 italic">
+                    {{ form.title.errors }}
+                </span>
 
                 {{ form.description.label_tag }}
                 {{ form.description }}
-                {{ form.description.errors }}
+                <span class="text-sm text-red-500 italic">
+                    {{ form.description.errors }}
+                </span>
+
                 <!-- Form Actions -->
                 <div class="flex justify-end space-x-3 pt-4">
                     <a href="{% url 'category-overview' %}" class="px-5 py-2 text-sm font-medium text-pink-600 hover:text-pink-500 hover:bg-pink-100 border border-pink-200 rounded-lg transition-colors">

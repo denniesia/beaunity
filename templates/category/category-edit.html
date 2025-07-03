@@ -29,18 +29,24 @@
                       <span class="text-sm italic">
                           {{ form.image.help_text }}
                       </span>
-                      {{ form.image.errors }}
+                      <span class="text-sm text-red-500 italic">
+                          {{ form.image.errors }}
+                      </span>
                   </div>
 
                   <div>
                       {{ form.title.label_tag }}
                       {{ form.title }}
-                      {{ form.title.errors }}
+                      <span class="text-sm text-red-500 italic">
+                        {{ form.title.errors }}
+                      </span>
                   </div>
                   <div>
                       {{ form.description.label_tag }}
                       {{ form.description }}
-                      {{ form.description.errors }}
+                      <span class="text-sm text-red-500 italic">
+                        {{ form.description.errors }}
+                      </span>
                   </div>
 
                   <!-- Form Actions -->
