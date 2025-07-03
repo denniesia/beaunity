@@ -11,29 +11,33 @@
 
         <form method="post" class="space-y-5">
             {% csrf_token %}
-            {{ form.non_field_errors }}
+            <span class="text-sm italic text-red-500 mb-2">
+                {% for error in form.non_field_errors %}
+                    <ul class="mb-2">{{ error }}</ul>
+                {% endfor %}
+            </span>
 
             <div>
                 {{ form.banner.label_tag }}
                 {{ form.banner }}
-                {{ form.banner.errors }}
+                <span class="text-sm italic text-red-500">{{ form.banner.errors }}</span>
             </div>
 
             <div>
                 {{ form.title.label_tag }}
                 {{ form.title }}
-                {{ form.title.errors }}
+                <span class="text-sm italic text-red-500">{{ form.title.errors }}</span>
             </div>
 
             <div>
                 {{ form.content.label_tag }}
                 {{ form.content }}
-                {{ form.content.errors }}
+                <span class="text-sm italic text-red-500">{{ form.content.errors }}</span>
             </div>
             <div>
                 {{ form.category.label_tag }}
                 {{ form.category }}
-                {{ form.category.errors }}
+                <span class="text-sm italic text-red-500">{{ form.category.errors }}</span>
             </div>
 
             <button type="submit"

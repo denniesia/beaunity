@@ -10,6 +10,7 @@ class PostBaseForm(forms.ModelForm):
         fields = ['banner', 'title', 'content', ]
 
     banner = forms.URLField(
+        label="Banner URL:",
         required=False,
         widget=forms.URLInput(
             attrs={
@@ -19,6 +20,7 @@ class PostBaseForm(forms.ModelForm):
         ),
     )
     title = forms.CharField(
+        label="Title:",
         widget=forms.TextInput(
             attrs={
                 'class': CLASS,
@@ -26,6 +28,7 @@ class PostBaseForm(forms.ModelForm):
         ),
     )
     content = forms.CharField(
+        label="Content:",
         widget=forms.Textarea(
             attrs={
                 'class': CLASS,
@@ -40,6 +43,7 @@ class PostCreateForm(PostBaseForm):
         fields = PostBaseForm.Meta.fields + ['category']
 
     category = forms.ModelChoiceField(
+        label="Category:",
         queryset=Category.objects.all(),
         widget=forms.Select(attrs={
             'class': CLASS

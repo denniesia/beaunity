@@ -13,8 +13,10 @@
 
             <form method="post" class="space-y-5">
                 {% csrf_token %}
-                <span class="text-sm italic text-red-500">
-                        {{ form.non_field.errors }}
+                <span class="text-sm italic text-red-500 mb-2">
+                    {% for error in form.non_field_errors %}
+                        <ul class="mb-2">{{ error }}</ul>
+                    {% endfor %}
                 </span>
 
                 <div>

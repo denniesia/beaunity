@@ -23,7 +23,6 @@ def delete_comment(request, pk):
     content_object = comment.content_object
 
     if request.method == 'POST' and comment.created_by == request.user:
-
         comment.delete()
 
         if isinstance(content_object, Post):

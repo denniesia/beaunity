@@ -41,6 +41,7 @@ class CategoryCreateView(LoginRequiredMixin, CreateView):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
 
+
 class CategoryEditView(LoginRequiredMixin, UpdateView):
     model = Category
     form_class = CategoryEditForm

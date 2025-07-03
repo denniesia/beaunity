@@ -59,7 +59,7 @@ class CategoryBaseForm(forms.ModelForm):
 
     def clean_image(self):
         image = self.cleaned_data['image']
-        cloudinary_file_validator(profile_pic)
+        cloudinary_file_validator(image)
         return image
 
 

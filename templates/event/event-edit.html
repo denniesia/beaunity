@@ -26,13 +26,13 @@
                             {{ form.poster_image.label }}
                             {{ form.poster_image }}
                             <span class="text-sm italic text-gray-500"> {{ form.poster_image.help_text }}</span>
-                            {{ form.poster_image.errors }}
+                            <span class="text-sm italic text-red-500"> {{ form.poster_image.errors }}</span>
                         </div>
 
                         <div>
                             {{ form.title.label }}
                             {{ form.title }}
-                            {{ form.title.errors }}
+                            <span class="text-sm italic text-red-500"> {{ form.title.errors }}</span>
                         </div>
                         <div>
                             {{ form.details.label }}
@@ -43,7 +43,7 @@
                             <div>
                                 <span class="text-sm text-gray-500 italic ml-2">{{ form.details.help_text }}</span>
                             </div>
-                            {{ form.details.errors }}
+                            <span class="text-sm italic text-red-500"> {{ form.details.errors }}</span>
                         </div>
 
                         <div>
@@ -58,7 +58,7 @@
                         <div>
                             {{ form.city.label }}
                             {{ form.city }}
-                            {{ form.city.errors }}
+                            <span class="text-sm italic text-red-500"> {{ form.city.errors }}</span>
                         </div>
                     </div>
 
@@ -68,32 +68,32 @@
                             {{ form.location.label }}
                             {{ form.location }}
                             <small class="text-gray-500 italic text-sm">{{ form.location.help_text }}</small>
-                            {{ form.location.errors }}
+                            <span class="text-sm italic text-red-500"> {{ form.location.errors }}</span>
                         </div>
 
                         <div>
                             {{ form.meeting_link.label }}
                             {{ form.meeting_link }}
-                            {{ form.meeting_link.errors }}
+                            <span class="text-sm italic text-red-500"> {{ form.meeting_link.errors }}</span>
                         </div>
 
                         <div>
                             {{ form.start_time.label }}
                             {{ form.start_time }}
-                            {{ form.start_time.errors }}
+                            <span class="text-sm italic text-red-500"> {{ form.start_time.errors }}</span>
                         </div>
 
                         <div>
                             {{ form.end_time.label }}
                             {{ form.end_time }}
-                            {{ form.end_time.errors }}
+                            <span class="text-sm italic text-red-500"> {{ form.end_time.errors }}</span>
                         </div>
 
                         <div>
                             {{ form.categories.label }}
                             {{ form.categories }}
                             <small class="text-gray-500 italic text-sm">{{ form.categories.help_text }}</small>
-                            {{ form.categories.errors }}
+                            <span class="text-sm italic text-red-500"> {{ form.categories.errors }}</span>
                         </div>
                     </div>
                 </div>
