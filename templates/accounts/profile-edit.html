@@ -12,7 +12,7 @@
         <div class="space-y-6">
             <!-- Profile Picture Upload -->
             <div>
-                <label class="block text-sm font-medium  text-gray-700 mb-1">Profile Picture:</label>
+                <label class="block text-sm font-medium  text-gray-700 mb-1">{{ form.profile_pic.label }}</label>
                     <div class="flex justify-center mb-2">
                         {% if request.user.profile.profile_pic %}
                             <img src="{{ request.user.profile.profile_pic.url }}" alt="Profile Picture" class="w-40 h-40 rounded-full mx-auto">
@@ -28,9 +28,12 @@
                         {{ profile_form.profile_pic.errors }}
                     </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mt-4">Bio:</label>
+                    <label class="block text-sm font-medium text-gray-700 mt-4"> {{ profile_form.bio.label }}</label>
                     {{ profile_form.bio }}
-                    {{ profile_form.bio.errors }}
+                    <span class="text-sm italic text-red-500">
+                       {{ profile_form.bio.errors }}
+                    </span>
+
                 </div>
             </div>
          </div>
@@ -39,41 +42,55 @@
         <div class="space-y-6">
             <!-- Email -->
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Email:</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1"> {{ user_form.email.label }}:</label>
                 {{ user_form.email }}
-                {{ user_form.email.errors }}
+                 <span class="text-sm italic text-red-500">
+                       {{ user_form.email.errors }}
+                 </span>
+
             </div>
             <!-- First Name -->
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">First Name:</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1"> {{ profile_form.first_name.label }}</label>
                 {{ profile_form.first_name }}
-                {{ profile_form.first_name.errors }}
+                 <span class="text-sm italic text-red-500">
+                     {{ profile_form.first_name.errors }}
+                 </span>
+
             </div>
             <!-- Last Name -->
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Last Name:</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">{{ profile_form.last_name.label }}</label>
                 {{ profile_form.last_name }}
-                {{ profile_form.last_name.errors }}
+                <span class="text-sm italic text-red-500">
+                     {{ profile_form.last_name.errors }}
+                 </span>
             </div>
             <!-- Date of Birth -->
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Date of Birth:</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">{{ profile_form.date_of_birth.label }}</label>
                 {{ profile_form.date_of_birth }}
-                {{ profile_form.date_of_birth.errors }}
+                <span class="text-sm italic text-red-500">
+                     {{ profile_form.date_of_birth.errors }}
+                 </span>
             </div>
 
             <!-- Location -->
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Location:</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">{{ profile_form.location.label }}</label>
                 {{ profile_form.location }}
-                {{ profile_form.location.errors }}
+                <span class="text-sm italic text-red-500">
+                    {{ profile_form.location.errors }}
+                </span>
             </div>
 
             <!-- Skin Type -->
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Skin Type:</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">  {{ profile_form.skin_type.label }}</label>
                 {{ profile_form.skin_type }}
-                {{ profile_form.skin_type.errors }}
+                <span class="text-sm italic text-red-500">
+                     {{ profile_form.skin_type.errors }}
+                </span>
             </div>
         </div>
 
@@ -94,115 +111,3 @@
 
 {% endblock %}
 
-
-{#<form class="bg-white rounded-2xl shadow-xl w-full max-w-6xl p-10 grid md:grid-cols-3 gap-6" method="POST" >#}
-{#    {% csrf_token %}#}
-{#    <!-- Left Column -->#}
-{#    <section class="col-span-1 text-center space-y-4">#}
-{#      <!-- Profile Picture -->#}
-{#      <div class="flex flex-col items-center">#}
-{#        <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg" class="w-32 h-32 rounded-full mx-auto object-cover" alt="Profile Picture">#}
-{#        <input type="file" name="profile_picture" class="mt-2 text-sm text-gray-600">#}
-{#      </div>#}
-{##}
-{#      <!-- Basic Info -->#}
-{#      <div class="mb-4">#}
-{#          <label for="id_username" class="block text-sm font-medium text-pink-600 mb-1">#}
-{#            Username#}
-{#          </label>#}
-{#            {{ form.username}}#}
-{#          {% if form.username.errors %}#}
-{#              <p class="mt-1 text-sm text-red-600">{{ form.username.errors.0 }}</p>#}
-{#          {% endif %}#}
-{#      </div>#}
-{##}
-{#      <div class="mb-4">#}
-{#          <label for="id_username" class="block text-sm font-medium text-pink-600 mb-1">#}
-{#            First Name#}
-{#          </label>#}
-{#            {{ form.first_name}}#}
-{#          {% if form.user.first_name.errors %}#}
-{#              <p class="mt-1 text-sm text-red-600">{{ form.user.first_name.errors.0 }}</p>#}
-{#          {% endif %}#}
-{#      </div>#}
-{##}
-{##}
-{#      <div>#}
-{#        <label class="block text-sm font-medium text-pink-600">Bio</label>#}
-{#        <textarea name="bio" rows="2" class="w-full mt-1 border rounded-md p-2 text-sm"></textarea>#}
-{#      </div>#}
-{##}
-{#      <!-- Other Info -->#}
-{#      <div class="space-y-2">#}
-{#        <div>#}
-{#          <label class="block text-sm font-medium text-pink-600">Age</label>#}
-{#          <input type="number" name="age" class="w-full border rounded-md p-2 text-sm">#}
-{#        </div>#}
-{#        <div>#}
-{#          <label class="block text-sm font-medium text-pink-600">Location</label>#}
-{#          <input type="text" name="location" class="w-full border rounded-md p-2 text-sm">#}
-{#        </div>#}
-{#        <div>#}
-{#          <label class="block text-sm font-medium text-pink-600">Skin Type</label>#}
-{#          <select name="skin_type" class="w-full border rounded-md p-2 text-sm">#}
-{#          </select>#}
-{#        </div>#}
-{#      </div>#}
-{##}
-{#      <!-- Traits -->#}
-{#      <div class="flex flex-wrap gap-2 justify-center mt-4">#}
-{#        <input type="text" name="traits" placeholder="Add traits like 'Organized'" class="w-full border rounded-md p-2 text-sm text-center">#}
-{#      </div>#}
-{#    </section>#}
-{##}
-{#    <!-- Middle Column -->#}
-{#    <section class="col-span-1 space-y-6 bg-pink-100 p-4 rounded-xl">#}
-{#      <div>#}
-{#        <h3 class="text-lg font-semibold text-pink-600 mb-1">Goals</h3>#}
-{#        <textarea name="goals" rows="3" class="w-full border rounded-md p-2 text-sm" placeholder="List your goals..."></textarea>#}
-{#      </div>#}
-{##}
-{#      <div>#}
-{#        <h3 class="text-lg font-semibold text-pink-600 mb-1">Morning Routine</h3>#}
-{#        <textarea name="morning_routine" rows="3" class="w-full border rounded-md p-2 text-sm" placeholder="Describe your routine..."></textarea>#}
-{#      </div>#}
-{##}
-{#      <div>#}
-{#        <h3 class="text-lg font-semibold text-pink-600 mb-1">Night Routine</h3>#}
-{#        <textarea name="night_routine" rows="3" class="w-full border rounded-md p-2 text-sm" placeholder="Describe your night routine..."></textarea>#}
-{#      </div>#}
-{#    </section>#}
-{##}
-{#    <!-- Right Column -->#}
-{#    <section class="col-span-1 space-y-6 bg-pink-100 p-4 rounded-xl">#}
-{#      <div>#}
-{#        <h3 class="text-lg font-semibold text-pink-600 mb-1">My Posts</h3>#}
-{#        <div class="space-y-2 text-sm text-gray-700">#}
-{#          <label class="block text-sm font-medium text-pink-600">Describe your personality scale</label>#}
-{#          <textarea name="personality" rows="3" class="w-full border rounded-md p-2 text-sm" placeholder="Introvert ▭▭▮▮▮ ... etc."></textarea>#}
-{#        </div>#}
-{#      </div>#}
-{##}
-{#      <div>#}
-{#        <h3 class="text-lg font-semibold text-pink-600 mb-1">My Challenges</h3>#}
-{#        <div class="space-y-2">#}
-{#          <label class="block text-sm font-medium text-pink-600">Motivation Ratings</label>#}
-{#          <div class="space-y-1">#}
-{#          </div>#}
-{#        </div>#}
-{#      </div>#}
-{##}
-{#      <div>#}
-{#        <h3 class="text-lg font-semibold text-pink-600 mb-1">My Dairy</h3>#}
-{#        <input type="text" name="brands" class="w-full border rounded-md p-2 text-sm" placeholder="Adidas, Nike, Netflix...">#}
-{#      </div>#}
-{#    </section>#}
-{##}
-{#    <!-- Submit -->#}
-{#    <div class="col-span-3 text-center pt-4">#}
-{#      <button type="submit" class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-lg font-semibold">#}
-{#        Save Profile#}
-{#      </button>#}
-{#    </div>#}
-{##}
-{#  </form>#}

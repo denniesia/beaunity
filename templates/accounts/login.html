@@ -13,16 +13,24 @@
 
             <form method="post" class="space-y-5">
                 {% csrf_token %}
-                {{ form.non_field_errors }}
+                <span class="text-sm italic text-red-500">
+                        {{ form.non_field.errors }}
+                </span>
 
                 <div>
                     {{ form.username.label_tag }}
                     {{ form.username }}
+                    <span class="text-sm italic text-red-500">
+                        {{ form.username.errors }}
+                    </span>
                 </div>
 
                 <div>
                     {{ form.password.label_tag }}
                     {{ form.password }}
+                    <span class="text-sm italic text-red-500">
+                        {{ form.password.errors }}
+                    </span>
                 </div>
 
                 <button type="submit"

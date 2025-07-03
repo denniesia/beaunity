@@ -17,7 +17,6 @@
     --color-blue-700: oklch(48.8% 0.243 264.376);
     --color-purple-200: oklch(90.2% 0.063 306.703);
     --color-purple-500: oklch(62.7% 0.265 303.9);
-    --color-purple-700: oklch(49.6% 0.265 301.924);
     --color-pink-50: oklch(97.1% 0.014 343.198);
     --color-pink-100: oklch(94.8% 0.028 342.258);
     --color-pink-200: oklch(89.9% 0.061 343.231);
@@ -410,9 +409,6 @@
   .mb-8 {
     margin-bottom: calc(var(--spacing) * 8);
   }
-  .mb-10 {
-    margin-bottom: calc(var(--spacing) * 10);
-  }
   .ml-1 {
     margin-left: calc(var(--spacing) * 1);
   }
@@ -485,9 +481,6 @@
   .h-13 {
     height: calc(var(--spacing) * 13);
   }
-  .h-24 {
-    height: calc(var(--spacing) * 24);
-  }
   .h-30 {
     height: calc(var(--spacing) * 30);
   }
@@ -505,9 +498,6 @@
   }
   .h-70 {
     height: calc(var(--spacing) * 70);
-  }
-  .h-72 {
-    height: calc(var(--spacing) * 72);
   }
   .h-88 {
     height: calc(var(--spacing) * 88);
@@ -535,9 +525,6 @@
   }
   .min-h-\[100px\] {
     min-height: 100px;
-  }
-  .min-h-\[300px\] {
-    min-height: 300px;
   }
   .min-h-screen {
     min-height: 100vh;
@@ -572,9 +559,6 @@
   .w-15 {
     width: calc(var(--spacing) * 15);
   }
-  .w-24 {
-    width: calc(var(--spacing) * 24);
-  }
   .w-32 {
     width: calc(var(--spacing) * 32);
   }
@@ -586,9 +570,6 @@
   }
   .w-60 {
     width: calc(var(--spacing) * 60);
-  }
-  .w-65 {
-    width: calc(var(--spacing) * 65);
   }
   .w-70 {
     width: calc(var(--spacing) * 70);
@@ -737,9 +718,6 @@
   }
   .gap-6 {
     gap: calc(var(--spacing) * 6);
-  }
-  .gap-8 {
-    gap: calc(var(--spacing) * 8);
   }
   .gap-10 {
     gap: calc(var(--spacing) * 10);
@@ -1280,11 +1258,6 @@
     }
   }
   @media (hover: hover) {
-    .hover\:bg-purple-700:hover {
-      background-color: var(--color-purple-700);
-    }
-  }
-  @media (hover: hover) {
     .hover\:text-blue-600:hover {
       color: var(--color-blue-600);
     }
@@ -1469,21 +1442,6 @@
   @media (width >= 48rem) {
     .md\:grid-cols-\[2fr_1fr\] {
       grid-template-columns: 2fr 1fr;
-    }
-  }
-  @media (width >= 48rem) {
-    .md\:grid-cols-\[3fr_4fr\] {
-      grid-template-columns: 3fr 4fr;
-    }
-  }
-  @media (width >= 48rem) {
-    .md\:grid-cols-\[4fr_3fr\] {
-      grid-template-columns: 4fr 3fr;
-    }
-  }
-  @media (width >= 48rem) {
-    .md\:grid-cols-\[7fr_3fr\] {
-      grid-template-columns: 7fr 3fr;
     }
   }
   @media (width >= 48rem) {
