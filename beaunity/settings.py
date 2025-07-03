@@ -31,9 +31,11 @@ SECRET_KEY = config('THE_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.ngrok.io', '']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.ngrok.io', '4674-2-200-180-38.ngrok-free.app']
 
-CSRF_TRUSTED_ORIGINS = []
+CSRF_TRUSTED_ORIGINS = [
+    'https://4674-2-200-180-38.ngrok-free.app'
+]
 
 SITE_ID = 2 #google login
 
