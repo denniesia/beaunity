@@ -10,11 +10,12 @@ from beaunity.post.models import Post
 from beaunity.interaction.models import Like
 from django.db.models import Q
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 
 
 from django.core.paginator import Paginator
+from beaunity.common.mixins import UserIsCreatorMixin
 
 # Create your views here.
 class ForumDashboardView(TemplateView):
@@ -103,19 +104,26 @@ class PostDetailsView(DetailView):
             comment.content_type = ContentType.objects.get_for_model(self.object)
             comment.object_id = self.object.pk
             comment.save()
-            return reverse(request.META.get('HTTP_REFERER') + f"#{self.object.id}")
+            return redirect(request.META.get('HTTP_REFERER') + f"#{self.object.id}")
 
         return redirect(reverse('post-details', kwargs={'pk': self.object.id}))
 
 
-class PostEditView(LoginRequiredMixin, UpdateView):
+class PostEditView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     model = Post
     template_name = 'post/post-edit.html'
 
-    def get_success_url(self):
-        if user_is_admin_or_moderator(self.request.user):
-            return reverse_lazy('post-pending')
+    def test_func(self):
+        user = self.request.user
+        return (
+                user.pk == self.get_object().created_by.pk or
+                user.is_superuser or
+                user.groups.filter(name__in=[ 'Moderator']).exists()
+        )
 
+    def get_success_url(self):
+        if self.request.user.is_superuser or self.request.user.groups.filter(name='Moderator'):
+            return reverse_lazy('post-pending')
         return reverse_lazy('post-details', kwargs={'pk': self.object.pk})
 
     def get_form_class(self):
@@ -126,18 +134,16 @@ class PostEditView(LoginRequiredMixin, UpdateView):
     def get_initial(self):
        return self.object.__dict__
 
-class PostDeleteView(LoginRequiredMixin, DeleteView):
+class PostDeleteView(LoginRequiredMixin,UserIsCreatorMixin, DeleteView):
     template_name = 'post/post-delete.html'
     model = Post
     success_url = reverse_lazy('forum-dashboard')
-
 
 
 class PendingPostsView(LoginRequiredMixin,PermissionRequiredMixin, ListView):
     model = Post
     template_name = 'post/pending-posts.html'
     permission_required = 'post.can_approve_post'
-
 
     def get_queryset(self):
         posts = Post.objects.filter(is_approved=False).order_by('-created_at')

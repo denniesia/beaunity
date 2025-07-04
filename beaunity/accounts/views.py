@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, View
 from django.contrib.auth import get_user_model, login
 from .forms import AppUserCreationForm, AppUserLoginForm, ProfileEditForm, AppUserEditForm
 from django.urls import reverse_lazy
@@ -10,6 +10,8 @@ from beaunity.event.models import Event
 from beaunity.post.models import Post
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.mixins import LoginRequiredMixin
+from beaunity.common.mixins import UserIsSelfMixin
+
 # Create your views here.
 
 UserModel = get_user_model()
@@ -19,18 +21,16 @@ class AppUserRegisterView(CreateView):
     model = UserModel
     form_class = AppUserCreationForm
     template_name = 'accounts/register.html'
-    success_url = reverse_lazy('landing-page')
+    success_url = reverse_lazy('login')
 
     def form_valid(self, form):
         response = super().form_valid(form)
         return response
     #no login
+
 class AppUserLoginView(LoginView):
     template_name = 'accounts/login.html'
     form_class = AppUserLoginForm
-
-
-#Profile Views
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     template_name = 'accounts/profile-details.html'
@@ -58,7 +58,8 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         context['my_posts'] = Post.objects.filter(created_by=self.request.user).order_by('-created_at')
         return context
 
-class ProfileEditView(LoginRequiredMixin, UpdateView):   #LoginRequiredMixin, UserPassesTestMixin
+class ProfileEditView(LoginRequiredMixin, UserIsSelfMixin, UpdateView):
+    model = UserModel
     template_name = 'accounts/profile-edit.html'
 
     def get_success_url(self):
@@ -81,8 +82,6 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):   #LoginRequiredMixin, Us
             user_form.save()
             profile_form.save()
             return redirect(reverse_lazy('profile-details',kwargs={'pk': request.user.pk} ))
-        else:
-            print(user_form.errors, profile_form.errors)
 
         context = {
             'user_form': user_form,
@@ -90,7 +89,7 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):   #LoginRequiredMixin, Us
         }
         return render(request, self.template_name, context)
 
-class ProfileDeleteView(LoginRequiredMixin, DeleteView):
+class ProfileDeleteView(LoginRequiredMixin,UserIsSelfMixin, DeleteView):
     model = Profile
     template_name = 'accounts/profile-delete.html'
     success_url = reverse_lazy('landing-page')

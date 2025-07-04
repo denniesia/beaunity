@@ -1,5 +1,5 @@
 {% extends 'common/base.html' %}
-{% load user_is_admin_or_moderator %}
+{% load permissions %}
 {% block content %}
 
 <div class="max-w-screen-xl mx-auto w-full">
@@ -34,8 +34,7 @@
         <form method="post" class="flex flex-col gap- w-full">
             {% csrf_token %}
 
-            {% user_is_admin_or_moderator user as has_perm %}
-                {% if has_perm %}
+                {% if request.user|is_superuser_or_moderator %}
                     <!--- Category -->
                      <div class="w-full mb-4">
                          <span class="text-sm italic text-red-500 mb-2">

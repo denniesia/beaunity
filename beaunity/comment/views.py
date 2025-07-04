@@ -7,9 +7,10 @@ from beaunity.post.models import Post
 from beaunity.event.models import Event
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from beaunity.common.mixins import UserIsCreatorMixin
 # Create your views here.
 
-class CommentEditView(LoginRequiredMixin, UpdateView):
+class CommentEditView(LoginRequiredMixin, UserIsCreatorMixin, UpdateView):
     model = Comment
     form_class = CommentEditForm
     template_name = 'comment/comment-edit.html'
