@@ -9,9 +9,14 @@
         <section class="col-span-1 relative text-center space-y-4 border-2 border-pink-300 rounded-2xl p-6 mb-2">
             <!-- Edit Button -->
             {% if request.user == profile.user %}
-                <a href="{% url 'profile-edit' profile.pk %}" class="absolute top-4 right-4 bg-white hover:bg-pink-600 text-white text-xs px-3 py-1 rounded-full shadow-md">
-                    <img src="{% static 'common/edit.png' %}">
-                </a>
+                <div class="absolute top-4 right-4 flex items-center gap-4 bg-white  text-white text-xs px-3 py-1 rounded-full shadow-md">
+                    <a href="{% url 'profile-edit' profile.pk %}">
+                        <img src="{% static 'common/edit.png' %}" alt="Edit">
+                    </a>
+                    <a href="{% url 'profile-delete' profile.pk %}">
+                        <img src="{% static 'common/delete.png' %}" class="w-4 h-4">
+                    </a>
+                </div>
             {% endif %}
 
             {% if profile.profile_pic.url %}

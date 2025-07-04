@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView, DetailView, View
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth import get_user_model, login
 from .forms import AppUserCreationForm, AppUserLoginForm, ProfileEditForm, AppUserEditForm
 from django.urls import reverse_lazy
@@ -19,14 +19,12 @@ class AppUserRegisterView(CreateView):
     model = UserModel
     form_class = AppUserCreationForm
     template_name = 'accounts/register.html'
-    success_url = reverse_lazy('landing_page')
+    success_url = reverse_lazy('landing-page')
 
     def form_valid(self, form):
         response = super().form_valid(form)
-
-        login(self.request, self.object)
         return response
-
+    #no login
 class AppUserLoginView(LoginView):
     template_name = 'accounts/login.html'
     form_class = AppUserLoginForm
@@ -60,7 +58,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         context['my_posts'] = Post.objects.filter(created_by=self.request.user).order_by('-created_at')
         return context
 
-class ProfileEditView(LoginRequiredMixin, View):   #LoginRequiredMixin, UserPassesTestMixin
+class ProfileEditView(LoginRequiredMixin, UpdateView):   #LoginRequiredMixin, UserPassesTestMixin
     template_name = 'accounts/profile-edit.html'
 
     def get_success_url(self):
@@ -91,4 +89,12 @@ class ProfileEditView(LoginRequiredMixin, View):   #LoginRequiredMixin, UserPass
             'profile_form': profile_form,
         }
         return render(request, self.template_name, context)
-    
+
+class ProfileDeleteView(LoginRequiredMixin, DeleteView):
+    model = Profile
+    template_name = 'accounts/profile-delete.html'
+    success_url = reverse_lazy('landing-page')
+
+    def get_object(self):
+        return self.request.user
+

@@ -1,0 +1,23 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <section class="w-max-screen flex justify-center items-center">
+    <div class="shadow-lg rounded-xl p-10 text-center max-w-xl mx-6 bg-white">
+        <h3 class="text-3xl font-bold text-pink-700 mb-4">Delete Profile?</h3>
+        <p class="text-pink-700 mb-6">
+            Are you sure you want to delete your profile? This action cannot be undone.
+        </p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="flex justify-center gap-4">
+                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-lg">
+                    Delete
+                </button>
+                <a href="{% url 'profile-details' object.pk %}" class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded-lg">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
