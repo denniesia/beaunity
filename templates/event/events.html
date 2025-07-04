@@ -43,7 +43,7 @@
                             </a>
                         </p>
                         <p class="text-sm text-gray-600 mt-2 mb-4">
-                            {{ event.details|striptags|truncatewords:20 }}
+                            {{ event.details|striptags|safe|truncatewords:20 }}
                         </p>
                     </div>
                     <div class="text-sm text-gray-600 space-y-1 mb-2">

@@ -106,7 +106,7 @@
                                         Hosted by
                                         <a href="{% url 'profile-details' event.created_by.id %}"><strong>@{{ event.created_by }}</strong>
                                         </a>
-                                    <p class="text-sm text-gray-600 mb-2">{{ event.details|truncatechars:90 }}</p>
+                                    <p class="text-sm text-gray-600 mb-2">{{ event.details|striptags|safe|truncatechars:90 }}</p>
                                     <p class="text-sm text-gray-500">{{ event.start_time|date:"F j, Y, H:i" }}</p>
                                     <div class="flex">
                                         <p class="text-sm text-gray-500 mt-4">

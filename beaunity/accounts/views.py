@@ -92,6 +92,3 @@ class ProfileEditView(LoginRequiredMixin, View):   #LoginRequiredMixin, UserPass
         }
         return render(request, self.template_name, context)
     
-    def form_invalid(self, form):
-        print(form.errors)
-        return super().form_invalid(form)
