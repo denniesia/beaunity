@@ -59,16 +59,23 @@ class EventsOverviewView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         request = self.request
-        filter_mode = any([
-            request.GET.get('city'),
-            request.GET.get('category'),
-            request.GET.get('sort_by'),
-            request.GET.get('online'),
-            request.GET.get('archived')
-        ])
-        context['filter_mode'] = filter_mode
+
+        applied_filters = {}
+        if request.GET.get('city'):
+            applied_filters['city'] = request.GET['city']
+        if request.GET.get('category'):
+            applied_filters['category'] = request.GET['category']
+        if request.GET.get('sort_by'):
+            applied_filters['Sorted by'] = request.GET['sort_by']
+        if request.GET.get('online'):
+            applied_filters['online'] = 'Online'
+        if request.GET.get('archived'):
+            applied_filters['archived'] = True
+
+        context['applied_filters'] = applied_filters
+        context['filter_mode'] = bool(applied_filters)
+
 
         context['categories'] = Category.objects.all()
         context['cities'] = Event.objects.exclude(city='').values_list('city', flat=True).distinct()
@@ -101,8 +108,6 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-
-
         form = CommentCreateForm(request.POST)
 
         if form.is_valid():
