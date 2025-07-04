@@ -40,7 +40,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     template_name = 'post/post-create.html'
 
     def get_success_url(self):
-        if self.request.user.has_perm('can_post_without_approval'):
+        if self.request.user.has_perm('post.can_post_without_approval'):
             return reverse('category-details', kwargs={'category_slug': self.object.category.slug})
         else:
             return reverse_lazy('post-confirmation')
@@ -66,7 +66,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         
         post.created_by = self.request.user
 
-        if self.request.user.has_perm('can_post_without_approval'):
+        if self.request.user.has_perm('post.can_post_without_approval'):
             post.is_approved = True
 
         post.save()

@@ -30,7 +30,6 @@ class IndexView(TemplateView):
         return context
 
 
-
 def about_view(request):
     form = ContactForm()
     if request.method == 'POST':
