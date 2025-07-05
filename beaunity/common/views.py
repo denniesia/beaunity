@@ -46,7 +46,7 @@ def about_view(request):
                 subject,
                 full_message,
                 settings.EMAIL_HOST_USER,
-                [settings.EMAIL_HOST_USER],  # you can change to another email
+                [settings.EMAIL_HOST_USER],
                 fail_silently=False,
             )
             return render(request, 'common/email_confirmation.html')
