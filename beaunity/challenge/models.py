@@ -23,6 +23,9 @@ class Challenge(BaseActivity,LastUpdatedMixin, CreatedAtMixin, CreatedByMixin):
 
     class Meta:
         verbose_name_plural = 'Challenges'
+        permissions = (
+            ("can_approve_challenge", "Can approve challenge"),
+        )
 
     def __str__(self):
         return self.title
