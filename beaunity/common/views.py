@@ -13,7 +13,8 @@ from django.db.models import Q
 from django.utils.timezone import now
 from django.core.mail import send_mail
 from django.conf import settings
-import requests
+
+from beaunity.challenge.models import Challenge
 
 # Create your views here.
 class IndexView(TemplateView):
@@ -27,6 +28,10 @@ class IndexView(TemplateView):
         context['events'] = Event.objects.filter(
             end_time__gte=current_datetime
         ).order_by('start_time').prefetch_related( 'attendees')[:3]
+
+        context['challenges'] = Challenge.objects.filter(
+            end_time__gte=current_datetime
+        ).order_by('start_time').prefetch_related( 'participants')[:3]
         return context
 
 
