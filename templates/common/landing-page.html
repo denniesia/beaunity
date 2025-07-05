@@ -167,7 +167,7 @@
                                             <a href="{% url 'profile-details' challenge.created_by.id %}"><strong>@{{ challenge.created_by }}</strong>
                                             </a>
                                         <p class="text-sm text-gray-600 mb-2">{{ challenge.details|striptags|safe|truncatechars:90 }}</p>
-                                        <p class="text-sm text-gray-500">{{ challenge.start_time|date:"F j, Y, H:i" }}</p>
+                                        <p class="text-sm text-gray-500">{{ challenge.start_time|date:"F j, Y, H:i" }} - {{ challenge.end_time|date:"F j, Y, H:i" }}</p>
                                         <div class="flex">
                                             <p class="text-sm text-gray-500 mt-4">
                                                 Going:
