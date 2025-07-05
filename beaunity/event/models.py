@@ -59,7 +59,6 @@ class Event(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
         verbose_name_plural = 'Events'
         permissions = [
             ("can_join_event", "Can join events"),
-
         ]
 
     def __str__(self):

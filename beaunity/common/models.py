@@ -21,6 +21,10 @@ class BaseActivity(models.Model):
     )
     details = RichTextField()
     is_online = models.BooleanField(default=False)
+    meeting_link = models.URLField(
+        blank=True,
+        null=True
+    )
     city = models.CharField(
         null=True,
         blank=True,

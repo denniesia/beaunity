@@ -27,6 +27,7 @@ urlpatterns = [
     path("post/", include("beaunity.post.urls")),
     path("comment/", include("beaunity.comment.urls")),
     path("event/", include("beaunity.event.urls")),
+    path("challenge/", include("beaunity.challenge.urls")),
     path("interaction/", include("beaunity.interaction.urls")),
 
 ]

@@ -7,7 +7,7 @@
         <div class="hidden md:flex space-x-4">
             <a href="{% url 'about' %}" class="text-gray-800 hover:text-pink-600 font-medium">About</a>
             <a href="{% url 'forum-dashboard' %}" class="text-gray-800 hover:text-pink-600 font-medium">Forum</a>
-            <a href="" class="text-gray-800 hover:text-pink-600 font-medium">Challenges</a>
+            <a href="{% url 'challenges' %}" class="text-gray-800 hover:text-pink-600 font-medium">Challenges</a>
             <a href="{% url 'events' %}" class="text-gray-800 hover:text-pink-600 font-medium">Events</a>
         </div>
         <!-- Center: Logo -->
@@ -46,7 +46,7 @@
                               transition-all duration-200 ease-in-out z-50  transform -translate-x-1/2 text-center">
                         {% if perms.category.change_category %}
                             <a href="{% url 'category-overview' %}" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Categories</a>
-                            <a href="#" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Challenges</a>
+                            <a href="{% url 'challenges' %}" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Challenges</a>
                             <a href="{% url 'post-pending' %}" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Posts</a>
                         {% endif %}
 
