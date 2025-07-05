@@ -1,9 +1,17 @@
 from django.shortcuts import render
 from django.views.generic import ListView,CreateView,  DetailView, UpdateView, DeleteView
-
+from beaunity.common.utils.mixins import FilteredQuerysetMixin, FilteredContextMixin
 from .models import Challenge
 # Create your views here.
-class ChallengeOverviewView(ListView):
+class ChallengeOverviewView(FilteredContextMixin, FilteredQuerysetMixin, ListView):
     model = Challenge
     ordering = ['-start_time']
-    template_name = 'challenge/challenge-overview.html'
+    template_name = 'challenge/challenges-overview.html'
+    context_object_name = 'challenges'
+
+    def get_queryset(self):
+        return self.get_filtered_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return self.get_filtered_context(context, self.model)

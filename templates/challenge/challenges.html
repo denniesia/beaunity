@@ -1,0 +1,86 @@
+<div class="flex flex-col space-y-6">
+    {% for challenge in challenges %}
+        <div class="relative bg-white border border-pink-200 rounded-2xl shadow-md overflow-hidden flex flex-col hover:-translate-y-1 hover:shadow-lg hover:shadow-pink-300">
+            <img src="{{ challenge.poster_image.url }}" alt="Event Poster" class="w-full h-40 object-cover ">
+            <div id="{{ challenge.pk }}" class="p-5 flex flex-col flex-grow justify-between">
+                <div class="space-y-4">
+                    <!-- Header: Title + Hosted By -->
+                    <div>
+                        <a href="">
+                            <p class="text-2xl font-bold text-pink-700">
+                                {{ challenge.title|truncatewords:20 }}
+                            </p>
+                        </a>
+                        <p class="text-sm text-gray-500">
+                            Hosted by
+                            <a href="{% url 'profile-details' challenge.created_by.id %}">
+                                <strong class="hover:text-blue-700 hover:underline">@{{ challenge.created_by }}</strong>
+                            </a>
+                        </p>
+                    </div>
+
+                    <!-- Two-column layout -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-700">
+                        <!-- Left Column -->
+                        <div class="space-y-3">
+                            <p class="mb-4">{{ challenge.details|striptags|safe|truncatewords:20 }}</p>
+
+                            <div class="mb-4">
+                                <p><strong>Start:</strong> {{ challenge.start_time|date:"F j, Y, H:i" }}</p>
+                                <p><strong>End:</strong> {{ challenge.end_time|date:"F j, Y, H:i" }}</p>
+                                {% if challenge.is_online %}
+                                    <p><strong>Location:</strong> {{ challenge.location }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="flex flex-wrap mb-4 gap-2">
+                                {% for category in challenge.categories.all %}
+                                    <a href="{% url 'category-details' category.slug %}">
+                                        <span class="bg-pink-100 text-pink-600 text-xs font-medium px-2 py-1 rounded-full">
+                                            {{ category.title }}
+                                        </span>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="space-y-4">
+                            <!-- Difficulty -->
+                            <div>
+                                <p><strong>Difficulty:</strong> {{ challenge.difficulty }}</p>
+                            </div>
+
+                            <!-- Progress Bar -->
+                            <div>
+                                <p class="mb-1"><strong>Period:</strong></p>
+                                <p class="mb-1"><strong>Progress:</strong></p>
+                                <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+                                    <div class="bg-pink-500 h-4" style="width: {{ challenge.progress }}%;"></div>
+                                </div>
+                            </div>
+
+                            <!-- Participants (if you have this field) -->
+                            <div>
+                                <p><strong>Participants:</strong> {{ challenge.participants.count }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-auto flex text-center gap-6">
+                    {% if user.is_authenticated %}
+                        <div class="w-full bg-pink-500 text-white text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-900 transition">
+                            <a href="">
+                                <p>See More</p>
+                            </a>
+                        </div>
+
+                        <div class="w-full bg-purple-500 text-white text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-900 transition">
+                            <!--- Interaction Join --->
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
