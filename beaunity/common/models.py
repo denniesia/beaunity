@@ -1,3 +1,44 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+from cloudinary.models import CloudinaryField
+
+from django.core.validators import MinLengthValidator
+
+from ckeditor.fields import RichTextField
+
 
 # Create your models here.
+
+UserModel = get_user_model()
+
+class BaseActivity(models.Model):
+    poster_image = CloudinaryField()
+    title = models.CharField(
+        max_length=100,
+        validators=[
+            MinLengthValidator(10)
+        ]
+    )
+    details = RichTextField()
+    is_online = models.BooleanField(default=False)
+    city = models.CharField(
+        null=True,
+        blank=True,
+        max_length=100,
+        validators=[
+            MinLengthValidator(2)
+        ]
+    )
+    location = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True,
+        validators=[
+            MinLengthValidator(10)
+        ]
+    )
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+
+    class Meta:
+        abstract = True

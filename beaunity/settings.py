@@ -49,12 +49,13 @@ EMAIL_USE_TLS = True
 MY_APPS = [
     'beaunity.accounts',
     'beaunity.common',
-    # 'beaunity.challenge'
-     'beaunity.category',
-     'beaunity.post',
-     'beaunity.comment',
-     'beaunity.event',
-     'beaunity.interaction',
+    'beaunity.category',
+    'beaunity.post',
+    'beaunity.comment',
+    'beaunity.event',
+    'beaunity.interaction',
+    'beaunity.challenge',
+
 ]
 # Application definition
 
