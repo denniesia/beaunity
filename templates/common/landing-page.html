@@ -3,7 +3,6 @@
 {% block content %}
 <!-- Hero Section -->
 <section class="relative flex flex-col justify-center overflow-hidden ">
-    <!-- 🌸 Background Video -->
 
     <img src="{% static 'common/bg-pic6.png' %}" class="absolute inset-0 w-full h-full object-cover ">
     <!-- ✨ Foreground Content -->
@@ -85,7 +84,7 @@
             </div>
         </section>
 
-         <!-- Challenges -->
+         <!-- Events -->
         <div class="max-w-full mx-auto px-4">
             <h2 class="text-2xl font-bold text-pink-500 text-center mt-4">Explore Events</h2>
             <div class="relative overflow-x-auto py-8 pl-8">
@@ -142,6 +141,7 @@
                     </div>
                 </div>
             </div>
+        </div>
 
         <!-- Challenges -->
             <div class="max-w-full mx-auto px-4">
@@ -162,30 +162,37 @@
                                         <a href="" >
                                             <span class="text-lg font-semibold text-pink-600">{{ challenge.title }}</span>
                                         </a>
+                                        {% if user.is_authenticated %}
+
+
                                         <p class="text-xs text-gray-500 mb-3">
                                             Hosted by
-                                            <a href="{% url 'profile-details' challenge.created_by.id %}"><strong>@{{ challenge.created_by }}</strong>
+                                            <a href="{% url 'profile-details' challenge.created_by.id %}">
+                                                <strong>
+                                                @{{ challenge.created_by }}
+                                                </strong>
                                             </a>
+                                        </p>
                                         <p class="text-sm text-gray-600 mb-2">{{ challenge.details|striptags|safe|truncatechars:90 }}</p>
                                         <p class="text-sm text-gray-500">{{ challenge.start_time|date:"F j, Y, H:i" }} - {{ challenge.end_time|date:"F j, Y, H:i" }}</p>
                                         <div class="flex">
                                             <p class="text-sm text-gray-500 mt-4">
                                                 Going:
                                             </p>
-                                            {% if user.is_authenticated%}
                                                 {% if challenge.participants %}
                                                     <div class="flex flex-wrap gap-2 mt-2 ml-2">
-                                                        {% for participants in challenge.participants.all %}
-                                                            <a href=""><img src="{{ attendee.profile.profile_pic.url|default:'https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg' }}" class="w-10 h-10 rounded-full object-cover border border-pink-300"></a>
+                                                        {% for participant in challenge.participants.all %}
+                                                            <a href="">
+                                                                <img src="{{ participant.profile.profile_pic.url|default:'https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg' }}" class="w-10 h-10 rounded-full object-cover border border-pink-300"></a>
                                                         {% empty %}
                                                             <p class="text-sm text-gray-500">No participants yet.</p>
                                                         {% endfor %}
                                                     </div>
                                                 {% endif %}
-                                             {% else %}
-                                                <p class="text-sm text-gray-500 italic mt-4 ml-2">Login to see who is going.</p>
-                                            {% endif %}
                                         </div>
+                                        {% else %}
+                                                <p class="text-sm text-gray-500 italic ml-2">Login to see more.</p>
+                                        {% endif %}
                                     </div>
                                 </a>
                             </div>
@@ -200,47 +207,51 @@
                         </div>
                     </div>
                 </div>
-             </div>
+            </div>
 
-
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const scrollWrapper = document.getElementById("scroll-wrapper");
-
-                let scrollAmount = 0;
-                const speed = 0.5; // pixels per frame
-
-                function autoScroll() {
-                    scrollAmount += speed;
-                    scrollWrapper.scrollLeft = scrollAmount;
-                    // Reset when reaching the end
-                    if (scrollAmount >= scrollWrapper.scrollWidth - scrollWrapper.clientWidth) {
-                        scrollAmount = 0;
-                    }
-
-                    requestAnimationFrame(autoScroll);
-                }
-
-                autoScroll();
-            });
-            lottie.loadAnimation({
-                container: document.getElementById('community-animation'), // the div container
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: "{% static 'common/community-animation.json' %}"
-            });
-        </script>
-        <style>
-            #scroll-wrapper {
-                scrollbar-width: none; /* Firefox */
-                -ms-overflow-style: none;  /* Internet Explorer 10+ */
-            }
-            #scroll-wrapper::-webkit-scrollbar {
-                display: none; /* Safari and Chrome */
-            }
-        </style>
     </section>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const scrollWrapper = document.getElementById("scroll-wrapper");
+
+        let scrollAmount = 0;
+        const speed = 0.5; // pixels per frame
+
+        function autoScroll() {
+            scrollAmount += speed;
+            scrollWrapper.scrollLeft = scrollAmount;
+            // Reset when reaching the end
+            if (scrollAmount >= scrollWrapper.scrollWidth - scrollWrapper.clientWidth) {
+                scrollAmount = 0;
+            }
+
+            requestAnimationFrame(autoScroll);
+        }
+
+        autoScroll();
+    });
+    lottie.loadAnimation({
+        container: document.getElementById('community-animation'), // the div container
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: "{% static 'common/community-animation.json' %}"
+    });
+</script>
+<style>
+    #scroll-wrapper {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    }
+    #scroll-wrapper::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+    }
+</style>
+
+
 {% endblock %}

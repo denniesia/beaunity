@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.views.generic import ListView,CreateView,  DetailView, UpdateView, DeleteView
 from beaunity.common.utils.mixins import FilteredQuerysetMixin, FilteredContextMixin
 from .models import Challenge
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
-class ChallengeOverviewView(FilteredContextMixin, FilteredQuerysetMixin, ListView):
+class ChallengeOverviewView(LoginRequiredMixin, FilteredContextMixin, FilteredQuerysetMixin, ListView):
     model = Challenge
     ordering = ['-start_time']
     template_name = 'challenge/challenges-overview.html'
