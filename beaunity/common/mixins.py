@@ -48,3 +48,8 @@ class ContentMixin(models.Model):
     class Meta:
         abstract = True
 
+class IsApprovedMixin(models.Model):
+    is_approved = models.BooleanField(default=False)
+
+    class Meta:
+        abstract = True

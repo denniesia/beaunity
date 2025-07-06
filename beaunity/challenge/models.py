@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 
 from .choices import DifficultyLevel
 from beaunity.common.models import BaseActivity
-from beaunity.common.mixins import LastUpdatedMixin, CreatedAtMixin, CreatedByMixin
+from beaunity.common.mixins import LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, IsApprovedMixin
 from beaunity.category.models import Category
 
 
@@ -12,7 +12,7 @@ from beaunity.category.models import Category
 
 UserModel = get_user_model()
 
-class Challenge(BaseActivity,LastUpdatedMixin, CreatedAtMixin, CreatedByMixin):
+class Challenge(BaseActivity,LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, IsApprovedMixin):
     progress = models.PositiveIntegerField()
     difficulty = models.CharField(
         max_length=15,

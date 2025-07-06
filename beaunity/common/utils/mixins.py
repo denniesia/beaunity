@@ -5,14 +5,11 @@ from django.utils.timezone import now
 from beaunity.category.models import Category
 
 class FilteredQuerysetMixin:
-    model = None  # Set this in the view using the mixin
+    model = None
 
     def get_filtered_queryset(self):
         current_datetime = now()
         archived = self.request.GET.get('archived', '').lower() == 'true'
-
-        if not self.model:
-            raise ValueError("Model not specified in the view using FilteredQuerysetMixin.")
 
         if archived:
             queryset = self.model.objects.filter(end_time__lt=current_datetime)
@@ -43,7 +40,7 @@ class FilteredQuerysetMixin:
         if sort_by not in ['Popularity', 'Hosts']:
             queryset = queryset.order_by('start_time')
 
-        return queryset.distinct()
+        return queryset.filter(is_approved=True).distinct()
 
 class FilteredContextMixin:
     def get_filtered_context(self, context, model):
@@ -64,5 +61,5 @@ class FilteredContextMixin:
         context['applied_filters'] = applied_filters
         context['filter_mode'] = bool(applied_filters)
         context['categories'] = Category.objects.all()
-        context['cities'] = model.objects.exclude(city='').values_list('city', flat=True).distinct()
+        context['cities'] = model.objects.exclude(city=None).values_list('city', flat=True).distinct()
         return context

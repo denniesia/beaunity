@@ -10,6 +10,7 @@ class ChallengeOverviewView(LoginRequiredMixin, FilteredContextMixin, FilteredQu
     ordering = ['-start_time']
     template_name = 'challenge/challenges-overview.html'
     context_object_name = 'challenges'
+    paginate_by = 5
 
     def get_queryset(self):
         return self.get_filtered_queryset()
