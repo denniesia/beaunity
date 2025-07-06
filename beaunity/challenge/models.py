@@ -12,8 +12,7 @@ from beaunity.category.models import Category
 
 UserModel = get_user_model()
 
-class Challenge(BaseActivity,LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, IsApprovedMixin):
-    progress = models.PositiveIntegerField()
+class Challenge(BaseActivity, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, IsApprovedMixin):
     difficulty = models.CharField(
         max_length=15,
         choices=DifficultyLevel.choices,
