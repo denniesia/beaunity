@@ -31,3 +31,8 @@ class ChallengeCreateView(LoginRequiredMixin, CreateView):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
     
+
+class ChallengeDetailsView(DetailView):
+    model = Challenge
+    template_name = 'challenge/challenge-details.html'
+    context_object_name = 'challenge'

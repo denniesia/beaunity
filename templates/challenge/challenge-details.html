@@ -1,0 +1,168 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+
+<div class="w-[800px] max-w-full min-w-[500px] lg:w-2/3 mx-auto">
+    <div class="bg-pink-50 mb-2 p-2 my-4 transition ">
+
+        <!-- Event image -->
+        <div class="relative w-full h-64 rounded overflow-hidden">
+            <img src="{{ challenge.poster_image.url }}" alt="Event Banner" class="w-full h-full">
+{#            <!--- Favourite -->#}
+{#            <div class="absolute top-2 left-2 text-normal text-pink-600 font-semibold px-8 py-4 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">#}
+{#                {% include 'interaction/favourite.html' with obj=challenge model_name='challenge' %}#}
+{#            </div>#}
+{#            <!-- Join -->#}
+{#            <div class="absolute bottom-2 left-2 text-normal text-pink-600 font-semibold px-10 py-3 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">#}
+{#                <div class="flex items-center text-2xs cursor-pointer gap-1">#}
+{#                    {% include 'interaction/join.html'  %}#}
+{#                </div>#}
+{#            </div>#}
+
+             <div class="absolute top-2 right-1 text-normal text-pink-600 font-semibold px-6 py-3 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">
+                <div class="flex items-center text-2xs cursor-pointer gap-4">
+                    <a href="">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 hover:text-blue-700">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                        </svg>
+                    </a>
+                    <a href="">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 hover:text-blue-700">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Details -->
+
+        <div class="mt-2 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Left: Title + Host Info -->
+            <div class="md:col-span-2 ml-4 ">
+                <!-- Event Title -->
+                <h2 class="text-2xl font-bold text-pink-900 mb-4">{{ event.title }}</h2>
+                <!-- Host Info -->
+                <div class="flex items-center gap-4 ml-4">
+                    {% if challenge.created_by.profile.profile_pic %}
+                        <img src="{{ challenge.created_by.profile.profile_pic.url }}"  class="w-12 h-12 rounded-full object-cover">
+                    {% else %}
+                        <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg"
+                             class="w-12 h-12 rounded-full object-cover">
+                    {% endif %}
+                    <div class="text-md font-semibold text-pink-700">
+                        <h3 >
+                          Hosted by:
+                            <a href="" class="hover:text-blue-700">
+                                {{ challenge.created_by }}
+                            </a>
+                        </h3>
+                        <p class="text-sm text-gray-700">{{ challenge.created_by.email }}</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center text-pink-700 gap-2 mt-2 pl-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <div>
+                        <p>{{ challenge.start_time|date:"F j, Y, H:i" }}</p>
+                        <p class="text-sm text-gray-500">{{ challenge.end_time|date:"F j, Y, H:i" }}</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center text-pink-700 gap-2 pl-6">
+                    <span>📍</span>
+                    {% if challenge.is_online%}
+                        <p class="text-pink-600 ">
+                            Online
+                        </p>
+                    {% else %}
+                        <p class="text-pink-600 ">
+                            {{ challenge.location }}
+                        </p>
+                    {% endif %}
+                </div>
+
+            </div>
+            <!-- Right -->
+            <div>
+                <h4 class="text-lg font-semibold text-pink-700 mt-2">Participants:</h4>
+                <div class="flex items-center gap-3 mt-2">
+{#                    {% if attendees %}#}
+{#                        <div class="flex flex-wrap gap-2 mb-4">#}
+{#                            {% for attendee in attendees %}#}
+{#                                <a href=""><img src="{{ attendee.profile.profile_pic.url|default:'https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg' }}" class="w-10 h-10 rounded-full object-cover border border-pink-300"></a>#}
+{#                            {% empty %}#}
+{#                                <p class="text-sm text-gray-500">No attendees yet.</p>#}
+{#                            {% endfor %}#}
+{#                            <p class="text-pink-700 text-bold text-3xl">...</p>#}
+{#                        </div>#}
+{#                    {% else %}#}
+{#                        <p class="text-sm text-gray-500">No attendees yet.</p>#}
+{#                    {% endif %}#}
+                </div>
+                <div class="flex flex-wrap items-center gap-3 mt-2">
+                    {% for category in challenge.categories.all %}
+                            <a href="{% url 'category-details' category.slug %}">
+                                <span class="bg-pink-100 text-pink-600 text-xs  font-medium px-2 py-1 rounded-full">
+                                    {{ category.title }}
+                                </span>
+                            </a>
+                        {% endfor %}
+                </div>
+            </div>
+        </div>
+        <hr class="border-t border-gray-300 my-4" />
+
+        <div class="flex flex-col md:flex-row justify-between items-start gap-10 ml-6 mb-6">
+            <!-- Left -->
+            <div class="flex-[2]">
+                <h3 class="text-lg font-semibold text-pink-700 mb-2">Challenge Details</h3>
+                <p class="text-medium font-medium text-gray-600 ml-4">
+                    {{ challenge.details|safe  }}
+                </p>
+            </div>
+
+            <!-- Right: Location / Map (smaller) -->
+            <div class="flex-1">
+                {% if challenge.is_online and challenge.meeting_link %}
+                    <p class="text-sm font-semibold text-pink-700">Meeting Link:</p>
+                    <a href="{{ challenge.meeting_link }}" class="text-sm text-gray-700 hover:underline hover:text-blue-600">{{ challenge.meeting_link }}</a>
+                {% endif %}
+                {% if challenge.location %}
+                    <div class="flex items-center gap-2 ml-4">
+                        <p class="text-sm font-semibold text-pink-700">Location:</p>
+                        <p class="text-sm text-gray-700">{{ event.location }}</p>
+                    </div>
+                    <div class="text-medium font-medium text-gray-600 ml-4">
+                        <div class="rounded-xl overflow-hidden w-full h-[200px]">
+                            <iframe
+                                        width="100%"
+                                        height="100%"
+                                        class="w-full h-full"
+                                        style="border:0"
+                                        loading="lazy"
+                                        allowfullscreen
+                                        referrerpolicy="no-referrer-when-downgrade"
+                                        src="https://www.google.com/maps?q={{ event.location|urlencode }}&output=embed">
+                            </iframe>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+{#        <div class="flex items-start text-pink-500 space-x-4 text-sm mb-2 mt-2 ml-6">#}
+{#            <!-- Like finctionality -->#}
+{#            {% include 'interaction/like.html' with obj=event model_name='event' %}#}
+{#            <!-- Share finctionality -->#}
+{#            {% include 'interaction/share.html'%}#}
+{#        </div>#}
+
+       <hr class="border-t border-gray-300 my-4">
+
+
+
+{% endblock %}

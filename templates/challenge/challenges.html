@@ -1,7 +1,7 @@
 <div class="flex flex-col space-y-6">
     {% for challenge in challenges %}
-        <div class="relative bg-white border border-pink-200 rounded-2xl shadow-md overflow-hidden flex flex-col hover:-translate-y-1 hover:shadow-lg hover:shadow-pink-300">
-            <img src="{{ challenge.poster_image.url }}" alt="Event Poster" class="w-full h-40 object-cover ">
+        <div class="relative bg-pink-50 border border-pink-200 rounded-2xl shadow-md overflow-hidden flex flex-col hover:-translate-y-1 hover:shadow-lg hover:shadow-pink-300">
+            <img src="{{ challenge.poster_image.url }}" alt="Event Poster" class="w-full h-40 object-cover">
             <div id="{{ challenge.pk }}" class="p-5 flex flex-col flex-grow justify-between">
                 <div class="space-y-4">
                     <!-- Header: Title + Hosted By -->
@@ -70,7 +70,7 @@
                 <div class="mt-auto flex text-center gap-6">
                     {% if user.is_authenticated %}
                         <div class="w-full bg-pink-500 text-white text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-900 transition">
-                            <a href="">
+                            <a href="{% url 'challenge-details' challenge.pk %}">
                                 <p>See More</p>
                             </a>
                         </div>
