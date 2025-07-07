@@ -8,6 +8,8 @@ from beaunity.common.forms import SearchForm, ContactForm
 from beaunity.post.models import Post
 from beaunity.event.models import Event
 from beaunity.category.models import Category
+from beaunity.challenge.models import Challenge
+from beaunity.event.models import Event
 from beaunity.accounts.models import AppUser
 from django.db.models import Q
 from django.utils.timezone import now
@@ -80,6 +82,12 @@ class SearchView(TemplateView):
             context['categories'] = Category.objects.filter(
                 Q(title__icontains=query) |
                 Q(description__icontains=query)
+            )
+            context['events'] = Event.objects.filter(
+                title__icontains=query
+            )
+            context['challenge'] = Challenge.objects.filter(
+                title__icontains=query
             )
             context['users'] = AppUser.objects.filter(
                 username__icontains=query
