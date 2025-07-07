@@ -33,8 +33,7 @@
         <!-- Post Edit Form -->
         <form method="post" class="flex flex-col gap- w-full">
             {% csrf_token %}
-
-                {% if request.user|is_superuser_or_moderator %}
+                {% if request.user|is_superuser_or_moderator and not post.is_approved %}
                     <!--- Category -->
                      <div class="w-full mb-4">
                          <span class="text-sm italic text-red-500 mb-2">
@@ -45,9 +44,7 @@
                          <label for="id_category" class="block text-sm font-medium text-gray-700 mb-1 ">Select Category:</label>
                          {{ form.category }}
                      </div>
-                {% endif %}
-
-                     <!-- Optional Banner -->
+                      <!-- Optional Banner -->
                     {% if post.banner %}
                     <div class="w-full mb-4 ">
                         <label class="block text-sm font-medium text-gray-700">{{ form.banner.label }}</label>
@@ -56,13 +53,12 @@
                     </div>
                     {% endif %}
 
-                    <!-- Post Content -->
+                    <!-- Post Title -->
                     <div class="w-full mb-4 ">
                         <label class="block text-sm font-medium text-gray-700">{{ form.title.label }}</label>
                         {{ form.title }}
 
                         <span class="text-sm italic text-red-500">{{ form.title.errors }}</span>
-
                     </div>
 
                     <!-- Content Field -->
@@ -71,6 +67,69 @@
                         {{ form.content }}
                         <span class="text-sm italic text-red-500">{{ form.content.errors }}</span>
                     </div>
+
+
+                {% elif request.user|is_superuser_or_moderator and post.is_approved  %}
+
+                     <!--- Category -->
+                    <div class="w-full mb-4">
+                         <span class="text-sm italic text-red-500 mb-2">
+                             {% for error in form.non_field_errors %}
+                                 <ul class="mb-2">{{ error }}</ul>
+                             {% endfor %}
+                         </span>
+                         <label for="id_category" class="block text-sm font-medium text-gray-700 mb-1 ">Select Category:</label>
+                         {{ form.category }}
+                     </div>
+
+                     <!-- Optional Banner -->
+
+                    <div class="w-full mb-4 ">
+                        <label class="block text-sm font-medium text-gray-700">{{ form.banner.label }}</label>
+                        {{ form.banner }}
+                        <span class="text-sm italic text-red-500">{{ form.banner.errors }}</span>
+                    </div>
+
+
+                    <!-- Post Title -->
+                    <div class="w-full mb-4 ">
+                        <label class="block text-sm font-medium text-gray-700">{{ form.title.label }}</label>
+                        {{ form.title }}
+
+                        <span class="text-sm italic text-red-500">{{ form.title.errors }}</span>
+                    </div>
+
+                    <!-- Content Field -->
+                    <div class="w-full mb-4">
+                        <label class="block text-sm font-medium text-gray-700">{{ form.content.label }}</label>
+                        {{ form.content }}
+                        <span class="text-sm italic text-red-500">{{ form.content.errors }}</span>
+                    </div>
+
+                {% elif post.is_approved and not post.created_by|is_superuser_or_moderator %}
+
+
+                    <div class="w-full mb-4 ">
+                        <label class="block text-sm font-medium text-gray-700">{{ form.banner.label }}</label>
+                        {{ form.banner }}
+                        <span class="text-sm italic text-red-500">{{ form.banner.errors }}</span>
+                    </div>
+
+                    <!-- Post Title -->
+                    <div class="w-full mb-4 ">
+                        <label class="block text-sm font-medium text-gray-700">{{ form.title.label }}</label>
+                        {{ form.title }}
+
+                        <span class="text-sm italic text-red-500">{{ form.title.errors }}</span>
+                    </div>
+
+                    <!-- Content Field -->
+                    <div class="w-full mb-4">
+                        <label class="block text-sm font-medium text-gray-700">{{ form.content.label }}</label>
+                        {{ form.content }}
+                        <span class="text-sm italic text-red-500">{{ form.content.errors }}</span>
+                    </div>
+                {% endif %}
 
 
             <!-- Submit Button -->

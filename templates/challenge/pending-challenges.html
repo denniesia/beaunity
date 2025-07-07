@@ -2,7 +2,7 @@
 
 {% block content %}
 
-{% if perms.post.can_approve_post %}
+{% if perms.challenge.can_approve_challenge %}
     <section class="flex-grow flex items-center justify-center py-16">
         <div class="bg-white rounded-2xl shadow-xl w-full max-w-3xl p-8">
 
@@ -35,6 +35,13 @@
                                         Start:
                                         {{ challenge.start_time|date:"M d, Y H:i" }}
                                     </span>
+                                     <span class="inline-flex items-center text-xs text-gray-500 bg-pink-50 rounded-full px-2 py-0.5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                        Created:
+                                        {{ challenge.created_at|date:"M d, Y H:i" }}
+                                    </span>
                                 </div>
                             </div>
                             <!-- Check Button -->
@@ -61,7 +68,7 @@
                 {% endfor %}
             </div>
             {% else %}
-                <h2 class="text-center text-pink-600">No pending posts</h2>
+                <h2 class="text-center text-pink-600">No pending challenges</h2>
             {% endif %}
         </div>
     </section>

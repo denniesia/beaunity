@@ -1,4 +1,5 @@
 from PycharmProjects.pythonProjectDev.Advanced.functions_advanced_exc.keyword_arguments_length import kwargs_length
+from beaunity.common.mixins import UserIsCreatorMixin
 from django.shortcuts import render
 from django.template.base import kwarg_re
 from django.urls import reverse_lazy
@@ -36,7 +37,7 @@ class ChallengeCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse_lazy('challenge-details', kwargs={'pk': self.object.pk})
 
-class ChallengeDetailsView(DetailView):
+class ChallengeDetailsView(LoginRequiredMixin, DetailView):
     model = Challenge
     template_name = 'challenge/challenge-details.html'
     context_object_name = 'challenge'
@@ -49,7 +50,7 @@ class ChallengeEditView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('challenge-details', kwargs={'pk': self.object.pk})
 
-class ChallengeDeleteView(DeleteView):
+class ChallengeDeleteView(LoginRequiredMixin, UserIsCreatorMixin, DeleteView):
     model = Challenge
     form_class = ChallengeDeleteForm
     template_name = 'challenge/challenge-delete.html'

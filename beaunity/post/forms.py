@@ -7,7 +7,15 @@ CLASS = 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none f
 class PostBaseForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['banner', 'title', 'content', ]
+        fields = ['banner', 'title', 'content', 'category']
+
+    category = forms.ModelChoiceField(
+        label="Category:",
+        queryset=Category.objects.all(),
+        widget=forms.Select(attrs={
+            'class': CLASS
+        })
+    )
 
     banner = forms.URLField(
         label="Banner URL:",
@@ -38,17 +46,10 @@ class PostBaseForm(forms.ModelForm):
         ),
     )
 
-class PostCreateForm(PostBaseForm):
-    class Meta(PostBaseForm.Meta):
-        fields = PostBaseForm.Meta.fields + ['category']
 
-    category = forms.ModelChoiceField(
-        label="Category:",
-        queryset=Category.objects.all(),
-        widget=forms.Select(attrs={
-            'class': CLASS
-        })
-    )
+class PostCreateForm(PostBaseForm):
+    pass
+
 
 
 class PostEditForm(PostBaseForm):
@@ -59,14 +60,3 @@ class AdminPostEditForm(PostBaseForm):
         super().__init__(*args, **kwargs)
         self.fields['title'].disabled = True
         self.fields['content'].disabled = True
-
-    class Meta(PostBaseForm.Meta):
-        fields = ['category']
-
-    category = forms.ModelChoiceField(
-        queryset=Category.objects.all(),
-        widget=forms.Select(attrs={
-            'class': CLASS
-        })
-    )
-

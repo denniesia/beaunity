@@ -113,6 +113,7 @@ class PostEditView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     model = Post
     template_name = 'post/post-edit.html'
 
+
     def test_func(self):
         user = self.request.user
         return (
@@ -127,9 +128,16 @@ class PostEditView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
         return reverse_lazy('post-details', kwargs={'pk': self.object.pk})
 
     def get_form_class(self):
-        if self.request.user.groups.filter(name='Moderator').exists() or self.request.user.groups.filter(name='Superadmin').exists():
+        post = self.get_object()
+        user = self.request.user
+
+        is_admin = user.groups.filter(name__in=['Superadmin', 'Moderator']).exists()
+
+        if is_admin and not post.is_approved:
             return AdminPostEditForm
+
         return PostEditForm
+
 
     def get_initial(self):
        return self.object.__dict__

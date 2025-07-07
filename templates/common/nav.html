@@ -51,7 +51,6 @@
                         {% endif %}
 
                         {% if perms.event.change_event %}
-                            <a href="{% url 'event-create' %}" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Add New Event</a>
                             <a href="{% url 'my-events' %}" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">My Events</a>
                         {% endif %}
                         </div>
@@ -94,7 +93,6 @@
             {% endif %}
 
             {% if perms.event.change_event %}
-                <li><a href="{% url 'event-create' %}" class="block text-gray-800 hover:text-pink-600">Add New Event</a></li>
                 <li><a href="{% url 'my-events' %}" class="block text-gray-800 hover:text-pink-600">My Events</a></li>
             {% endif %}
         {% endif %}
