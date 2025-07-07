@@ -31,7 +31,14 @@ class ChallengeCreateView(LoginRequiredMixin, CreateView):
     form_class = ChallengeCreateForm
 
     def form_valid(self, form):
-        form.instance.created_by = self.request.user
+        challenge = form.save(commit=False)
+
+        challenge.created_by = self.request.user
+
+        if self.request.user.has_perm('challenge.can_approve_challenge'):
+            challenge.is_approved = True
+
+        challenge.save()
         return super().form_valid(form)
 
     def get_success_url(self):

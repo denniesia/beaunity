@@ -31,7 +31,7 @@ class IndexView(TemplateView):
 
         context['challenges'] = Challenge.objects.filter(
             end_time__gte=current_datetime
-        ).order_by('start_time').prefetch_related( 'participants')[:3]
+        ).order_by('start_time').prefetch_related( 'attendees')[:3]
         return context
 
 
