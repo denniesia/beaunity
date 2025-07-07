@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-
+from django.utils import timezone
 
 from .choices import DifficultyLevel
 from beaunity.common.models import BaseActivity
@@ -25,6 +25,19 @@ class Challenge(BaseActivity, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, 
         permissions = (
             ("can_approve_challenge", "Can approve challenge"),
         )
+
+    @property
+    def progress(self):
+        now = timezone.now()
+
+        if now <= self.start_time:
+            return 0
+        elif now > self.end_time:
+            return 100
+
+        total_duration = (self.end_time - self.start_time).total_seconds()
+        elapsed = (now - self.start_time).total_seconds()
+        return round((elapsed / total_duration) * 100,2)
 
     def __str__(self):
         return self.title
