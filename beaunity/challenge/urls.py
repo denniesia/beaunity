@@ -8,4 +8,5 @@ urlpatterns = [
         path('edit/', views.ChallengeEditView.as_view(), name='challenge-edit'),
         path('delete/', views.ChallengeDeleteView.as_view(), name='challenge-delete'),
     ])),
+    path('pending/', views.PendingChallengeView.as_view(), name='challenge-pending'),
 ]

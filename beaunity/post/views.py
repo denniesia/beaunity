@@ -146,8 +146,8 @@ class PendingPostsView(LoginRequiredMixin,PermissionRequiredMixin, ListView):
     permission_required = 'post.can_approve_post'
 
     def get_queryset(self):
-        posts = Post.objects.filter(is_approved=False).order_by('-created_at')
-        return posts
+        return Post.objects.filter(is_approved=False).order_by('-created_at')
+
 
 @login_required(login_url='login')
 def forum_search(request):

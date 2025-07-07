@@ -150,7 +150,7 @@
                     <div class="flex justify-center gap-6 pl-8">
                         {% for challenge in challenges %}
                             <div class="w-full sm:w-80 md:w-96 lg:w-100 bg-white relative rounded-2xl shadow text-left flex-shrink-0 transition-all duration-300 transform cursor-pointer hover:scale-105 hover:shadow-pink-400 hover:shadow-lg">
-                                <a href="" >
+                                <a href="{% url 'challenge-details' challenge.pk %}" >
                                     {% if challenge.created_by == user %}
                                         <div class="absolute top-1 right-2 text-pink-600 text-xs font-semibold px-5 py-2 rounded-full shadow-md z-10" style=" background-color: white">
                                             Your challenge
@@ -175,9 +175,13 @@
                                         </p>
                                         <p class="text-sm text-gray-600 mb-2">{{ challenge.details|striptags|safe|truncatechars:90 }}</p>
                                         <p class="text-sm text-gray-500">{{ challenge.start_time|date:"F j, Y, H:i" }} - {{ challenge.end_time|date:"F j, Y, H:i" }}</p>
+                                         <div class="w-full bg-gray-200 rounded-full h-3 mt-1 overflow-hidden">
+                                             <div class="bg-pink-500 h-3" style="width: {{ challenge.progress }}%;">
+                                             </div>
+                                         </div>
                                         <div class="flex">
-                                            <p class="text-sm text-gray-500 mt-4">
-                                                Going:
+                                            <p class="text-sm text-gray-500 mt-2">
+                                                Joined:
                                             </p>
                                                 {% if challenge.participants %}
                                                     <div class="flex flex-wrap gap-2 mt-2 ml-2">
@@ -185,7 +189,7 @@
                                                             <a href="">
                                                                 <img src="{{ participant.profile.profile_pic.url|default:'https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg' }}" class="w-10 h-10 rounded-full object-cover border border-pink-300"></a>
                                                         {% empty %}
-                                                            <p class="text-sm text-gray-500">No participants yet.</p>
+                                                            <p class="text-sm  italic text-gray-500">No participants yet.</p>
                                                         {% endfor %}
                                                     </div>
                                                 {% endif %}

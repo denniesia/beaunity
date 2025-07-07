@@ -7,7 +7,8 @@ from beaunity.common.utils.mixins import FilteredQuerysetMixin, FilteredContextM
 from .models import Challenge
 from .forms import  ChallengeCreateForm, ChallengeEditForm, ChallengeDeleteForm
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
+
 # Create your views here.
 class ChallengeOverviewView(LoginRequiredMixin, FilteredContextMixin, FilteredQuerysetMixin, ListView):
     model = Challenge
@@ -63,3 +64,12 @@ class ChallengeDeleteView(DeleteView):
             'data': self.get_initial(),
             })
         return kwargs
+
+class PendingChallengeView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    model = Challenge
+    template_name = 'challenge/pending-challenges.html'
+    permission_required = 'challenge.can_approve_challenge'
+
+    def get_queryset(self):
+        return Challenge.objects.filter(is_approved=False).order_by('-created_at')
+

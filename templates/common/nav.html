@@ -46,7 +46,7 @@
                               transition-all duration-200 ease-in-out z-50  transform -translate-x-1/2 text-center">
                         {% if perms.category.change_category %}
                             <a href="{% url 'category-overview' %}" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Categories</a>
-                            <a href="{% url 'challenges' %}" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Challenges</a>
+                            <a href="{% url 'challenge-pending' %}" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Challenges</a>
                             <a href="{% url 'post-pending' %}" class="block px-4 py-1 text-gray-700 hover:bg-pink-100">Posts</a>
                         {% endif %}
 
@@ -81,7 +81,7 @@
     <ul class="space-y-2">
         <li><a href="" class="block text-gray-800 hover:text-pink-600">About</a></li>
         <li><a href="{% url 'forum-dashboard' %}" class="block text-gray-800 hover:text-pink-600">Forum</a></li>
-        <li><a href="" class="block text-gray-800 hover:text-pink-600">Challenges</a></li>
+        <li><a href="{% url 'challenges' %}" class="block text-gray-800 hover:text-pink-600">Challenges</a></li>
         <li><a href="{% url 'events' %}" class="block text-gray-800 hover:text-pink-600">Events</a></li>
          <hr class="w-[100px]">
         {% if perms.category.change_category or perms.event.change_event %}
@@ -89,7 +89,7 @@
 
             {% if perms.category.change_category %}
                 <li><a href="{% url 'category-overview' %}" class="block text-gray-800 hover:text-pink-600">Categories</a></li>
-                <li><a href="#" class="block text-gray-800 hover:text-pink-600">Challenges</a></li>
+                <li><a href="{% url 'challenge-pending' %}" class="block text-gray-800 hover:text-pink-600">Challenges</a></li>
                 <li><a href="{% url 'post-pending' %}" class="block text-gray-800 hover:text-pink-600">Posts</a></li>
             {% endif %}
 
