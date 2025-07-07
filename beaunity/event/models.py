@@ -10,46 +10,14 @@ from beaunity.common.mixins import CreatedByMixin, CreatedAtMixin, LastUpdatedMi
 from beaunity.category.models import Category
 from beaunity.interaction.models import Like
 from beaunity.comment.models import Comment
-
+from beaunity.common.models import BaseActivity
 from ckeditor.fields import RichTextField
 # Create your models here.
 
 UserModel = get_user_model()
 
-class Event(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
-    poster_image = CloudinaryField()
-    title = models.CharField(
-        max_length=100,
-        validators=[
-            MinLengthValidator(10)
-        ]
-    )
-    details = RichTextField()
-    is_online = models.BooleanField(default=False)
-    meeting_link = models.URLField(
-        blank=True,
-        null=True
-    )
+class Event(BaseActivity, CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
     is_public = models.BooleanField()
-    city = models.CharField(
-        null=True,
-        blank=True,
-        max_length=100,
-        validators=[
-            MinLengthValidator(2)
-        ]
-    )
-    location = models.CharField(
-        max_length=200,
-        blank=True,
-        null=True,
-        validators=[
-            MinLengthValidator(10)
-        ]
-    )
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
-
     categories = models.ManyToManyField(Category, related_name='events')
     attendees = models.ManyToManyField(UserModel, related_name='events_attendees', blank=True)
     likes = GenericRelation(Like)
