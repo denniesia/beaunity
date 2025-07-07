@@ -1,0 +1,99 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="max-w-full lg:w-2/3 mx-auto">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-pink-500 text-center mt-8 mb-4">Delete Challenge</h1>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <!-- Poster Image Preview -->
+            <div class="relative w-full h-56 md:h-72">
+                <img src="{{ challenge.poster_image.url }}" alt="Event Banner" class="w-full h-full">
+            </div>
+
+            <form method="POST"  class="p-6 md:p-8">
+                {% csrf_token %}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Left Column -->
+                    <div class="space-y-4">
+                        <div>
+                            {{ form.title.label }}
+                            {{ form.title }}
+                        </div>
+                        <div>
+                            {{ form.details.label }}
+                            <div class="w-full">
+                                {{ form.details }}
+                                {{ form.media }}
+                            </div>
+
+                        </div>
+                        <div>
+                            {{ form.is_online.label }}
+                            {{ form.is_online }}
+                        </div>
+
+                         <div>
+                            {{ form.difficulty.label }}
+                            {{ form.difficulty }}
+                        </div>
+
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="space-y-4">
+                        <div>
+                            {{ form.city.label }}
+                            {{ form.city }}
+                        </div>
+                        <div>
+                            {{ form.location.label }}
+                            {{ form.location }}
+                        </div>
+
+                        <div>
+                            {{ form.meeting_link.label }}
+                            {{ form.meeting_link }}
+                        </div>
+
+                        <div>
+                            {{ form.start_time.label }}
+                            {{ form.start_time }}
+                        </div>
+
+                        <div>
+                            {{ form.end_time.label }}
+                            {{ form.end_time }}
+                        </div>
+
+                        <div>
+                            <p>Categories:</p>
+                            {% for category in challenge.categories.all %}
+                                <p class="flex items-center  text-gray-800">
+                                    <span class="text-pink-500 text-lg mr-2">•</span> {{ category }}
+                                </p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="mt-8 flex justify-center gap-6">
+                    <a href="javascript:history.back()" class="bg-gray-100 text-gray-700 px-10 py-2 rounded-xl font-semibold border shadow hover:bg-gray-200 transition">
+                        Cancel
+                    </a>
+                    <button type="submit" class="bg-pink-500 text-white px-6 py-2 rounded-xl font-semibold hover:bg-pink-600 cursor-pointer transition shadow">
+                        Delete Challenge
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+
+
+
+

@@ -149,8 +149,8 @@ class EventEditView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
 
 class EventDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Event
-    template_name = 'event/event-delete.html'
     form_class = EventDeleteForm
+    template_name = 'event/event-delete.html'
     permission_required = 'event.delete_event'
     success_url = reverse_lazy('events')
 
@@ -161,7 +161,7 @@ class EventDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
         kwargs = super().get_form_kwargs()
         kwargs.update({
             'data': self.get_initial(),
-        })
+            })
         return kwargs
 
 

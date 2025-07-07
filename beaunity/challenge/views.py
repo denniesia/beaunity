@@ -1,9 +1,11 @@
+from PycharmProjects.pythonProjectDev.Advanced.functions_advanced_exc.keyword_arguments_length import kwargs_length
 from django.shortcuts import render
+from django.template.base import kwarg_re
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView,  DetailView, UpdateView, DeleteView
 from beaunity.common.utils.mixins import FilteredQuerysetMixin, FilteredContextMixin
 from .models import Challenge
-from .forms import  ChallengeCreateForm, ChallengeEditForm
+from .forms import  ChallengeCreateForm, ChallengeEditForm, ChallengeDeleteForm
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
@@ -46,4 +48,18 @@ class ChallengeEditView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('challenge-details', kwargs={'pk': self.object.pk})
 
+class ChallengeDeleteView(DeleteView):
+    model = Challenge
+    form_class = ChallengeDeleteForm
+    template_name = 'challenge/challenge-delete.html'
+    success_url = reverse_lazy('challenges')
 
+    def get_initial(self):
+        return self.object.__dict__
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({
+            'data': self.get_initial(),
+            })
+        return kwargs

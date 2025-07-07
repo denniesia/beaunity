@@ -30,6 +30,13 @@ class EventEditForm(ActivityBaseForm):
     class Meta(ActivityBaseForm.Meta):
         model = Event
 
+    is_public = forms.BooleanField(
+        label='Public event:',
+        required=False,
+        widget=forms.CheckboxInput(),
+        initial=True
+    )
+
 class EventDeleteForm(ActivityBaseForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -40,3 +47,10 @@ class EventDeleteForm(ActivityBaseForm):
 
     class Meta(ActivityBaseForm.Meta):
         model = Event
+
+    is_public = forms.BooleanField(
+        label='Public event:',
+        required=False,
+        widget=forms.CheckboxInput(),
+        initial=True
+    )
