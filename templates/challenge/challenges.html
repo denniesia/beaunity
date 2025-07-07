@@ -1,9 +1,27 @@
+
+{% load static %}
+{% load has_passed %}
 <div class="flex flex-col space-y-6">
     {% for challenge in challenges %}
         <div class="relative bg-pink-50 border border-pink-200 rounded-2xl shadow-md overflow-hidden flex flex-col hover:-translate-y-1 hover:shadow-lg hover:shadow-pink-300">
-            <img src="{{ challenge.poster_image.url }}" alt="Event Poster" class="w-full h-40 object-cover">
+            <img src="{{ challenge.poster_image.url }}"  class="w-full h-40 object-cover">
             <div id="{{ challenge.pk }}" class="p-5 flex flex-col flex-grow justify-between">
                 <div class="space-y-4">
+                    {% if challenge.created_by == user %}
+                        <div class="absolute top-3 right-2 flex items-center gap-3 text-pink-600 text-xs font-semibold px-5 py-2 rounded-full shadow-md z-10" style="background-color: white;">
+                            <p>Your Challenge</p>
+                            <a href="{% url 'challenge-edit' challenge.pk %}" class=" hover:text-blue-700 hover-shadow-mb">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"  class="w-5 h-5">
+                                </svg>
+                            </a>
+                        </div>
+                    {% endif %}
+                    {% if challenge.end_time|has_passed %}
+                        <div class="absolute top-3 left-2 text-red-700 text-xs font-bold px-5 py-2 rounded-full shadow-md z-10" style=" background-color: white">
+                            Passed Challenge
+                        </div>
+                    {% endif %}
+
                     <!-- Header: Title + Hosted By -->
                     <div>
                         <a href="">
