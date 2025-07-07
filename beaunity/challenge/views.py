@@ -10,6 +10,7 @@ from .forms import  ChallengeCreateForm, ChallengeEditForm, ChallengeDeleteForm
 
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 
+from beaunity.common.utils.approval import approve_instance, disapprove_instance
 # Create your views here.
 class ChallengeOverviewView(LoginRequiredMixin, FilteredContextMixin, FilteredQuerysetMixin, ListView):
     model = Challenge
@@ -81,3 +82,23 @@ class PendingChallengeView(LoginRequiredMixin, PermissionRequiredMixin, ListView
     def get_queryset(self):
         return Challenge.objects.filter(is_approved=False).order_by('-created_at')
 
+
+def approve_challenge(request, pk):
+    return approve_instance(
+        request=request,
+        model_class=Challenge,
+        pk=pk,
+        permission_required='challenge.can_approve_challenge',
+        redirect_approved='challenge-pending',
+        redirect_fallback='challenge-pending',
+    )
+
+def disapprove_challenge(request, pk):
+    return disapprove_instance(
+        request=request,
+        model_class=Challenge,
+        pk=pk,
+        permission_required='challenge.can_approve_challenge',
+        redirect_approved='challenge-pending',
+        redirect_fallback='challenge-pending',
+    )
