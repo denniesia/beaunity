@@ -105,7 +105,8 @@
                                     </a>
                                     <p class="text-xs text-gray-500 mb-3">
                                         Hosted by
-                                        <a href="{% url 'profile-details' event.created_by.id %}"><strong>@{{ event.created_by }}</strong>
+                                        <a href="{% url 'profile-details' event.created_by.id %}" class="hover:text-blue-600 hover:underline">
+                                            <strong>@{{ event.created_by }}</strong>
                                         </a>
                                     <p class="text-sm text-gray-600 mb-2">{{ event.details|striptags|safe|truncatechars:90 }}</p>
                                     <p class="text-sm text-gray-500">{{ event.start_time|date:"F j, Y, H:i" }}</p>
@@ -159,7 +160,7 @@
 
                                     <img src="{{ challenge.poster_image.url }}" class="w-full h-40 object-cover rounded-t-2xl">
                                     <div class="p-4">
-                                        <a href="" >
+                                        <a href="{% url 'challenge-details' challenge.pk %}" >
                                             <span class="text-lg font-semibold text-pink-600">{{ challenge.title }}</span>
                                         </a>
                                         {% if user.is_authenticated %}
@@ -167,15 +168,16 @@
 
                                         <p class="text-xs text-gray-500 mb-3">
                                             Hosted by
-                                            <a href="{% url 'profile-details' challenge.created_by.id %}">
+                                            <a href="{% url 'profile-details' challenge.created_by.id %}" class="hover:text-blue-600 hover:underline">
                                                 <strong>
                                                 @{{ challenge.created_by }}
                                                 </strong>
                                             </a>
                                         </p>
                                         <p class="text-sm text-gray-600 mb-2">{{ challenge.details|striptags|safe|truncatechars:90 }}</p>
-                                        <p class="text-sm text-gray-500">{{ challenge.start_time|date:"F j, Y, H:i" }} - {{ challenge.end_time|date:"F j, Y, H:i" }}</p>
-                                         <div class="w-full bg-gray-200 rounded-full h-3 mt-1 overflow-hidden">
+                                        <p class="text-sm text-gray-500">Duration: {{ challenge.duration_in_weeks }} weeks</p>
+                                        <p class="text-xs text-gray-500">{{ challenge.start_time|date:"F j, Y" }} - {{ challenge.end_time|date:"F j, Y" }}</p>
+                                        <div class="w-full bg-gray-200 rounded-full h-3 mt-1 overflow-hidden">
                                              <div class="bg-pink-500 h-3" style="width: {{ challenge.progress }}%;">
                                              </div>
                                          </div>

@@ -39,5 +39,12 @@ class Challenge(BaseActivity, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, 
         elapsed = (now - self.start_time).total_seconds()
         return round((elapsed / total_duration) * 100,2)
 
+    @property
+    def duration_in_weeks(self):
+        if self.start_time and self.end_time:
+            delta = self.end_time - self.start_time
+            return (delta.days + 6) // 7
+        return 0
+
     def __str__(self):
         return self.title
