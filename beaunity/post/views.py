@@ -4,6 +4,8 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from beaunity.category.models import Category
 from django.urls import reverse_lazy, reverse
+from oauthlib.uri_validate import query
+
 from .forms import PostCreateForm, PostEditForm, AdminPostEditForm
 from beaunity.comment.forms import CommentCreateForm
 from beaunity.post.models import Post
@@ -19,8 +21,10 @@ from django.core.paginator import Paginator
 from beaunity.common.mixins import UserIsCreatorMixin
 
 # Create your views here.
-class ForumDashboardView(TemplateView):
+class ForumDashboardView(ListView):
     template_name = 'post/forum-dashboard.html'
+
+    model = Post  # Set the model so ListView knows what you're listing
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -33,7 +37,20 @@ class ForumDashboardView(TemplateView):
             category_posts.append((category, posts))
 
         context['category_posts'] = category_posts
+        context['query'] = self.request.GET.get('query', '')
         return context
+
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+
+        if query:
+            return Post.objects.filter(
+                Q(title__icontains=query) |
+                Q(content__icontains=query),
+                is_approved=True
+            ).order_by('-created_at')
+        else:
+            return Post.objects.none()
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
@@ -176,25 +193,25 @@ def disapprove_post(request, pk):
         redirect_approved='post-pending',
         redirect_fallback='post-pending',
     )
-
-@login_required(login_url='login')
-def forum_search(request):
-    query = request.GET.get('query')
-
-    categories = Category.objects.filter(
-        Q(title__icontains=query)
-            |
-        Q(description__icontains=query)
-    ) if query else []
-    posts = Post.objects.filter(
-        Q(title__icontains=query)
-            |
-        Q(content__icontains=query)
-    ) if query else []
-
-    context = {
-        'query': query,
-        'categories': categories,
-        'posts': posts,
-    }
-    return render(request, 'post/post-search.html', context)
+#
+# @login_required(login_url='login')
+# def forum_search(request):
+#     query = request.GET.get('query')
+#
+#     categories = Category.objects.filter(
+#         Q(title__icontains=query)
+#             |
+#         Q(description__icontains=query)
+#     ) if query else []
+#     posts = Post.objects.filter(
+#         Q(title__icontains=query)
+#             |
+#         Q(content__icontains=query)
+#     ) if query else []
+#
+#     context = {
+#         'query': query,
+#         'categories': categories,
+#         'posts': posts,
+#     }
+#     return render(request, 'post/post-search.html', context)

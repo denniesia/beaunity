@@ -59,8 +59,6 @@ class FilteredQuerysetMixin:
             queryset = queryset.filter(difficulty='Legendary')
 
 
-
-
         if self.model == Challenge:
             return queryset.filter(is_approved=True).distinct()
         return queryset.distinct()

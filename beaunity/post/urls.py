@@ -1,6 +1,6 @@
 from django.urls import path, include
 from . import views
-from .views import forum_search, post_confirmation
+from .views import  post_confirmation
 
 urlpatterns = [
     path('dashboard/', views.ForumDashboardView.as_view(), name='forum-dashboard' ),
@@ -14,7 +14,7 @@ urlpatterns = [
         path('disapprove/', views.disapprove_post , name='post-disapprove'),
     ])),
     path('pending/', views.PendingPostsView.as_view(), name='post-pending'),
-    path('search/', forum_search, name='post-search'),
+    # path('search/', forum_search, name='post-search'),
 
 
 ]
