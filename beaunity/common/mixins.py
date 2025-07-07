@@ -19,8 +19,6 @@ class UserIsCreatorMixin(UserPassesTestMixin):
         return self.request.user.pk == self.get_object().created_by.pk
 
 
-
-
 class LastUpdatedMixin(models.Model):
     last_updated = models.DateTimeField(auto_now=True)
 

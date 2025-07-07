@@ -57,7 +57,7 @@ class ContactForm(forms.Form):
 
 
 class ActivityBaseForm(forms.ModelForm):
-    CLASS = 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
+    CLASS = CLASS
     class Meta:
         fields = ['poster_image',
                   'title', 'details',

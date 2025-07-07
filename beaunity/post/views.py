@@ -13,6 +13,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 
+from beaunity.common.utils.approval import approve_instance, disapprove_instance
 
 from django.core.paginator import Paginator
 from beaunity.common.mixins import UserIsCreatorMixin
@@ -156,6 +157,25 @@ class PendingPostsView(LoginRequiredMixin,PermissionRequiredMixin, ListView):
     def get_queryset(self):
         return Post.objects.filter(is_approved=False).order_by('-created_at')
 
+def approve_post(request, pk):
+    return approve_instance(
+        request=request,
+        model_class=Post,
+        pk=pk,
+        permission_required='post.can_approve_post',
+        redirect_approved='post-pending',
+        redirect_fallback='post-pending',
+    )
+
+def disapprove_post(request, pk):
+    return disapprove_instance(
+        request=request,
+        model_class=Post,
+        pk=pk,
+        permission_required='post.can_approve_post',
+        redirect_disapproved='post-pending',
+        redirect_fallback='post-pending',
+    )
 
 @login_required(login_url='login')
 def forum_search(request):
