@@ -78,7 +78,7 @@ class SearchView(TemplateView):
             context['posts'] = Post.objects.filter(
                 Q(title__icontains=query) |
                 Q(content__icontains=query)
-            )
+            ).exclude(is_approved=False)
             context['categories'] = Category.objects.filter(
                 Q(title__icontains=query) |
                 Q(description__icontains=query)
@@ -88,7 +88,7 @@ class SearchView(TemplateView):
             )
             context['challenge'] = Challenge.objects.filter(
                 title__icontains=query
-            )
+            ).exclude(is_approved=False)
             context['users'] = AppUser.objects.filter(
                 username__icontains=query
             )

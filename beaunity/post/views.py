@@ -23,8 +23,7 @@ from beaunity.common.mixins import UserIsCreatorMixin
 # Create your views here.
 class ForumDashboardView(ListView):
     template_name = 'post/forum-dashboard.html'
-
-    model = Post  # Set the model so ListView knows what you're listing
+    model = Post
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
