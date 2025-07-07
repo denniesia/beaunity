@@ -1,8 +1,11 @@
 from django.db.models import Count
+from django.db.models.fields import return_None
 from django.utils.timezone import now
 from beaunity.challenge.models import Challenge
-
+from django.db.models import Count, Q
 from beaunity.category.models import Category
+from oauthlib.uri_validate import query
+
 
 class FilteredQuerysetMixin:
     model = None
@@ -21,6 +24,12 @@ class FilteredQuerysetMixin:
         sort_by = self.request.GET.get('sort_by')
         online = self.request.GET.get('online')
         difficulty = self.request.GET.get('difficulty')
+        query = self.request.GET.get('query')
+
+        if query:
+            queryset = queryset.filter(
+                title__icontains=query
+            )
 
         if city:
             queryset = queryset.filter(city=city)
@@ -50,6 +59,8 @@ class FilteredQuerysetMixin:
             queryset = queryset.filter(difficulty='Legendary')
 
 
+
+
         if self.model == Challenge:
             return queryset.filter(is_approved=True).distinct()
         return queryset.distinct()
@@ -71,6 +82,7 @@ class FilteredContextMixin:
             applied_filters['archived'] = True
         if request.GET.get('difficulty'):
             applied_filters['difficulty'] = request.GET['difficulty']
+
 
         context['applied_filters'] = applied_filters
         context['filter_mode'] = bool(applied_filters)
