@@ -1,6 +1,6 @@
 from django.db.models import Count
 from django.utils.timezone import now
-
+from beaunity.challenge.models import Challenge
 
 from beaunity.category.models import Category
 
@@ -20,6 +20,7 @@ class FilteredQuerysetMixin:
         category = self.request.GET.get('category')
         sort_by = self.request.GET.get('sort_by')
         online = self.request.GET.get('online')
+        difficulty = self.request.GET.get('difficulty')
 
         if city:
             queryset = queryset.filter(city=city)
@@ -36,11 +37,22 @@ class FilteredQuerysetMixin:
             queryset = queryset.filter(is_public=True)
         elif sort_by == 'Hosts':
             queryset = queryset.order_by('created_by__username')
-
-        if sort_by not in ['Popularity', 'Hosts']:
+        elif sort_by not in ['Popularity', 'Hosts']:
             queryset = queryset.order_by('start_time')
 
-        return queryset.filter(is_approved=True).distinct()
+        if difficulty == 'Beginner':
+            queryset = queryset.filter(difficulty='Beginner')
+        elif difficulty == 'Intermediate':
+            queryset = queryset.filter(difficulty='Intermediate')
+        elif difficulty == 'Advanced':
+            queryset = queryset.filter(difficulty='Advanced')
+        elif difficulty == 'Legendary':
+            queryset = queryset.filter(difficulty='Legendary')
+
+
+        if self.model == Challenge:
+            return queryset.filter(is_approved=True).distinct()
+        return queryset.distinct()
 
 class FilteredContextMixin:
     def get_filtered_context(self, context, model):
@@ -57,9 +69,12 @@ class FilteredContextMixin:
             applied_filters['online'] = 'Online'
         if request.GET.get('archived'):
             applied_filters['archived'] = True
+        if request.GET.get('difficulty'):
+            applied_filters['difficulty'] = request.GET['difficulty']
 
         context['applied_filters'] = applied_filters
         context['filter_mode'] = bool(applied_filters)
         context['categories'] = Category.objects.all()
-        context['cities'] = model.objects.exclude(city=None).values_list('city', flat=True).distinct()
+        context['cities'] = model.objects.exclude(city=None).exclude(city='').values_list('city', flat=True).distinct()
+        context['model_name'] = model.__name__
         return context

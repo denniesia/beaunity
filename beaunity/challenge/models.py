@@ -18,7 +18,7 @@ class Challenge(BaseActivity, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, 
         choices=DifficultyLevel.choices,
     )
     categories = models.ManyToManyField(Category, related_name='challenge_categories')
-    participants = models.ManyToManyField(UserModel, related_name='challenge_participants', blank=True)
+    attendees = models.ManyToManyField(UserModel, related_name='challenge_attendees', blank=True)
 
     class Meta:
         verbose_name_plural = 'Challenges'
