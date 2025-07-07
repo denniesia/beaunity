@@ -78,6 +78,7 @@ class PendingChallengeView(LoginRequiredMixin, PermissionRequiredMixin, ListView
     model = Challenge
     template_name = 'challenge/pending-challenges.html'
     permission_required = 'challenge.can_approve_challenge'
+    paginate_by = 5
 
     def get_queryset(self):
         return Challenge.objects.filter(is_approved=False).order_by('-created_at')

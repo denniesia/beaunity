@@ -170,6 +170,7 @@ class PendingPostsView(LoginRequiredMixin,PermissionRequiredMixin, ListView):
     model = Post
     template_name = 'post/pending-posts.html'
     permission_required = 'post.can_approve_post'
+    paginate_by = 10
 
     def get_queryset(self):
         return Post.objects.filter(is_approved=False).order_by('-created_at')

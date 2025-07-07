@@ -70,7 +70,11 @@
             {% else %}
                 <h2 class="text-center text-pink-600">No pending challenges</h2>
             {% endif %}
+            <div class="mt-4">
+            {% include 'common/paginator.html' %}
         </div>
+        </div>
+
     </section>
 {% endif %}
 
