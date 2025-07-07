@@ -19,7 +19,7 @@
                     <div class="border border-pink-200 rounded-xl p-5 hover:shadow-md transition-shadow">
                         <div class="flex justify-between items-start">
                             <div>
-                                <h4 class="text-lg font-semibold text-pink-600">{{ category.title }}</h4>
+                                <a href="{% url 'category-details' category.slug %}" class="text-lg font-semibold text-pink-600">{{ category.title }}</a>
                             </div>
                         </div>
                         <p class="text-sm text-gray-600 mt-3">{{ category.description }}</p>
@@ -64,7 +64,7 @@
             <div class="space-y-4">
                 {% for event in events %}
                     <div class="flex flex-col border border-pink-200 rounded-xl p-5 hover:shadow-md transition-shadow">
-                        <a href="{% url 'post-details' event.pk %}">
+                        <a href="{% url 'event-details' event.pk %}">
                             <span class="text-lg font-semibold text-pink-600">{{ event.title }}</span>
                         </a>
                         <span class="text-sm text-gray-600 mt-2">{{ event.content|truncatewords:30 }}</span>
