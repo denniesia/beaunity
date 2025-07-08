@@ -6,8 +6,9 @@ from .choices import DifficultyLevel
 from beaunity.common.models import BaseActivity
 from beaunity.common.mixins import LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, IsApprovedMixin
 from beaunity.category.models import Category
-
-
+from beaunity.interaction.models import Like
+from beaunity.comment.models import Comment
+from django.contrib.contenttypes.fields import GenericRelation
 # Create your models here.
 
 UserModel = get_user_model()
@@ -20,6 +21,8 @@ class Challenge(BaseActivity, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, 
     )
     categories = models.ManyToManyField(Category, related_name='challenge_categories')
     attendees = models.ManyToManyField(UserModel, related_name='challenge_attendees', blank=True)
+    likes = GenericRelation(Like)
+    comments = GenericRelation(Comment)
 
     class Meta:
         verbose_name_plural = 'Challenges'

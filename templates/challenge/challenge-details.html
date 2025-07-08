@@ -192,13 +192,10 @@
 
        <hr class="border-t border-gray-300 my-4">
 
-{#        <!-- Comments Section -->#}
-{#        <p class="text-normal font-semibold text-gray-800 mb-4">Discussion Section:</p>#}
-{#        {% if event.is_public or has_joined%}#}
-{#        {% include 'comment/comments.html' %}#}
-{#        {% else %}#}
-{#           <p class="text-pink-600 italic text-sm">This is a private event. To comment, please join the event.</p>#}
-{#        {% endif %}#}
+        <!-- Comments Section -->
+        <p class="text-normal font-semibold text-gray-800 mb-4">Discussion Section:</p>
+
+        {% include 'comment/comments.html' %}
 
     </div>
 

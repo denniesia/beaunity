@@ -1,3 +1,4 @@
+from beaunity.challenge.models import Challenge
 from django.shortcuts import render, reverse, get_object_or_404, redirect
 from django.contrib.contenttypes.models import ContentType
 from .models import Comment
@@ -30,10 +31,14 @@ def delete_comment(request, pk):
             return redirect('post-details', pk=content_object.pk)
         elif isinstance(content_object, Event):
             return redirect('event-details', pk=content_object.pk)
+        elif isinstance(content_object, Challenge):
+            return redirect('challenge-details', pk=content_object.pk)
 
 
     if isinstance(content_object, Post):
         return redirect('forum-dashboard')
     elif isinstance(content_object, Event):
         return redirect('events')
+    elif isinstance(content_object, Challenge):
+        return redirect('challenges')
 

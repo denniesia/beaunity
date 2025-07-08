@@ -1,6 +1,5 @@
-from PycharmProjects.pythonProjectDev.Advanced.functions_advanced_exc.keyword_arguments_length import kwargs_length
 from beaunity.common.mixins import UserIsCreatorMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template.base import kwarg_re
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView,  DetailView, UpdateView, DeleteView
@@ -12,6 +11,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 
 from beaunity.common.utils.approval import approve_instance, disapprove_instance
 from django.contrib.auth.decorators import login_required
+from beaunity.comment.forms import  CommentCreateForm
+from django.contrib.contenttypes.models import ContentType
+from django.core.paginator import Paginator
 # Create your views here.
 class ChallengeOverviewView(LoginRequiredMixin, FilteredContextMixin, FilteredQuerysetMixin, ListView):
     model = Challenge
@@ -57,8 +59,34 @@ class ChallengeDetailsView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         challenge = self.get_object()
         attendees = challenge.challenge_attendees.select_related('user')[:6]
-        context['attendees'] = attendees
+        comments = challenge.comments.all().order_by('created_at')
+
+        paginator = Paginator(comments, 5)
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        context.update({
+            'attendees': attendees,
+            'form': CommentCreateForm(),
+            'page_obj': page_obj,
+
+        })
         return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = CommentCreateForm(request.POST)
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.created_by = request.user
+
+            comment.content_type = ContentType.objects.get_for_model(self.model)
+            comment.object_id = self.object.id
+            comment.save()
+            return redirect(request.META.get('HTTP_REFERER') + f"#{self.object.id}")
+
+        return redirect(reverse('challenge-details', kwargs={'pk': self.object.id}))
 
 class ChallengeEditView(UpdateView):
     model = Challenge

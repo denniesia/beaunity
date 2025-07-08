@@ -3,15 +3,15 @@
 {% block content %}
 
 <div class="max-w-screen-xl mx-auto w-full">
-    <!-- Unified Forum Post & Comments Container -->
+    <!-- Comments Container -->
     <div class="bg-white rounded-2xl shadow-md border border-pink-300 p-6 my-6 transition hover:shadow-lg w-full">
 
         <!-- User Info Header -->
         <div class="flex items-start justify-between mb-6 w-full">
             <div class="flex items-center space-x-4">
                 <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 font-semibold text-sm shadow-inner">
-                    {% if post.created_by.profile.profile_pic %}
-                        <img src="{{ post.created_by.profile.profile_pic.url }}" class="rounded-full w-15 h-13">
+                    {% if comment.created_by.profile.profile_pic %}
+                        <img src="{{ comment.created_by.profile.profile_pic.url }}" class="rounded-full w-15 h-13">
                     {% else %}
                         <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg" alt="Default Profile" class="w-fit h-fit rounded-full">
                     {% endif %}
