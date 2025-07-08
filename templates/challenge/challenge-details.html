@@ -24,12 +24,12 @@
 {#            <div class="absolute top-2 left-2 text-normal text-pink-600 font-semibold px-8 py-4 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">#}
 {#                {% include 'interaction/favourite.html' with obj=challenge model_name='challenge' %}#}
 {#            </div>#}
-{#            <!-- Join -->#}
-{#            <div class="absolute bottom-2 left-2 text-normal text-pink-600 font-semibold px-10 py-3 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">#}
-{#                <div class="flex items-center text-2xs cursor-pointer gap-1">#}
-{#                    {% include 'interaction/join.html'  %}#}
-{#                </div>#}
-{#            </div>#}
+            <!-- Join -->
+            <div class="absolute bottom-2 left-2 text-normal text-pink-600 font-semibold px-10 py-3 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">
+                <div class="flex items-center text-2xs cursor-pointer gap-1">
+                    {% include 'interaction/join.html' with model_name='challenge' pk=challenge.pk %}
+                </div>
+            </div>
             {% if request.user == challenge.created_by %}
              <div class="absolute top-2 right-1 text-normal text-pink-600 font-semibold px-6 py-3 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">
                 <div class="flex items-center text-2xs cursor-pointer gap-4">
