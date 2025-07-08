@@ -56,7 +56,7 @@ class ChallengeDetailsView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         challenge = self.get_object()
-        attendees = challenge.attendees.select_related('profile')[:6]
+        attendees = challenge.challenge_attendees.select_related('user')[:6]
         context['attendees'] = attendees
         return context
 

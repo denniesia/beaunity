@@ -42,7 +42,7 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         event = self.object
-        attendees = event.attendees.select_related('profile')[:6]
+        attendees = event.event_attendees.select_related('user')[:6]
         comments = event.comments.all().order_by('created_at')
         has_joined = event in self.request.user.profile.joined_events.all()
 
