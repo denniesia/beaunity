@@ -48,7 +48,10 @@
                                 <p><strong>Start:</strong> {{ challenge.start_time|date:"F j, Y, H:i" }}</p>
                                 <p><strong>End:</strong> {{ challenge.end_time|date:"F j, Y, H:i" }}</p>
                                 {% if challenge.is_online %}
-                                    <p><strong>Location:</strong> {{ challenge.location }}</p>
+                                    <p>Online Challenge</p>
+                                {% endif %}
+                                {% if challenge.location %}
+                                	 <p><strong>Location:</strong> {{ challenge.location }}</p>
                                 {% endif %}
                             </div>
                             <div class="flex flex-wrap mb-4 gap-2">
@@ -71,17 +74,13 @@
 
                             <!-- Progress Bar -->
                             <div>
-                                <p class="mb-1"><strong>Period:</strong></p>
+                                <p class="mb-1"><strong>Duration:</strong> {{ challenge.duration_in_weeks }} weeks</p>
                                 <p class="mb-1"><strong>Progress:</strong></p>
                                 <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
                                     <div class="bg-pink-500 h-4" style="width: {{ challenge.progress }}%;"></div>
                                 </div>
                             </div>
 
-                            <!-- Participants (if you have this field) -->
-                            <div>
-                                <p><strong>Participants:</strong> {{ challenge.participants.count }}</p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -95,7 +94,9 @@
                         </div>
 
                         <div class="w-full bg-purple-500 text-white text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-900 transition">
-                            <!--- Interaction Join --->
+                            {% include 'interaction/join.html' with model_name='challenge' pk=challenge.pk %}
+
+
                         </div>
                     {% endif %}
                 </div>

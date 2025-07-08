@@ -126,11 +126,19 @@
                 </ul>
             </div>
 
-            <div>
-                <h3 class="text-lg font-semibold text-pink-600 mb-1">My Dairy:</h3>
-                <div class="flex flex-wrap gap-4 text-gray-600 text-sm">
-                    <span>Adidas</span>
-                </div>
+             <div class="fav-events-container">
+                <h3 class="text-lg font-semibold text-pink-600 mb-1">Joined Challenges</h3>
+                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 max-h-40 overflow-y-auto">
+                    {% for challenge in profile.joined_challenges.all %}
+                        <li class="hover:underline hover:text-pink-600 cursor-pointer">
+                            <a href="{% url 'challenge-details' challenge.pk %}">
+                                {{ challenge.title }}
+                            </a>
+                        </li>
+                    {% empty %}
+                        <li class="text-gray-700 italic">No joined challenges yet.</li>
+                    {% endfor %}
+                </ul>
             </div>
         </section>
     </div>

@@ -23,6 +23,10 @@ class Event(BaseActivity, CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
     likes = GenericRelation(Like)
     comments = GenericRelation(Comment)
 
+    @property
+    def model_name(self):
+        return "event"
+
     class Meta:
         verbose_name_plural = 'Events'
         permissions = [
@@ -31,4 +35,5 @@ class Event(BaseActivity, CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
 
     def __str__(self):
         return self.title
+
 

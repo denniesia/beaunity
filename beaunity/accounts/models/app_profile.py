@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from beaunity.common.mixins import LastUpdatedMixin
 from beaunity.event.models import Event
+from beaunity.challenge.models import Challenge
 from .choices import SkinTypeChoices
 from datetime import date
 from cloudinary.models import CloudinaryField
@@ -53,6 +54,7 @@ class Profile(LastUpdatedMixin):
     )
 
     joined_events = models.ManyToManyField(Event, related_name="event_attendees")
+    joined_challenges = models.ManyToManyField(Challenge, related_name="challenge_attendees")
 
     @property
     def age(self):

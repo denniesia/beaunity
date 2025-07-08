@@ -28,6 +28,10 @@ class Challenge(BaseActivity, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, 
         )
 
     @property
+    def model_name(self):
+        return "challenge"
+
+    @property
     def progress(self):
         now = timezone.now()
 

@@ -74,7 +74,7 @@
                             </div>
 
                             <div class="w-full bg-purple-500 text-white bg-pink-600 text-sm font-medium px-10 py-2 rounded-lg hover:bg-pink-900 transition">
-                               {% include 'interaction/join.html' %}
+                               {% include 'interaction/join.html' with model_name='event' pk=event.pk %}
                             </div>
                         {% endif %}
                     </div>
