@@ -1,0 +1,18 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+<section class="flex-grow flex items-center justify-center py-10">
+    <div class="bg-white shadow-xl rounded-3xl w-3/4 max-w-2xl p-8">
+        <div class="text-center mb-4">
+            <p class="text-2xl font-semibold text-pink-600">You have successfully created a {{ obj_name}}!</p>
+            <p class="text-red-500 text-bold mt-1">Your {{ obj_name }} is up for approval!</p>
+        </div>
+        <a href="{% url 'forum-dashboard' %}"
+           class="block w-full text-center bg-pink-500 hover:bg-pink-600 text-white py-2 rounded-md font-semibold transition">
+            Close
+        </a>
+    </div>
+</section>
+
+{% endblock %}

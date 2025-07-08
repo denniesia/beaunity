@@ -11,6 +11,7 @@ from .forms import  ChallengeCreateForm, ChallengeEditForm, ChallengeDeleteForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 
 from beaunity.common.utils.approval import approve_instance, disapprove_instance
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 class ChallengeOverviewView(LoginRequiredMixin, FilteredContextMixin, FilteredQuerysetMixin, ListView):
     model = Challenge
@@ -43,7 +44,9 @@ class ChallengeCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('challenge-details', kwargs={'pk': self.object.pk})
+        if self.request.user.has_perm('challenge.can_approve_challenge'):
+            return reverse_lazy('challenge-details', kwargs={'pk': self.object.pk})
+        return reverse_lazy('challenge-confirmation')
 
 class ChallengeDetailsView(LoginRequiredMixin, DetailView):
     model = Challenge
@@ -103,3 +106,7 @@ def disapprove_challenge(request, pk):
         redirect_approved='challenge-pending',
         redirect_fallback='challenge-pending',
     )
+
+@login_required(login_url='login')
+def challenge_confirmation(request):
+    return render(request, 'challenge/challenge-create-confirmation.html')
