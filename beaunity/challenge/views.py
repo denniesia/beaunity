@@ -103,9 +103,10 @@ def disapprove_challenge(request, pk):
         model_class=Challenge,
         pk=pk,
         permission_required='challenge.can_approve_challenge',
-        redirect_approved='challenge-pending',
+        redirect_disapproved='challenge-pending',
         redirect_fallback='challenge-pending',
     )
+
 
 @login_required(login_url='login')
 def challenge_confirmation(request):

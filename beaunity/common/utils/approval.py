@@ -15,7 +15,7 @@ def approve_instance(request, model_class, pk: int, permission_required: str, re
 
 
 @login_required
-def disapprove_instance(request, model_class, pk: int, permission_required: str, redirect_disapproved,redirect_fallback):
+def disapprove_instance(request, model_class, pk: int, permission_required: str, redirect_disapproved, redirect_fallback):
     instance = get_object_or_404(model_class, pk=pk)
 
     if request.user.has_perm(permission_required):

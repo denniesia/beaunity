@@ -46,11 +46,6 @@
                             </div>
                             <!-- Check Button -->
                             <div class="flex gap-2">
-                                <a class="text-pink-500 hover:text-pink-700 mr-3" href="{% url 'challenge-edit' challenge.pk %}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                    </svg>
-                                </a>
                                 <a class="text-pink-500" href="{% url 'challenge-approve' challenge.pk %}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" style="color: green" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7" />
@@ -63,7 +58,7 @@
                                 </a>
                             </div>
                         </div>
-                        <p class="text-sm text-gray-600 mt-3">{{ challenge.details|striptags|safe|truncatewords:40 }}</p>
+                        <p class="text-sm text-gray-600 mt-3">{{ challenge.details|striptags|safe|truncatewords:30 }}</p>
                     </div>
                 {% endfor %}
             </div>
