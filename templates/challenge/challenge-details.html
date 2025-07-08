@@ -15,7 +15,7 @@
             </div>
         {% endif %}
 
-    <div class="bg-pink-50 mb-2 p-2 my-4 transition ">
+    <div class="mb-2 p-2 my-4 transition ">
 
         <!-- Event image -->
         <div class="relative w-full h-64 rounded overflow-hidden">
@@ -171,21 +171,45 @@
                                         allowfullscreen
                                         referrerpolicy="no-referrer-when-downgrade"
                                         src="https://www.google.com/maps?q={{ challenge.location|urlencode }}&output=embed">
+
                                 </iframe>
                             </div>
                         </div>
                     {% endif %}
             </div>
         </div>
+    </div>
 
-{#        <div class="flex items-start text-pink-500 space-x-4 text-sm mb-2 mt-2 ml-6">#}
-{#            <!-- Like finctionality -->#}
-{#            {% include 'interaction/like.html' with obj=event model_name='event' %}#}
-{#            <!-- Share finctionality -->#}
-{#            {% include 'interaction/share.html'%}#}
-{#        </div>#}
+        <div class="flex items-start text-pink-500 space-x-4 text-sm mb-2 mt-2 ml-6">
+            <!-- Like finctionality -->
+            {% include 'interaction/like.html' with obj=challenge model_name='challenge' %}
+            <!-- Share finctionality -->
+            {% include 'interaction/share.html'%}
+        </div>
 
        <hr class="border-t border-gray-300 my-4">
+
+{#        <!-- Comments Section -->#}
+{#        <p class="text-normal font-semibold text-gray-800 mb-4">Discussion Section:</p>#}
+{#        {% if event.is_public or has_joined%}#}
+{#        {% include 'comment/comments.html' %}#}
+{#        {% else %}#}
+{#           <p class="text-pink-600 italic text-sm">This is a private event. To comment, please join the event.</p>#}
+{#        {% endif %}#}
+
+    </div>
+
+  {% include 'common/paginator.html' %}
+
+
+
+<div class="text-pink-400 text-base text-center font-semibold" >
+    <a href="javascript:history.back()" class="inline-flex hover:text-pink-500">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061A1.125 1.125 0 0 1 21 8.689v8.122ZM11.25 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061a1.125 1.125 0 0 1 1.683.977v8.122Z" />
+        </svg>
+    </a>
+</div>
 
 
 
