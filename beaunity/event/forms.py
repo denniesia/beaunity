@@ -34,7 +34,7 @@ class EventEditForm(ActivityBaseForm):
         label='Public event:',
         required=False,
         widget=forms.CheckboxInput(),
-        initial=True
+
     )
 
 class EventDeleteForm(ActivityBaseForm):
