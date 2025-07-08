@@ -10,11 +10,8 @@
                         </a>
                           <!-- Fav Functionality -->
                         {% if user.is_authenticated %}
-
                             {% include 'interaction/favourite.html' with obj=post model_name='post' %}
-
                         {% endif %}
-
 
                     </div>
                     <div class="flex justify-between text-xs mb-2 text-gray-500">

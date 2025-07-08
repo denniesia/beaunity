@@ -22,6 +22,11 @@
                             Passed Challenge
                         </div>
                     {% endif %}
+                    {% if user.is_authenticated %}
+                	<div class="absolute top-30 left-2 text-pink-600 text-xs font-semibold px-5 py-2 rounded-full shadow-md z-10 bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300" >
+                        {% include 'interaction/favourite.html' with obj=challenge model_name='challenge' %}
+                    </div>
+                {% endif %}
 
                     <!-- Header: Title + Hosted By -->
                     <div>
@@ -75,7 +80,7 @@
                             <!-- Progress Bar -->
                             <div>
                                 <p class="mb-1"><strong>Duration:</strong> {{ challenge.duration_in_weeks }} weeks</p>
-                                <p class="mb-1"><strong>Progress:</strong></p>
+                                <p class="mb-1"><strong>Progress: </strong> {{ challenge.progress }} %</p>
                                 <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
                                     <div class="bg-pink-500 h-4" style="width: {{ challenge.progress }}%;"></div>
                                 </div>

@@ -37,7 +37,7 @@ def favourite_functionality(request, model_name, object_id):
 
         favourite.delete()
 
-    return redirect(request.META.get('HTTP_REFERER') + f"#{object_id}")
+    return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
 @login_required(login_url='login')

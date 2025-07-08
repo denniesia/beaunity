@@ -17,13 +17,13 @@
 
     <div class="mb-2 p-2 my-4 transition ">
 
-        <!-- Event image -->
+        <!-- Challenge image -->
         <div class="relative w-full h-64 rounded overflow-hidden">
-            <img src="{{ challenge.poster_image.url }}" alt="Event Banner" class="w-full h-full">
-{#            <!--- Favourite -->#}
-{#            <div class="absolute top-2 left-2 text-normal text-pink-600 font-semibold px-8 py-4 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">#}
-{#                {% include 'interaction/favourite.html' with obj=challenge model_name='challenge' %}#}
-{#            </div>#}
+            <img src="{{ challenge.poster_image.url }}" class="w-full h-full">
+            <!--- Favourite -->
+            <div class="absolute top-2 left-2 text-normal text-pink-600 font-semibold px-8 py-4 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">
+                {% include 'interaction/favourite.html' with obj=challenge model_name='challenge' %}
+            </div>
             <!-- Join -->
             <div class="absolute bottom-2 left-2 text-normal text-pink-600 font-semibold px-10 py-3 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">
                 <div class="flex items-center text-2xs cursor-pointer gap-1">
@@ -53,8 +53,8 @@
         <div class="mt-2 grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Left: Title + Host Info -->
             <div class="md:col-span-2 ml-4 ">
-                <!-- Event Title -->
-                <h2 class="text-2xl font-bold text-pink-900 mb-4">{{ event.title }}</h2>
+                <!-- Challenge Title -->
+                <h2 class="text-2xl font-bold text-pink-900 mb-4">{{ challenge.title }}</h2>
                 <!-- Host Info -->
                 <div class="flex items-center gap-4 ml-4">
                     {% if challenge.created_by.profile.profile_pic %}
@@ -151,8 +151,11 @@
                     <p class="text-sm font-semibold text-pink-700 ">Duration: </p>
                      <p class="text-sm text-gray-700">{{ challenge.duration_in_weeks }} weeks</p>
                 </div>
-                <div class="w-full bg-gray-200 rounded-full h-3 mt-1 overflow-hidden mb-2">
+                <p class="text-sm font-semibold text-pink-700 ml-4 mt-2 ">Progress: {{ challenge.progress }} %</p>
+                <div class="w-full bg-gray-200 rounded-full h-3 mt-1 overflow-hidden ml-4  mb-2">
+
                     <div class="bg-pink-500 h-3" style="width: {{ challenge.progress }}%;">
+
                     </div>
                 </div>
                 <div class="flex items-center gap-2 ml-4">
