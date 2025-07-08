@@ -15,7 +15,8 @@ UserModel = get_user_model()
 class Challenge(BaseActivity, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, IsApprovedMixin):
     difficulty = models.CharField(
         max_length=15,
-        choices=DifficultyLevel.choices,
+        choices=DifficultyLevel,
+        default=DifficultyLevel.BEGINNER,
     )
     categories = models.ManyToManyField(Category, related_name='challenge_categories')
     attendees = models.ManyToManyField(UserModel, related_name='challenge_attendees', blank=True)
