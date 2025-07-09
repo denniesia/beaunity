@@ -58,7 +58,7 @@ class ChallengeDetailsView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         challenge = self.get_object()
-        attendees = challenge.challenge_attendees.select_related('user')[:6]
+        attendees = challenge.attendees.all()[:6]
         comments = challenge.comments.all().order_by('created_at')
 
         paginator = Paginator(comments, 5)

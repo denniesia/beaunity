@@ -29,11 +29,11 @@ class IndexView(TemplateView):
         current_datetime = now()
         context['events'] = Event.objects.filter(
             end_time__gte=current_datetime
-        ).order_by('start_time').prefetch_related( 'attendees')[:3]
+        ).order_by('start_time')[:3]
 
         context['challenges'] = Challenge.objects.filter(
             end_time__gte=current_datetime
-        ).order_by('start_time').prefetch_related( 'attendees')[:3]
+        ).order_by('start_time')[:3]
         return context
 
 

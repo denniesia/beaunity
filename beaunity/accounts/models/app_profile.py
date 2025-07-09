@@ -53,9 +53,6 @@ class Profile(LastUpdatedMixin):
         choices=SkinTypeChoices,
     )
 
-    joined_events = models.ManyToManyField(Event, related_name="event_attendees")
-    joined_challenges = models.ManyToManyField(Challenge, related_name="challenge_attendees")
-
     @property
     def age(self):
         if not self.date_of_birth:

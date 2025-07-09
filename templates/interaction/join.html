@@ -1,7 +1,7 @@
 {% load interaction_tags %}
 
 {% if user.is_authenticated %}
-    {% has_joined  request.user.profile model_name pk as joined %}
+    {% has_joined  request.user model_name pk as joined %}
 
     {% if joined %}
         <a href="{% url 'join-functionality' model_name pk %}">Joined</a>

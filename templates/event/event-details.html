@@ -115,7 +115,7 @@
 
                         <div class="flex flex-wrap gap-2 mb-4">
                             {% for attendee in attendees %}
-                                <a href="{% url 'profile-details' attendee.pk %}"><img src="{{ attendee.profile_pic.url|default:'https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg' }}" class="w-10 h-10 rounded-full object-cover border border-pink-300"></a>
+                                <a href="{% url 'profile-details' attendee.pk %}"><img src="{{ attendee.profile.profile_pic.url|default:'https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg' }}" class="w-10 h-10 rounded-full object-cover border border-pink-300"></a>
                             {% empty %}
                                 <p class="text-sm text-gray-500">No attendees yet.</p>
                             {% endfor %}

@@ -33,7 +33,7 @@ def is_favourited_by_user(obj, user):
 @register.simple_tag
 def has_joined(user, model_name, obj_id):
     if model_name == 'event':
-        return user.joined_events.filter(pk=obj_id).exists()
+        return user.event_attendees.filter(pk=obj_id).exists()
     elif model_name == 'challenge':
-        return user.joined_challenges.filter(pk=obj_id).exists()
+        return user.challenge_attendees.filter(pk=obj_id).exists()
     return False

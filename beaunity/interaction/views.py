@@ -42,22 +42,21 @@ def favourite_functionality(request, model_name, object_id):
 
 @login_required(login_url='login')
 def join_functionality(request, model_name, pk):
-    user = request.user.profile
+    user = request.user
 
     if model_name == 'event':
         obj = get_object_or_404(Event, pk=pk)
-        # Join or leave logic — toggle join state
-        if user.joined_events.filter(pk=pk).exists():
-            user.joined_events.remove(obj)
+        if user.event_attendees.filter(pk=pk).exists():
+            user.event_attendees.remove(obj)
         else:
-            user.joined_events.add(obj)
+            user.event_attendees.add(obj)
 
     elif model_name == 'challenge':
         obj = get_object_or_404(Challenge, pk=pk)
-        if user.joined_challenges.filter(pk=pk).exists():
-            user.joined_challenges.remove(obj)
+        if user.challenge_attendees.filter(pk=pk).exists():
+            user.challenge_attendees.remove(obj)
         else:
-            user.joined_challenges.add(obj)
+            user.challenge_attendees.add(obj)
 
 
     return redirect(request.META.get('HTTP_REFERER', '/'))

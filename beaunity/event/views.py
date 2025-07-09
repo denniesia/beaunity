@@ -42,9 +42,9 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         event = self.object
-        attendees = event.event_attendees.select_related('user')[:6]
+        attendees = event.attendees.all()[:6]
         comments = event.comments.all().order_by('created_at')
-        has_joined = event in self.request.user.profile.joined_events.all()
+        has_joined = event in self.request.user.events_attendees.all()
 
         paginator = Paginator(comments, 5)
         page_number = self.request.GET.get('page')
@@ -57,6 +57,7 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
             'page_obj': page_obj,
             'has_joined': has_joined,
         })
+
         return context
 
     def post(self, request, *args, **kwargs):
