@@ -44,7 +44,7 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
         event = self.object
         attendees = event.attendees.all()[:6]
         comments = event.comments.all().order_by('created_at')
-        has_joined = event in self.request.user.events_attendees.all()
+        has_joined = event in self.request.user.event_attendees.all()
 
         paginator = Paginator(comments, 5)
         page_number = self.request.GET.get('page')
