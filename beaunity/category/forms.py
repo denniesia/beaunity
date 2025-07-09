@@ -23,7 +23,6 @@ class CategoryBaseForm(forms.ModelForm):
             'use_filename': True,
             'unique_filename': True,
         },
-
         widget=ClearableFileInput(
             attrs={
                 'class': CLASS
