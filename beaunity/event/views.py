@@ -1,3 +1,4 @@
+from django.contrib.auth.backends import UserModel
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
@@ -141,5 +142,6 @@ class MyEventsView(LoginRequiredMixin, PermissionRequiredMixin,ListView):
         context = super().get_context_data(**kwargs)
         context['archived'] = self.archived
         return context
+
 
 
