@@ -48,7 +48,7 @@ class CategoryEditView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Category
     form_class = CategoryEditForm
     template_name = 'category/category-edit.html'
-    permission_required = 'beaunity.can_edit_category'
+    permission_required = 'category.change_category'
     slug_url_kwarg = 'category_slug'
 
     def get_success_url(self):
