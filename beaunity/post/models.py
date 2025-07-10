@@ -16,8 +16,7 @@ class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, IsApprovedMixin, Co
         ]
     )
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts')
-
-
+    
     comments = GenericRelation(Comment)
     likes = GenericRelation(Like)
     favourites = GenericRelation(Favourite)

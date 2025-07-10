@@ -131,7 +131,6 @@ class PostEditView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     model = Post
     template_name = 'post/post-edit.html'
 
-
     def test_func(self):
         user = self.request.user
         return (
