@@ -36,7 +36,7 @@ class CategoryCreateView(LoginRequiredMixin,PermissionRequiredMixin, CreateView)
     model = Category
     form_class = CategoryCreateForm
     template_name = 'category/category-create.html'
-    permission_required = 'beaunity.can_create_category'
+    permission_required = 'category.add_category'
     success_url = reverse_lazy('category-overview')
 
     def form_valid(self, form):
@@ -76,7 +76,6 @@ class CategoryDetailsView(DetailView):
     template_name = 'category/category-details.html'
     context_object_name = 'category'
     slug_url_kwarg = 'category_slug'
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
