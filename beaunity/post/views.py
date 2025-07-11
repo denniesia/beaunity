@@ -148,7 +148,7 @@ class PostEditView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
         post = self.get_object()
         user = self.request.user
 
-        is_admin = user.groups.filter(name__in=['Superadmin', 'Moderator']).exists()
+        is_admin = user.groups.filter(name__in=['Superuser', 'Moderator']).exists()
 
         if is_admin and not post.is_approved:
             return AdminPostEditForm
@@ -174,6 +174,8 @@ class PendingPostsView(LoginRequiredMixin,PermissionRequiredMixin, ListView):
     def get_queryset(self):
         return Post.objects.filter(is_approved=False).order_by('-created_at')
 
+
+@login_required(login_url='login')
 def approve_post(request, pk):
     return approve_instance(
         request=request,
@@ -184,6 +186,7 @@ def approve_post(request, pk):
         redirect_fallback='post-pending',
     )
 
+@login_required(login_url='login')
 def disapprove_post(request, pk):
     return disapprove_instance(
         request=request,

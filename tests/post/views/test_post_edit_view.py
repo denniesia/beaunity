@@ -1,17 +1,22 @@
-
+from allauth.account.signals import password_reset
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from beaunity.post.models import Post
 from beaunity.category.models import Category
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, AnonymousUser
+from django.test import RequestFactory
+from beaunity.post.views import PostEditView
+from beaunity.post.forms import AdminPostEditForm, PostEditForm
+
 
 UserModel = get_user_model()
 
 class TestsPostEditView(TestCase):
     def setUp(self):
         Group.objects.get_or_create(name='User')
+        Group.objects.get_or_create(name='Superuser')
 
         self.user = UserModel.objects.create_user(
             username='test',
@@ -27,6 +32,7 @@ class TestsPostEditView(TestCase):
 
         )
         self.user.groups.add(Group.objects.get(name='User'))
+        self.superuser.groups.add(Group.objects.get(name='Superuser'))
 
 
         self.category = Category.objects.create(
@@ -80,3 +86,62 @@ class TestsPostEditView(TestCase):
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('post-pending'))
+
+    def test__test_func_superuser_can_edit(self):
+        self.client.login(username='superuser', password='gsdgs!2dd')
+        response = self.client.post(
+            reverse('post-edit', kwargs={'pk': self.post.pk}))
+
+        self.assertEqual(response.status_code, 200)
+
+    def test__test_func_other_user_cannot_edit(self):
+        other_user = UserModel.objects.create_user(
+            username='other_user',
+            email='other_user@test.bg',
+            password='sdfkmlsd!'
+        )
+        self.client.login(username='other_user', password='sdfkmlsd!')
+        response = self.client.post(
+            reverse('post-edit', kwargs={'pk': self.post.pk}))
+        self.assertEqual(response.status_code, 403)
+
+    def test__admin_gets_right_edit_post_form(self):
+        post = Post.objects.create(
+            title='Test Post',
+            content='Test content',
+            category=self.category,
+            created_by=self.user,
+            is_approved=False
+        )
+        request = RequestFactory().get('/')
+        request.user = self.superuser
+
+        view = PostEditView()
+        view.request = request
+        view.kwargs = {'pk': post.pk}
+        view.object = post
+
+        form_class = view.get_form_class()
+
+        self.assertEqual(form_class, AdminPostEditForm)
+
+    def test__creator_gets_right_edit_post_form(self):
+        post = Post.objects.create(
+            title='Test Post',
+            content='Test content',
+            category=self.category,
+            created_by=self.user,
+            is_approved=True
+        )
+        request = RequestFactory().get('/')
+        request.user = self.user
+
+        view = PostEditView()
+        view.request = request
+        view.kwargs = {'pk': post.pk}
+        view.object = post
+
+        form_class = view.get_form_class()
+
+        self.assertEqual(form_class, PostEditForm)
+
