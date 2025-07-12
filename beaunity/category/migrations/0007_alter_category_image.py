@@ -8,14 +8,16 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('category', '0006_category_image'),
+        ("category", "0006_category_image"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='category',
-            name='image',
-            field=cloudinary.models.CloudinaryField(default=django.utils.timezone.now, max_length=255),
+            model_name="category",
+            name="image",
+            field=cloudinary.models.CloudinaryField(
+                default=django.utils.timezone.now, max_length=255
+            ),
             preserve_default=False,
         ),
     ]
