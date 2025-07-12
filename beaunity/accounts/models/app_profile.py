@@ -63,9 +63,6 @@ class Profile(LastUpdatedMixin):
 
     @property
     def full_name(self):
-        if self.first_name and self.last_name:
-            return f"{self.first_name.capitalize()} {self.last_name.capitalize()}"
-        elif self.first_name:
-            return f"{self.first_name.capitalize()}"
-        elif self.last_name:
-            return f"{self.last_name.capitalize()}"
+        first = self.first_name.capitalize() if self.first_name else ""
+        last = self.last_name.capitalize() if self.last_name else ""
+        return f"{first} {last}".strip()
