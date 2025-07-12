@@ -37,7 +37,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://4674-2-200-180-38.ngrok-free.app'
 ]
 
-SITE_ID = 2 #google login
+SITE_ID = 1 #google login
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
@@ -93,6 +93,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
+
     ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
@@ -112,7 +113,14 @@ SOCIALACCOUNT_PROVIDERS = {
             'profile',
             'email',
         ],
-        'AUTH_PARAMS': {'access_type': 'online'}
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'APP': {
+            'client_id': config('GOOGLE_CLIENT_ID'),
+            'secret': config('GOOGLE_CLIENT_SECRET'),
+            'key': ''
+        }
     }
 }
 
