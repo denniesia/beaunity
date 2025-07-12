@@ -1,4 +1,4 @@
-# 🩷 Beaunity – Empowering Beauty Through Community
+# 🩷 Beaunity – Empowering Self Through Community
 
 **Beaunity** is a platform where users can create, discover, and participate in challenges and events—both online and offline. The app brings together beauty enthusiasts, professionals, and brands to share their creativity and knowledge through interactive experiences. Whether you're building a skincare routine, exploring makeup trends, or hosting a beauty workshop, Beaunity helps you grow individually while connecting with a supportive community.
 
@@ -34,6 +34,26 @@
 To empower individuals to embrace their unique selves through collaboration, creativity, and meaningful connections.
 
 ---
+
+## Core Tools and Frameworks
+
+- **Python** — Programming language  
+- **Django 5.2.2** — Web framework  
+- **PostgreSQL** — Database backend  
+- **Cloudinary** & **django-cloudinary-storage** — Media and image storage management  
+- **django-allauth** & **social-auth-app-django** — Authentication and social login  
+- **django-ckeditor** — Rich text editor  
+- **django-tailwind** — Tailwind CSS integration  
+
+## Utility Libraries
+
+- **python-decouple 3.8** — Environment variable management  
+- **python-slugify 8.0.4** — URL-friendly slugs  
+- **pillow 11.2.1** — Image processing  
+- **psycopg2 2.9.10** — PostgreSQL database adapter  
+- **sqlparse 0.5.3** — SQL parsing utilities  
+- **bleach 6.2.0** — Sanitizing HTML input  
+
 
 
 
