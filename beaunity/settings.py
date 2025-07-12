@@ -82,6 +82,8 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'ckeditor',
     'rest_framework',
+    'drf_spectacular',
+
 
 ] + MY_APPS
 
@@ -93,7 +95,17 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'beaunity',
+    'DESCRIPTION': 'Empowering the Self Through Community',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+
+}
+
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {

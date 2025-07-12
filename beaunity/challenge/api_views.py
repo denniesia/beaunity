@@ -3,6 +3,7 @@ from rest_framework import viewsets, permissions
 from .models import Challenge
 from rest_framework.permissions import IsAuthenticated
 from .permissions import CanApprove
+from rest_framework.decorators import action
 
 from beaunity.challenge.serializers import ChallengeSerializer
 

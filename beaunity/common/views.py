@@ -31,7 +31,7 @@ class IndexView(TemplateView):
             end_time__gte=current_datetime
         ).order_by('start_time')[:3]
 
-        context['challenges'] = Challenge.objects.filter(
+        context['challenges'] = Challenge.objects.exclude(is_approved=False).filter(
             end_time__gte=current_datetime
         ).order_by('start_time')[:3]
         return context
