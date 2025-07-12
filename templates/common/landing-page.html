@@ -14,16 +14,17 @@
                     Welcome to your glow-up journey ✨
                 </h1>
                 <p class="max-w-2xl mb-4 font-light lg:mb-6 md:text-lg lg:text-xl">
-                    Join a vibrant skincare community where real routines, trusted products, and personal glow-ups come to life.
+                   Join a vibrant community where real routines, trusted advice, and personal glow-ups come together —
+                    all in the name of becoming your best self.
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-white rounded-lg bg-pink-500 hover:bg-pink-600 focus:ring-4 focus:ring-pink-300">
-                        Join the Forum
+                    <a href="{% url 'forum-dashboard' %}" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-white rounded-lg bg-pink-500 hover:bg-pink-600 focus:ring-4 focus:ring-pink-300">
+                        Browse Topics
                         <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
                         </svg>
                     </a>
-                    <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-pink-700 border border-pink-300 rounded-lg hover:bg-pink-200 focus:ring-4 focus:ring-pink-300">
+                    <a href="{% url 'about' %}" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-pink-700 border border-pink-300 rounded-lg hover:bg-pink-200 focus:ring-4 focus:ring-pink-300">
                         Learn More
                     </a>
                 </div>
