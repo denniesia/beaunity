@@ -1,4 +1,3 @@
-
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, View
@@ -35,8 +34,8 @@ class AppUserLoginView(LoginView):
     form_class = AppUserLoginForm
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
-    template_name = 'accounts/profile-details.html'
     model = Profile
+    template_name = 'accounts/profile-details.html'
     context_object_name = 'profile'
 
     def get_object(self):
@@ -85,6 +84,8 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         })
         return context
 
+
+
 class ProfileEditView(LoginRequiredMixin, UserIsSelfMixin, UpdateView):
     model = UserModel
     template_name = 'accounts/profile-edit.html'
@@ -130,4 +131,6 @@ class ProfileDeleteView(LoginRequiredMixin,UserIsSelfMixin, DeleteView):
         profile.save()
         logout(request)
         return redirect(self.success_url)
+
+
 

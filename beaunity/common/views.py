@@ -1,22 +1,27 @@
+from django.contrib.auth import get_user_model
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 from beaunity.category.models import Category
 from django.shortcuts import get_object_or_404, redirect
 from beaunity.post.models import Post
 from django.contrib.auth.decorators import login_required
 from beaunity.common.forms import SearchForm, ContactForm
 from beaunity.post.models import Post
-from beaunity.event.models import Event
+from beaunity.event.models import Event, UserModel
 from beaunity.category.models import Category
 from beaunity.challenge.models import Challenge
-from beaunity.event.models import Event
+
 from beaunity.accounts.models import AppUser
 from django.db.models import Q
 from django.utils.timezone import now
 from django.core.mail import send_mail
 from django.conf import settings
+from beaunity.accounts.models import Profile
 
 from beaunity.challenge.models import Challenge
+from django.contrib.contenttypes.models import ContentType
+from beaunity.interaction.models import Favourite
+
 
 # Create your views here.
 class IndexView(TemplateView):
@@ -97,51 +102,12 @@ class SearchView(TemplateView):
             context['query'] = query
             context['form'] = form
 
-        return context
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return contex
 
 def custom_permission_denied_view(request, exception=None):
     return render(request, "common/403.html", status=403)
 
 
-#TODO - Challenge and Events logic
 @login_required
 def approve_functionality(request, pk: int):
 
@@ -161,5 +127,54 @@ def disapprove_functionality(request, pk: int):
         declined_object.delete()
         return redirect('post-pending')
 
+UserModel = get_user_model()
 
+class DashboardView(DetailView):
+    model = UserModel
+    template_name = 'common/dashboard.html'
+    context_object_name = 'user'
 
+    def get_object(self):
+        return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.get_object()
+        profile = user.profile
+
+        event_content_type = ContentType.objects.get_for_model(Event)
+        fav_events = Event.objects.filter(
+            id__in=Favourite.objects.filter(
+                user=user,
+                content_type=event_content_type,
+            ).values_list('object_id', flat=True)
+        )
+
+        post_content_type = ContentType.objects.get_for_model(Post)
+        fav_posts = Post.objects.filter(
+            id__in=Favourite.objects.filter(
+                user=user,
+                content_type=post_content_type,
+            ).values_list('object_id', flat=True)
+        )
+
+        challenge_content_type = ContentType.objects.get_for_model(Challenge)
+        fav_challenges = Challenge.objects.filter(
+            id__in=Favourite.objects.filter(
+                user=user,
+                content_type=challenge_content_type,
+            ).values_list('object_id', flat=True)
+        )
+
+        context.update({
+            'fav_events': fav_events,
+            'fav_posts': fav_posts,
+            'fav_challenges': fav_challenges,
+            'my_posts': Post.objects.filter(created_by=user, is_approved=True).order_by('-created_at'),
+            'my_events': Event.objects.filter(created_by=user),
+            'joined_events': Event.objects.filter(attendees=user),
+            'joined_challenges': Challenge.objects.filter(attendees=user),
+            'challenges': Challenge.objects.filter(created_by=user, is_approved=True).order_by('-start_time'),
+            'profile_user': user,  # optional: for easy reference in template
+        })
+        return context
