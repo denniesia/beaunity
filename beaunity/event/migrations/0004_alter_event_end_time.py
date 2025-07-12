@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('event', '0003_rename_online_event_is_online'),
+        ("event", "0003_rename_online_event_is_online"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='end_time',
+            model_name="event",
+            name="end_time",
             field=models.DateTimeField(),
         ),
     ]

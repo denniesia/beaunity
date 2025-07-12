@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('event', '0007_remove_event_is_public'),
+        ("event", "0007_remove_event_is_public"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='is_public',
+            model_name="event",
+            name="is_public",
             field=models.BooleanField(default=True),
         ),
     ]
