@@ -17,4 +17,4 @@ class EventViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         user = self.request.user
-        challenge = serializer.save(created_by=user)
+        event = serializer.save(created_by=user)
