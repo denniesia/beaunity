@@ -11,4 +11,5 @@ urlpatterns = [
 
     ])),
     path('my-events/', views.MyEventsView.as_view(), name='my-events'),
+    path("api/", include("beaunity.event.api_urls")),
 ]

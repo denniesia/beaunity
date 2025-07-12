@@ -1,7 +1,6 @@
 # 🩷 Beaunity – Empowering Beauty Through Community
 
-**Beaunity** is a platform where users can create, discover, and participate in challenges and events—both online and offline. The app brings together beauty enthusiasts, professionals, and brands to share their creativity and knowledge through interactive experiences. Whether you're building a skincare routine, exploring makeup trends, or hosting a beauty workshop, Beaunity helps you grow individually while connecting with a supportive community.
-
+**Beaunity** is a forum-like platform where users can create, discover, and participate in challenges, discussions and events —both online and offline. The app brings together beauty enthusiasts, professionals, and brands to share their creativity and knowledge through interactive experiences. Whether you're building a skincare routine, exploring makeup trends, or hosting a beauty workshop, Beaunity helps you grow individually while connecting with a supportive community.
 ---
 
 ## Core Features
