@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('post', '0002_alter_post_banner'),
+        ("post", "0002_alter_post_banner"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='post',
-            name='banner',
+            model_name="post",
+            name="banner",
             field=models.URLField(blank=True, null=True),
         ),
     ]

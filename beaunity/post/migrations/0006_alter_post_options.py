@@ -6,12 +6,15 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('post', '0005_alter_post_content_alter_post_title'),
+        ("post", "0005_alter_post_content_alter_post_title"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='post',
-            options={'ordering': ['-created_at'], 'permissions': [('can_approve_post', 'Can approve posts')]},
+            name="post",
+            options={
+                "ordering": ["-created_at"],
+                "permissions": [("can_approve_post", "Can approve posts")],
+            },
         ),
     ]

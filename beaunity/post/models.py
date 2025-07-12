@@ -1,22 +1,28 @@
-from django.db import models
-from beaunity.category.models import Category
-from beaunity.common.mixins import ContentMixin, CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, IsApprovedMixin
-from django.core.validators import MinLengthValidator
 from django.contrib.contenttypes.fields import GenericRelation
+from django.core.validators import MinLengthValidator
+from django.db import models
+
+from beaunity.category.models import Category
 from beaunity.comment.models import Comment
-from beaunity.interaction.models import Like, Favourite
+from beaunity.common.mixins import ContentMixin, CreatedAtMixin,  CreatedByMixin, IsApprovedMixin, LastUpdatedMixin
+from beaunity.interaction.models import Favourite, Like
+
 
 # Create your models here.
-class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, IsApprovedMixin, ContentMixin):
+class Post(
+    CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, IsApprovedMixin, ContentMixin
+):
     banner = models.URLField(null=True, blank=True)
     title = models.CharField(
         max_length=100,
         validators=[
             MinLengthValidator(5),
-        ]
+        ],
     )
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts')
-    
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, related_name="posts"
+    )
+
     comments = GenericRelation(Comment)
     likes = GenericRelation(Like)
     favourites = GenericRelation(Favourite)
@@ -24,9 +30,9 @@ class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, IsApprovedMixin, Co
     class Meta:
         permissions = [
             ("can_approve_post", "Can approve posts"),
-            ('can_post_without_approval', 'Can post without approval'),
+            ("can_post_without_approval", "Can post without approval"),
         ]
-        ordering = ['-created_at']
+        ordering = ["-created_at"]
 
     def __str__(self):
         return self.title
