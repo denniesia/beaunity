@@ -6,7 +6,7 @@ from .models import Profile
 from beaunity.accounts.models.choices import SkinTypeChoices
 from cloudinary.forms import CloudinaryFileField
 from django.forms import ClearableFileInput
-from beaunity.common.utils.validators import cloudinary_file_validator
+from beaunity.common.utils.validators import CloudinaryExtensionandSizeValidator
 
 
 UserModel = get_user_model()
@@ -172,7 +172,7 @@ class ProfileBaseForm(forms.ModelForm):
 
     def clean_profile_pic(self):
         profile_pic = self.cleaned_data['profile_pic']
-        cloudinary_file_validator(profile_pic)
+        CloudinaryExtensionandSizeValidator()(profile_pic)
         return profile_pic
 
 

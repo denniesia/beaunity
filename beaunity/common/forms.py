@@ -6,7 +6,7 @@ from cloudinary.forms import CloudinaryFileField
 from django.forms import ClearableFileInput
 from beaunity.category.models import Category
 
-from beaunity.common.utils.validators import cloudinary_file_validator
+from beaunity.common.utils.validators import CloudinaryExtensionandSizeValidator
 
 
 CLASS = 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
@@ -181,7 +181,7 @@ class ActivityBaseForm(forms.ModelForm):
 
     def clean_poster_image(self):
         poster_image = self.cleaned_data['poster_image']
-        cloudinary_file_validator(poster_image)
+        CloudinaryExtensionandSizeValidator()(poster_image)
         return poster_image
 
     # def clean(self):

@@ -2,16 +2,22 @@ from django.core.exceptions import ValidationError
 import os
 from cloudinary.models import CloudinaryResource
 
-def cloudinary_file_validator(file):
-    max_size_mb = 5
-    allowed_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.pdf', '.mp4']
+class CloudinaryExtensionandSizeValidator:
+    def __init__(self, max_size_mb=5):
+        self.max_size_mb = max_size_mb
 
-    if isinstance(file, CloudinaryResource):
-        return
 
-    if file.size > max_size_mb * 1024 * 1024:
-        raise ValidationError(f"File size must be under {max_size_mb} MB.")
+    @property
+    def allowed_extensions(self):
+        return ['.jpg', '.jpeg', '.png', '.gif', '.pdf', '.mp4']
 
-    extension = os.path.splitext(file.name)[1].lower()
-    if extension not in allowed_extensions:
-        raise ValidationError(f"Unsupported file type: {extension}.")
+
+    def __call__(self, file):
+        if isinstance(file, CloudinaryResource):
+            return
+
+        if file.size > self.max_size_mb * 1024 * 1024:
+            raise ValidationError(f"File size must be under {max_size_mb} MB.")
+        extension = os.path.splitext(file.name)[1].lower()
+        if extension not in allowed_extensions:
+            raise ValidationError(f"Unsupported file type: {extension}.")

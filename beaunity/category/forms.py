@@ -2,7 +2,8 @@ from django import forms
 from .models import Category
 from cloudinary.forms import CloudinaryFileField
 from django.forms import ClearableFileInput
-from beaunity.common.utils.validators import cloudinary_file_validator
+from beaunity.common.utils.validators import CloudinaryExtensionandSizeValidator
+
 
 CLASS = 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
 class CategoryBaseForm(forms.ModelForm):
@@ -58,7 +59,7 @@ class CategoryBaseForm(forms.ModelForm):
 
     def clean_image(self):
         image = self.cleaned_data['image']
-        cloudinary_file_validator(image)
+        CloudinaryExtensionandSizeValidator()(image)
         return image
 
 
