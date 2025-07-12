@@ -1,117 +1,113 @@
 {% extends 'common/base.html' %}
 {% load static %}
 {% block content %}
-    <!-- Hero Section -->
-<section class="bg-pink-100 py-4 px-4 text-center">
+<!-- Hero Section -->
+<section class="space-y-6">
 
-  <!-- Top centered animation -->
-  <div class="mb-2">
-    <lottie-player
-      src="{% static 'common/hello2.json' %}"
-      background="transparent"
-      speed="1"
-      class="mx-auto w-60 h-30"
-      loop
-      autoplay>
-    </lottie-player>
-  </div>
-
-  <!-- Two-column layout -->
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 items-center text-center md:text-left">
-
-    <!-- Left: Heading + Text -->
-    <div>
-      <h2 class="text-4xl font-bold text-pink-700 mb-4">We’re passionate about what we do</h2>
-      <p class="text-lg text-pink-800 max-w-md mx-auto md:mx-0">
-        Our mission is to build beautiful experiences and create value for our users with every line of code.
-      </p>
+    <div class="bg-pink-100 py-10 px-6">
+        <lottie-player
+            src="{% static 'common/hello2.json' %}"
+            background="transparent"
+            speed="1"
+            class="mx-auto w-60 h-30"
+            loop
+            autoplay>
+        </lottie-player>
     </div>
 
-    <!-- Right: Second animation -->
+    <!-- What is Beaunity -->
+    <div class="max-w-5xl mx-auto bg-white py-10 px-6">
+        <div class="space-y-6">
+            <h2 class="text-4xl font-bold text-pink-700 text-center">What is Beaunity?</h2>
+            <p class="text-lg text-pink-800 max-w-3xl mx-auto text-center">
+                Beaunity is a community-driven forum designed to inspire and support individuals on their journey to
+                becoming their best selves. Whether you're interested in self-care, wellness, lifestyle, or personal
+                development, Beaunity offers a space to share experiences, discover new ideas, and connect with others
+                who are passionate about growth and well-being.
+            </p>
+        </div>
+    </div>
 
-  </div>
+    <!-- Mission -->
+    <div class="bg-pink-100 py-10 px-6">
+        <div class="max-w-5xl mx-auto space-y-6">
+            <h2 class="text-4xl font-bold text-pink-700 text-center">Our Mission</h2>
+            <p class="text-lg text-pink-800 max-w-3xl mx-auto text-center">
+                At Beaunity, our mission is to foster a welcoming community dedicated to growing a better self — inside
+                and out. We believe that personal growth comes from sharing honest experiences, learning from others,
+                and supporting each other's journey toward confidence, well-being, and self-care.
+            </p>
+        </div>
+    </div>
+
+    <!-- How to Get Started -->
+    <div class="bg-white py-10 px-6">
+        <div class="max-w-5xl mx-auto space-y-6">
+            <h2 class="text-4xl font-bold text-pink-700 text-center">How to Get Started</h2>
+            <p class="text-lg text-pink-800 max-w-3xl mx-auto text-center">
+                Getting involved is easy! Just create an account, explore the categories, and start joining discussions.
+                Feel free to share your own skincare experiences, ask questions, or recommend your favorite products.
+            </p>
+        </div>
+    </div>
+
+</section>
+<section class="bg-pink-100 py-10">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-10 items-center">
+        <!-- Left: Contact Form -->
+        <div>
+            <h3 class="text-3xl font-bold  text-pink-700">Contact us</h3>
+            <p class="text-gray-700 mb-6">
+                We’d love to hear from you! Feel free to reach out with any questions, feedback, or concerns you may
+                have about our website — we’re here to help.
+            </p>
+
+            <form method="POST" class="bg-white shadow-lg rounded-xl p-6 space-y-4">
+                {% csrf_token %}
+
+                <div>
+                    <label class="block mb-1 text-sm font-medium text-gray-700">{{ form.name.label }}</label>
+                    {{ form.name }}
+                </div>
+
+                <div>
+                    <label class="block mb-1 text-sm font-medium text-gray-700">{{ form.email.label }}</label>
+                    {{ form.email }}
+                </div>
+
+                <div>
+                    <label class="block mb-1 text-sm font-medium text-gray-700">{{ form.subject.label }}</label>
+                    {{ form.subject }}
+                </div>
+
+                <div>
+                    <label class="block mb-1 text-sm font-medium text-gray-700">{{ form.content.label }}</label>
+                    {{ form.content }}
+                </div>
+
+                <button type="submit" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 rounded-md transition">
+                    Send
+                </button>
+            </form>
+        </div>
+
+        <!-- Right:Animation -->
+        <div>
+            <lottie-player
+                    src="{% static 'common/lama.json' %}"
+                    background="transparent"
+                    speed="1"
+                    class="mx-auto w-105 h-100"
+                    loop
+                    autoplay>
+            </lottie-player>
+        </div>
+
+    </div>
 </section>
 
 
-
-  <!-- About Content -->
-  <section class="max-w-5xl mx-auto px-4 py-16">
-    <div class="grid md:grid-cols-2 gap-10 items-center">
-      <img src="https://via.placeholder.com/400x300" alt="Team" class="rounded-2xl shadow-lg">
-      <div>
-        <h3 class="text-2xl font-semibold text-pink-700 mb-4">Who We Are</h3>
-        <p class="text-pink-900 mb-4">
-          We're a small team of creatives, developers, and dreamers who believe in the power of technology and design.
-        </p>
-        <p class="text-pink-900">
-          From humble beginnings to exciting new challenges, our journey is all about collaboration, learning, and continuous improvement.
-        </p>
-      </div>
-    </div>
-  </section>
-
-<section class="bg-pink-100 py-16">
-  <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-10 items-center">
-
-
-    <!-- Left: Contact Form -->
-    <div>
-      <h3 class="text-3xl font-bold  text-pink-700 mb-2">Contact us</h3>
-      <p class="text-gray-700 mb-6">
-        We’d love to hear from you! Feel free to reach out with any questions, feedback, or concerns you may have about our website — we’re here to help.
-      </p>
-
-      <form method="POST" class="bg-white shadow-lg rounded-xl p-6 space-y-4">
-        {% csrf_token %}
-
-        <div>
-          <label class="block mb-1 text-sm font-medium text-gray-700">{{ form.name.label }}</label>
-          {{ form.name }}
-        </div>
-
-        <div>
-          <label class="block mb-1 text-sm font-medium text-gray-700">{{ form.email.label }}</label>
-          {{ form.email }}
-        </div>
-
-        <div>
-          <label class="block mb-1 text-sm font-medium text-gray-700">{{ form.subject.label }}</label>
-          {{ form.subject }}
-        </div>
-
-        <div>
-          <label class="block mb-1 text-sm font-medium text-gray-700">{{ form.content.label }}</label>
-          {{ form.content }}
-        </div>
-
-        <button type="submit" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 rounded-md transition">
-          Send
-        </button>
-      </form>
-    </div>
-
-    <!-- Right: Lottie Animation -->
-     <div>
-      <lottie-player
-        src="{% static 'common/lama.json' %}"
-        background="transparent"
-        speed="1"
-        class="mx-auto w-105 h-100"
-        loop
-        autoplay>
-      </lottie-player>
-    </div>
-
-
-  </div>
-</section>
-
-<!-- Include Lottie script (once per page, ideally at the end of <body>) -->
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
-
-
-
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
 {% endblock %}
