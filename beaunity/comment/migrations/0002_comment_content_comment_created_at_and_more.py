@@ -10,32 +10,41 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('comment', '0001_initial'),
+        ("comment", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='comment',
-            name='content',
-            field=models.TextField(default=django.utils.timezone.now, validators=[django.core.validators.MinLengthValidator(5)]),
+            model_name="comment",
+            name="content",
+            field=models.TextField(
+                default=django.utils.timezone.now,
+                validators=[django.core.validators.MinLengthValidator(5)],
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='comment',
-            name='created_at',
-            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),
+            model_name="comment",
+            name="created_at",
+            field=models.DateTimeField(
+                auto_now_add=True, default=django.utils.timezone.now
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='comment',
-            name='created_by',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="comment",
+            name="created_by",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='comment',
-            name='last_updated',
+            model_name="comment",
+            name="last_updated",
             field=models.DateTimeField(auto_now=True),
         ),
     ]
