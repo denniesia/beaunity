@@ -26,7 +26,7 @@
                                 <li>
                                     <a href="{% url 'post-details' post.pk %}"
                                        class="flex justify-between items-center px-3 py-1 rounded hover:bg-pink-50 hover:text-pink-600 transition">
-                                        <span class="truncate">{{ post.title }}</span>
+                                       <span class="max-w-xs">{{ post.title|truncatechars:30  }}</span>
                                         <span class="ml-2 inline-block bg-pink-200 text-pink-800 text-xs font-normal px-2 py-0.5 rounded-full">
                                             {{ post.comments.count }} comments
                                         </span>
@@ -49,7 +49,7 @@
                                 <li>
                                     <a href="{% url 'post-details' post.pk %}"
                                        class="flex justify-between items-center px-3 py-1 rounded hover:bg-pink-50 hover:text-pink-600 transition">
-                                        <span class="truncate">{{ post.title }}</span>
+                                        <span class="max-w-xs">{{ post.title|truncatechars:30  }}</span>
                                         <span class="ml-2 inline-block bg-pink-200 text-pink-800 text-xs font-normal px-2 py-0.5 rounded-full">
                                             {{ post.comments.count }} comments
                                         </span>
@@ -74,7 +74,7 @@
                                 <li>
                                     <a href="{% url 'challenge-details' challenge.pk %}"
                                        class="flex justify-between items-center px-3 py-1 rounded hover:bg-pink-50 hover:text-pink-600 transition">
-                                        <span class="truncate max-w-xs">{{ challenge.title }}</span>
+                                        <span class="max-w-xs">{{ challenge.title|truncatechars:30  }}</span>
                                         <div class="flex space-x-2 ml-4 flex-shrink-0">
                                             <span class="inline-block bg-pink-200 text-pink-800 text-xs font-normal px-2 py-0.5 rounded-full whitespace-nowrap">
                                                 {{ challenge.comments.count }} comments
@@ -102,7 +102,7 @@
                                <li>
                                     <a href="{% url 'challenge-details' challenge.pk %}"
                                        class="flex justify-between items-center px-3 py-1 rounded hover:bg-pink-50 hover:text-pink-600 transition">
-                                        <span class="truncate max-w-xs">{{ challenge.title }}</span>
+                                        <span class="max-w-xs">{{ challenge.title|truncatechars:30  }}</span>
                                         <div class="flex space-x-2 ml-4 flex-shrink-0">
                                             <span class="inline-block bg-pink-200 text-pink-800 text-xs font-normal px-2 py-0.5 rounded-full whitespace-nowrap">
                                                 {{ challenge.comments.count }} comments
@@ -130,7 +130,7 @@
                                 <li>
                                     <a href="{% url 'challenge-details' challenge.pk %}"
                                        class="flex justify-between items-center px-3 py-1 rounded hover:bg-pink-50 hover:text-pink-600 transition">
-                                        <span class="truncate max-w-xs">{{ challenge.title }}</span>
+                                        <span class="max-w-xs">{{ challenge.title|truncatechars:30  }}</span>
                                         <div class="flex space-x-2 ml-4 flex-shrink-0">
                                             <span class="inline-block bg-pink-200 text-pink-800 text-xs font-normal px-2 py-0.5 rounded-full whitespace-nowrap">
                                                 {{ challenge.comments.count }} comments
@@ -165,7 +165,7 @@
                                 <li>
                                     <a href="{% url 'event-details' event.pk %}"
                                        class="flex justify-between items-center px-3 py-1 rounded hover:bg-pink-50 hover:text-pink-600 transition">
-                                        <span class="truncate max-w-xs">{{ event.title }}</span>
+                                        <span class="max-w-xs">{{ event.title|truncatechars:30  }}</span>
                                         <div class="flex space-x-2 ml-4 flex-shrink-0">
                                             <span class="inline-block bg-pink-200 text-pink-800 text-xs font-normal px-2 py-0.5 rounded-full whitespace-nowrap">
                                                 {{ event.comments.count }} comments
@@ -192,7 +192,7 @@
                                 <li>
                                     <a href="{% url 'event-details' event.pk %}"
                                        class="flex justify-between px-3 py-1 rounded hover:bg-pink-50 hover:text-pink-600 transition">
-                                        <span class="truncate max-w-xs">{{ event.title }}</span>
+                                       <span class="max-w-xs">{{ event.title|truncatechars:30  }}</span>
                                         <div class="flex space-x-2 ml-4 flex-shrink-0">
                                             <span class="inline-block bg-pink-200 text-pink-800 text-xs font-normal px-2 py-0.5 rounded-full whitespace-nowrap">
                                                 {{ event.comments.count }} comments
@@ -219,7 +219,7 @@
                                 <li>
                                     <a href="{% url 'event-details' event.pk %}"
                                        class="flex justify-between items-center px-3 py-1 rounded hover:bg-pink-50 hover:text-pink-600 transition">
-                                        <span class="truncate max-w-xs">{{ event.title }}</span>
+                                        <span class="max-w-xs">{{ event.title|truncatechars:30  }}</span>
                                         <div class="flex space-x-2 ml-4 flex-shrink-0">
                                             <span class="inline-block bg-pink-200 text-pink-800 text-xs font-normal px-2 py-0.5 rounded-full whitespace-nowrap">
                                                 {{ event.comments.count }} comments
