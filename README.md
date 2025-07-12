@@ -35,5 +35,5 @@ To empower individuals to embrace their unique selves through collaboration, cre
 
 ---
 
-*Feel free to contribute or report issues! Together, let's make Beaunity a thriving beauty community.*
+
 
