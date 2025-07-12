@@ -79,13 +79,13 @@
     <!-- Mobile Menu -->
     <div class="md:hidden hidden px-4 pb-4" id="navbar-menu">
     <ul class="space-y-2">
-        <li><a href="" class="block text-gray-800 hover:text-pink-600">About</a></li>
+        <li><a href="{% url 'about' %}" class="block text-gray-800 hover:text-pink-600">About</a></li>
         <li><a href="{% url 'forum-dashboard' %}" class="block text-gray-800 hover:text-pink-600">Forum</a></li>
         <li><a href="{% url 'challenges' %}" class="block text-gray-800 hover:text-pink-600">Challenges</a></li>
         <li><a href="{% url 'events' %}" class="block text-gray-800 hover:text-pink-600">Events</a></li>
          <hr class="w-[100px]">
         {% if perms.category.change_category or perms.event.change_event %}
-        <li class="pt-2 font-semibold text-gray-600">Administration</li>
+        <li class="pt-2 font-semibold text-pink-600">Administration</li>
 
             {% if perms.category.change_category %}
                 <li><a href="{% url 'category-overview' %}" class="block text-gray-800 hover:text-pink-600">Categories</a></li>
@@ -99,6 +99,7 @@
         {% endif %}
         <hr class="w-[100px]">
         {% if user.is_authenticated %}
+             <li><a href="{% url 'dashboard'%}" class="block text-gray-800 hover:text-pink-600">Dashboard</a></li>
              <li><a href="{% url 'profile-details' request.user.pk %}" class="block text-gray-800 hover:text-pink-600">Profile</a></li>
             <form action="{% url 'logout' %}" method="post" class="block text-gray-800 hover:text-pink-600">
                 {% csrf_token %}
