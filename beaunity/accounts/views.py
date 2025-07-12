@@ -1,6 +1,8 @@
+
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, View
-from django.contrib.auth import get_user_model, login
+from django.contrib.auth import get_user_model, login, logout
 from .forms import AppUserCreationForm, AppUserLoginForm, ProfileEditForm, AppUserEditForm
 from django.urls import reverse_lazy
 from django.contrib.auth.views import  LoginView
@@ -11,7 +13,7 @@ from beaunity.post.models import Post
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.mixins import LoginRequiredMixin
 from beaunity.common.mixins import UserIsSelfMixin
-
+from beaunity.challenge.models import Challenge
 # Create your views here.
 
 UserModel = get_user_model()
@@ -37,25 +39,50 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = Profile
     context_object_name = 'profile'
 
+    def get_object(self):
+        return get_object_or_404(Profile, pk=self.kwargs['pk'])
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        profile = self.get_object()
+        user = profile.user
+
+
         event_content_type = ContentType.objects.get_for_model(Event)
         fav_events = Event.objects.filter(
             id__in=Favourite.objects.filter(
-                user=self.request.user,
+                user=user,
                 content_type=event_content_type,
             ).values_list('object_id', flat=True)
         )
-        post_event_type = ContentType.objects.get_for_model(Post)
+
+
+        post_content_type = ContentType.objects.get_for_model(Post)
         fav_posts = Post.objects.filter(
             id__in=Favourite.objects.filter(
-                user=self.request.user,
-                content_type=post_event_type,
+                user=user,
+                content_type=post_content_type,
             ).values_list('object_id', flat=True)
         )
-        context['fav_events'] = fav_events
-        context['fav_posts'] = fav_posts
-        context['my_posts'] = Post.objects.filter(created_by=self.request.user).order_by('-created_at')
+
+        challenge_content_type=ContentType.objects.get_for_model(Challenge)
+        fav_challenges = Challenge.objects.filter(
+            id__in=Favourite.objects.filter(
+                user=user,
+                content_type=challenge_content_type,
+            ).values_list('object_id', flat=True)
+        )
+
+        context.update({
+            'fav_events': fav_events,
+            'fav_posts': fav_posts,
+            'fav_challenges': fav_challenges,
+            'my_posts': Post.objects.filter(created_by=user, is_approved=True).order_by('-created_at'),
+            'joined_events': Event.objects.filter(attendees=user),
+            'joined_challenges': Challenge.objects.filter(attendees=user),
+            'challenges': Challenge.objects.filter(created_by=user, is_approved=True).order_by('-start_time'),
+            'profile_user': user,  # optional: for easy reference in template
+        })
         return context
 
 class ProfileEditView(LoginRequiredMixin, UserIsSelfMixin, UpdateView):
@@ -96,4 +123,11 @@ class ProfileDeleteView(LoginRequiredMixin,UserIsSelfMixin, DeleteView):
 
     def get_object(self):
         return self.request.user
+
+    def post(self, request, *args, **kwargs):
+        profile = self.get_object()
+        profile.is_active = False
+        profile.save()
+        logout(request)
+        return redirect(self.success_url)
 
