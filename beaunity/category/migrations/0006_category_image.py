@@ -7,13 +7,15 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('category', '0005_alter_category_options'),
+        ("category", "0005_alter_category_options"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='category',
-            name='image',
-            field=cloudinary.models.CloudinaryField(blank=True, default='', max_length=255, null=True),
+            model_name="category",
+            name="image",
+            field=cloudinary.models.CloudinaryField(
+                blank=True, default="", max_length=255, null=True
+            ),
         ),
     ]

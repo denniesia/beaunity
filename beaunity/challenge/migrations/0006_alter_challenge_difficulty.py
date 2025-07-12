@@ -6,13 +6,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('challenge', '0005_remove_challenge_participants_challenge_attendees'),
+        ("challenge", "0005_remove_challenge_participants_challenge_attendees"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='challenge',
-            name='difficulty',
-            field=models.CharField(choices=[('Beginner', 'Beginner'), ('Intermediate', 'Intermediate'), ('Advanced', 'Advanced'), ('Legenary', 'Legenary')], default='Beginner', max_length=15),
+            model_name="challenge",
+            name="difficulty",
+            field=models.CharField(
+                choices=[
+                    ("Beginner", "Beginner"),
+                    ("Intermediate", "Intermediate"),
+                    ("Advanced", "Advanced"),
+                    ("Legenary", "Legenary"),
+                ],
+                default="Beginner",
+                max_length=15,
+            ),
         ),
     ]

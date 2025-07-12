@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('post', '0003_alter_post_banner'),
+        ("post", "0003_alter_post_banner"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='post',
-            options={'permissions': [('can_approve_post', 'Can approve posts')]},
+            name="post",
+            options={"permissions": [("can_approve_post", "Can approve posts")]},
         ),
     ]

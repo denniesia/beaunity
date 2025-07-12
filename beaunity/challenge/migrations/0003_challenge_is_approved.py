@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('challenge', '0002_alter_challenge_options'),
+        ("challenge", "0002_alter_challenge_options"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='challenge',
-            name='is_approved',
+            model_name="challenge",
+            name="is_approved",
             field=models.BooleanField(default=False),
         ),
     ]

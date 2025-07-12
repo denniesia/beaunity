@@ -1,34 +1,44 @@
-from django.db import models
 from django.contrib.auth import get_user_model
+from django.contrib.contenttypes.fields import GenericRelation
+from django.db import models
 from django.utils import timezone
 
-from .choices import DifficultyLevel
-from beaunity.common.models import BaseActivity
-from beaunity.common.mixins import LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, IsApprovedMixin
 from beaunity.category.models import Category
-from beaunity.interaction.models import Like
 from beaunity.comment.models import Comment
-from django.contrib.contenttypes.fields import GenericRelation
+from beaunity.common.mixins import (
+    CreatedAtMixin,
+    CreatedByMixin,
+    IsApprovedMixin,
+    LastUpdatedMixin,
+)
+from beaunity.common.models import BaseActivity
+from beaunity.interaction.models import Like
+
+from .choices import DifficultyLevel
+
 # Create your models here.
 
 UserModel = get_user_model()
 
-class Challenge(BaseActivity, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, IsApprovedMixin):
+
+class Challenge(
+    BaseActivity, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, IsApprovedMixin
+):
     difficulty = models.CharField(
         max_length=15,
         choices=DifficultyLevel,
         default=DifficultyLevel.BEGINNER,
     )
-    categories = models.ManyToManyField(Category, related_name='challenge_categories')
-    attendees = models.ManyToManyField(UserModel, related_name='challenge_attendees', blank=True)
+    categories = models.ManyToManyField(Category, related_name="challenge_categories")
+    attendees = models.ManyToManyField(
+        UserModel, related_name="challenge_attendees", blank=True
+    )
     likes = GenericRelation(Like)
     comments = GenericRelation(Comment)
 
     class Meta:
-        verbose_name_plural = 'Challenges'
-        permissions = (
-            ("can_approve_challenge", "Can approve challenge"),
-        )
+        verbose_name_plural = "Challenges"
+        permissions = (("can_approve_challenge", "Can approve challenge"),)
 
     @property
     def model_name(self):

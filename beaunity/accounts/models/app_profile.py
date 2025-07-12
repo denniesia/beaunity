@@ -1,14 +1,18 @@
-from .app_user import AppUser
+from datetime import date
+
+from cloudinary.models import CloudinaryField
 from django.contrib.auth import get_user_model
 from django.db import models
+
+from beaunity.challenge.models import Challenge
 from beaunity.common.mixins import LastUpdatedMixin
 from beaunity.event.models import Event
-from beaunity.challenge.models import Challenge
+
+from .app_user import AppUser
 from .choices import SkinTypeChoices
-from datetime import date
-from cloudinary.models import CloudinaryField
 
 UserModel = get_user_model()
+
 
 class Profile(LastUpdatedMixin):
     user = models.OneToOneField(
@@ -17,10 +21,10 @@ class Profile(LastUpdatedMixin):
         primary_key=True,
     )
     profile_pic = CloudinaryField(
-        'image',
+        "image",
         blank=True,
         null=True,
-        default='',
+        default="",
     )
     first_name = models.CharField(
         max_length=20,
@@ -59,7 +63,14 @@ class Profile(LastUpdatedMixin):
             return None
 
         today = date.today()
-        return today.year - self.date_of_birth.year - ((today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day))
+        return (
+            today.year
+            - self.date_of_birth.year
+            - (
+                (today.month, today.day)
+                < (self.date_of_birth.month, self.date_of_birth.day)
+            )
+        )
 
     @property
     def full_name(self):

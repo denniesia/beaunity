@@ -6,14 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0004_profile_joined_events'),
-        ('event', '0007_remove_event_is_public'),
+        ("accounts", "0004_profile_joined_events"),
+        ("event", "0007_remove_event_is_public"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='profile',
-            name='joined_events',
-            field=models.ManyToManyField(related_name='event_attendees', to='event.event'),
+            model_name="profile",
+            name="joined_events",
+            field=models.ManyToManyField(
+                related_name="event_attendees", to="event.event"
+            ),
         ),
     ]

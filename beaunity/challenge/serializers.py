@@ -1,16 +1,19 @@
-from rest_framework import serializers
-from .models import Challenge
-from beaunity.category.models import Category
 import bleach
+from rest_framework import serializers
+
+from beaunity.category.models import Category
+
+from .models import Challenge
+
 
 class ChallengeSerializer(serializers.ModelSerializer):
     created_by = serializers.StringRelatedField(read_only=True)
     categories = serializers.PrimaryKeyRelatedField(
         many=True,
         queryset=Category.objects.all(),
-        help_text='Please choose one or more categories.'
+        help_text="Please choose one or more categories.",
     )
-    attendees  = serializers.PrimaryKeyRelatedField(
+    attendees = serializers.PrimaryKeyRelatedField(
         many=True,
         read_only=True,
     )
@@ -20,10 +23,12 @@ class ChallengeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Challenge
-        fields = '__all__'
+        fields = "__all__"
 
     def validate_details(self, value):
         plain_text = bleach.clean(value, tags=[], strip=True)
         if len(plain_text.strip()) < 100:
-            raise serializers.ValidationError("Description must be at least 100 characters (excluding formatting).")
+            raise serializers.ValidationError(
+                "Description must be at least 100 characters (excluding formatting)."
+            )
         return value

@@ -6,14 +6,14 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('category', '0007_alter_category_image'),
-        ('event', '0001_initial'),
+        ("category", "0007_alter_category_image"),
+        ("event", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='categories',
-            field=models.ManyToManyField(related_name='events', to='category.category'),
+            model_name="event",
+            name="categories",
+            field=models.ManyToManyField(related_name="events", to="category.category"),
         ),
     ]

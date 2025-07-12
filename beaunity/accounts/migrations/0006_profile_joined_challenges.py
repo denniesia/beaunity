@@ -6,14 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0005_alter_profile_joined_events'),
-        ('challenge', '0006_alter_challenge_difficulty'),
+        ("accounts", "0005_alter_profile_joined_events"),
+        ("challenge", "0006_alter_challenge_difficulty"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='profile',
-            name='joined_challenges',
-            field=models.ManyToManyField(related_name='challenge_attendees', to='challenge.challenge'),
+            model_name="profile",
+            name="joined_challenges",
+            field=models.ManyToManyField(
+                related_name="challenge_attendees", to="challenge.challenge"
+            ),
         ),
     ]

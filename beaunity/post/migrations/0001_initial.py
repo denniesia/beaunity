@@ -11,26 +11,52 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('category', '0005_alter_category_options'),
+        ("category", "0005_alter_category_options"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Post',
+            name="Post",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('banner', cloudinary.models.CloudinaryField(max_length=255, verbose_name='banner')),
-                ('title', models.CharField(max_length=100)),
-                ('content', models.TextField()),
-                ('is_approved', models.BooleanField(default=False)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='posts', to='category.category')),
-                ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "banner",
+                    cloudinary.models.CloudinaryField(
+                        max_length=255, verbose_name="banner"
+                    ),
+                ),
+                ("title", models.CharField(max_length=100)),
+                ("content", models.TextField()),
+                ("is_approved", models.BooleanField(default=False)),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="posts",
+                        to="category.category",
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
     ]

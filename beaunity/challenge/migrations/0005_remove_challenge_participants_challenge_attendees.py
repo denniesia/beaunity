@@ -7,18 +7,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('challenge', '0004_remove_challenge_progress'),
+        ("challenge", "0004_remove_challenge_progress"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='challenge',
-            name='participants',
+            model_name="challenge",
+            name="participants",
         ),
         migrations.AddField(
-            model_name='challenge',
-            name='attendees',
-            field=models.ManyToManyField(blank=True, related_name='challenge_attendees', to=settings.AUTH_USER_MODEL),
+            model_name="challenge",
+            name="attendees",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="challenge_attendees",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

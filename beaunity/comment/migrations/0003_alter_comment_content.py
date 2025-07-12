@@ -7,13 +7,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('comment', '0002_comment_content_comment_created_at_and_more'),
+        ("comment", "0002_comment_content_comment_created_at_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='comment',
-            name='content',
-            field=models.TextField(validators=[django.core.validators.MinLengthValidator(6)]),
+            model_name="comment",
+            name="content",
+            field=models.TextField(
+                validators=[django.core.validators.MinLengthValidator(6)]
+            ),
         ),
     ]

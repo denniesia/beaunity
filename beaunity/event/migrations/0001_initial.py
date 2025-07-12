@@ -17,27 +17,75 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Event',
+            name="Event",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('poster_image', cloudinary.models.CloudinaryField(max_length=255)),
-                ('title', models.CharField(max_length=100, validators=[django.core.validators.MinLengthValidator(10)])),
-                ('details', models.TextField(validators=[django.core.validators.MinLengthValidator(100)])),
-                ('online', models.BooleanField()),
-                ('city', models.CharField(max_length=100, validators=[django.core.validators.MinLengthValidator(2)])),
-                ('location', models.CharField(max_length=100, validators=[django.core.validators.MinLengthValidator(10)])),
-                ('meeting_link', models.URLField(blank=True, null=True)),
-                ('start_time', models.DateTimeField()),
-                ('end_time', models.DateTimeField(blank=True, null=True)),
-                ('is_public', models.BooleanField(default=False)),
-                ('attendees', models.ManyToManyField(blank=True, related_name='events_attendees', to=settings.AUTH_USER_MODEL)),
-                ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("poster_image", cloudinary.models.CloudinaryField(max_length=255)),
+                (
+                    "title",
+                    models.CharField(
+                        max_length=100,
+                        validators=[django.core.validators.MinLengthValidator(10)],
+                    ),
+                ),
+                (
+                    "details",
+                    models.TextField(
+                        validators=[django.core.validators.MinLengthValidator(100)]
+                    ),
+                ),
+                ("online", models.BooleanField()),
+                (
+                    "city",
+                    models.CharField(
+                        max_length=100,
+                        validators=[django.core.validators.MinLengthValidator(2)],
+                    ),
+                ),
+                (
+                    "location",
+                    models.CharField(
+                        max_length=100,
+                        validators=[django.core.validators.MinLengthValidator(10)],
+                    ),
+                ),
+                ("meeting_link", models.URLField(blank=True, null=True)),
+                ("start_time", models.DateTimeField()),
+                ("end_time", models.DateTimeField(blank=True, null=True)),
+                ("is_public", models.BooleanField(default=False)),
+                (
+                    "attendees",
+                    models.ManyToManyField(
+                        blank=True,
+                        related_name="events_attendees",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Events',
-                'permissions': [('can_approve_event', 'Can approve events'), ('can_join_event', 'Can join events'), ('can_host_event', 'Can host events')],
+                "verbose_name_plural": "Events",
+                "permissions": [
+                    ("can_approve_event", "Can approve events"),
+                    ("can_join_event", "Can join events"),
+                    ("can_host_event", "Can host events"),
+                ],
             },
         ),
     ]

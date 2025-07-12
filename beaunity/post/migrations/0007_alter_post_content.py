@@ -7,13 +7,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('post', '0006_alter_post_options'),
+        ("post", "0006_alter_post_options"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='post',
-            name='content',
-            field=models.TextField(validators=[django.core.validators.MinLengthValidator(6)]),
+            model_name="post",
+            name="content",
+            field=models.TextField(
+                validators=[django.core.validators.MinLengthValidator(6)]
+            ),
         ),
     ]

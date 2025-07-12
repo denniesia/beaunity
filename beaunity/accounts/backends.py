@@ -1,9 +1,9 @@
-from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth import get_user_model
+from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
 
-
 UserModel = get_user_model()
+
 
 class EmailOrUsernameModelBackend(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
@@ -11,7 +11,9 @@ class EmailOrUsernameModelBackend(ModelBackend):
             username = kwargs.get(UserModel.USERNAME_FIELD)
 
         try:
-            user = UserModel.objects.get(Q(email__iexact=username) | Q(username=username))
+            user = UserModel.objects.get(
+                Q(email__iexact=username) | Q(username=username)
+            )
         except UserModel.DoesNotExist:
             return None
 

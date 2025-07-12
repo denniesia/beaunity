@@ -8,23 +8,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('event', '0009_alter_event_is_public'),
+        ("event", "0009_alter_event_is_public"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='details',
+            model_name="event",
+            name="details",
             field=ckeditor.fields.RichTextField(),
         ),
         migrations.AlterField(
-            model_name='event',
-            name='is_online',
+            model_name="event",
+            name="is_online",
             field=models.BooleanField(default=False),
         ),
         migrations.AlterField(
-            model_name='event',
-            name='location',
-            field=models.CharField(blank=True, max_length=200, null=True, validators=[django.core.validators.MinLengthValidator(10)]),
+            model_name="event",
+            name="location",
+            field=models.CharField(
+                blank=True,
+                max_length=200,
+                null=True,
+                validators=[django.core.validators.MinLengthValidator(10)],
+            ),
         ),
     ]

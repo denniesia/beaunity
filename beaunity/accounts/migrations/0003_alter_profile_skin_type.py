@@ -6,13 +6,26 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0002_alter_profile_profile_pic'),
+        ("accounts", "0002_alter_profile_profile_pic"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='profile',
-            name='skin_type',
-            field=models.CharField(blank=True, choices=[('Normal Skin', 'Normal Skin'), ('Dry Skin', 'Dry Skin'), ('Oily Skin', 'Oily Skin'), ('Combination Skin', 'Combination Skin'), ('Combination Skin Oily', 'Combination Skin Oily'), ('Combination Skin Dry', 'Combination Skin Dry'), ('Sensitive Skin', 'Sensitive Skin')], max_length=30, null=True),
+            model_name="profile",
+            name="skin_type",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("Normal Skin", "Normal Skin"),
+                    ("Dry Skin", "Dry Skin"),
+                    ("Oily Skin", "Oily Skin"),
+                    ("Combination Skin", "Combination Skin"),
+                    ("Combination Skin Oily", "Combination Skin Oily"),
+                    ("Combination Skin Dry", "Combination Skin Dry"),
+                    ("Sensitive Skin", "Sensitive Skin"),
+                ],
+                max_length=30,
+                null=True,
+            ),
         ),
     ]

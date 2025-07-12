@@ -1,45 +1,25 @@
-from django.db import models
-from django.contrib.auth import get_user_model
-from cloudinary.models import CloudinaryField
-
-from django.core.validators import MinLengthValidator
-
 from ckeditor.fields import RichTextField
-
+from cloudinary.models import CloudinaryField
+from django.contrib.auth import get_user_model
+from django.core.validators import MinLengthValidator
+from django.db import models
 
 # Create your models here.
 
 UserModel = get_user_model()
 
+
 class BaseActivity(models.Model):
     poster_image = CloudinaryField()
-    title = models.CharField(
-        max_length=100,
-        validators=[
-            MinLengthValidator(10)
-        ]
-    )
+    title = models.CharField(max_length=100, validators=[MinLengthValidator(10)])
     details = RichTextField()
     is_online = models.BooleanField(default=False)
-    meeting_link = models.URLField(
-        blank=True,
-        null=True
-    )
+    meeting_link = models.URLField(blank=True, null=True)
     city = models.CharField(
-        null=True,
-        blank=True,
-        max_length=100,
-        validators=[
-            MinLengthValidator(2)
-        ]
+        null=True, blank=True, max_length=100, validators=[MinLengthValidator(2)]
     )
     location = models.CharField(
-        max_length=200,
-        blank=True,
-        null=True,
-        validators=[
-            MinLengthValidator(10)
-        ]
+        max_length=200, blank=True, null=True, validators=[MinLengthValidator(10)]
     )
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()

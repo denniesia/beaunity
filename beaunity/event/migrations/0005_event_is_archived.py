@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('event', '0004_alter_event_end_time'),
+        ("event", "0004_alter_event_end_time"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='is_archived',
+            model_name="event",
+            name="is_archived",
             field=models.BooleanField(default=False),
         ),
     ]

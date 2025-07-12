@@ -7,13 +7,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('event', '0010_alter_event_details_alter_event_is_online_and_more'),
+        ("event", "0010_alter_event_details_alter_event_is_online_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='city',
-            field=models.CharField(blank=True, max_length=100, null=True, validators=[django.core.validators.MinLengthValidator(2)]),
+            model_name="event",
+            name="city",
+            field=models.CharField(
+                blank=True,
+                max_length=100,
+                null=True,
+                validators=[django.core.validators.MinLengthValidator(2)],
+            ),
         ),
     ]

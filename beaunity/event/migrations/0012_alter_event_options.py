@@ -6,12 +6,15 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('event', '0011_alter_event_city'),
+        ("event", "0011_alter_event_city"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='event',
-            options={'permissions': [('can_join_event', 'Can join events')], 'verbose_name_plural': 'Events'},
+            name="event",
+            options={
+                "permissions": [("can_join_event", "Can join events")],
+                "verbose_name_plural": "Events",
+            },
         ),
     ]

@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('event', '0006_remove_event_is_archived'),
+        ("event", "0006_remove_event_is_archived"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='event',
-            name='is_public',
+            model_name="event",
+            name="is_public",
         ),
     ]

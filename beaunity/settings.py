@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
+
 import os
 from pathlib import Path
 
@@ -17,45 +18,47 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-#Cloudinary Imports
+# Cloudinary Imports
 import cloudinary
-import cloudinary.uploader
 import cloudinary.api
+import cloudinary.uploader
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('THE_SECRET_KEY', None)
+SECRET_KEY = config("THE_SECRET_KEY", None)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.ngrok.io', '4674-2-200-180-38.ngrok-free.app']
-
-CSRF_TRUSTED_ORIGINS = [
-    'https://4674-2-200-180-38.ngrok-free.app'
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    ".ngrok.io",
+    "4674-2-200-180-38.ngrok-free.app",
 ]
 
-SITE_ID = 2 #google login
+CSRF_TRUSTED_ORIGINS = ["https://4674-2-200-180-38.ngrok-free.app"]
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST = 'smtp.gmail.com'
+SITE_ID = 2  # google login
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 MY_APPS = [
-    'beaunity.accounts',
-    'beaunity.common',
-    'beaunity.category',
-    'beaunity.post',
-    'beaunity.comment',
-    'beaunity.event',
-    'beaunity.interaction',
-    'beaunity.challenge',
-
+    "beaunity.accounts",
+    "beaunity.common",
+    "beaunity.category",
+    "beaunity.post",
+    "beaunity.comment",
+    "beaunity.event",
+    "beaunity.interaction",
+    "beaunity.challenge",
 ]
 # Application definition
 
@@ -63,100 +66,94 @@ INSTALLED_APPS = [
     "unfold",  # before django.contrib.admin
     "unfold.contrib.filters",  # optional, if special filters are needed
     "unfold.contrib.forms",  # optional, if special form elements are needed
-    'django.contrib.auth',
-    'django.contrib.admin',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-
-    'tailwind',
-    'theme',
-    'django_browser_reload',
-    'cloudinary',
-    'cloudinary_storage',
-    'ckeditor',
-    'rest_framework',
-    'drf_spectacular',
-
-
+    "django.contrib.auth",
+    "django.contrib.admin",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "tailwind",
+    "theme",
+    "django_browser_reload",
+    "cloudinary",
+    "cloudinary_storage",
+    "ckeditor",
+    "rest_framework",
+    "drf_spectacular",
 ] + MY_APPS
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
     ],
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'beaunity',
-    'DESCRIPTION': 'Empowering the Self Through Community',
-    'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': False,
-
+    "TITLE": "beaunity",
+    "DESCRIPTION": "Empowering the Self Through Community",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
 }
 
 
 SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
+    "google": {
+        "SCOPE": [
+            "profile",
+            "email",
         ],
-        'AUTH_PARAMS': {'access_type': 'online'}
+        "AUTH_PARAMS": {"access_type": "online"},
     }
 }
 
-TAILWIND_APP_NAME = 'theme'
+TAILWIND_APP_NAME = "theme"
 
 INTERNAL_IPS = [
-    '127.0.0.1',
+    "127.0.0.1",
 ]
 
-NPM_BIN_PATH =r'C:\Program Files\nodejs\npm.cmd'
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_browser_reload.middleware.BrowserReloadMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
-
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
-ROOT_URLCONF = 'beaunity.urls'
+ROOT_URLCONF = "beaunity.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIR / "templates"],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'beaunity.wsgi.application'
+WSGI_APPLICATION = "beaunity.wsgi.application"
 
 
 # Database
@@ -192,17 +189,17 @@ DATABASES = {
 # ]
 
 AUTHENTICATION_BACKENDS = [
-    'beaunity.accounts.backends.EmailOrUsernameModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
+    "beaunity.accounts.backends.EmailOrUsernameModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'Europe/Berlin'
+TIME_ZONE = "Europe/Berlin"
 
 USE_I18N = True
 
@@ -212,33 +209,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = [
-    BASE_DIR  / 'static'
-]
+STATIC_URL = "static/"
+STATIC_ROOT = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_REDIRECT_URL = 'landing-page'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+LOGIN_REDIRECT_URL = "landing-page"
 
-LOGOUT_REDIRECT_URL = 'landing-page'
+LOGOUT_REDIRECT_URL = "landing-page"
 
-AUTH_USER_MODEL = 'accounts.AppUser'
+AUTH_USER_MODEL = "accounts.AppUser"
 
-#Cloudinary-Django intergration
+# Cloudinary-Django intergration
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': config('CLOUDINARY_API_KEY'),
-    'API_SECRET': config('CLOUDINARY_API_SECRET'),
+    "CLOUD_NAME": config("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": config("CLOUDINARY_API_KEY"),
+    "API_SECRET": config("CLOUDINARY_API_SECRET"),
 }
 cloudinary.config(
-    cloud_name=config('CLOUDINARY_CLOUD_NAME'),
-    api_key=config('CLOUDINARY_API_KEY'),
-    api_secret=config('CLOUDINARY_API_SECRET')
+    cloud_name=config("CLOUDINARY_CLOUD_NAME"),
+    api_key=config("CLOUDINARY_API_KEY"),
+    api_secret=config("CLOUDINARY_API_SECRET"),
 )
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"

@@ -13,34 +13,93 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('category', '0007_alter_category_image'),
+        ("category", "0007_alter_category_image"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Challenge',
+            name="Challenge",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('poster_image', cloudinary.models.CloudinaryField(max_length=255)),
-                ('title', models.CharField(max_length=100, validators=[django.core.validators.MinLengthValidator(10)])),
-                ('details', ckeditor.fields.RichTextField()),
-                ('is_online', models.BooleanField(default=False)),
-                ('meeting_link', models.URLField(blank=True, null=True)),
-                ('city', models.CharField(blank=True, max_length=100, null=True, validators=[django.core.validators.MinLengthValidator(2)])),
-                ('location', models.CharField(blank=True, max_length=200, null=True, validators=[django.core.validators.MinLengthValidator(10)])),
-                ('start_time', models.DateTimeField()),
-                ('end_time', models.DateTimeField()),
-                ('progress', models.PositiveIntegerField()),
-                ('difficulty', models.CharField(choices=[('Beginner', 'Beginner'), ('Intermediate', 'Intermediate'), ('Advanced', 'Advanced'), ('Legenary', 'Legenary')], max_length=15)),
-                ('categories', models.ManyToManyField(related_name='challenge_categories', to='category.category')),
-                ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('participants', models.ManyToManyField(blank=True, related_name='challenge_participants', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("poster_image", cloudinary.models.CloudinaryField(max_length=255)),
+                (
+                    "title",
+                    models.CharField(
+                        max_length=100,
+                        validators=[django.core.validators.MinLengthValidator(10)],
+                    ),
+                ),
+                ("details", ckeditor.fields.RichTextField()),
+                ("is_online", models.BooleanField(default=False)),
+                ("meeting_link", models.URLField(blank=True, null=True)),
+                (
+                    "city",
+                    models.CharField(
+                        blank=True,
+                        max_length=100,
+                        null=True,
+                        validators=[django.core.validators.MinLengthValidator(2)],
+                    ),
+                ),
+                (
+                    "location",
+                    models.CharField(
+                        blank=True,
+                        max_length=200,
+                        null=True,
+                        validators=[django.core.validators.MinLengthValidator(10)],
+                    ),
+                ),
+                ("start_time", models.DateTimeField()),
+                ("end_time", models.DateTimeField()),
+                ("progress", models.PositiveIntegerField()),
+                (
+                    "difficulty",
+                    models.CharField(
+                        choices=[
+                            ("Beginner", "Beginner"),
+                            ("Intermediate", "Intermediate"),
+                            ("Advanced", "Advanced"),
+                            ("Legenary", "Legenary"),
+                        ],
+                        max_length=15,
+                    ),
+                ),
+                (
+                    "categories",
+                    models.ManyToManyField(
+                        related_name="challenge_categories", to="category.category"
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "participants",
+                    models.ManyToManyField(
+                        blank=True,
+                        related_name="challenge_participants",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Challenges',
+                "verbose_name_plural": "Challenges",
             },
         ),
     ]
