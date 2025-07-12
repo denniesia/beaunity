@@ -13,4 +13,5 @@ urlpatterns = [
         path('disapprove/', views.disapprove_challenge, name='challenge-disapprove'),
     ])),
     path('pending/', views.PendingChallengeView.as_view(), name='challenge-pending'),
+    path('api/', include('beaunity.challenge.api_urls')),
 ]

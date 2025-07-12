@@ -79,9 +79,21 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
     'cloudinary',
+    'cloudinary_storage',
     'ckeditor',
+    'rest_framework',
 
 ] + MY_APPS
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {

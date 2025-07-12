@@ -79,6 +79,7 @@ class ActivityBaseForm(forms.ModelForm):
             }
         )
     )
+
     title = forms.CharField(
         label='Title:',
         widget=forms.TextInput(
@@ -87,6 +88,7 @@ class ActivityBaseForm(forms.ModelForm):
             }
         )
     )
+
     details = forms.CharField(
         label='Details:',
         widget=CKEditorWidget(
@@ -97,6 +99,7 @@ class ActivityBaseForm(forms.ModelForm):
         ),
         help_text='Please enter at least 100 characters describing the details.',
     )
+
     is_online = forms.BooleanField(
         label='Online event:',
         required=False,
@@ -112,6 +115,7 @@ class ActivityBaseForm(forms.ModelForm):
             }
         )
     )
+
     location = forms.CharField(
         label='Location:',
         required=False,
@@ -121,8 +125,8 @@ class ActivityBaseForm(forms.ModelForm):
             },
         ),
         help_text='Please enter the street, the city and the country, where the it will take place.',
-
     )
+
     meeting_link = forms.URLField(
         label='Meeting Link:',
         required=False,
@@ -132,6 +136,7 @@ class ActivityBaseForm(forms.ModelForm):
             }
         )
     )
+
     start_time = forms.DateTimeField(
         label='Start Time:',
         widget=forms.DateTimeInput(
@@ -143,6 +148,7 @@ class ActivityBaseForm(forms.ModelForm):
         ),
         input_formats=['%Y-%m-%dT%H:%M'],
     )
+
     end_time = forms.DateTimeField(
         label='End Time:',
         widget=forms.DateTimeInput(
@@ -154,6 +160,7 @@ class ActivityBaseForm(forms.ModelForm):
         ),
         input_formats=['%Y-%m-%dT%H:%M'],
     )
+
     categories = forms.ModelMultipleChoiceField(
         label='Categories:',
         queryset=Category.objects.all(),
