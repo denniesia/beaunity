@@ -20,9 +20,7 @@ from beaunity.accounts.models import Profile
 
 from beaunity.challenge.models import Challenge
 from django.contrib.contenttypes.models import ContentType
-from beaunity.interaction.models import Favourite
-
-
+from beaunity.interaction.models import Favourite, Like
 # Create your views here.
 class IndexView(TemplateView):
     template_name = 'common/landing-page.html'
@@ -175,6 +173,7 @@ class DashboardView(DetailView):
             'joined_events': Event.objects.filter(attendees=user),
             'joined_challenges': Challenge.objects.filter(attendees=user),
             'challenges': Challenge.objects.filter(created_by=user, is_approved=True).order_by('-start_time'),
-            'profile_user': user,  # optional: for easy reference in template
+            'likes': Like.objects.filter(user=user),
+            'favs': Favourite.objects.filter(user=user),
         })
         return context

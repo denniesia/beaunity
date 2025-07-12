@@ -159,6 +159,7 @@
 
                     <!-- My Events -->
                     <div class="mb-6">
+                        {% if perms.event.add_event %}
                         <h3 class="text-lg font-semibold text-pink-600 mb-1">My Events</h3>
                         <ul class="list-none list-inside text-sm text-gray-700 space-y-2 max-h-40 overflow-y-auto">
                             {% for event in my_events %}
@@ -180,10 +181,12 @@
                                 <li class="text-gray-700 italic">No challenges yet.</li>
                             {% endfor %}
                         </ul>
+                        {% endif %}
                     </div>
 
+                    {% if my_events %}
                     <hr class="my-4 border-t border-pink-300">
-
+                    {% endif %}
                     <!-- Fav Events -->
                     <div>
                         <h3 class="text-lg font-semibold text-pink-600 mb-1">Fav Events</h3>
@@ -236,25 +239,14 @@
                         </ul>
                     </div>
                 </div>
-                <!-- Challenges Section -->
+                <!-- Stats Section -->
                 <div class="bg-pink-100 rounded-2xl p-6 shadow-md">
                     <h2 class="text-2xl font-bold text-pink-700 mb-4">Stats</h2>
 
-                    <!-- My Challenges -->
                     <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-pink-600 mb-1">Stats</h3>
-{#                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 max-h-40 overflow-y-auto">#}
-{#                            {% for challenge in challenges %}#}
-{#                                <li class="hover:underline hover:text-pink-600 cursor-pointer">#}
-{#                                    <a href="{% url 'challenge-details' challenge.pk %}">{{ challenge.title }}</a>#}
-{#                                </li>#}
-{#                            {% empty %}#}
-{#                                <li class="text-gray-700 italic">No challenges yet.</li>#}
-{#                            {% endfor %}#}
-{#                        </ul>#}
+                        <h3 class="text-lg font-semibold text-pink-600 mb-1">Total Likes: {{  likes.count }}</h3>
+                        <h3 class="text-lg font-semibold text-pink-600 mb-1">Total favs: {{  favs.count }}</h3>
                     </div>
-
-                    <hr class="my-4 border-t border-pink-300">
 
                 </div>
             </section>
