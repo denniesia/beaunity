@@ -7,7 +7,7 @@ from beaunity.accounts.models.choices import SkinTypeChoices
 from cloudinary.forms import CloudinaryFileField
 from django.forms import ClearableFileInput
 from beaunity.common.utils.validators import CloudinaryExtensionandSizeValidator
-
+from django.core.exceptions import ValidationError
 
 UserModel = get_user_model()
 CLASS = 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
@@ -52,6 +52,12 @@ class AppUserCreationForm(UserCreationForm):
         )
     )
 
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if UserModel.objects.filter(email=email).exists():
+            raise ValidationError("This email is already in use.")
+        return email
+
 class AppUserLoginForm(AuthenticationForm):
     username = forms.CharField(
         label='Username or email',
@@ -69,6 +75,8 @@ class AppUserLoginForm(AuthenticationForm):
             }
         )
     )
+
+
 
 class AppUserEditForm(forms.ModelForm):
     class Meta:
