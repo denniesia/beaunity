@@ -69,11 +69,10 @@
             {% else %}
                 <h2 class="text-center text-pink-600">No pending posts</h2>
             {% endif %}
-        </div>
-        <div class="mt-4">
-            {% include 'common/paginator.html' %}
+            <div class="mt-4">
+                {% include 'common/paginator.html' %}
+            </div>
         </div>
     </section>
 {% endif %}
-
 {% endblock %}

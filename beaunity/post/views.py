@@ -193,7 +193,7 @@ def disapprove_post(request, pk):
         model_class=Post,
         pk=pk,
         permission_required='post.can_approve_post',
-        redirect_approved='post-pending',
+        redirect_disapproved='post-pending',
         redirect_fallback='post-pending',
     )
 #
