@@ -12,6 +12,6 @@ urlpatterns = [
         path('edit/', views.ProfileEditView.as_view(), name='profile-edit'),
         path('delete/', views.ProfileDeleteView.as_view(), name='profile-delete'),
     ])),
-
+    path('api/', include('beaunity.accounts.api_urls')),
 
 ]

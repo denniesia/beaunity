@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from decouple import config
@@ -50,7 +51,7 @@ EMAIL_HOST = config("EMAIL_HOST")
 EMAIL_PORT = config("EMAIL_PORT")
 EMAIL_USE_TLS = True
 
-MY_APPS = [
+PROJECT_APPS = [
     "beaunity.accounts",
     "beaunity.common",
     "beaunity.category",
@@ -85,16 +86,24 @@ INSTALLED_APPS = [
     "ckeditor",
     "rest_framework",
     "drf_spectacular",
-] + MY_APPS
+    "rest_framework_simplejwt",
+    "rest_framework_simplejwt.token_blacklist",
+
+] + PROJECT_APPS
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticatedOrReadOnly",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME":timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME":timedelta(days=1),
 }
 
 SPECTACULAR_SETTINGS = {
