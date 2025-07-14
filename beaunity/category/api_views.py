@@ -2,19 +2,12 @@ from beaunity.category.permissions import IsModeratorOrSuperuser
 from rest_framework.permissions import IsAdminUser
 from rest_framework.viewsets import ModelViewSet
 from .models import Category
-from beaunity.category.serializers import CategoryCreateSerializer, CategoryEditDeleteSerializer, CategoryViewSerializer
+from beaunity.category.serializers import CategorySerializer
 
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     permission_classes = [IsModeratorOrSuperuser]
-
-    def get_serializer_class(self):
-        if self.action == 'create':
-            return CategoryCreateSerializer
-        elif self.action in ['update', 'partial_update', 'destroy']:
-            return CatedoryEditDeleteSerializer
-        else:
-            return CategoryViewSerializer
+    serializer_class = CategorySerializer
 
     def perform_create(self, serializer):
         user = self.request.user

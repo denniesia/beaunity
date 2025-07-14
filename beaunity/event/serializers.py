@@ -1,9 +1,10 @@
 from rest_framework import serializers
-
 from beaunity.category.models import Category
 from beaunity.common.utils.validators import CloudinaryExtensionandSizeValidator
 from .models import Event
 import bleach
+from beaunity.accounts.serializers import UserSerialiazier
+
 
 class EventSerializer(serializers.ModelSerializer):
     categories = serializers.PrimaryKeyRelatedField(
@@ -11,13 +12,18 @@ class EventSerializer(serializers.ModelSerializer):
         queryset=Category.objects.all(),
         help_text='Please choose one or more categories.'
     )
+    created_by = UserSerialiazier(read_only=True)
+    is_public = serializers.BooleanField(read_only=True)
+    last_updated = serializers.DateTimeField(read_only=True)
+    created_at = serializers.DateTimeField(read_only=True)
 
     class Meta:
         model = Event
         fields = [
             'poster_image', 'title', 'details',
             'is_online', 'is_public', 'city', 'location', 'meeting_link',
-            'start_time', 'end_time', 'categories',
+            'start_time', 'end_time', 'categories', "last_updated", "created_by",
+            "created_at", 'is_public'
         ]
 
     def validate_details(self, value):
@@ -30,12 +36,3 @@ class EventSerializer(serializers.ModelSerializer):
         CloudinaryExtensionandSizeValidator()(image)
         return image
 
-class EventCreateSerializer(EventSerializer):
-    pass
-
-class EventEditDeleteSerializer(EventSerializer):
-    pass
-
-class EventViewSerializer(EventSerializer):
-    class Meta(EventSerializer.Meta):
-        fields = EventSerializer.Meta.fields + ["last_updated", "created_by", "created_at", 'is_public']

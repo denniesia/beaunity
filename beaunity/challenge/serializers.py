@@ -4,7 +4,7 @@ from beaunity.category.models import Category
 import bleach
 from drf_spectacular.utils import extend_schema_field
 from beaunity.common.utils.validators import CloudinaryExtensionandSizeValidator
-
+from beaunity.accounts.serializers import UserSerialiazier
 
 class ChallengeSerializer(serializers.ModelSerializer):
     categories = serializers.PrimaryKeyRelatedField(
@@ -12,6 +12,9 @@ class ChallengeSerializer(serializers.ModelSerializer):
         queryset=Category.objects.all(),
         help_text='Please choose one or more categories.'
     )
+    created_by = UserSerialiazier(read_only=True)
+    last_updated = serializers.DateTimeField(read_only=True)
+    created_at = serializers.DateTimeField(read_only=True)
 
     class Meta:
         model = Challenge
@@ -19,7 +22,7 @@ class ChallengeSerializer(serializers.ModelSerializer):
             'poster_image', 'title', 'details',
             'is_online', 'city', 'location', 'meeting_link',
             'start_time', 'end_time', 'categories',
-            'difficulty',
+            'difficulty', "last_updated", "created_by", "created_at"
         ]
 
 
@@ -32,12 +35,3 @@ class ChallengeSerializer(serializers.ModelSerializer):
     def validate_poster_image(self, image):
         CloudinaryExtensionandSizeValidator()(image)
         return image
-
-class ChallengeCreateSerializer(ChallengeSerializer):
-    pass
-class ChallengeEditDeleteSerializer(ChallengeSerializer):
-    pass
-
-class ChallengeViewSerializer(ChallengeSerializer):
-    class Meta(ChallengeSerializer.Meta):
-        fields = ChallengeSerializer.Meta.fields + ["last_updated", "created_by", "created_at"]

@@ -1,5 +1,5 @@
 from beaunity.common.permissions import IsCreator
-from beaunity.post.serializers import PostCreateSerializer, PostViewSerializer, PostEditDeleteSerializer
+from beaunity.post.serializers import PostSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.viewsets import ModelViewSet
 from .models import Post
@@ -7,14 +7,7 @@ from .models import Post
 class PostViewSet(ModelViewSet):
     queryset = Post.objects.all()
     permission_classes = [AllowAny]
-
-    def get_serializer_class(self):
-        if self.action == 'create':
-            return PostCreateSerializer
-        elif self.action in ['update', 'partial_update', 'destroy']:
-            return PostEditDeleteSerializer
-        else:
-            return PostViewSerializer
+    serializer_class = PostSerializer
 
     def get_permissions(self):
         if self.action in ['update', 'partial_update', 'destroy']:

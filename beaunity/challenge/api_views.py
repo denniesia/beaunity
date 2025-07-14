@@ -8,20 +8,13 @@ from .permissions import CanApprove
 
 from rest_framework.response import Response
 from rest_framework import status
-from beaunity.challenge.serializers import ChallengeViewSerializer, ChallengeCreateSerializer, ChallengeEditDeleteSerializer
+from beaunity.challenge.serializers import ChallengeSerializer
 
 
 class ChallengeViewSet(ModelViewSet):
     queryset = Challenge.objects.all()
+    serializer_class = ChallengeSerializer
     permission_classes = [IsAuthenticated]
-
-    def get_serializer_class(self):
-        if self.action == 'create':
-            return ChallengeCreateSerializer
-        elif self.action in ['update', 'partial_update', 'destroy']:
-            return ChallengeEditDeleteSerializer
-        else:
-            return ChallengeViewSerializer
 
     def get_permissions(self):
         if self.action in ['update', 'partial_update', 'destroy']:
