@@ -57,27 +57,30 @@
 
 {% if not page_obj.has_next %}
 
+    {% if request.user.is_authenticated %}
+        <!-- Comment Form -->
+        <form method="post" id="comment-form" class="flex items-center justify-between gap-2">
+            {% csrf_token %}
+            {{ form.content }}
+            {{ form.content.errors }}
 
-<!-- Comment Form -->
-<form method="post" id="comment-form" class="flex items-center justify-between gap-2">
-    {% csrf_token %}
-    {{ form.content }}
-    {{ form.content.errors }}
+            <div class="w-[30px]">
 
-    <div class="w-[30px]">
+                <button id="submit-btn" type="submit"
+                        class="text-pink-500 transition duration-200"
+                        style="display: none;">
 
-        <button id="submit-btn" type="submit"
-                class="text-pink-500 transition duration-200"
-                style="display: none;">
-
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 cursor-pointer" fill="none"
-                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M4 4l16 8-16 8v-6l10-2-10-2V4z"/>
-            </svg>
-        </button>
-    </div>
-</form>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 cursor-pointer" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M4 4l16 8-16 8v-6l10-2-10-2V4z"/>
+                    </svg>
+                </button>
+            </div>
+        </form>
+    {% else %}
+        <p class="text-xs text-gray-500 mb-2"><a href="{% url 'login' %}" class="hover:text-blue-600">Login</a> to comment.</p>
+    {% endif %}
 {% endif %}
 
 
