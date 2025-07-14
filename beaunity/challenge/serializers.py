@@ -6,7 +6,7 @@ from drf_spectacular.utils import extend_schema_field
 from beaunity.common.utils.validators import CloudinaryExtensionandSizeValidator
 
 
-class ChallengeCreateSerializer(serializers.ModelSerializer):
+class ChallengeSerializer(serializers.ModelSerializer):
     categories = serializers.PrimaryKeyRelatedField(
         many=True,
         queryset=Category.objects.all(),
