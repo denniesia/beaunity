@@ -9,9 +9,7 @@ from beaunity.interaction.models import Favourite, Like
 
 
 # Create your models here.
-class Post(
-    CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, IsApprovedMixin, ContentMixin
-):
+class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, IsApprovedMixin, ContentMixin):
     banner = models.URLField(null=True, blank=True)
     title = models.CharField(
         max_length=100,
