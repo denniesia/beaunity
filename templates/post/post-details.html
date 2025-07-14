@@ -85,7 +85,12 @@
 
         <!-- Comments Section -->
         <p class="text-sm font-semibold text-gray-800 mb-2 mt-4">Comments:</p>
-            {% include 'comment/comments.html' %}
+            {% if request.user.is_authenticated %}
+            	{% include 'comment/comments.html' %}
+            {% else %}
+                <p class="text-small text-gray-500 mb-2"><a href="{% url 'login' %}" class="hover:text-blue-600">Login</a> to see the comments.</p>
+            {% endif %}
+
         {% endif %}
     </div>
 

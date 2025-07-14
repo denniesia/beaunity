@@ -8,8 +8,10 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   TemplateView, UpdateView)
+
 from oauthlib.uri_validate import query
 
 from beaunity.category.models import Category
@@ -100,6 +102,7 @@ def post_confirmation(request):
     return render(request, "post/post-create-confirmation.html")
 
 
+@method_decorator(login_required, name='post')
 class PostDetailsView(DetailView):
     model = Post
     template_name = "post/post-details.html"
