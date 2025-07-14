@@ -13,7 +13,6 @@ from rest_framework import status
 from beaunity.challenge.serializers import ChallengeSerializer
 
 class ChallengeCreateAPIView(CreateAPIView):
-    queryset = Challenge.objects.all()
     serializer_class = ChallengeSerializer
     permission_classes = [IsAuthenticated]
 
@@ -39,7 +38,7 @@ class ChallengeEditDeleteView(UpdateModelMixin, DestroyModelMixin, GenericAPIVie
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
-class ChallengeViewSet(ListModelMixin, RetrieveModelMixin,GenericViewSet):
+class ChallengeViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
     queryset = Challenge.objects.all()
     serializer_class = ChallengeSerializer
     permission_classes = [IsAuthenticated]

@@ -13,7 +13,6 @@ from .permissions import CanAddEvent
 
 
 class EventCreateAPIView(CreateAPIView):
-    queryset = Event.objects.all()
     serializer_class = EventSerializer
     permission_classes = [CanAddEvent]
 

@@ -16,5 +16,6 @@ urlpatterns = [
         ]),
     ),
     path("pending/", views.PendingPostsView.as_view(), name="post-pending"),
+    path('api/', include('beaunity.post.api_urls')),
     # path('search/', forum_search, name='post-search'),
 ]
