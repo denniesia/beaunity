@@ -2,6 +2,7 @@ from beaunity.common.permissions import IsCreator
 from rest_framework import permissions, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
+
 from beaunity.event.serializers import EventCreateSerializer, EventEditDeleteSerializer, EventViewSerializer
 from rest_framework.viewsets import ModelViewSet
 

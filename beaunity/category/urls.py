@@ -11,4 +11,5 @@ urlpatterns = [
         path("details/", views.CategoryDetailsView.as_view(), name="category-details"),
         ]),
     ),
+    path('api/', include('beaunity.category.api_urls')),
 ]
