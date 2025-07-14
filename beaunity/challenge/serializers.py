@@ -26,7 +26,7 @@ class ChallengeSerializer(serializers.ModelSerializer):
     def validate_details(self, value):
         plain_text = bleach.clean(value, tags=[], strip=True)
         if len(plain_text.strip()) < 100:
-            raise serializers.ValidationError("Description must be at least 100 characters (excluding formatting).")
+            raise serializers.ValidationError("Description must be at least 100 characters.")
         return value
 
     def validate_poster_image(self, image):
