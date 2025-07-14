@@ -1,8 +1,9 @@
 from beaunity.challenge.permissions import IsCreator
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import viewsets, permissions
-from rest_framework.generics import CreateAPIView, GenericAPIView
-from rest_framework.mixins import UpdateModelMixin, DestroyModelMixin
+from rest_framework.generics import CreateAPIView, GenericAPIView, ListAPIView
+from rest_framework.mixins import UpdateModelMixin, DestroyModelMixin, ListModelMixin, RetrieveModelMixin
+from rest_framework.viewsets import GenericViewSet
 from .models import Challenge
 from rest_framework.permissions import IsAuthenticated
 from .permissions import CanApprove
@@ -71,3 +72,8 @@ class ChallengeEditDeleteView(UpdateModelMixin, DestroyModelMixin, GenericAPIVie
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+
+class ChallengeViewSet(ListModelMixin, RetrieveModelMixin,GenericViewSet):
+    queryset = Challenge.objects.all()
+    serializer_class = ChallengeSerializer
+    permission_classes = [IsAuthenticated]
