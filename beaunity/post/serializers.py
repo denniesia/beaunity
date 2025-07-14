@@ -2,12 +2,11 @@ from rest_framework import serializers
 from .models import Post
 from beaunity.category.models import Category
 from beaunity.accounts.serializers import UserSerialiazier
+from beaunity.category.serializers import CategorySerializer
+
 
 class PostSerializer(serializers.ModelSerializer):
-    category = serializers.PrimaryKeyRelatedField(
-        queryset=Category.objects.all(),
-        help_text='Please choose one category.'
-    )
+    categories = CategorySerializer(many=True, read_only=True)
     created_by = UserSerialiazier(read_only=True)
     last_updated = serializers.DateTimeField(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)
