@@ -35,5 +35,5 @@ class PostEditDeleteView(UpdateModelMixin, DestroyModelMixin, GenericAPIView):
     def patch(self, request, *args, **kwargs):
         return self.partial_update(request, *args, **kwargs)
 
-    def destroy(self, request, *args, **kwargs):
+    def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)

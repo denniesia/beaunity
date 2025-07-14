@@ -5,7 +5,7 @@ from rest_framework.mixins import UpdateModelMixin, DestroyModelMixin, ListModel
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import CreateAPIView, GenericAPIView
-from beaunity.event.serializers import EventSerializer
+from beaunity.event.serializers import EventCreateSerializer, EventEditDeleteSerializer, EventViewSerializer
 from rest_framework.viewsets import GenericViewSet
 
 from .models import Event
@@ -13,7 +13,7 @@ from .permissions import CanAddEvent
 
 
 class EventCreateAPIView(CreateAPIView):
-    serializer_class = EventSerializer
+    serializer_class = EventCreateSerializer
     permission_classes = [CanAddEvent]
 
     def perform_create(self, serializer):
@@ -23,7 +23,7 @@ class EventCreateAPIView(CreateAPIView):
 
 class EventEditDeleteView(UpdateModelMixin, DestroyModelMixin, GenericAPIView):
     queryset = Event.objects.all()
-    serializer_class = EventSerializer
+    serializer_class = EventEditDeleteSerializer
     permission_classes = [IsCreator]
 
     def put(self, request, *args, **kwargs):
@@ -37,5 +37,5 @@ class EventEditDeleteView(UpdateModelMixin, DestroyModelMixin, GenericAPIView):
 
 class EventViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
     queryset = Event.objects.all()
-    serializer_class = EventSerializer
+    serializer_class = EventViewSerializer
     permission_classes = [IsAuthenticated]

@@ -6,7 +6,7 @@ from beaunity.category.models import Category
 class PostSerializer(serializers.ModelSerializer):
     category = serializers.PrimaryKeyRelatedField(
         queryset=Category.objects.all(),
-        help_text='Please choose one or more categories.'
+        help_text='Please choose one category.'
     )
     class Meta:
         model = Post

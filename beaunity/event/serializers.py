@@ -29,3 +29,13 @@ class EventSerializer(serializers.ModelSerializer):
     def validate_poster_image(self, image):
         CloudinaryExtensionandSizeValidator()(image)
         return image
+
+class EventCreateSerializer(EventSerializer):
+    pass
+
+class EventEditDeleteSerializer(EventSerializer):
+    pass
+
+class EventViewSerializer(EventSerializer):
+    class Meta(EventSerializer.Meta):
+        fields = EventSerializer.Meta.fields + ["last_updated", "created_by", "created_at", 'is_public']

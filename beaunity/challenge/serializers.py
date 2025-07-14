@@ -32,3 +32,12 @@ class ChallengeSerializer(serializers.ModelSerializer):
     def validate_poster_image(self, image):
         CloudinaryExtensionandSizeValidator()(image)
         return image
+
+class ChallengeCreateSerializer(ChallengeSerializer):
+    pass
+class ChallengeEditDeleteSerializer(ChallengeSerializer):
+    pass
+
+class ChallengeViewSerializer(ChallengeSerializer):
+    class Meta(ChallengeSerializer.Meta):
+        fields = ChallengeSerializer.Meta.fields + ["last_updated", "created_by", "created_at"]

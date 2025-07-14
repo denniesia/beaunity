@@ -10,10 +10,10 @@ from .permissions import CanApprove
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
-from beaunity.challenge.serializers import ChallengeSerializer
+from beaunity.challenge.serializers import ChallengeViewSerializer, ChallengeCreateSerializer, ChallengeEditDeleteSerializer
 
 class ChallengeCreateAPIView(CreateAPIView):
-    serializer_class = ChallengeSerializer
+    serializer_class = ChallengeCreateSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
@@ -26,7 +26,7 @@ class ChallengeCreateAPIView(CreateAPIView):
 
 class ChallengeEditDeleteView(UpdateModelMixin, DestroyModelMixin, GenericAPIView):
     queryset = Challenge.objects.all()
-    serializer_class = ChallengeSerializer
+    serializer_class = ChallengeEditDeleteSerializer
     permission_classes = [IsCreator]
 
     def put(self, request, *args, **kwargs):
@@ -40,5 +40,5 @@ class ChallengeEditDeleteView(UpdateModelMixin, DestroyModelMixin, GenericAPIVie
 
 class ChallengeViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
     queryset = Challenge.objects.all()
-    serializer_class = ChallengeSerializer
+    serializer_class = ChallengeViewSerializer
     permission_classes = [IsAuthenticated]
