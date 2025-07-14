@@ -1,44 +1,39 @@
 from beaunity.common.permissions import IsCreator
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import viewsets, permissions
-from rest_framework.generics import CreateAPIView, GenericAPIView, ListAPIView
-from rest_framework.mixins import UpdateModelMixin, DestroyModelMixin, ListModelMixin, RetrieveModelMixin
-from rest_framework.viewsets import GenericViewSet
+from rest_framework.viewsets import  ModelViewSet
 from .models import Challenge
 from rest_framework.permissions import IsAuthenticated
 from .permissions import CanApprove
-from rest_framework.decorators import action
+
 from rest_framework.response import Response
 from rest_framework import status
 from beaunity.challenge.serializers import ChallengeViewSerializer, ChallengeCreateSerializer, ChallengeEditDeleteSerializer
 
-class ChallengeCreateAPIView(CreateAPIView):
-    serializer_class = ChallengeCreateSerializer
+
+class ChallengeViewSet(ModelViewSet):
+    queryset = Challenge.objects.all()
     permission_classes = [IsAuthenticated]
+
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return ChallengeCreateSerializer
+        elif self.action in ['update', 'partial_update', 'destroy']:
+            return ChallengeEditDeleteSerializer
+        else:
+            return ChallengeViewSerializer
+
+    def get_permissions(self):
+        if self.action in ['update', 'partial_update', 'destroy']:
+            return [IsCreator()]
+        return [IsAuthenticated()]
 
     def perform_create(self, serializer):
         user = self.request.user
         challenge = serializer.save(created_by=user)
 
-        if user.has_perm('challenge.can_approve_challenge'):
+        if user.has_perm('challenge.can_post_without_approval'):
             challenge.is_approved = True
             challenge.save()
 
-class ChallengeEditDeleteView(UpdateModelMixin, DestroyModelMixin, GenericAPIView):
-    queryset = Challenge.objects.all()
-    serializer_class = ChallengeEditDeleteSerializer
-    permission_classes = [IsCreator]
 
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-
-    def patch(self, request, *args, **kwargs):
-        return self.partial_update(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
-
-class ChallengeViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
-    queryset = Challenge.objects.all()
-    serializer_class = ChallengeViewSerializer
-    permission_classes = [IsAuthenticated]

@@ -1,41 +1,34 @@
 from beaunity.common.permissions import IsCreator
 from rest_framework import permissions, viewsets
 from rest_framework.decorators import action
-from rest_framework.mixins import UpdateModelMixin, DestroyModelMixin, ListModelMixin, RetrieveModelMixin
-from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.generics import CreateAPIView, GenericAPIView
 from beaunity.event.serializers import EventCreateSerializer, EventEditDeleteSerializer, EventViewSerializer
-from rest_framework.viewsets import GenericViewSet
+from rest_framework.viewsets import ModelViewSet
 
 from .models import Event
 from .permissions import CanAddEvent
 
 
-class EventCreateAPIView(CreateAPIView):
-    serializer_class = EventCreateSerializer
-    permission_classes = [CanAddEvent]
+class EventViewSet(ModelViewSet):
+    queryset = Event.objects.all()
+    permission_classes = [IsAuthenticated, CanAddEvent]
+
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return EventCreateSerializer
+        elif self.action in ['update', 'partial_update', 'destroy']:
+            return EventEditDeleteSerializer
+        else:
+            return EventViewSerializer
+
+    def get_permissions(self):
+        if self.action in ['update', 'partial_update', 'destroy']:
+            return [IsCreator()]
+        elif self.action == 'create':
+            return [IsAuthenticated(), CanAddEvent()]
+        return [IsAuthenticated()]
 
     def perform_create(self, serializer):
         user = self.request.user
         event = serializer.save(created_by=user)
 
-
-class EventEditDeleteView(UpdateModelMixin, DestroyModelMixin, GenericAPIView):
-    queryset = Event.objects.all()
-    serializer_class = EventEditDeleteSerializer
-    permission_classes = [IsCreator]
-
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-
-    def patch(self, request, *args, **kwargs):
-        return self.partial_update(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
-
-class EventViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
-    queryset = Event.objects.all()
-    serializer_class = EventViewSerializer
-    permission_classes = [IsAuthenticated]
