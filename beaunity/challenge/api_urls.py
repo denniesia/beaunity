@@ -1,12 +1,10 @@
+from beaunity.challenge.api_views import ChallengeCreateAPIView
 from django.urls import path, include
 
-from rest_framework.routers import DefaultRouter
-from .api_views import ChallengeViewSet
+from . import api_views
 
-router = DefaultRouter()
-router.register(r'challenges', ChallengeViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('create/', ChallengeCreateAPIView.as_view(), name='api-create-challenge' ),
 
 ]
