@@ -129,6 +129,7 @@ def approve_challenge(request, pk):
         request=request,
         model_class=Challenge,
         pk=pk,
+        content_type='challenge',
         permission_required='challenge.can_approve_challenge',
         redirect_approved='challenge-pending',
         redirect_fallback='challenge-pending',

@@ -193,6 +193,7 @@ def approve_post(request, pk):
         request=request,
         model_class=Post,
         pk=pk,
+        content_type='post',
         permission_required="post.can_approve_post",
         redirect_approved="post-pending",
         redirect_fallback="post-pending",
