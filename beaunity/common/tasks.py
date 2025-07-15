@@ -3,7 +3,7 @@ from django.core.mail import send_mail
 from django.contrib.auth import get_user_model
 
 @shared_task()
-def send_approval_email( user_id, object_type, object_title):
+def send_approval_email( user_id, object_type, object_title=None):
     User = get_user_model()
     user = User.objects.get(id=user_id)
 
@@ -15,6 +15,10 @@ def send_approval_email( user_id, object_type, object_title):
         'challenge': {
             'subject': 'Challenge submission approved',
             'message': f'Hi {user.username},\n\nYour challenge "{object_title}" is now live!'
+        },
+        'user': {
+            'subject': "Welcome to beaunity!",
+            'message': f"Hi {user.username},\n\nWe're excited to have you on board."
         }
     }
 
