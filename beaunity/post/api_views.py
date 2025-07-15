@@ -3,6 +3,9 @@ from beaunity.post.serializers import PostSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.viewsets import ModelViewSet
 from .models import Post
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from beaunity.category.models import Category
 
 class PostViewSet(ModelViewSet):
     queryset = Post.objects.all()

@@ -2,6 +2,11 @@ from rest_framework import serializers
 from .models import Category
 from beaunity.accounts.serializers import UserSerialiazier
 
+class CategorySimpleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('title', 'description')
+
 
 class CategorySerializer(serializers.ModelSerializer):
     created_by = UserSerialiazier(read_only=True)

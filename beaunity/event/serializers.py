@@ -4,11 +4,11 @@ from beaunity.common.utils.validators import CloudinaryExtensionandSizeValidator
 from .models import Event
 import bleach
 from beaunity.accounts.serializers import UserSerialiazier
-from beaunity.category.serializers import CategorySerializer
+from beaunity.category.serializers import CategorySimpleSerializer
 
 
 class EventSerializer(serializers.ModelSerializer):
-    categories = CategorySerializer(many=True, read_only=True)
+    categories = CategorySimpleSerializer(many=True, read_only=True)
     created_by = UserSerialiazier(read_only=True)
     is_public = serializers.BooleanField(read_only=True)
     last_updated = serializers.DateTimeField(read_only=True)
@@ -33,3 +33,9 @@ class EventSerializer(serializers.ModelSerializer):
         CloudinaryExtensionandSizeValidator()(image)
         return image
 
+class EventCreateSerializer(EventSerializer):
+    categories = serializers.SlugRelatedField(
+        queryset=Category.objects.all(),
+        slug_field='title',
+        many=True,
+    )
