@@ -25,7 +25,7 @@ from django.contrib.contenttypes.models import ContentType
 from beaunity.interaction.models import Favourite, Like
 from django.contrib.auth.mixins import LoginRequiredMixin
 from beaunity.common.tasks import send_approval_email
-
+from django.contrib.auth.models import Group
 # Create your views here.
 class IndexView(TemplateView):
     template_name = 'common/landing-page.html'
@@ -193,6 +193,15 @@ class DashboardView(LoginRequiredMixin, DetailView):
             'comments_challenges': comments_challenges.count(),
             'comments_posts': comments_posts.count(),
         })
+
+        if self.request.user.is_superuser:
+            context.update({
+                'superusers': Group.objects.filter(name='Superuser').count(),
+                'moderators': Group.objects.filter(name='Moderator').count(),
+                'organizer': Group.objects.filter(name='Organizer').count(),
+                'users': UserModel.objects.count(),
+            })
+
         return context
 
 
