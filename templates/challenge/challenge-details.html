@@ -21,13 +21,22 @@
         <div class="relative w-full h-64 rounded overflow-hidden">
             <img src="{{ challenge.poster_image.url }}" class="w-full h-full">
             <!--- Favourite -->
-            <div class="absolute top-2 left-2 text-normal justify-center text-pink-600 font-semibold px-8 py-4 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">
-                {% include 'interaction/favourite.html' with obj=challenge model_name='challenge' %}
-            </div>
-            <!-- Join -->
-            <div class="absolute bottom-2 left-2 text-normal text-pink-600 font-semibold px-10 py-3 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">
-                <div class="flex items-center text-2xs cursor-pointer gap-1">
-                    {% include 'interaction/join.html' with model_name='challenge' pk=challenge.pk %}
+            {% if challenge.is_new %}
+                <div class="absolute top-3 left-2 flex items-center gap-3 text-normal font-semibold px-10 py-4 rounded-full shadow-md z-10" style="background-color: white;">
+                    <p class="text-pink-900"> New ✨</p>
+                </div>
+            {% endif %}
+            <div class="absolute bottom-2 left-2 flex gap-2">
+                <!-- Join -->
+                <div class="text-normal text-pink-600 font-semibold px-10 py-3 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">
+                    <div class="flex items-center text-2xs cursor-pointer gap-1">
+                        {% include 'interaction/join.html' with model_name='challenge' pk=challenge.pk %}
+                    </div>
+                </div>
+
+                <!-- Favourite -->
+                <div class="text-normal text-pink-600 font-semibold px-8 py-4 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">
+                    {% include 'interaction/favourite.html' with obj=challenge model_name='challenge' %}
                 </div>
             </div>
             {% if request.user == challenge.created_by %}
@@ -140,10 +149,10 @@
             <!-- Right: Location / Map (smaller) -->
             <div class="flex-1">
                 {% if challenge.is_online and challenge.meeting_link %}
-                    <p class="text-sm font-semibold text-pink-700">Meeting Link:</p>
-                    <a href="{{ challenge.meeting_link }}" class="text-sm text-gray-700 hover:underline hover:text-blue-600">{{ challenge.meeting_link }}</a>
+                    <p class="text-sm font-semibold text-pink-700 ml-4 ">Meeting Link:</p>
+                    <a href="{{ challenge.meeting_link }}" class="text-sm text-gray-700 hover:underline hover:text-blue-600 ml-4 mb-4">{{ challenge.meeting_link }}</a>
                 {% endif %}
-                <div class="flex items-center gap-2 ml-4 mb-2">
+                <div class="flex items-center gap-2 mt-2 ml-4 mb-2">
                     <p class="text-sm font-semibold text-pink-700 ">Difficulty: </p>
                     <p class="text-sm text-gray-700">{{ challenge.difficulty }}</p>
                 </div>
