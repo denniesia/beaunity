@@ -11,6 +11,8 @@ from beaunity.event.models import Event, UserModel
 from beaunity.category.models import Category
 from beaunity.challenge.models import Challenge
 
+from beaunity.comment.models import Comment
+
 from beaunity.accounts.models import AppUser
 from django.db.models import Q
 from django.utils.timezone import now
@@ -131,6 +133,14 @@ class DashboardView(DetailView):
                 content_type=event_content_type,
             ).values_list('object_id', flat=True)
         )
+        liked_events = Like.objects.filter(
+            user=user,
+            content_type=event_content_type,
+        )
+        comments_events = Comment.objects.filter(
+            created_by=user,
+            content_type=event_content_type,
+        )
 
         post_content_type = ContentType.objects.get_for_model(Post)
         fav_posts = Post.objects.filter(
@@ -138,6 +148,14 @@ class DashboardView(DetailView):
                 user=user,
                 content_type=post_content_type,
             ).values_list('object_id', flat=True)
+        )
+        liked_posts = Like.objects.filter(
+            user=user,
+            content_type=post_content_type,
+        )
+        comments_posts = Comment.objects.filter(
+            created_by=user,
+            content_type=post_content_type,
         )
 
         challenge_content_type = ContentType.objects.get_for_model(Challenge)
@@ -147,6 +165,17 @@ class DashboardView(DetailView):
                 content_type=challenge_content_type,
             ).values_list('object_id', flat=True)
         )
+        liked_challenges = Like.objects.filter(
+            user=user,
+            content_type=challenge_content_type,
+        )
+        comments_challenges = Comment.objects.filter(
+            created_by=user,
+            content_type=challenge_content_type,
+        )
+
+
+
 
         context.update({
             'fav_events': fav_events,
@@ -159,6 +188,13 @@ class DashboardView(DetailView):
             'challenges': Challenge.objects.filter(created_by=user, is_approved=True).order_by('-start_time'),
             'likes': Like.objects.filter(user=user),
             'favs': Favourite.objects.filter(user=user),
+            'liked_posts': liked_posts.count(),
+            'liked_events': liked_events.count(),
+            'liked_challenges': liked_challenges.count(),
+            'comments': Comment.objects.filter(created_by=user),
+            'comments_events': comments_events.count(),
+            'comments_challenges': comments_challenges.count(),
+            'comments_posts': comments_posts.count(),
         })
         return context
 
