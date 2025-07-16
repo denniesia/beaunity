@@ -13,6 +13,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.mixins import LoginRequiredMixin
 from beaunity.common.mixins import UserIsSelfMixin
 from beaunity.challenge.models import Challenge
+from .decorators import superuser_required
+from django.contrib.auth.models import Group
 # Create your views here.
 
 UserModel = get_user_model()
@@ -99,5 +101,38 @@ class ProfileDeleteView(LoginRequiredMixin,UserIsSelfMixin, DeleteView):
         logout(request)
         return redirect(self.success_url)
 
+@superuser_required
+def make_superuser(request, pk):
+    profile = get_object_or_404(Profile, pk=pk)
+    user = profile.user
+    user.groups.clear()
+    group = Group.objects.get(name='Superuser')
+    user.groups.add(group)
+    return redirect('profile-details', pk)
 
+@superuser_required
+def make_moderator(request, pk):
+    profile = get_object_or_404(Profile, pk=pk)
+    user = profile.user
+    user.groups.clear()
+    group = Group.objects.get(name='Moderator')
+    user.groups.add(group)
+    return redirect('profile-details', pk=pk)
 
+@superuser_required
+def make_organizer(request, pk):
+    profile = get_object_or_404(Profile, pk=pk)
+    user = profile.user
+    user.groups.clear()
+    group = Group.objects.get(name='Organizer')
+    user.groups.add(group)
+    return redirect('profile-details', pk=pk)
+
+@superuser_required
+def remove_roles(request, pk):
+    profile = get_object_or_404(Profile, pk=pk)
+    user = profile.user
+    user.groups.clear()
+    group = Group.objects.get(name='User')
+    user.groups.add(group)
+    return redirect('profile-details', pk=pk)

@@ -11,6 +11,10 @@ urlpatterns = [
         path('', views.ProfileDetailView.as_view(), name='profile-details'),
         path('edit/', views.ProfileEditView.as_view(), name='profile-edit'),
         path('delete/', views.ProfileDeleteView.as_view(), name='profile-delete'),
+        path('make-superuser/', views.make_superuser, name='make-superuser'),
+        path('make-moderator/', views.make_moderator, name='make-moderator'),
+        path('make-organizer/', views.make_organizer, name='make-organizer'),
+        path('remove-roles/', views.remove_roles, name='remove-roles'),
     ])),
     path('api/', include('beaunity.accounts.api_urls')),
 

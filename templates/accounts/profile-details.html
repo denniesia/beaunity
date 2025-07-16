@@ -7,17 +7,76 @@
         <!-- Profile Box -->
         <section class="relative text-center space-y-4 border-2 border-pink-300 rounded-2xl p-6">
             {% if not profile.user.is_active %}
-                <p class="inline-block bg-red-100 text-red-800 text-sm font-semibold px-3 py-1 rounded-full border border-red-300 shadow-sm">
+                <p class="inline-block bg-red-100 text-red-800 text-sm font-semibold px-3 py-1 rounded-full border border-red-300 shadow-sm" >
                     This profile is no longer active
                 </p>
             {% endif %}
             {% if request.user.is_staff %}
-            	<div class="absolute top-4 left-2 flex items-center gap-4 bg-white font-semibold text-white text-normal px-3 py-1 rounded-full shadow-md">
-                    {% for group in user_groups %}
-                        <p style="color:#19B26D">{{ group.name }}</p>
-                    {% endfor %}
+
+                <div class="relative inline-block text-left">
+                {% for group in user_groups %}
+                    <button type="button"
+                            class="inline-flex justify-center rounded-full bg-white px-3 py-1 font-semibold shadow-md hover:bg-gray-100 focus:outline-none"
+                            style="color: #19B26D"
+                            id="menu-button" aria-expanded="true" aria-haspopup="true">
+                        {{ group.name }}
+                        <svg class="-mr-1 ml-2 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+
+
+                    <div class="origin-top-left absolute left-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10 hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" id="dropdown-menu">
+                        <div class="py-1" role="none">
+                            {% if group.name != 'Superuser' %}
+                                <form method="post" action="{% url 'make-superuser' profile.pk  %}">
+                                    {% csrf_token %}
+                                    <button type="submit"
+                                        class="block w-full text-left px-4 py-2 text-sm  text-pink-600 hover:bg-green-100 hover:text-green-800 whitespace-nowrap">
+                                        Make Superuser
+                                    </button>
+                                </form>
+                            {% endif %}
+
+                            {% if group.name != 'Moderator' %}
+                                <form method="post" action="{% url 'make-moderator' profile.pk %}">
+                                    {% csrf_token %}
+                                    <button type="submit"
+                                        class="block w-full text-left px-4 py-2 text-sm text-pink-600 hover:bg-blue-100 hover:text-blue-800 whitespace-nowrap">
+                                        Make Moderator
+                                    </button>
+                                </form>
+                            {% endif %}
+
+                            {% if group.name != 'Organizer' %}
+                                <form method="post" action="{% url 'make-organizer' profile.pk  %}">
+                                    {% csrf_token %}
+                                    <button type="submit"
+                                        class="block w-full text-left px-4 py-2 text-sm text-pink-600  hover:bg-blue-100 hover:text-blue-800 whitespace-nowrap">
+                                        Make Organizer
+                                    </button>
+                                </form>
+                            {% endif %}
+
+                            {% if group.name != 'User' %}
+                                <form method="post" action="{% url 'remove-roles' profile.pk  %}">
+                                    {% csrf_token %}
+                                    <button type="submit"
+                                            class="block w-full text-left px-4 py-2 text-sm text-pink-600  hover:bg-blue-100 hover:text-blue-800 whitespace-nowrap">
+                                        Clear roles
+                                    </button>
+                                </form>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                {% endfor %}
                 </div>
-            {% endif %}
+
+             {% endif %}
+
+
+
 
             {% if request.user == profile.user %}
                 <div class="absolute top-4 right-4 flex items-center gap-4 bg-white text-white text-xs px-3 py-1 rounded-full shadow-md">
@@ -59,6 +118,23 @@
     </div>
 </section>
 
+
+    <script>
+  // Simple toggle for dropdown
+  const btn = document.getElementById('menu-button');
+  const menu = document.getElementById('dropdown-menu');
+
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+
+  // Optional: close the dropdown when clicking outside
+  window.addEventListener('click', (e) => {
+    if (!btn.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.add('hidden');
+    }
+  });
+</script>
 {% endblock %}
 
 
