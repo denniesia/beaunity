@@ -8,6 +8,7 @@ from beaunity.event.models import Event
 from beaunity.challenge.models import Challenge
 import beaunity.settings as settings
 from beaunity.common.utils import mark_new
+from beaunity.common.utils import get_upcoming_events, get_upcoming_challenges, send_reminder_email
 
 @shared_task()
 def send_approval_email( user_id, object_type, object_title=None):
@@ -32,41 +33,6 @@ def send_approval_email( user_id, object_type, object_title=None):
     send_mail(
         subject=email_templates[object_type]['subject'],
         message=email_templates[object_type]['message'],
-        from_email=settings.EMAIL_HOST_USER,
-        recipient_list=[user.email],
-    )
-
-def get_upcoming_events():
-    two_days_later = now().date() + timedelta(days=2)
-    return Event.objects.filter(start_time__date=two_days_later)
-
-
-def get_upcoming_challenges():
-    two_days_later = now().date() + timedelta(days=2)
-    return Challenge.objects.filter(start_time__date=two_days_later)
-
-
-def send_reminder_email(user, title, start_time, item_type):
-    start_time_str = start_time.strftime('%Y-%m-%d %H:%M')
-
-    if item_type == "event":
-        subject = f"BEAUNITY Reminder: {title} is in 2 days!"
-        message = (
-            f"Hello {user.username},\n\n"
-            f"Just a reminder that the event '{title}' starts in 2 days on - {start_time_str}.\n"
-            f"See you there!"
-        )
-    elif item_type == 'challenge':
-        subject = f"BEAUNITY Reminder: Challenge - {title} - starts in 2 days!"
-        message = (
-            f"Hello {user.username},\n\n"
-            f"Just a reminder that the challenge '{title}' starts in 2 days on - {start_time_str}.\n"
-            f"Get ready to smash it!"
-        )
-
-    send_mail(
-        subject=subject,
-        message=message,
         from_email=settings.EMAIL_HOST_USER,
         recipient_list=[user.email],
     )
