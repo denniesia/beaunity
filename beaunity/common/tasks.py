@@ -89,3 +89,4 @@ def send_reminders():
 @shared_task
 def update_is_new_status():
     mark_new(Event)
+    mark_new(Challenge)

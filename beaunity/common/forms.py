@@ -101,7 +101,7 @@ class ActivityBaseForm(forms.ModelForm):
     )
 
     is_online = forms.BooleanField(
-        label='Online event:',
+        label='Online:',
         required=False,
         widget=forms.CheckboxInput()
     )

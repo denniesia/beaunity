@@ -43,6 +43,7 @@ class BaseActivity(models.Model):
     )
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+    is_new = models.BooleanField(default=False)
 
     class Meta:
         abstract = True
