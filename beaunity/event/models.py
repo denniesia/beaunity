@@ -23,6 +23,7 @@ UserModel = get_user_model()
 
 class Event(BaseActivity, CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
     is_public = models.BooleanField(default=True)
+    is_new = models.BooleanField(default=False)
     categories = models.ManyToManyField(Category, related_name="events")
     attendees = models.ManyToManyField(
         UserModel, related_name="event_attendees", blank=True

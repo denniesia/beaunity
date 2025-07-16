@@ -7,7 +7,7 @@ from datetime import timedelta
 from beaunity.event.models import Event
 from beaunity.challenge.models import Challenge
 import beaunity.settings as settings
-
+from beaunity.common.utils import mark_new
 
 @shared_task()
 def send_approval_email( user_id, object_type, object_title=None):
@@ -84,3 +84,8 @@ def send_reminders():
     for challenge in challenges:
         for user in challenge.attendees.all():
             send_reminder_email(user, challenge.title, challenge.start_time, "challenge")
+
+
+@shared_task
+def update_is_new_status():
+    mark_new(Event)

@@ -2,7 +2,6 @@
 {% load static %}
 {% load has_passed %}
 
-
 {% block content %}
 
 <div class="w-[800px] max-w-full min-w-[500px] lg:w-2/3 mx-auto">
@@ -29,16 +28,26 @@
         <!-- Event image -->
         <div class="relative w-full h-64 rounded overflow-hidden">
             <img src="{{ event.poster_image.url }}" alt="Event Banner" class="w-full h-full object-cover">
-            <!--- Favourite -->
-            <div class="absolute top-2 left-2 text-normal text-pink-600 font-semibold px-8 py-4 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">
-                {% include 'interaction/favourite.html' with obj=event model_name='event' %}
-            </div>
-            <!-- Join -->
-            <div class="absolute bottom-2 left-2 text-normal text-pink-600 font-semibold px-10 py-3 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">
-                <div class="flex items-center text-2xs cursor-pointer gap-1">
-                    {% include 'interaction/join.html' with model_name='event' pk=event.pk %}
+            {% if event.is_new %}
+                <div class="absolute top-3 left-2 flex items-center gap-3 text-normal font-semibold px-10 py-4 rounded-full shadow-md z-10" style="background-color: white;">
+                    <p class="text-pink-900"> New ✨</p>
+                </div>
+            {% endif %}
+            <div class="absolute bottom-2 left-2 flex gap-2">
+                <!-- Join -->
+                <div class="text-normal text-pink-600 font-semibold px-10 py-3 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">
+                    <div class="flex items-center text-2xs cursor-pointer gap-1">
+                        {% include 'interaction/join.html' with model_name='event' pk=event.pk %}
+                    </div>
+                </div>
+
+                <!-- Favourite -->
+                <div class="text-normal text-pink-600 font-semibold px-8 py-4 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">
+                    {% include 'interaction/favourite.html' with obj=event model_name='event' %}
                 </div>
             </div>
+        </div>
+
              {% if perms.event.add_event %}
              <div class="absolute top-2 right-1 text-normal text-pink-600 font-semibold px-6 py-3 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">
                 <div class="flex items-center text-2xs cursor-pointer gap-4">

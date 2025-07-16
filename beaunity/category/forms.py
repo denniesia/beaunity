@@ -2,7 +2,7 @@ from cloudinary.forms import CloudinaryFileField
 from django import forms
 from django.forms import ClearableFileInput
 
-from beaunity.common.utils.validators import CloudinaryExtensionandSizeValidator
+from beaunity.common.validators import CloudinaryExtensionandSizeValidator
 
 from .models import Category
 

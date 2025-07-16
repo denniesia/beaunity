@@ -21,6 +21,9 @@ from beaunity.accounts.models import Profile
 from beaunity.challenge.models import Challenge
 from django.contrib.contenttypes.models import ContentType
 from beaunity.interaction.models import Favourite, Like
+
+from beaunity.common.tasks import send_approval_email
+
 # Create your views here.
 class IndexView(TemplateView):
     template_name = 'common/landing-page.html'
@@ -158,3 +161,31 @@ class DashboardView(DetailView):
             'favs': Favourite.objects.filter(user=user),
         })
         return context
+
+
+@login_required
+def approve_instance(request, model_class, pk: int, content_type:str, permission_required: str, redirect_approved, redirect_fallback):
+    instance = get_object_or_404(model_class, pk=pk)
+
+    if request.user.has_perm(permission_required):
+        instance.is_approved = True
+        instance.save()
+        send_approval_email.delay(
+            user_id=instance.created_by.id,
+            object_type=content_type,
+            object_title=instance.title
+        )
+        return redirect(redirect_approved)
+
+    return redirect(redirect_fallback, pk=pk)
+
+
+@login_required
+def disapprove_instance(request, model_class, pk: int, permission_required: str, redirect_disapproved, redirect_fallback):
+    instance = get_object_or_404(model_class, pk=pk)
+
+    if request.user.has_perm(permission_required):
+        instance.delete()
+        return redirect(redirect_disapproved)
+
+    return redirect(redirect_fallback, pk=pk)

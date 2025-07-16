@@ -5,7 +5,13 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {% for event in events %}
             <div class="relative bg-white border border-pink-200 rounded-2xl shadow-md overflow-hidden flex flex-col hover:-translate-y-1 hover:shadow-lg hover:shadow-pink-300">
-                <!-- Label -->
+                <!-- New event -->
+                {% if event.is_new %}
+                    <div class="absolute top-3 left-2 flex items-center gap-3 text-normal font-semibold px-5 py-2 rounded-full shadow-md z-10" style="background-color: white;">
+                           <p class="text-pink-900"> New ✨</p>
+                    </div>
+                {% endif %}
+                <!-- Your event -->
                 {% if event.created_by == user %}
                    <div class="absolute top-3 right-2 flex items-center gap-3 text-pink-600 text-xs font-semibold px-5 py-2 rounded-full shadow-md z-10" style="background-color: white;">
                        <p>Your Event</p>
@@ -15,7 +21,6 @@
                            </svg>
                        </a>
                    </div>
-
                 {% endif %}
                 {% if event.end_time|has_passed %}
                       <div class="absolute top-3 left-2 text-red-700 text-xs font-bold px-5 py-2 rounded-full shadow-md z-10" style=" background-color: white">
@@ -23,7 +28,7 @@
                       </div>
                 {% endif %}
                 {% if user.is_authenticated %}
-                	<div class="absolute top-30 right-2 text-pink-600 text-xs font-semibold px-5 py-2 rounded-full shadow-md z-10 bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300" >
+                	<div class="absolute top-30 left-2 text-pink-600 text-xs font-semibold px-5 py-2 rounded-full shadow-md z-10 bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300" >
                        {% include 'interaction/favourite.html' with obj=event model_name='event' %}
                  </div>
                 {% endif %}

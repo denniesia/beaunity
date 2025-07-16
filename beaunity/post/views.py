@@ -17,8 +17,7 @@ from oauthlib.uri_validate import query
 from beaunity.category.models import Category
 from beaunity.comment.forms import CommentCreateForm
 from beaunity.common.mixins import UserIsCreatorMixin
-from beaunity.common.utils.approval import (approve_instance,
-                                            disapprove_instance)
+from beaunity.common.views import approve_instance, disapprove_instance
 from beaunity.interaction.models import Like
 from beaunity.post.models import Post
 

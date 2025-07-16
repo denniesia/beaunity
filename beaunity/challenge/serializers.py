@@ -3,7 +3,7 @@ from .models import Challenge
 from beaunity.category.models import Category
 import bleach
 from drf_spectacular.utils import extend_schema_field
-from beaunity.common.utils.validators import CloudinaryExtensionandSizeValidator
+from beaunity.common.validators import CloudinaryExtensionandSizeValidator
 from beaunity.accounts.serializers import UserSerialiazier
 from beaunity.category.serializers import CategorySimpleSerializer
 

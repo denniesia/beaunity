@@ -6,7 +6,7 @@ from .models import Profile
 from beaunity.accounts.models.choices import SkinTypeChoices
 from cloudinary.forms import CloudinaryFileField
 from django.forms import ClearableFileInput
-from beaunity.common.utils.validators import CloudinaryExtensionandSizeValidator
+from beaunity.common.validators import CloudinaryExtensionandSizeValidator
 from django.core.exceptions import ValidationError
 
 UserModel = get_user_model()

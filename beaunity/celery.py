@@ -12,11 +12,15 @@ app.autodiscover_tasks()
 
 
 app.conf.beat_schedule = {
-    'send-event-reminders-every-morning' : {
+    'send-reminders-every-morning' : {
         'task': 'beaunity.common.tasks.send_reminders',
         'schedule':  crontab(hour=8, minute=0),
         # 'schedule': 30.0
     },
+    'update_is_new_status_daily': {
+        'task': 'beaunity.common.tasks.update_is_new_status',
+        'schedule': crontab(hour=0, minute=0),
+    }
 }
 
 @app.task(bind=True)

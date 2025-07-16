@@ -15,8 +15,7 @@ from markdown_it.rules_core import inline
 
 from beaunity.category.models import Category
 from beaunity.comment.forms import CommentCreateForm
-from beaunity.common.utils.mixins import (FilteredContextMixin,
-                                          FilteredQuerysetMixin)
+from beaunity.common.mixins_class import FilteredContextMixin, FilteredQuerysetMixin
 
 from .forms import EventCreateForm, EventDeleteForm, EventEditForm
 from .models import Event

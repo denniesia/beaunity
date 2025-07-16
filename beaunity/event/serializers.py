@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from beaunity.category.models import Category
-from beaunity.common.utils.validators import CloudinaryExtensionandSizeValidator
+from beaunity.common.validators import CloudinaryExtensionandSizeValidator
 from .models import Event
 import bleach
 from beaunity.accounts.serializers import UserSerialiazier

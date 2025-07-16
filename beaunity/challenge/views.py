@@ -3,13 +3,13 @@ from django.shortcuts import render, redirect
 from django.template.base import kwarg_re
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView,  DetailView, UpdateView, DeleteView
-from beaunity.common.utils.mixins import FilteredQuerysetMixin, FilteredContextMixin
+from beaunity.common.mixins_class import FilteredQuerysetMixin, FilteredContextMixin
 from .models import Challenge
 from .forms import  ChallengeCreateForm, ChallengeEditForm, ChallengeDeleteForm
 
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 
-from beaunity.common.utils.approval import approve_instance, disapprove_instance
+from beaunity.common.views import approve_instance, disapprove_instance
 from django.contrib.auth.decorators import login_required
 from beaunity.comment.forms import  CommentCreateForm
 from django.contrib.contenttypes.models import ContentType
