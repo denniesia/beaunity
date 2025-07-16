@@ -1,3 +1,5 @@
+from asgiref.sync import sync_to_async
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404, redirect, render
@@ -26,17 +28,17 @@ def like_functionality(request, model_name, object_id):
 
 
 @login_required(login_url="login")
-def favourite_functionality(request, model_name, object_id):
-    content_type = get_object_or_404(ContentType, model=model_name)
+async def favourite_functionality(request, model_name, object_id):
+    content_type = await ContentType.objects.aget(model=model_name)
     model = content_type.model_class()
-    obj = get_object_or_404(model, id=object_id)
+    obj = await model.objects.aget(id=object_id)
 
-    favourite, created = Favourite.objects.get_or_create(
+    favourite, created = await sync_to_async(Favourite.objects.get_or_create)(
         user=request.user, content_type=content_type, object_id=obj.id
     )
-    if not created:
 
-        favourite.delete()
+    if not created:
+        await sync_to_async(favourite.delete)()
 
     return redirect(request.META.get("HTTP_REFERER", "/"))
 

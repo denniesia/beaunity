@@ -76,7 +76,11 @@
                     <!-- Share finctionality -->
                     {% include 'interaction/share.html'%}
                     <!-- Fav Functionality -->
-                    {% include 'interaction/favourite.html' with obj=post model_name='post' %}
+                    <div class="flex text-center justify-center">
+                        {% include 'interaction/favourite.html' with obj=post model_name='post' %}
+                        <p class="ml-1 text-2xs">Fav</p>
+                    </div>
+
                 </div>
             {% endif %}
 
