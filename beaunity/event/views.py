@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.backends import UserModel
-from django.contrib.auth.mixins import (LoginRequiredMixin,
-                                        PermissionRequiredMixin)
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator
 from django.db.models import Count, Q
@@ -22,8 +21,7 @@ from .models import Event
 
 
 # Create your views here.
-class EventsOverviewView(
-    LoginRequiredMixin, FilteredContextMixin, FilteredQuerysetMixin, ListView):
+class EventsOverviewView(LoginRequiredMixin, FilteredContextMixin, FilteredQuerysetMixin, ListView):
 
     model = Event
     template_name = "event/events-overview.html"

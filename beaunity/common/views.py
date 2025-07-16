@@ -23,7 +23,7 @@ from beaunity.accounts.models import Profile
 from beaunity.challenge.models import Challenge
 from django.contrib.contenttypes.models import ContentType
 from beaunity.interaction.models import Favourite, Like
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from beaunity.common.tasks import send_approval_email
 
 # Create your views here.
@@ -113,7 +113,7 @@ def custom_permission_denied_view(request, exception=None):
 
 UserModel = get_user_model()
 
-class DashboardView(DetailView):
+class DashboardView(LoginRequiredMixin, DetailView):
     model = UserModel
     template_name = 'common/dashboard.html'
     context_object_name = 'user'
@@ -173,9 +173,6 @@ class DashboardView(DetailView):
             created_by=user,
             content_type=challenge_content_type,
         )
-
-
-
 
         context.update({
             'fav_events': fav_events,
