@@ -13,17 +13,18 @@ from .models import Favourite, Like
 # Create your views here.
 
 @login_required(login_url="login")
-def like_functionality(request, model_name, object_id):
-    content_type = get_object_or_404(ContentType, model=model_name)
+async def like_functionality(request, model_name, object_id):
+    content_type = await ContentType.objects.aget(model=model_name)
     model = content_type.model_class()
-    obj = get_object_or_404(model, id=object_id)
+    obj = await model.objects.aget(id=object_id)
 
-    like, created = Like.objects.get_or_create(
+    like, created = await sync_to_async(Like.objects.get_or_create)(
         user=request.user, content_type=content_type, object_id=obj.id
     )
-    if not created:
 
-        like.delete()
+    if not created:
+        await sync_to_async(like.delete)()
+
     return redirect(request.META.get("HTTP_REFERER") + f"#{object_id}")
 
 

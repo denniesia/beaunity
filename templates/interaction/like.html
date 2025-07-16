@@ -1,11 +1,18 @@
 {% load static %}
 {% load interaction_tags %}
 
-<a href="{% url 'like' model_name obj.id %}" class="flex items-center text-2xs cursor-pointer gap-1">
-    {% if obj|is_liked_by_user:user %}
-        <img src="{% static 'common/like-filled.png' %}" alt="Unlike"> Unlike
-    {% else %}
-        <img src="{% static 'common/like.png' %}" alt="Like"> Like
-    {% endif %}
+{% if user.is_authenticated %}
+
+<form action="{% url 'like' model_name obj.id %}" method="post"  class="flex items-center text-2xs cursor-pointer gap-1">
+    {% csrf_token %}
+    <button type="submit" class="flex items-center justify-center text-2xs cursor-pointer gap-1">
+        {% if obj|is_liked_by_user:user %}
+            <img src="{% static 'common/like-filled.png' %}" alt="Unlike"> Unlike
+        {% else %}
+            <img src="{% static 'common/like.png' %}" alt="Like"> Like
+        {% endif %}
+    </button>
   <span>({{ obj|total_likes }} Likes)</span>
-</a>
+</form>
+
+{% endif %}
