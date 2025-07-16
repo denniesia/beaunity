@@ -11,6 +11,13 @@
                     This profile is no longer active
                 </p>
             {% endif %}
+            {% if request.user.is_staff %}
+            	<div class="absolute top-4 left-2 flex items-center gap-4 bg-white font-semibold text-white text-normal px-3 py-1 rounded-full shadow-md">
+                    {% for group in user_groups %}
+                        <p style="color:#19B26D">{{ group.name }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
 
             {% if request.user == profile.user %}
                 <div class="absolute top-4 right-4 flex items-center gap-4 bg-white text-white text-xs px-3 py-1 rounded-full shadow-md">

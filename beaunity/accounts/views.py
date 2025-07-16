@@ -38,10 +38,20 @@ class AppUserLoginView(LoginView):
     template_name = 'accounts/login.html'
     form_class = AppUserLoginForm
 
-class ProfileDetailView(LoginRequiredMixin,UserIsSelfMixin, DetailView):
+class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = Profile
     template_name = 'accounts/profile-details.html'
     context_object_name = 'profile'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        profile = self.get_object()
+
+        user_groups = profile.user.groups.all()
+
+        context['user_groups'] = user_groups
+        return context
+
 
 class ProfileEditView(LoginRequiredMixin, UserIsSelfMixin, UpdateView):
     model = UserModel
