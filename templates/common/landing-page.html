@@ -92,6 +92,12 @@
                 <div class="flex justify-center gap-6 pl-8">
                     {% for event in events %}
                         <div class="w-full sm:w-80 md:w-96 lg:w-100 bg-white relative rounded-2xl shadow text-left flex-shrink-0 transition-all duration-300 transform cursor-pointer hover:scale-105 hover:shadow-pink-400 hover:shadow-lg">
+                            {% if event.is_new %}
+                                <div class="absolute top-3 left-2 flex items-center gap-3 text-normal font-semibold px-5 py-2 rounded-full shadow-md z-10" style="background-color: white;">
+                                    <p class="text-pink-900"> New ✨</p>
+                                </div>
+                            {% endif %}
+
                             <a href="{% url 'event-details' event.pk %}" >
                                 {% if event.created_by == user %}
                                     <div class="absolute top-1 right-2 text-pink-600 text-xs font-semibold px-5 py-2 rounded-full shadow-md z-10" style=" background-color: white">
