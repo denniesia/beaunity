@@ -23,6 +23,13 @@ iii. Click **"Create Account"** to complete the registration.
 
 *(Optional)* You can also use your **Google account** to sign up instantly via the **"Sign up with Google"** option.
 
+### Error Handling During Registration
+
+If your registration cannot be completed due to missing or invalid information, the form will highlight the fields that need correction. Please ensure all required details are filled in correctly before submitting again.
+
+---
+After successful registration, you will receive a **Welcome email** and be automatically redirected to the **login page**.
+
 3. **Log In**
    - Use your credentials to log into your account.
 
