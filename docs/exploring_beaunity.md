@@ -52,7 +52,7 @@ If your login attempt fails (e.g., due to incorrect email or password), the form
   - Browse through the landing page to get familiar with what the site has to offer.
   - Discover categories, latest posts, upcoming challenges and interesting events.
     
-![Demo GIF](docs/assets/home_page.gif)
+![Demo GIF](https://github.com/denniesia/beaunity/blob/main/docs/assets/home_page.gif)
 
 5. **Post & Interact**
    - Create a new post by clicking **"Start a Discussion"**.
