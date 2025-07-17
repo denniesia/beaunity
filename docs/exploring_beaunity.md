@@ -51,6 +51,7 @@ If your login attempt fails (e.g., due to incorrect email or password), the form
 ## 3. **Explore Landing Page**
   - Browse through the landing page to get familiar with what the site has to offer.
   - Discover categories, latest posts, upcoming challenges and interesting events.
+    
 ![Demo GIF](docs/assets/home_page.gif)
 
 5. **Post & Interact**
