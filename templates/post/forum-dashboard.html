@@ -52,6 +52,7 @@
                                 <span class="text-lg font-semibold text-pink-600">{{ post.title }}</span>
                             </a>
                             <span class="text-sm text-gray-600 mt-2">{{ post.content|truncatewords:30 }}</span>
+                            <span class=" text-xs text-gray-500 mt-2"> Category: <a href="{% url 'category-details' post.category.pk %}" class="hover:text-pink-600">{{ post.category }}</a></span>
                             <span class="mt-1 text-xs text-gray-400">Author: <a href="{% url 'profile-details' post.created_by.pk %}" class="hover:text-pink-600">{{ post.created_by }}</a></span>
                         </div>
                     {% endfor %}

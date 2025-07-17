@@ -51,8 +51,8 @@ class ForumDashboardView(ListView):
                 Q(title__icontains=query) | Q(content__icontains=query),
                 is_approved=True,
             ).order_by("-created_at")
-        else:
-            return Post.objects.none()
+
+        return Post.objects.all()
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
