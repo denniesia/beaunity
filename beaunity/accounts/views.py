@@ -1,3 +1,5 @@
+from tokenize import group
+
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, View
@@ -48,10 +50,19 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         profile = self.get_object()
+        group = None
 
-        user_groups = profile.user.groups.all()
+        if profile.user.groups.filter(name='Superuser').exists():
+            group = 'Superuser'
+        elif profile.user.groups.filter(name='Moderator').exists():
+            group = 'Moderator'
+        elif profile.user.groups.filter(name='Organizer').exists():
+            group = 'Organizer'
+        elif profile.user.groups.filter(name='User').exists():
+            group = 'User'
 
-        context['user_groups'] = user_groups
+
+        context['group'] = group
         return context
 
 
@@ -105,25 +116,36 @@ class ProfileDeleteView(LoginRequiredMixin,UserIsSelfMixin, DeleteView):
 def make_superuser(request, pk):
     profile = get_object_or_404(Profile, pk=pk)
     user = profile.user
-    user.groups.clear()
     group = Group.objects.get(name='Superuser')
     user.groups.add(group)
     return redirect('profile-details', pk)
 
 @superuser_required
 def make_moderator(request, pk):
+    '''
+    A moderator cannot be an organizer.
+    '''
     profile = get_object_or_404(Profile, pk=pk)
     user = profile.user
-    user.groups.clear()
+
+    if user.groups.filter(name='Organizer').exists():
+        user.groups.remove(Group.objects.get(name='Organizer'))
+
     group = Group.objects.get(name='Moderator')
     user.groups.add(group)
     return redirect('profile-details', pk=pk)
 
 @superuser_required
 def make_organizer(request, pk):
+    ''''
+    A organizer cannot be a moderator.
+    '''
     profile = get_object_or_404(Profile, pk=pk)
     user = profile.user
-    user.groups.clear()
+
+    if user.groups.filter(name='Moderator').exists():
+        user.groups.remove(Group.objects.get(name='Moderator'))
+
     group = Group.objects.get(name='Organizer')
     user.groups.add(group)
     return redirect('profile-details', pk=pk)

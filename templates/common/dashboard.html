@@ -300,10 +300,30 @@
                             <tbody class="divide-y divide-pink-100">
                                 <tr class="hover:bg-pink-50 transition">
                                     <td class="px-4 py-3 text-pink-700 font-medium text-center">Total</td>
-                                    <td class="px-4 py-3 text-pink-700 font-semibold text-center">{{ superusers }}</td>
-                                    <td class="px-4 py-3 text-pink-700 font-semibold text-center">{{ moderators }}</td>
-                                    <td class="px-4 py-3 text-pink-700 font-semibold text-center">{{ organizer }}</td>
-                                    <td class="px-4 py-3 text-pink-700 font-semibold text-center">{{ users }}</td>
+
+                                    {% if superusers %}
+                                    	<td class="px-4 py-3 text-pink-700 font-semibold text-center">{{ superusers }}</td>
+                                    {% else %}
+                                        <td class="px-4 py-3 text-pink-700 font-semibold text-center">0</td>
+                                    {% endif %}
+
+                                    {% if moderators %}
+                                    	<td class="px-4 py-3 text-pink-700 font-semibold text-center">{{ moderators }}</td>
+                                    {% else %}
+                                        <td class="px-4 py-3 text-pink-700 font-semibold text-center">0</td>
+                                    {% endif %}
+
+                                    {% if organizers %}
+                                    	<td class="px-4 py-3 text-pink-700 font-semibold text-center">{{ organizers }}</td>
+                                    {% else %}
+                                        <td class="px-4 py-3 text-pink-700 font-semibold text-center">0</td>
+                                    {% endif %}
+
+                                    {% if users %}
+                                    	<td class="px-4 py-3 text-pink-700 font-semibold text-center">{{ users }}</td>
+                                    {% else %}
+                                        <td class="px-4 py-3 text-pink-700 font-semibold text-center">0</td>
+                                    {% endif %}
 
                                 </tr>
                             </tbody>

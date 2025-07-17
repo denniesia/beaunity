@@ -196,9 +196,9 @@ class DashboardView(LoginRequiredMixin, DetailView):
 
         if self.request.user.is_superuser:
             context.update({
-                'superusers': Group.objects.filter(name='Superuser').count(),
-                'moderators': Group.objects.filter(name='Moderator').count(),
-                'organizer': Group.objects.filter(name='Organizer').count(),
+                'superusers': UserModel.objects.filter(groups__name='Superuser').count(),
+                'moderators': UserModel.objects.filter(groups__name='Moderator').count(),
+                'organizers': UserModel.objects.filter(groups__name='Organizer').count(),
                 'users': UserModel.objects.count(),
             })
 
