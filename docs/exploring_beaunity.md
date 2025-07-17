@@ -50,12 +50,35 @@ If your login attempt fails (e.g., due to incorrect email or password), the form
 
 ## 3. **Explore**
 
-Landing Page
+🌟 Landing Page
   
   - Browse through the landing page to get familiar with what the site has to offer.
   - Discover categories, latest posts, upcoming challenges and interesting events.
     
 ![Demo GIF](https://github.com/denniesia/beaunity/blob/main/docs/assets/home_page.gif)
+
+🌟 Forum Page 
+
+- Explore the forum to discover various topics and related posts.
+
+📌 Functionalities:
+- Create a new post
+- Search posts
+- Add posts to Favourites
+- View more posts by browsing different categories
+- Create a post directly within a specific category
+
+<img width="1469" height="946" alt="image" src="https://github.com/user-attachments/assets/97b43772-2662-40f1-8b6a-27bb364f3bd7" />
+
+
+🌸 Category + related posts age
+
+<img width="1568" height="942" alt="image" src="https://github.com/user-attachments/assets/e76c8faf-d265-490a-b537-e53035e631e5" />
+
+🌸 Post details page 
+<img width="1526" height="950" alt="image" src="https://github.com/user-attachments/assets/27f96a43-af00-41fd-b8a7-8c7ec78be9a0" />
+<img width="1423" height="864" alt="image" src="https://github.com/user-attachments/assets/02a021be-87b8-47a2-b581-93dfc8be3c25" />
+
 
 5. **Post & Interact**
    - Create a new post by clicking **"Start a Discussion"**.
