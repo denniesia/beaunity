@@ -3,19 +3,19 @@
 Once the app is running locally or deployed, you can start exploring Beaunity:
 
 1. **Create an Account**
-   1. Click the "Register" button in the top-right corner of the homepage.
+   i. Click the "Register" button in the top-right corner of the homepage.
   <img width="1474" height="638" alt="image" src="https://github.com/user-attachments/assets/034d6c0c-6da2-4edc-af2d-bd975c218ab3" />
 
 
-   2. Fill in the registration form:
+   ii. Fill in the registration form:
       - Username
       - Email address
       - Password and Confirm Password (for security)
   <img width="1477" height="930" alt="image" src="https://github.com/user-attachments/assets/c1ccc953-f03d-4e4f-8fc7-f5015e929cf5" />
 
 
-   3. Click "Create Account" to complete the registration.
-   (Optional) Use your Google account to sign up instantly via the "Sign up with Google" option.
+   iii. Click "Create Account" to complete the registration.
+(Optional) Use your Google account to sign up instantly via the "Sign up with Google" option.
 
 3. **Log In**
    - Use your credentials to log into your account.
