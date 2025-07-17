@@ -19,8 +19,8 @@ app.conf.beat_schedule = {
     },
     'update_is_new_status_daily': {
         'task': 'beaunity.common.tasks.update_is_new_status',
-        # 'schedule': crontab(hour=0, minute=0),
-        'schedule': 30.0
+        'schedule': crontab(hour=0, minute=0),
+        # 'schedule': 30.0
     }
 }
 

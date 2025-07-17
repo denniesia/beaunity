@@ -35,6 +35,7 @@ def send_approval_email( user_id, object_type, object_title=None):
         message=email_templates[object_type]['message'],
         from_email=settings.EMAIL_HOST_USER,
         recipient_list=[user.email],
+        fail_silently=True
     )
 
 

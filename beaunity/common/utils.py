@@ -42,4 +42,5 @@ def send_reminder_email(user, title, start_time, item_type):
         message=message,
         from_email=settings.EMAIL_HOST_USER,
         recipient_list=[user.email],
+        fail_silently=True,
     )
