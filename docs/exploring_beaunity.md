@@ -46,9 +46,12 @@ ii. Click **"Log In"** to access your account.
 If your login attempt fails (e.g., due to incorrect email or password), the form will display clear error messages indicating what went wrong. Please verify your credentials and try again.
 <img width="1403" height="933" alt="image" src="https://github.com/user-attachments/assets/87c9a459-ca5f-4c98-a33b-56e29b5d9f3f" />
 
-4. **Explore Landing Page**
+---
+
+## 3. **Explore Landing Page**
   - Browse through the landing page to get familiar with what the site has to offer.
   - Discover categories, latest posts, upcoming challenges and interesting events.
+![Demo GIF](docs/assets/home_page.gif)
 
 5. **Post & Interact**
    - Create a new post by clicking **"Start a Discussion"**.
