@@ -4,7 +4,8 @@
 ---
 
 - [Project Setup](docs/project_setup.md)
-2. [Screenshots](#screenshots)
+- [Exploring beaunity](docs/exploring_beaunity.md)
+- 
 3. [Core Feautures](#core features)
 4. [Installation](#installation)
 5. [Usage](#usage)
