@@ -1,4 +1,4 @@
-🌟 Forum Page 
+### 🌟 Forum Page 
 
 - Explore the forum to discover various topics and related posts.
 
@@ -28,7 +28,6 @@
 
 <img width="1458" height="945" alt="image" src="https://github.com/user-attachments/assets/d6bce613-ce15-4fec-a986-e72a07956df9" />
 <img width="1459" height="943" alt="image" src="https://github.com/user-attachments/assets/6d292fd4-8fa3-4d43-83b7-8d60933c9f63" />
-
 
 
 🌸 Searchbar results 
