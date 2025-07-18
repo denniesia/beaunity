@@ -49,6 +49,9 @@ If your login attempt fails (e.g., due to incorrect email or password), the form
 ---
 
 ## 3. **Explore**
+
+Exple beaunity from the view of a normal user. 
+
 -  [About Page](pages/about.md)
 -  [Forum Page](pages/forum.md)
 -  [Landing Page](pages/landing_page.md)
