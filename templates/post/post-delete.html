@@ -18,6 +18,9 @@
                 <div>
                     <p class="text-sm font-semibold text-gray-900">{{ post.created_by }}</p>
                     <p class="text-xs text-gray-500">{{ post.created_at|date:"F j, Y, H:i" }}</p>
+                     {% if post.created_at < post.last_updated %}
+                         <span class="text-xs text-gray-500">Edited: {{ post.last_updated|date:"F j, Y, H:i" }}</span>
+                     {% endif %}
                 </div>
             </div>
         </div>
@@ -25,14 +28,12 @@
         <!-- Post Preview -->
         <div class="mb-6">
             <div class="flex">
-                <h2 class="text-lg  font-semibold italic text-gray-800 mb-2 mr-2">Title:</h2>
                 <h2 class="text-lg  font-semibold text-gray-800 mb-2"> {{ post.title }}</h2>
             </div>
                 {% if post.banner %}
-                <img src="{{ post.banner }}" alt="Post Banner" class="mb-4 max-h-64 object-cover  ">
-            {% endif %}
+                    <img src="{{ post.banner }}" alt="Post Banner" class="mb-4 max-h-64 object-cover">
+                {% endif %}
             <div class="flex">
-                <p class="text-gray-700 italic whitespace-pre-line mr-2">Content:</p>
                 <p class="text-gray-700 whitespace-pre-line">{{ post.content }}</p>
             </div>
         </div>

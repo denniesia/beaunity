@@ -11,8 +11,8 @@ class UserSerialiazier(serializers.ModelSerializer):
         fields = ['username', 'email', 'password']
 
     def create(self, validated_data):
-        user = UserModel.objects.create_user(**validated_data)
-        return user
+        return UserModel.objects.create_user(**validated_data)
+
 
 
 class LoginRequestSerializer(serializers.Serializer):
