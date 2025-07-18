@@ -1,4 +1,4 @@
-###🌟 Landing Page
+### 🌟 Landing Page
   
   - Browse through the landing page to get familiar with what the site has to offer.
   - Discover categories, latest posts, upcoming challenges and interesting events.
