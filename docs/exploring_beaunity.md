@@ -49,7 +49,7 @@ If your login attempt fails (e.g., due to incorrect email or password), the form
 ---
 
 ## 3. **Explore**
--  [About Page](docs/pages/about.md)
--  [Forum Page](docs/pages/forum.md)
--  [Landing Page](docs/pages/landing_page.md)
+-  [About Page](pages/about.md)
+-  [Forum Page](pages/forum.md)
+-  [Landing Page](pages/landing_page.md)
 
