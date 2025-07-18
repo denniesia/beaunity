@@ -49,14 +49,7 @@ If your login attempt fails (e.g., due to incorrect email or password), the form
 ---
 
 ## 3. **Explore**
+-  [About Page](docs/pages/about.md)
+-  [Forum Page](docs/pages/forum.md)
+-  [Landing Page](docs/pages/landing_page.md)
 
-[Forum Page](docs/pages/forum.md)
-
-5. **Post & Interact**
-   - Create a new post by clicking **"Start a Discussion"**.
-   - Comment on posts or reply to other users.
-   - Join challenges and share your progress.
-
-6. **Profile & Favorites**
-   - Update your profile with skincare preferences.
-   - Save posts to your **Favorites** for quick access later.
