@@ -1,4 +1,4 @@
-🌟 About Page
+### 🌟 About Page
 
 - Learn more about the site, its mission, and how to get started.
 - Contact Form – Reach out with questions or inquiries.
