@@ -6,6 +6,8 @@ Before you begin, make sure you have the following installed:
 - **pip** – Comes with Python, or install via `python -m ensurepip`
 - **virtualenv** 
 - **Django 5.0+**
-- **PostgreSQL 14+**
+- **PostgreSQL 13+**
+- **Redis (recommended)**
 - **Git** – For cloning the repository
+- **Node.js 16+**
   
