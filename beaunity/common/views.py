@@ -60,7 +60,7 @@ def about_view(request):
             send_mail(
                 subject,
                 full_message,
-                settings.EMAIL_HOST_USER,
+                email,
                 [settings.EMAIL_HOST_USER],
                 fail_silently=False,
             )
