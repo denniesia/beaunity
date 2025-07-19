@@ -1,6 +1,8 @@
-from django.urls import path, include
-from . import views
 from django.contrib.auth.views import LogoutView
+from django.urls import include, path
+
+from . import views
+
 
 urlpatterns = [
 
@@ -17,5 +19,4 @@ urlpatterns = [
         path('remove-roles/', views.remove_roles, name='remove-roles'),
     ])),
     path('api/', include('beaunity.accounts.api_urls')),
-
 ]

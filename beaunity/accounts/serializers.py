@@ -14,7 +14,6 @@ class UserSerialiazier(serializers.ModelSerializer):
         return UserModel.objects.create_user(**validated_data)
 
 
-
 class LoginRequestSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()

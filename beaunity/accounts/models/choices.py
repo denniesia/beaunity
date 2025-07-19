@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class SkinTypeChoices(models.TextChoices):
     NORMAL_SKIN = 'Normal Skin', 'Normal Skin'
     DRY_SKIN = 'Dry Skin', 'Dry Skin'

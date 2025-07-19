@@ -5,7 +5,8 @@
 
 - [Project Setup](docs/project_setup.md)
 - [Exploring beaunity](docs/exploring_beaunity.md)
-- 
+- [App Structure & Api Views](docs/app_structure_and_api_views.md)
+
 3. [Core Feautures](#core features)
 4. [Installation](#installation)
 5. [Usage](#usage)
