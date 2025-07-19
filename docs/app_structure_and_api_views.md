@@ -65,3 +65,5 @@ The custom User model is registered in the Django admin with:
 
 This setup improves user management with a clean, tailored admin interface.
 
+<img width="1896" height="841" alt="Screenshot_1-ezgif com-censor" src="https://github.com/user-attachments/assets/ecbdbfbc-4398-45b6-9a3a-026b46c65633" />
+
