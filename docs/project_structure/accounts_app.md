@@ -1,6 +1,30 @@
 
 ⭐ Accounts
-[screenshot of the structure]
+
+```tree
+accounts/
+├── migrations/          # Django migrations for the accounts app
+├── models/              # Custom user and profile models
+│   ├── __init__.py
+│   ├── app_profile.py   # User profile model (e.g., profile_pic, first_name, last_name, etc.)
+│   ├── app_user.py      # Custom user model (extends AbstractBaseUser)
+│   └── choices.py       # Choice constants for skin type (e.g., dry, oily, etc.)
+├── __init__.py
+├── admin.py             # Admin configurations w
+├── api_urls.py          # API-specific URLs
+├── api_views.py         # Views handling API logic (REST endpoints)
+├── apps.py              # App configuration, signals registration
+├── backends.py          # Custom authentication backends (email or username login)
+├── decorators.py        # Custom decorators (role-based access control)
+├── forms.py             # Django forms for user registration/login/update/delete
+├── managers.py          # Custom model managers ( AppUserManager)
+├── serializers.py       # DRF serializers for user model, login and logout
+├── signals.py           # Signal handlers (auto-create profile, auto-add to group 'User')
+├── tests.py             
+├── urls.py              # Regular (non-API) URL routes
+└── views.py             # Standard Django views (non-API)
+````
+
 
 
 👤 User Model Implementation
@@ -49,17 +73,91 @@ Profile Model:
 - The Profile model is used to store and retrieve user-facing information (e.g., name, bio, avatar).
 
 🌷 Custom User Admin
+
 The custom User model is registered in the Django admin with:
 - List display: username, email, is_staff, is_superuser
 - Search: by username and email
 - Custom add form: uses AppUserCreationForm
 - Fieldsets: organized into credentials, personal info, and permissions
 - Add user form: includes username, email, and password
-- Enhanced UI: uses *django-unhold* for a better admin interface and improved user experience
+- Enhanced UI: uses *django-unfold* for a better admin interface and improved user experience
 
 This setup improves user management with a clean, tailored admin interface.
 
 <img width="1896" height="841" alt="Screenshot_1-ezgif com-censor" src="https://github.com/user-attachments/assets/ecbdbfbc-4398-45b6-9a3a-026b46c65633" />
+
+
+**🚀 Additional Features**
+
+🔧 Role Management Views:
+
+- Make Superuser – Grants a user the Superuser role by adding them to the corresponding group.
+```python
+@superuser_required
+def make_superuser(request, pk):
+    profile = get_object_or_404(Profile, pk=pk)
+    user = profile.user
+    group = Group.objects.get(name="Superuser")
+    user.groups.add(group)
+    return redirect("profile-details", pk)
+```
+
+- Make Moderator – Assigns the Moderator role (removes Organizer role if present).
+```python
+@superuser_required
+def make_moderator(request, pk):
+    """
+    A moderator cannot be an organizer.
+    """
+    profile = get_object_or_404(Profile, pk=pk)
+    user = profile.user
+
+    if user.groups.filter(name="Organizer").exists():
+        user.groups.remove(Group.objects.get(name="Organizer"))
+
+    group = Group.objects.get(name="Moderator")
+    user.groups.add(group)
+    return redirect("profile-details", pk=pk)
+
+```
+
+- Make Organizer – Assigns the Organizer role (removes Moderator role if present).
+```python
+@superuser_required
+def make_organizer(request, pk):
+    """'
+    A organizer cannot be a moderator.
+    """
+    profile = get_object_or_404(Profile, pk=pk)
+    user = profile.user
+
+    if user.groups.filter(name="Moderator").exists():
+        user.groups.remove(Group.objects.get(name="Moderator"))
+
+    group = Group.objects.get(name="Organizer")
+    user.groups.add(group)
+    return redirect("profile-details", pk=pk)
+````
+
+- Remove Roles – Clears all roles and resets the user to the default User group.
+```python
+@superuser_required
+def remove_roles(request, pk):
+    profile = get_object_or_404(Profile, pk=pk)
+    user = profile.user
+    user.groups.clear()
+    group = Group.objects.get(name="User")
+    user.groups.add(group)
+    return redirect("profile-details", pk=pk)
+````
+🔧 Custom Decorator:
+
+Checks if the user is superuser: 
+
+````python
+def superuser_required(view_func):
+    return user_passes_test(lambda user: user.is_superuser)(view_func)
+````
 
 ## 🌿RestFull Api Contents
 
@@ -84,7 +182,7 @@ This setup improves user management with a clean, tailored admin interface.
   - Returns a message field confirming logout success.
 
 
-**JWT Authentication**
+🌻 **JWT Authentication**
 
 This project uses JSON Web Tokens (JWT) for user authentication. Upon login, the server issues:
 - An access token (short-lived) to authenticate API requests.
@@ -96,7 +194,12 @@ the refresh token can be used to obtain a new one. Logging out blacklists the re
 ✅ *JWT allows stateless, secure, and scalable authentication for REST APIs.*
 
 
-**API Views**
+
+
+🌻 **API Views**
+
+<img width="1520" height="600" alt="image" src="https://github.com/user-attachments/assets/b913bfd3-f24e-44f4-a0c3-8f1e753e034d" />
+
 
 - /accounts/api/login/ - Authenticates a user with username and password
 - /accounts/api/logout/ -  Logs out the user by blacklisting the refresh token.
