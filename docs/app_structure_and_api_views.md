@@ -5,4 +5,4 @@
 
 📌 **Apps**
 
-- [Accounts App](docs/accounts_app.md)
+- [Accounts App](docs/project_structure/accounts_app.md)

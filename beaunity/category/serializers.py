@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Category
-from beaunity.accounts.serializers import UserSerialiazier
+from beaunity.accounts.serializers import UserSerializier
 
 class CategorySimpleSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,7 +9,7 @@ class CategorySimpleSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    created_by = UserSerialiazier(read_only=True)
+    created_by = UserSerializier(read_only=True)
     last_updated = serializers.DateTimeField(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)
     class Meta:

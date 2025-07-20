@@ -61,3 +61,70 @@ This setup improves user management with a clean, tailored admin interface.
 
 <img width="1896" height="841" alt="Screenshot_1-ezgif com-censor" src="https://github.com/user-attachments/assets/ecbdbfbc-4398-45b6-9a3a-026b46c65633" />
 
+## 🌿RestFull Api Contents
+
+**🌻 Serializers:**
+ ensure the API receives the expected data and responds consistently.
+- UserSerializier - handles user registration data
+  - Serializes the fields: username, email, and password (write-only for security).
+  - Creates a new user using create_user() method, which typically hashes the password and saves the user.
+
+- LoginRequestSerializer - validates login input data.
+  - Accepts username and password fields.
+  - nsures both are provided for authentication.
+
+- LoginResponseSerializer - defines the format of the login response.
+  - Returns access_token and refresh_token for JWT authentication. 
+  - Includes a message field for any success message.
+
+- LogoutRequestSerializer - Validates logout request data.
+  - Accepts a refresh_token string which is required to blacklist the token on logout.
+
+- LogoutResponseSerializer - defines the format of the logout response.
+  - Returns a message field confirming logout success.
+
+
+**JWT Authentication**
+
+This project uses JSON Web Tokens (JWT) for user authentication. Upon login, the server issues:
+- An access token (short-lived) to authenticate API requests.
+- A refresh token (longer-lived) to get new access tokens without logging in again.
+
+Clients send the access token with each request to access protected endpoints. When the access token expires, 
+the refresh token can be used to obtain a new one. Logging out blacklists the refresh token to end the session.
+
+✅ *JWT allows stateless, secure, and scalable authentication for REST APIs.*
+
+
+**API Views**
+
+- /accounts/api/login/ - Authenticates a user with username and password
+- /accounts/api/logout/ -  Logs out the user by blacklisting the refresh token.
+```python
+class LogoutAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        try:
+            refresh_token = request.data.get("refresh_token")  
+            token = RefreshToken(refresh_token)  
+            token.blacklist()
+            return Response(
+                {
+                    "message": "Successfully logged out.",
+                },
+                status=status.HTTP_200_OK,
+            )
+        except TokenError:
+            return Response(
+                {
+                    "error": "Invalid or expired token.",
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+  ```  
+
+- /accounts/api/register/ - Creates a new user account, includes username, email, password
+- /accounts/api/token/refresh/ - Refreshes the JWT access token using the refresh token. Returns a new access token 
+to keep the user logged in without re-entering credentials. The *TokenRefreshView* is used to build this view.
+

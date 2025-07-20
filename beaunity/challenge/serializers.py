@@ -4,13 +4,13 @@ from beaunity.category.models import Category
 import bleach
 from drf_spectacular.utils import extend_schema_field
 from beaunity.common.validators import CloudinaryExtensionandSizeValidator
-from beaunity.accounts.serializers import UserSerialiazier
+from beaunity.accounts.serializers import UserSerializier
 from beaunity.category.serializers import CategorySimpleSerializer
 
 
 class ChallengeSerializer(serializers.ModelSerializer):
     categories = CategorySimpleSerializer(many=True, read_only=True)
-    created_by = UserSerialiazier(read_only=True)
+    created_by = UserSerializier(read_only=True)
     last_updated = serializers.DateTimeField(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)
 

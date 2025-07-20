@@ -17,7 +17,7 @@ from beaunity.challenge.serializers import ChallengeSerializer
 from beaunity.event.models import Event
 from beaunity.event.serializers import EventSerializer
 
-from beaunity.accounts.serializers import UserSerialiazier
+from beaunity.accounts.serializers import UserSerializier
 
 
 UserModel = get_user_model()
@@ -62,7 +62,7 @@ def global_search(request):
         users = UserModel.objects.filter(
             username__icontains=query
         )
-        users_data = UserSerialiazier(users, many=True).data
+        users_data = UserSerializier(users, many=True).data
 
         return Response(
             {
