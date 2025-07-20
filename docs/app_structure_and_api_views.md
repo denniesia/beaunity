@@ -5,4 +5,5 @@
 
 📌 **Apps**
 
-- [Accounts App](docs/project_structure/accounts_app.md)
+- [Accounts App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/accounts_app.md)
+- [Category App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/category_app.md)
