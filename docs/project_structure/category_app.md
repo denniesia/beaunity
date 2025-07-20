@@ -5,14 +5,14 @@
 category/
 ├── migrations/          # Django migrations for the category app
 ├── __init__.py
-├── admin.py             # Admin configurations w
-├── api_urls.py          # API-specific URLs
+├── admin.py             # Admin configurations 
+├── api_urls.py          # API-specific URLs - router for ModelViewSet
 ├── api_views.py         # Views handling API logic (REST endpoints)
-├── apps.py              # App configuration, signals registration
-├── forms.py             # Django forms for user registration/login/update/delete
-├── models.py            
-├── permissions.py         
-├── serializers.py       # DRF serializers for user model, login and logout
+├── apps.py              
+├── forms.py             # Django forms for CRUD operations
+├── models.py            # Category Model
+├── permissions.py       # Custom permissions for API-Views
+├── serializers.py       # DRF serializers for CRUD operations and Nested Structures
 ├── tests.py             
 ├── urls.py              # Regular (non-API) URL routes
 └── views.py             # Standard Django views (non-API)
@@ -65,6 +65,9 @@ The CategoryAdmin class customizes how categories are managed in the Django admi
 - Ordering: Categories are ordered by created_at in descending order (newest first). 
 - Search: Allows searching by title or created_by for easier navigation.
 
+<img width="1874" height="653" alt="image" src="https://github.com/user-attachments/assets/81928ab7-cf5f-46dc-8554-5d60385ab7a9" />
+
+
 ## 🌿RestFull Api Contents
 
 **🌻 Serializers:**
@@ -83,6 +86,9 @@ The project uses two serializers to handle Category data in different contexts:
   - created_at (read-only) – Timestamp when the category was created.
 
 🌻 **API Views**
+
+<img width="1763" height="386" alt="image" src="https://github.com/user-attachments/assets/8b787f4e-5010-4589-9554-b40f313d3add" />
+
 
 - api/#/category/ - ModelViewSet - This ModelViewSet provides full CRUD operations for the Category model.
 It uses the CategorySerializer to handle serialization and ensures that the created_by field is automatically assigned to 
