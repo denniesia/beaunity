@@ -17,7 +17,10 @@ class Admin(ModelAdmin):
         "is_staff",
         "is_superuser",
     )
-    search_fields = ("username", "email")
+    search_fields = (
+        "username",
+        "email"
+    )
     add_form = AppUserCreationForm
 
     fieldsets = (

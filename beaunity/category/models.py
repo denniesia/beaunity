@@ -7,10 +7,17 @@ from beaunity.common.mixins import CreatedAtMixin, CreatedByMixin, LastUpdatedMi
 
 # Create your models here.
 class Category(LastUpdatedMixin, CreatedAtMixin, CreatedByMixin):
-    title = models.CharField(max_length=30, unique=True)
+    title = models.CharField(
+        max_length=30,
+        unique=True)
     image = CloudinaryField()
     description = models.CharField(max_length=100)
-    slug = models.SlugField(null=True, blank=True, unique=True, editable=False)
+    slug = models.SlugField(
+        null=True,
+        blank=True,
+        unique=True,
+        editable=False
+    )
 
     class Meta:
         verbose_name_plural = "Categories"

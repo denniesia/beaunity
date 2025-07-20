@@ -20,15 +20,17 @@ class CategoryOverviewView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         self.form = SearchForm(self.request.GET)
+        queryset = self.model.objects.all()
+
         if self.form.is_valid():
             query = self.form.cleaned_data.get("query")
             if query:
-                return self.model.objects.filter(
+                queryset = queryset.filter(
                     Q(title__icontains=query)
                         |
                     Q(description__icontains=query)
                 )
-        return self.model.objects.all()
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -55,9 +57,7 @@ class CategoryEditView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     template_name = "category/category-edit.html"
     permission_required = "category.change_category"
     slug_url_kwarg = "category_slug"
-
-    def get_success_url(self):
-        return reverse_lazy("category-overview")
+    success_url = reverse_lazy("category-overview")
 
 
 class CategoryDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
@@ -65,8 +65,7 @@ class CategoryDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView
     template_name = "category/category-delete.html"
     form_class = CategoryDeleteForm
     slug_url_kwarg = "category_slug"
-    permission_required = "beaunity.can_delete_category"
-
+    permission_required = "category.delete_category"
     success_url = reverse_lazy("category-overview")
 
     def get_initial(self):

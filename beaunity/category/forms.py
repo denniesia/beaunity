@@ -15,7 +15,11 @@ class CategoryBaseForm(forms.ModelForm):
         exclude = [
             "created_by",
         ]
-        error_messages = {"title": {"unique": "Such title already exists."}}
+        error_messages = {
+            "title": {
+                "unique": "Such title already exists."
+            }
+        }
 
     image = CloudinaryFileField(
         label="Image",
@@ -39,7 +43,7 @@ class CategoryBaseForm(forms.ModelForm):
 
     def clean_title(self):
         title = self.cleaned_data["title"]
-        return title[0].upper() + title[1:] if title else title
+        return title.capitalize() if title else title
 
     def clean_description(self):
         description = self.cleaned_data["description"]
@@ -64,7 +68,6 @@ class CategoryDeleteForm(CategoryBaseForm):
         super().__init__(*args, **kwargs)
 
         for field in self.fields.values():
-            field.widget.attrs["disabled"] = True
             field.widget.attrs["readonly"] = True
 
 

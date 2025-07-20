@@ -1,8 +1,11 @@
-from beaunity.category.permissions import CanAddCategory
 from rest_framework.permissions import IsAdminUser
 from rest_framework.viewsets import ModelViewSet
-from .models import Category
+
+from beaunity.category.permissions import CanAddCategory
 from beaunity.category.serializers import CategorySerializer
+
+from .models import Category
+
 
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()

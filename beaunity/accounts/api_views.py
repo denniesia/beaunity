@@ -12,14 +12,14 @@ from beaunity.accounts.serializers import (LoginRequestSerializer,
                                            LoginResponseSerializer,
                                            LogoutRequestSerializer,
                                            LogoutResponseSerializer,
-                                           UserSerializier)
+                                           UserSerializer)
 
 UserModel = get_user_model()
 
 
 class AppUserRegisterAPIView(CreateAPIView):
     queryset = UserModel.objects.all()
-    serializer_class = UserSerializier
+    serializer_class = UserSerializer
     permission_classes = [AllowAny]
 
 
