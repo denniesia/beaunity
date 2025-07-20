@@ -1,19 +1,15 @@
 # 🩷 Beaunity – Empowering Beauty Through Community
 
-**Beaunity** is a forum-like platform where users can create, discover, and participate in challenges, discussions and events —both online and offline. The app brings together beauty enthusiasts, professionals, and brands to share their creativity and knowledge through interactive experiences. Whether you're building a skincare routine, exploring makeup trends, or hosting a beauty workshop, Beaunity helps you grow individually while connecting with a supportive community.
+Beaunity is a forum-like platform where users can create, discover, and participate in challenges, discussions and events — both online and offline. The app brings together beauty enthusiasts, professionals, and brands to share their creativity and knowledge through interactive experiences. Whether you're building a skincare routine, exploring makeup trends, or hosting a beauty workshop, Beaunity helps you grow individually while connecting with a supportive community.
+
 ---
 
+
+### Contents
 - [Project Setup](docs/project_setup.md)
 - [Exploring beaunity](docs/exploring_beaunity.md)
 - [App Structure & Api Views](docs/app_structure_and_api_views.md)
 
-3. [Core Feautures](#core features)
-4. [Installation](#installation)
-5. [Usage](#usage)
-6. [Tech Stack](#tech-stack)
-7. [Contributing](#contributing)
-8. [License](#license)
-9. [Contact](#contact)
 
 ---
 
