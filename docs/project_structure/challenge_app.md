@@ -183,3 +183,5 @@ class ChallengeViewSet(ModelViewSet):
             challenge.save()
 
 ````
+---
+Next -> [Comment App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/comment_app.md)

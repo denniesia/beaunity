@@ -86,3 +86,6 @@ class CommentDeleteView(LoginRequiredMixin, UserIsCreatorMixin, DeleteView):
     def get_success_url(self):
         return self.object.content_object.get_absolute_url()
 ````
+
+---
+Next -> [Category App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/common_app.md)

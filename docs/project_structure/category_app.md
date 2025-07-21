@@ -134,3 +134,7 @@ class CategoryViewSet(ModelViewSet):
         category = serializer.save(created_by=user)
 
 ```
+
+
+---
+Next -> [Challenge App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/challenge_app.md)
