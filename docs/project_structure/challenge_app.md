@@ -185,3 +185,6 @@ class ChallengeViewSet(ModelViewSet):
 ````
 ---
 Next -> [Comment App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/comment_app.md)
+
+--- 
+Home -> [Home](https://github.com/denniesia/beaunity?tab=readme-ov-file#readme)

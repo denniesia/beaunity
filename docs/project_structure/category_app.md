@@ -138,3 +138,6 @@ class CategoryViewSet(ModelViewSet):
 
 ---
 Next -> [Challenge App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/challenge_app.md)
+
+--- 
+Home -> [Home](https://github.com/denniesia/beaunity?tab=readme-ov-file#readme)
