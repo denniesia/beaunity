@@ -60,6 +60,7 @@ And some inherited Mixins:
     - progress - Calculates the progress of the challenge in percentage (0% before start, 100% after end.
     - duration_in_weeks - Returns the total challenge duration in weeks, rounded up.
 
+**🚀 Additional Features**
 
 🔧 Role Management: 
 

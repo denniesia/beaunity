@@ -10,7 +10,7 @@ from beaunity.event.models import Event
 from .models import Favourite, Like
 
 
-# Create your views here.
+
 
 @login_required(login_url="login")
 async def like_functionality(request, model_name, object_id):

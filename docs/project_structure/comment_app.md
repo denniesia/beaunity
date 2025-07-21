@@ -32,6 +32,9 @@ Moreover, the model includes some inherited mixins:
 | `CreatedByMixin  `   | *ForeignKey* to UserModel, tracks which user created the category.      |
 | `ContentMixin  `     | Stores the content of the object. Minimal length value is 5 characters. |
 
+
+**🚀 Additional Features**
+
 🔧 Role Management: 
 
 Regular authenticated users have full CRUD (Create, Read, Update, and Delete) permissions for the Comment model.
