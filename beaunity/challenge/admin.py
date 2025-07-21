@@ -1,7 +1,9 @@
 from django.contrib import admin
-from .models import Challenge
 from unfold.admin import ModelAdmin
-# Register your models here.
+
+from .models import Challenge
+
+
 @admin.register(Challenge)
 class ChallengeAdmin(ModelAdmin):
     list_display = (

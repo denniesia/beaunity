@@ -1,6 +1,7 @@
 from django.urls import path, include
 from . import views
 
+
 urlpatterns = [
     path('overview/', views.ChallengeOverviewView.as_view(), name='challenges'),
     path('create/', views.ChallengeCreateView.as_view(), name='challenge-create'),
