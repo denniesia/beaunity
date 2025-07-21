@@ -66,6 +66,13 @@ page would be triggered.
 The LikeAdmin class and FavouriteAdmin customize how likes and favourites are managed in the Django admin panel:
 - List Display: Shows user, content_object, object_id, and content_type for quick overview.
 - Search: Allows searching by user for easier navigation.
+  
+Like:
+<img width="1525" height="463" alt="image" src="https://github.com/user-attachments/assets/cae2da39-2c1d-4a8a-9ead-2e3a650b7e5c" />
+
+Favourite:
+<img width="1873" height="866" alt="image" src="https://github.com/user-attachments/assets/b7e239cc-4968-4c0e-b892-66a65b189f5f" />
+
 
 📣 Views: 
 
@@ -217,7 +224,7 @@ def has_joined(user, model_name, obj_id):
     return False
 
 ````
-
+---
 
 Next -> [Post App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/post_app.md)
 
