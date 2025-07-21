@@ -1,4 +1,4 @@
-⭐ Comment
+# ⭐ Comment
 
 ```tree
 comment/
@@ -44,6 +44,9 @@ The CommentAdmin class customizes how comments are managed in the Django admin p
 - List Display: Shows content, content_object and created_by fields for quick overview.
 - Ordering: Challenges are ordered by created_at in descending order (newest first). 
 - Search: Allows searching by content or created_by for easier navigation.
+
+<img width="1893" height="577" alt="image" src="https://github.com/user-attachments/assets/aff2d870-b2f5-4509-8d26-c026fbcc087b" />
+
 
 #### 📣 Views:
 
