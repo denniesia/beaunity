@@ -11,8 +11,7 @@ category/
 ├── forms.py             # Django forms for CRUD operations
 ├── models.py            # Category Model
 ├── permissions.py       # Custom permissions for API-Views
-├── serializers.py       # DRF serializers for CRUD operations and Nested Structures
-├── tests.py             
+├── serializers.py       # DRF serializers for CRUD operations and Nested Structures            
 ├── urls.py              # Regular (non-API) URL routes
 └── views.py             # Standard Django views (non-API)
 ````

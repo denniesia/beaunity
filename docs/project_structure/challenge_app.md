@@ -12,8 +12,7 @@ challenge/
 ├── forms.py             # Django forms for CRUD operations
 ├── models.py            # Challenge Model
 ├── permissions.py       # Custom permissions for API-Views
-├── serializers.py       # DRF serializers for CRUD operations 
-├── tests.py             
+├── serializers.py       # DRF serializers for CRUD operations             
 ├── urls.py              # Regular (non-API) URL routes
 └── views.py             # Standard Django views (non-API)
 ````

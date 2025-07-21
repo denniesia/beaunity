@@ -19,8 +19,7 @@ accounts/
 ├── forms.py             # Django forms for user registration/login/update/delete
 ├── managers.py          # Custom model managers ( AppUserManager)
 ├── serializers.py       # DRF serializers for user model, login and logout
-├── signals.py           # Signal handlers (auto-create profile, auto-add to group 'User')
-├── tests.py             
+├── signals.py           # Signal handlers (auto-create profile, auto-add to group 'User')        
 ├── urls.py              # Regular (non-API) URL routes
 └── views.py             # Standard Django views (non-API)
 ````
