@@ -177,7 +177,7 @@ class ActivityBaseForm(forms.ModelForm):
         plain_text = bleach.clean(raw, tags=[], strip=True)
         if len(plain_text.strip()) < 100:
             raise forms.ValidationError("Description must be at least 100 characters (excluding formatting).")
-        return raw
+        return plain_text
 
     def clean_poster_image(self):
         poster_image = self.cleaned_data['poster_image']

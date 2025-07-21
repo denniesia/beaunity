@@ -4,4 +4,4 @@ class DifficultyLevel(models.TextChoices):
     BEGINNER = 'Beginner', 'Beginner'
     INTERMEDIATE = 'Intermediate', 'Intermediate'
     ADVANCED = 'Advanced', 'Advanced'
-    LEGENDARY = 'Legenary', 'Legenary'
+    LEGENDARY = 'Legendary', 'Legendary'

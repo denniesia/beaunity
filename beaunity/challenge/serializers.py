@@ -27,11 +27,26 @@ class ChallengeSerializer(serializers.ModelSerializer):
         plain_text = bleach.clean(value, tags=[], strip=True)
         if len(plain_text.strip()) < 100:
             raise serializers.ValidationError("Description must be at least 100 characters.")
-        return value
+        return cleaned_value
 
     def validate_poster_image(self, image):
-        CloudinaryExtensionandSizeValidator()(image)
+        try:
+            CloudinaryExtensionandSizeValidator()(image)
+        except serializers.ValidationError as e:
+            raise serializers.ValidationError(str(e))
         return image
+
+    def validate(self, data):
+        start_time = data.get('start_time')
+        end_time = data.get('end_time')
+
+        if start_time and end_time and end_time <= start_time:
+            raise serializers.ValidationError(
+                {
+                    "end_time": "End time must be after start time."
+                }
+            )
+        return data
 
 class ChallengeCreateSerializer(ChallengeSerializer):
     categories = serializers.SlugRelatedField(

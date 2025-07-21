@@ -12,8 +12,13 @@ from beaunity.challenge.serializers import ChallengeSerializer, ChallengeCreateS
 
 
 class ChallengeViewSet(ModelViewSet):
-    queryset = Challenge.objects.all()
-    permission_classes = [IsAuthenticated]
+    queryset = Challenge.objects.filter(
+        is_approved=True
+    ).select_related(
+        "created_by"
+    ).prefetch_related(
+        "categories", "attendees"
+    )
 
     def get_serializer_class(self):
         if self.action == 'create':

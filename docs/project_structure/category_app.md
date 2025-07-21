@@ -1,4 +1,3 @@
-
 ⭐ Category
 
 ```tree
@@ -51,7 +50,7 @@ def save(self, *args, **kwargs):
 
 **🚀 Additional Features**
 
-🔧 Role Management Views: 
+🔧 Role Management: 
 
 Superusers and members of the Moderator group have full CRUD (Create, Read, Update, and Delete) permissions
 for the Category model. Regular authenticated users can only view categories but cannot modify them unless explicitly
@@ -76,7 +75,16 @@ The CategoryAdmin class customizes how categories are managed in the Django admi
 The project uses two serializers to handle Category data in different contexts:
 - CategorySimpleSerializer - a lightweight serializer that returns only basic category information like title and description.
 
-- A detailed serializer that provides full category information, including metadata:
+````python
+class CategorySimpleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = (
+            "title",
+            "description"
+        )
+````
+- CategorySerializer - A detailed serializer that provides full category information.
   - id – The unique identifier of the category.
   - title – The category name.
   - image – The category image (Cloudinary-hosted).
@@ -84,6 +92,27 @@ The project uses two serializers to handle Category data in different contexts:
   - last_updated (read-only) – Timestamp of the last update.
   - created_by (read-only) – User who created the category (nested UserSerializer).
   - created_at (read-only) – Timestamp when the category was created.
+
+````python
+class CategorySerializer(serializers.ModelSerializer):
+    created_by = UserSerializer(read_only=True)
+    last_updated = serializers.DateTimeField(read_only=True)
+    created_at = serializers.DateTimeField(read_only=True)
+
+    class Meta:
+        model = Category
+        fields = [
+            "id",
+            "title",
+            "image",
+            "description",
+            "last_updated",
+            "created_by",
+            "created_at",
+        ]
+````
+
+
 
 🌻 **API Views**
 
@@ -94,3 +123,15 @@ The project uses two serializers to handle Category data in different contexts:
 It uses the CategorySerializer to handle serialization and ensures that the created_by field is automatically assigned to 
 the authenticated user when creating a category. A custom permission class (CanAddCategory) restricts category creation to 
 authorized users - members of the Moderator or Superuser Group.
+
+```python
+class CategoryViewSet(ModelViewSet):
+    queryset = Category.objects.all()
+    permission_classes = [CanAddCategory]
+    serializer_class = CategorySerializer
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        category = serializer.save(created_by=user)
+
+```

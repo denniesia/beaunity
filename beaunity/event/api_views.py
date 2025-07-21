@@ -12,7 +12,6 @@ from .permissions import CanAddEvent
 
 class EventViewSet(ModelViewSet):
     queryset = Event.objects.all()
-    permission_classes = [IsAuthenticated, CanAddEvent]
 
     def get_serializer_class(self):
         if self.action == 'create':
@@ -25,6 +24,7 @@ class EventViewSet(ModelViewSet):
         elif self.action == 'create':
             return [IsAuthenticated(), CanAddEvent()]
         return [IsAuthenticated()]
+
 
     def perform_create(self, serializer):
         user = self.request.user
