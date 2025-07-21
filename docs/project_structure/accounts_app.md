@@ -229,3 +229,5 @@ class LogoutAPIView(APIView):
 - /accounts/api/token/refresh/ - Refreshes the JWT access token using the refresh token. Returns a new access token 
 to keep the user logged in without re-entering credentials. The *TokenRefreshView* is used to build this view.
 
+---
+Next -> [Category App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/category_app.md)
