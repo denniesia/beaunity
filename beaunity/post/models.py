@@ -1,7 +1,7 @@
 from django.contrib.contenttypes.fields import GenericRelation
 from django.core.validators import MinLengthValidator
 from django.db import models
-
+from django.urls import reverse
 from beaunity.category.models import Category
 from beaunity.comment.models import Comment
 from beaunity.common.mixins import ContentMixin, CreatedAtMixin,  CreatedByMixin, IsApprovedMixin, LastUpdatedMixin
@@ -31,6 +31,9 @@ class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, IsApprovedMixin, Co
             ("can_post_without_approval", "Can post without approval"),
         ]
         ordering = ["-created_at"]
+
+    def get_absolute_url(self):
+        return reverse("post-details", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.title

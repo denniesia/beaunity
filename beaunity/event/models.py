@@ -1,5 +1,5 @@
 from datetime import datetime
-
+from django.urls import reverse
 from ckeditor.fields import RichTextField
 from cloudinary.models import CloudinaryField
 from django.contrib.auth import get_user_model
@@ -39,6 +39,9 @@ class Event(BaseActivity, CreatedByMixin, CreatedAtMixin, LastUpdatedMixin):
         permissions = [
             ("can_join_event", "Can join events"),
         ]
+
+    def get_absolute_url(self):
+        return reverse("event-details", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.title

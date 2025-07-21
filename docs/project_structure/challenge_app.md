@@ -34,7 +34,7 @@ The Challenge Model inherits the BaseActivity abstract class, which contains:
 | `end_time`     | `DateTimeField`   | The end date and time of the activity.                                                     |
 | `is_new`       | `BooleanField`    | 	Indicates if the activity is newly added (True). Defaults to False.                       |
 
-Moreover, the models includes additional fields:
+Moreover, the model includes additional fields:
 
 | Field        | Type               | Description                                                                                                            |
 |--------------|--------------------|------------------------------------------------------------------------------------------------------------------------|
@@ -44,7 +44,7 @@ Moreover, the models includes additional fields:
 | `likes`      | `GenericRelation ` | *Generic relation* to Like Model for tracking likes.                                                                   |
 | `comments `  | `GenericRelation ` | *Generic relation* to Comment Model for tracking comments.                                                             |
 
-And some Mixins:
+And some inherited Mixins:
 
 | Mixins                | Description                                                        |
 |-----------------------|--------------------------------------------------------------------|
@@ -71,7 +71,7 @@ Unauthenticated user cannot see a full list of the posted challenges.
 🌷 Admin Panel
 
 The ChallengeAdmin class customizes how challenges are managed in the Django admin panel:
-- List Display: Shows title, created_by, created_at, start_timr and end_time fields for quick overview.
+- List Display: Shows title, created_by, created_at, start_time and end_time fields for quick overview.
 - Ordering: Challenges are ordered by created_at in descending order (newest first). 
 - Search: Allows searching by title or created_by for easier navigation.
 

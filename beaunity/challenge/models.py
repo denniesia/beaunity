@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 from beaunity.category.models import Category
 from beaunity.comment.models import Comment
@@ -62,6 +63,9 @@ class Challenge(BaseActivity, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, 
             delta = self.end_time - self.start_time
             return (delta.days + 6) // 7
         return 0
+
+    def get_absolute_url(self):
+        return reverse("challenge-details", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.title

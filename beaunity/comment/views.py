@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.views.generic import DeleteView, UpdateView
+from django.urls import reverse_lazy
 
 from beaunity.challenge.models import Challenge
 from beaunity.common.mixins import UserIsCreatorMixin
@@ -12,8 +13,6 @@ from beaunity.post.models import Post
 from .forms import CommentEditForm
 from .models import Comment
 
-# Create your views here.
-
 
 class CommentEditView(LoginRequiredMixin, UserIsCreatorMixin, UpdateView):
     model = Comment
@@ -21,27 +20,13 @@ class CommentEditView(LoginRequiredMixin, UserIsCreatorMixin, UpdateView):
     template_name = "comment/comment-edit.html"
 
     def get_success_url(self):
-        return reverse("post-details", kwargs={"pk": self.object.content_object.pk})
+        content_object = self.object.content_object
+        return content_object.get_absolute_url()
 
 
-@login_required(login_url="login")
-def delete_comment(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)
-    content_object = comment.content_object
+class CommentDeleteView(LoginRequiredMixin, UserIsCreatorMixin, DeleteView):
+    model = Comment
+    template_name = "comment/comment_confirm_delete.html"
 
-    if request.method == "POST" and comment.created_by == request.user:
-        comment.delete()
-
-        if isinstance(content_object, Post):
-            return redirect("post-details", pk=content_object.pk)
-        elif isinstance(content_object, Event):
-            return redirect("event-details", pk=content_object.pk)
-        elif isinstance(content_object, Challenge):
-            return redirect("challenge-details", pk=content_object.pk)
-
-    if isinstance(content_object, Post):
-        return redirect("forum-dashboard")
-    elif isinstance(content_object, Event):
-        return redirect("events")
-    elif isinstance(content_object, Challenge):
-        return redirect("challenges")
+    def get_success_url(self):
+        return self.object.content_object.get_absolute_url()
