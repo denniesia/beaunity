@@ -76,6 +76,7 @@ The ChallengeAdmin class customizes how challenges are managed in the Django adm
 - Ordering: Challenges are ordered by created_at in descending order (newest first). 
 - Search: Allows searching by title or created_by for easier navigation.
 
+<img width="1878" height="523" alt="image" src="https://github.com/user-attachments/assets/19e403ff-8ed2-44e2-91ca-e96c56e3519e" />
 
 
 ## 🌿RestFull Api Contents
@@ -147,6 +148,9 @@ class ChallengeCreateSerializer(ChallengeSerializer):
 
 
 🌻 **API Views**
+<img width="1538" height="413" alt="image" src="https://github.com/user-attachments/assets/2ec09c42-fa16-4c3a-8140-43a33fadec8a" />
+
+
 - api/#/challenge/ - This ModelViewSet provides full CRUD operations for the Challenge model.
 It uses ChallengeCreateSerializer for creating challenges (allows category selection by slug) and ChallengeSerializer 
 for reading and other operations. The logged-in user is automatically set as the created_by field when creating a challenge.
