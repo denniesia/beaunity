@@ -11,7 +11,6 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   TemplateView, UpdateView)
-from oauthlib.uri_validate import query
 
 from beaunity.category.models import Category
 from beaunity.comment.forms import CommentCreateForm
