@@ -46,7 +46,76 @@ Moreover, the model includes additional mixins:
 
 🔧 Role Management: 
 
-Superusers and members of the Moderator group have full CRUD (Create, Read, Update, and Delete) permissions
-for the Category model. Regular authenticated users can only view categories but cannot modify them unless explicitly
-granted the necessary permissions.
+Regular authenticated users have full CRUD (Create, Read, Update, and Delete) permissions for the Post model.
+After a post is created, it must be approved by a member of the Superuser group or the Moderator group before it becomes publicly visible. 
+Unauthenticated user can see a full list of the posted post, but cannot comment until logged in. 
 
+
+
+🌷 Admin Panel
+
+The **PostAdmin** class customizes how **posts** are managed in the Django admin panel:
+- List Display: Shows title, created_at, category and created_by fields for quick overview.
+- Ordering: **Post** are ordered by created_at in descending order (newest first). 
+- Search: Allows searching by title or created_by__username for easier navigation.
+
+## 🌿RestFull Api Contents
+
+**🌻 Serializers:**
+ensure the API receives the expected data and responds consistently.
+
+The Model has only one serializer:
+- PostSerializer - the **PostSerializer** is used to serialize and deserialize Post objects for the API.
+
+```python
+class PostSerializer(serializers.ModelSerializer):
+    category = serializers.SlugRelatedField(
+        queryset=Category.objects.all(),
+        slug_field='title'
+    )
+    created_by = UserSerializer(read_only=True)
+    last_updated = serializers.DateTimeField(read_only=True)
+    created_at = serializers.DateTimeField(read_only=True)
+
+    class Meta:
+        model = Post
+        fields = [
+            "banner", "title",
+            "content", "category",
+            "last_updated", "created_by",
+            "created_at"
+        ]
+```
+
+
+🌻 **API Views** 
+
+- api/#/post/ - This ModelViewSet provides full CRUD operations for the **Post** model. The logged-in user is 
+automatically set as the created_by field when creating a post. The category field accepts the title of an existing 
+category (slug-based lookup). If the user has the permission to post without approval - belongs to the Moderator's or the 
+Superuser's group - the post is automatically approved and posted.
+````python
+
+class PostViewSet(ModelViewSet):
+    queryset = Post.objects.all()
+    permission_classes = [AllowAny]
+    serializer_class = PostSerializer
+
+    def get_permissions(self):
+        if self.action in ['update', 'partial_update', 'destroy']:
+            return [IsCreatorOrSuperuser()]
+        elif self.action == 'create':
+            return [IsAuthenticated()]
+        return [AllowAny()]
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        post = serializer.save(created_by=user)
+
+        if user.has_perm('post.can_post_without_approval'):
+            post.is_approved = True
+            post.save()
+````
+
+--- 
+Home -> [Home](https://github.com/denniesia/beaunity?tab=readme-ov-file#readme)

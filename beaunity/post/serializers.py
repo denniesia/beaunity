@@ -1,8 +1,10 @@
 from rest_framework import serializers
-from .models import Post
-from beaunity.category.models import Category
+
 from beaunity.accounts.serializers import UserSerializer
+from beaunity.category.models import Category
 from beaunity.category.serializers import CategorySerializer
+
+from .models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):

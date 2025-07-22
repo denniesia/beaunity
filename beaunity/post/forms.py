@@ -10,19 +10,31 @@ CLASS = "w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none f
 class PostBaseForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ["banner", "title", "content", "category"]
+        fields = [
+            "banner",
+            "title",
+            "content",
+            "category"
+        ]
 
     category = forms.ModelChoiceField(
         label="Category:",
         queryset=Category.objects.all(),
-        widget=forms.Select(attrs={"class": CLASS}),
+        widget=forms.Select(
+            attrs={
+                "class": CLASS
+            }
+        ),
     )
 
     banner = forms.URLField(
         label="Banner URL:",
         required=False,
         widget=forms.URLInput(
-            attrs={"class": CLASS, "placeholder": "Please provide a URL link"}
+            attrs={
+                "class": CLASS,
+                "placeholder": "Please provide a URL link"
+            }
         ),
     )
     title = forms.CharField(

@@ -11,7 +11,6 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   TemplateView, UpdateView)
-
 from oauthlib.uri_validate import query
 
 from beaunity.category.models import Category
@@ -24,7 +23,6 @@ from beaunity.post.models import Post
 from .forms import AdminPostEditForm, PostCreateForm, PostEditForm
 
 
-# Create your views here.
 class ForumDashboardView(ListView):
     template_name = "post/forum-dashboard.html"
     model = Post
@@ -36,7 +34,11 @@ class ForumDashboardView(ListView):
 
         category_posts = []
         for category in categories:
-            posts = category.posts.filter(is_approved=True).order_by("-created_at")[:5]
+            posts = category.posts.filter(
+                is_approved=True
+            ).order_by(
+                "-created_at"
+            )[:5]
             category_posts.append((category, posts))
 
         context["category_posts"] = category_posts
@@ -48,11 +50,17 @@ class ForumDashboardView(ListView):
 
         if query:
             return Post.objects.filter(
-                Q(title__icontains=query) | Q(content__icontains=query),
+                Q(title__icontains=query)
+                    |
+                Q(content__icontains=query),
                 is_approved=True,
             ).order_by("-created_at")
 
-        return Post.objects.all()
+        return Post.objects.filter(
+            is_approved=True
+        ).order_by(
+            "-created_at"
+        )
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -71,6 +79,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def get_initial(self):
         initial = super().get_initial()
         slug = self.request.GET.get("category")
+
         if slug:
             category = get_object_or_404(Category, slug=slug)
             initial["category"] = category.pk
@@ -101,7 +110,7 @@ def post_confirmation(request):
     return render(request, "post/post-create-confirmation.html")
 
 
-@method_decorator(login_required, name='post')
+@method_decorator(login_required, name="post")
 class PostDetailsView(DetailView):
     model = Post
     template_name = "post/post-details.html"
@@ -143,15 +152,13 @@ class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
         user = self.request.user
         return (
-            user.pk == self.get_object().created_by.pk
-            or user.is_superuser
-            or user.groups.filter(name__in=["Moderator"]).exists()
-        )
+                user.pk == self.get_object().created_by.pk
+                    or
+                user.has_perm('post.can_approve_posts')
+                )
 
     def get_success_url(self):
-        if self.request.user.is_superuser or self.request.user.groups.filter(
-            name="Moderator"
-        ):
+        if self.request.user.has_perm('post.can_approve_posts'):
             return reverse_lazy("post-pending")
         return reverse_lazy("post-details", kwargs={"pk": self.object.pk})
 
@@ -159,9 +166,7 @@ class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         post = self.get_object()
         user = self.request.user
 
-        is_admin = user.groups.filter(name__in=["Superuser", "Moderator"]).exists()
-
-        if is_admin and not post.is_approved:
+        if user.has_perm('post.can_approve_posts') and not post.is_approved:
             return AdminPostEditForm
 
         return PostEditForm
@@ -183,7 +188,11 @@ class PendingPostsView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Post.objects.filter(is_approved=False).order_by("-created_at")
+        return Post.objects.filter(
+            is_approved=False
+        ).order_by(
+            "-created_at"
+        )
 
 
 @login_required(login_url="login")
@@ -192,7 +201,7 @@ def approve_post(request, pk):
         request=request,
         model_class=Post,
         pk=pk,
-        content_type='post',
+        content_type="post",
         permission_required="post.can_approve_post",
         redirect_approved="post-pending",
         redirect_fallback="post-pending",
@@ -211,25 +220,3 @@ def disapprove_post(request, pk):
     )
 
 
-#
-# @login_required(login_url='login')
-# def forum_search(request):
-#     query = request.GET.get('query')
-#
-#     categories = Category.objects.filter(
-#         Q(title__icontains=query)
-#             |
-#         Q(description__icontains=query)
-#     ) if query else []
-#     posts = Post.objects.filter(
-#         Q(title__icontains=query)
-#             |
-#         Q(content__icontains=query)
-#     ) if query else []
-#
-#     context = {
-#         'query': query,
-#         'categories': categories,
-#         'posts': posts,
-#     }
-#     return render(request, 'post/post-search.html', context)
