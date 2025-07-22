@@ -54,8 +54,11 @@ Unauthenticated user can see a full list of the posted post, but cannot comment 
 
 🌷 Admin Panel
 
+<img width="1884" height="880" alt="image" src="https://github.com/user-attachments/assets/1fe69b44-74ef-46e7-b324-ea892d1e0a6d" />
+
+
 The **PostAdmin** class customizes how **posts** are managed in the Django admin panel:
-- List Display: Shows title, created_at, category and created_by fields for quick overview.
+- List Display: Shows title, is_approved, created_at, category and created_by fields for quick overview.
 - Ordering: **Post** are ordered by created_at in descending order (newest first). 
 - Search: Allows searching by title or created_by__username for easier navigation.
 
@@ -89,6 +92,9 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 🌻 **API Views** 
+
+<img width="1515" height="404" alt="image" src="https://github.com/user-attachments/assets/2ebe5dad-3ce1-4c2d-a7b0-615b0d16ab33" />
+
 
 - api/#/post/ - This ModelViewSet provides full CRUD operations for the **Post** model. The logged-in user is 
 automatically set as the created_by field when creating a post. The category field accepts the title of an existing 
