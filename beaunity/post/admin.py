@@ -8,6 +8,7 @@ from .models import Post
 class PostAdmin(ModelAdmin):
     list_display = (
         "title",
+        "is_approved",
         "created_at",
         "category",
         "created_by"
