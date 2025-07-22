@@ -6,6 +6,7 @@
 - Create a new post
 - Search posts
 - Add posts to Favourites
+- Comment on posts
 - View more posts by browsing different categories
 - Create a post directly within a specific category
 
