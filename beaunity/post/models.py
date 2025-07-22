@@ -8,9 +8,11 @@ from beaunity.common.mixins import ContentMixin, CreatedAtMixin,  CreatedByMixin
 from beaunity.interaction.models import Favourite, Like
 
 
-# Create your models here.
-class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, IsApprovedMixin, ContentMixin):
-    banner = models.URLField(null=True, blank=True)
+class Post(LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, IsApprovedMixin, ContentMixin):
+    banner = models.URLField(
+        null=True,
+        blank=True
+    )
     title = models.CharField(
         max_length=100,
         validators=[
@@ -18,14 +20,16 @@ class Post(CreatedByMixin, CreatedAtMixin, LastUpdatedMixin, IsApprovedMixin, Co
         ],
     )
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name="posts"
+        Category,
+        on_delete=models.CASCADE,
+        related_name="posts"
     )
-
     comments = GenericRelation(Comment)
     likes = GenericRelation(Like)
     favourites = GenericRelation(Favourite)
 
     class Meta:
+        verbose_name_plural = "Posts"
         permissions = [
             ("can_approve_post", "Can approve posts"),
             ("can_post_without_approval", "Can post without approval"),

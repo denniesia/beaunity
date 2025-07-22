@@ -9,7 +9,7 @@ from beaunity.comment.models import Comment
 from beaunity.common.mixins import (CreatedAtMixin, CreatedByMixin,
                                     IsApprovedMixin, LastUpdatedMixin)
 from beaunity.common.models import BaseActivity
-from beaunity.interaction.models import Like
+from beaunity.interaction.models import Like, Favourite
 
 from .choices import DifficultyLevel
 
@@ -33,6 +33,7 @@ class Challenge(BaseActivity, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, 
     )
     likes = GenericRelation(Like)
     comments = GenericRelation(Comment)
+    favourites = GenericRelation(Favourite)
 
     class Meta:
         verbose_name_plural = "Challenges"

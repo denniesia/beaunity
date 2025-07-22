@@ -8,9 +8,14 @@ from .models import Post
 
 @admin.register(Post)
 class PostAdmin(ModelAdmin):
-    list_display = ("title", "created_at", "category", "created_by")
-    search_fields = [
+    list_display = (
+        "title",
+        "created_at",
+        "category",
+        "created_by"
+    )
+    search_fields = (
         "title",
         "created_by__username",
-    ]
+    )
     ordering = ("-created_at",)

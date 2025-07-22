@@ -43,6 +43,7 @@ Moreover, the model includes additional fields:
 | `attendees`  | `ManyToManyField ` | *ManyToManyField* to UserModel. Users who have joined the challenge. Can be empty.  |
 | `likes`      | `GenericRelation ` | *Generic relation* to Like Model for tracking likes.                                |
 | `comments `  | `GenericRelation ` | *Generic relation* to Comment Model for tracking comments.                          |
+| `favourites` | `GenericRelation`  | *Generic relation* to Favourite Model for tracking favourites.            |
 
 And some inherited Mixins:
 

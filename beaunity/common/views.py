@@ -142,12 +142,11 @@ class DashboardView(LoginRequiredMixin, DetailView):
             content_type=event_content_type,
         )
 
+#TODO - generic relations
+
         post_content_type = ContentType.objects.get_for_model(Post)
         fav_posts = Post.objects.filter(
-            id__in=Favourite.objects.filter(
-                user=user,
-                content_type=post_content_type,
-            ).values_list('object_id', flat=True)
+            favourites__user=user
         )
         liked_posts = Like.objects.filter(
             user=user,

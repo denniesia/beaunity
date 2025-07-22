@@ -36,13 +36,15 @@ The Challenge Model inherits the BaseActivity abstract class, which contains:
 
 Moreover, the model includes additional fields:
 
-| Field        | Type               | Description                                                                                                           |
-|--------------|--------------------|-----------------------------------------------------------------------------------------------------------------------|
-| `difficulty` | `CharField `       | Defines the challenge difficulty level. Choices are Beginner, Intermediate, Advanced, Legendary. Default is Beginner. |
-| `categories` | `ManyToManyField ` | *ManyToManyField* to Category Model. Links the challenge to one or more categories.                                   |
-| `attendees`  | `ManyToManyField ` | *ManyToManyField* to UserModel. Users who have joined the challenge. Can be empty.                                    |
-| `likes`      | `GenericRelation ` | *Generic relation* to Like Model for tracking likes.                                                                  |
-| `comments `  | `GenericRelation ` | *Generic relation* to Comment Model for tracking comments.                                                            |
+| Field        | Type                | Description                                                                                                           |
+|--------------|---------------------|-----------------------------------------------------------------------------------------------------------------------|
+| `difficulty` | `CharField `        | Defines the challenge difficulty level. Choices are Beginner, Intermediate, Advanced, Legendary. Default is Beginner. |
+| `categories` | `ManyToManyField `  | *ManyToManyField* to Category Model. Links the challenge to one or more categories.                                   |
+| `attendees`  | `ManyToManyField `  | *ManyToManyField* to UserModel. Users who have joined the challenge. Can be empty.                                    |
+| `likes`      | `GenericRelation `  | *Generic relation* to Like Model for tracking likes.                                                                  |
+| `comments `  | `GenericRelation `  | *Generic relation* to Comment Model for tracking comments.                                                            |
+| `favourites` | `GenericRelation`   | *Generic relation* to Favourite Model for tracking favourites.            |
+
 
 And some inherited Mixins:
 
