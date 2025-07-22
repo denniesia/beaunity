@@ -15,12 +15,7 @@ from .permissions import CanApprove
 class ChallengeViewSet(ModelViewSet):
     queryset = Challenge.objects.filter(
         is_approved=True
-    ).select_related(
-        "created_by"
-    ).prefetch_related(
-        "categories",
-        "attendees"
-    )
+    ).order_by('-created_at')
 
 
     def get_serializer_class(self):

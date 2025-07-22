@@ -53,7 +53,7 @@ def save(self, *args, **kwargs):
 
 Superusers and members of the Moderator group have full CRUD (Create, Read, Update, and Delete) permissions
 for the Category model. Regular authenticated users can only view categories but cannot modify them unless explicitly
-granted the necessary permissions. 
+granted the necessary permissions.
 
 
 🌷 Admin Panel

@@ -40,7 +40,7 @@ class ChallengeSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(str(e))
         return image
 
-    def validate(self, data):
+    def validate_time(self, data):
         start_time = data.get("start_time")
         end_time = data.get("end_time")
 

@@ -21,37 +21,37 @@ challenge/
 
 The Challenge Model inherits the BaseActivity abstract class, which contains:
 
-| Field          | Type              | Description                                                                                |
-|----------------|-------------------|--------------------------------------------------------------------------------------------|
-| `poster_image` | `CloudinaryField` | An image hosted on Cloudinary.                                                             |
-| `title`        | `CharField`       | The title of the challenge. Must be at least 10 characters long.                           |
-| `details`      | `RichTextField`   | A rich-text description providing details about the challenge.                             |
-| `is_online`    | `BooleanField`    | Indicates if the activity is online (True) or in-person (False). Defaults to False         |
-| `meeting_link` | `CharField`       | The meeting link for online activities. Can be blank or null.                              |
-| `city`         | `CharField`       | The city where the activity takes place. Must be at least 2 characters if provided.        |
+| Field          | Type              | Description                                                                               |
+|----------------|-------------------|-------------------------------------------------------------------------------------------|
+| `poster_image` | `CloudinaryField` | An image hosted on Cloudinary.                                                            |
+| `title`        | `CharField`       | The title of the challenge. Must be at least 10 characters long.                          |
+| `details`      | `RichTextField`   | A rich-text description providing details about the challenge.                            |
+| `is_online`    | `BooleanField`    | Indicates if the activity is online (True) or in-person (False). Defaults to False        |
+| `meeting_link` | `CharField`       | The meeting link for online activities. Can be blank or null.                             |
+| `city`         | `CharField`       | The city where the activity takes place. Must be at least 2 characters if provided.       |
 | `location`     | `CharField`       | The physical address/location of the activity. Must be at least 10 characters if provided. |
-| `start_time`   | `DateTimeField`   | The start date and time of the challenge.                                                  |
-| `end_time`     | `DateTimeField`   | The end date and time of the activity.                                                     |
-| `is_new`       | `BooleanField`    | 	Indicates if the activity is newly added (True). Defaults to False.                       |
+| `start_time`   | `DateTimeField`   | The start date and time of the challenge.                                                 |
+| `end_time`     | `DateTimeField`   | The end date and time of the activity.                                                    |
+| `is_new`       | `BooleanField`    | Indicates if the activity is newly added (True). Defaults to False.                       |
 
 Moreover, the model includes additional fields:
 
-| Field        | Type               | Description                                                                                                            |
-|--------------|--------------------|------------------------------------------------------------------------------------------------------------------------|
-| `difficulty` | `CharField `       | Defines the challenge difficulty level. Choices are Beginner, Intermediate, Advanced, Legendary. Defaults to Beginner. |
-| `categories` | `ManyToManyField ` | *ManyToManyField* to Category Model. Links the challenge to one or more categories.                                    |
-| `attendees`  | `ManyToManyField ` | *ManyToManyField* to UserModel. Users who have joined the challenge. Can be empty.                                     |
-| `likes`      | `GenericRelation ` | *Generic relation* to Like Model for tracking likes.                                                                   |
-| `comments `  | `GenericRelation ` | *Generic relation* to Comment Model for tracking comments.                                                             |
+| Field        | Type               | Description                                                                                                           |
+|--------------|--------------------|-----------------------------------------------------------------------------------------------------------------------|
+| `difficulty` | `CharField `       | Defines the challenge difficulty level. Choices are Beginner, Intermediate, Advanced, Legendary. Default is Beginner. |
+| `categories` | `ManyToManyField ` | *ManyToManyField* to Category Model. Links the challenge to one or more categories.                                   |
+| `attendees`  | `ManyToManyField ` | *ManyToManyField* to UserModel. Users who have joined the challenge. Can be empty.                                    |
+| `likes`      | `GenericRelation ` | *Generic relation* to Like Model for tracking likes.                                                                  |
+| `comments `  | `GenericRelation ` | *Generic relation* to Comment Model for tracking comments.                                                            |
 
 And some inherited Mixins:
 
-| Mixins                | Description                                                        |
-|-----------------------|--------------------------------------------------------------------|
-| `LastUpdatedMixin  `  | Tracks the last modification timestamp.                            |
-| `CreatedAtMixin  `    | Stores when the category was created.                              | 
-| `CreatedByMixin  `    | *ForeignKey* to UserModel, tracks which user created the category. |
-| `IsApprovedMixin  `    | Defines if the object has been approved. Default is False.         |
+| Mixins                | Description                                                         |
+|-----------------------|---------------------------------------------------------------------|
+| `LastUpdatedMixin  `  | Tracks the last modification timestamp.                             |
+| `CreatedAtMixin  `    | Stores when the challenge was created.                              | 
+| `CreatedByMixin  `    | *ForeignKey* to UserModel, tracks which user created the challenge. |
+| `IsApprovedMixin  `    | Defines if the challenge has been approved. Default is False.       |
 
 - Meta options:
   - verbose_name_plural = "Challenges"
@@ -87,12 +87,12 @@ ensure the API receives the expected data and responds consistently.
 The project uses two serializers to handle Challenge data in different contexts:
 - ChallengeSerializer -  is used for retrieving and displaying challenge data in a structured JSON format. 
 It is based on the Challenge model and includes related data such as categories and the user who created the challenge. 
-  - Validation:
-    - validate_data method - ensures that the challenge description contains at least 100 characters of plain text 
+  - Validations:
+    - validate_details method - ensures that the challenge description contains at least 100 characters of plain text 
     (HTML tags are stripped before validation using bleach).
-    - validate_poster_image method - Validates the image using a custom CloudinaryExtensionandSizeValidator to check 
+    - validate_poster_image method - Validates the image is using a custom CloudinaryExtensionandSizeValidator to check 
     for allowed file types and size limits.
-    - validate method - ensures the end_time is after the start_time.
+    - validate_time method - ensures the end_time is after the start_time.
     
 ````python
 class ChallengeSerializer(serializers.ModelSerializer):

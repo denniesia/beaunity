@@ -63,6 +63,13 @@ class ChallengeDetailsView(LoginRequiredMixin, DetailView):
     template_name = "challenge/challenge-details.html"
     context_object_name = "challenge"
 
+    def get_queryset(self):
+        return super().get_queryset().prefetch_related(
+            "attendees"
+        ).select_related(
+            "created_by"
+        )
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         challenge = self.get_object()

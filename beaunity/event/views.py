@@ -20,9 +20,7 @@ from .forms import EventCreateForm, EventDeleteForm, EventEditForm
 from .models import Event
 
 
-# Create your views here.
 class EventsOverviewView(LoginRequiredMixin, FilteredContextMixin, FilteredQuerysetMixin, ListView):
-
     model = Event
     template_name = "event/events-overview.html"
     ordering = ["-start_time"]
@@ -42,12 +40,19 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
     context_object_name = "event"
     template_name = "event/event-details.html"
 
+    def get_queryset(self):
+        return super().get_queryset().prefetch_related(
+            "attendees"
+        ).select_related(
+            "created_by"
+        )
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         event = self.object
         attendees = event.attendees.all()[:6]
         comments = event.comments.all().order_by("created_at")
-        has_joined = event in self.request.user.event_attendees.all()
+        has_joined = self.request.user.event_attendees.filter(pk=event.pk).exists()
 
         paginator = Paginator(comments, 5)
         page_number = self.request.GET.get("page")
