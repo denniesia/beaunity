@@ -6,7 +6,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from beaunity.challenge.serializers import (ChallengeCreateSerializer,
                                             ChallengeSerializer)
-from beaunity.common.permissions import IsCreator
+from beaunity.common.permissions import IsCreatorOrSuperuser
 
 from .models import Challenge
 from .permissions import CanApprove
@@ -25,7 +25,7 @@ class ChallengeViewSet(ModelViewSet):
 
     def get_permissions(self):
         if self.action in ["update", "partial_update", "destroy"]:
-            return [IsCreator()]
+            return [IsCreatorOrSuperuser()]
         return [IsAuthenticated()]
 
     def perform_create(self, serializer):

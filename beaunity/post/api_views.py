@@ -1,4 +1,4 @@
-from beaunity.common.permissions import IsCreator
+from beaunity.common.permissions import IsCreatorOrSuperuser
 from beaunity.post.serializers import PostSerializer
 from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -15,7 +15,7 @@ class PostViewSet(ModelViewSet):
 
     def get_permissions(self):
         if self.action in ['update', 'partial_update', 'destroy']:
-            return [IsCreator()]
+            return [IsCreatorOrSuperuser()]
         elif self.action == 'create':
             return [IsAuthenticated()]
         return [AllowAny()]

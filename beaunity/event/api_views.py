@@ -1,4 +1,4 @@
-from beaunity.common.permissions import IsCreator
+from beaunity.common.permissions import IsCreatorOrSuperuser
 from rest_framework import permissions, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
@@ -20,7 +20,7 @@ class EventViewSet(ModelViewSet):
 
     def get_permissions(self):
         if self.action in ['update', 'partial_update', 'destroy']:
-            return [IsCreator()]
+            return [IsCreatorOrSuperuser()]
         elif self.action == 'create':
             return [IsAuthenticated(), CanAddEvent()]
         return [IsAuthenticated()]
