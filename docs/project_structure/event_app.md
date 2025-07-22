@@ -51,7 +51,7 @@ And some inherited Mixins:
 | `LastUpdatedMixin  `  | Tracks the last modification timestamp.                         |
 | `CreatedAtMixin  `    | Stores when the event was created.                              | 
 | `CreatedByMixin  `    | *ForeignKey* to UserModel, tracks which user created the event. |
-|
+
 
 - Meta options:
   - verbose_name_plural = "Events"
@@ -72,6 +72,7 @@ The EventAdmin class customizes how events are managed in the Django admin panel
 - Ordering: Events are ordered by created_at in descending order (newest first). 
 - Search: Allows searching by title or created_by for easier navigation.
 
+<img width="1886" height="653" alt="image" src="https://github.com/user-attachments/assets/54d210d3-9c5d-4ad5-bda8-626a8c24a1cc" />
 
 ## 🌿RestFull Api Contents
 
@@ -140,6 +141,9 @@ class EventCreateSerializer(EventSerializer):
 
 
 🌻 **API Views**
+
+<img width="1525" height="382" alt="image" src="https://github.com/user-attachments/assets/9e783d1a-b697-42ae-934f-de0e440af9f2" />
+
 
 - api/#/event/ - This ModelViewSet provides full CRUD operations for the Event model.
 It uses EventCreateSerializer for creating challenges (allows category selection by slug) and EventSerializer 
