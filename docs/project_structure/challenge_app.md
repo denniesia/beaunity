@@ -1,4 +1,4 @@
-# ⭐ Challenge
+# ⭐ Challenge App
 
 ```tree
 challenge/

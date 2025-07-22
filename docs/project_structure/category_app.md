@@ -1,4 +1,4 @@
-# ⭐ Category
+# ⭐ Category App
 
 ```tree
 category/

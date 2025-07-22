@@ -1,4 +1,4 @@
-# ⭐ Accounts
+# ⭐ Accounts App
 
 ```tree
 accounts/

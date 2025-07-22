@@ -1,4 +1,4 @@
-# ⭐ Interaction
+# ⭐ Interaction App
 
 ```tree
 interaction/

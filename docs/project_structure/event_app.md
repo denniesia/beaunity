@@ -1,4 +1,4 @@
-# ⭐ Event
+# ⭐ Event App
 
 ```tree
 event/
