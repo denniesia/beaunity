@@ -54,5 +54,11 @@ Exple beaunity from the view of a normal user.
 
 -  [About Page](pages/about.md)
 -  [Forum Page](pages/forum.md)
+-  [Challenges Page](pages/challenges.md)
+-  [Events Page](pages/events.md)
 -  [Landing Page](pages/landing_page.md)
+-  [Dashboard Page](pages/dashboard.md)
+-  [Profile Page](pages/profile.md)
+
+
 
