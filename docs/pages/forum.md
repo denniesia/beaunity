@@ -20,17 +20,24 @@
 <img width="1526" height="950" alt="image" src="https://github.com/user-attachments/assets/27f96a43-af00-41fd-b8a7-8c7ec78be9a0" />
 <img width="1423" height="864" alt="image" src="https://github.com/user-attachments/assets/02a021be-87b8-47a2-b581-93dfc8be3c25" />
 
-  - User can edit and delete their own content.
+  - You can edit and delete your own content by clicking on the icons in the upper right corner.
 <img width="1509" height="939" alt="image" src="https://github.com/user-attachments/assets/b5a20a7a-c422-4a43-bb39-52b3853124f4" />
+
+- Edit your post.
 <img width="1473" height="940" alt="image" src="https://github.com/user-attachments/assets/45232f32-4322-4156-a13e-0ddb53a684ab" />
 
+- Or you can delete it altogether. 
 <img width="1472" height="941" alt="image" src="https://github.com/user-attachments/assets/3eb99897-6a88-41a1-9fbe-f6a0ff742043" />
 
+- You can also edit or delete your comments. 
 <img width="1458" height="945" alt="image" src="https://github.com/user-attachments/assets/d6bce613-ce15-4fec-a986-e72a07956df9" />
+
+- Comment edit page.
 <img width="1459" height="943" alt="image" src="https://github.com/user-attachments/assets/6d292fd4-8fa3-4d43-83b7-8d60933c9f63" />
 
 
 🌸 Searchbar results 
+- You can search by post title and content.
 <img width="1468" height="942" alt="image" src="https://github.com/user-attachments/assets/df0e55dc-dabf-4f07-adff-736bb86241bd" />
 
 🌸 Creating Post page
