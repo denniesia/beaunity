@@ -4,11 +4,12 @@ from beaunity.common.forms import ActivityBaseForm
 
 from .choices import DifficultyLevel
 from .models import Challenge
+from .mixins import ChallengeValidationMixin
 
 CLASS = "w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400"
 
 
-class ChallengeCreateForm(ActivityBaseForm):
+class ChallengeCreateForm(ChallengeValidationMixin, ActivityBaseForm):
     class Meta(ActivityBaseForm.Meta):
         model = Challenge
 
@@ -23,7 +24,7 @@ class ChallengeCreateForm(ActivityBaseForm):
     )
 
 
-class ChallengeEditForm(ActivityBaseForm):
+class ChallengeEditForm(ChallengeValidationMixin, ActivityBaseForm):
     class Meta(ActivityBaseForm.Meta):
         model = Challenge
 
