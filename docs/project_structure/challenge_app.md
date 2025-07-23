@@ -10,6 +10,7 @@ challenge/
 ├── apps.py              
 ├── choices.py           # Choice constants for difficulty level (e.g., beginner, intermediate, etc.)
 ├── forms.py             # Django forms for CRUD operations
+├── mixins.py            # ChallengeValidationMixin 
 ├── models.py            # Challenge Model
 ├── permissions.py       # Custom permissions for API-Views
 ├── serializers.py       # DRF serializers for CRUD operations             
