@@ -68,13 +68,13 @@ Create category view:
 <img width="1239" height="937" alt="image" src="https://github.com/user-attachments/assets/2137486e-f583-4ec9-914d-55ab31584f6f" />
 
 
-- The *Challenges* section provides an overview of Pending Challenges, displaying their titles and details. Using the action icons, challenge can easily be approves or rejected.
+- The *Challenges* section provides an overview of Pending Challenges, displaying their titles and details. Using the action icons, challenge can easily be approves or rejected. Approving a challenge automatically send its author email with approval confirmation. 
 
 <img width="1249" height="946" alt="image" src="https://github.com/user-attachments/assets/65839bd4-cf47-475b-aa9d-c72f1ff704a1" />
 
 
 
-- The *Posts* section provides an overview of Pending Posts, displaying their titles and content. Using the action icons, challenge can easily be approves, rejected or edited. 
+- The *Posts* section provides an overview of Pending Posts, displaying their titles and content. Using the action icons, challenge can easily be approves, rejected or edited. Approving a post automatically send its author email with approval confirmation. 
  
   <img width="1341" height="942" alt="image" src="https://github.com/user-attachments/assets/672281f5-7e40-40f1-bf03-ea7d56edcd96" />
 
