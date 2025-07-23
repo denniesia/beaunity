@@ -23,9 +23,12 @@ class TestsCategoryEditView(TestCase):
             email='staffuser@test.bg',
             password='dfgm!2'
         )
-        permission = Permission.objects.get(codename='change_category')
-        self.staff.user_permissions.add(permission)
+        permission1 = Permission.objects.get(codename='change_category')
+        permission2 = Permission.objects.get(codename='add_category')
+
+        self.staff.user_permissions.add(permission1, permission2)
         self.staff.save()
+
         self.category = Category.objects.create(
             title='Test Category',
             description='Test Description',
@@ -65,7 +68,7 @@ class TestsCategoryEditView(TestCase):
             password='dfgm!2'
         )
         form_data = {
-            'title': 'Changed Title',
+            'title': 'Changed title',
             'description': self.category.description,
             'image': SimpleUploadedFile(
                 name='test.gif',
@@ -84,5 +87,5 @@ class TestsCategoryEditView(TestCase):
         self.assertRedirects(response, reverse('category-overview'))
 
         self.category.refresh_from_db()
-        self.assertEqual(self.category.title, 'Changed Title')
+        self.assertEqual(self.category.title, 'Changed title')
         self.assertEqual(self.category.description, 'Test Description')

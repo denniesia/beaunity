@@ -12,11 +12,10 @@ from .forms import CategoryCreateForm, CategoryDeleteForm, CategoryEditForm, Sea
 from .models import Category
 
 
-# Create your views here.
 class CategoryOverviewView(LoginRequiredMixin,PermissionRequiredMixin, ListView):
     template_name = "category/category-overview.html"
     model = Category
-    permission_required = "categories.add_category"
+    permission_required = "category.add_category"
     context_object_name = "categories"
 
     def get_queryset(self):
