@@ -64,6 +64,7 @@ Beaunity leverages a modern Python and Django-based tech stack to deliver a robu
 ### Database & Storage
 
 - PostgreSQL (psycopg2==2.9.10) – Relational database for structured data storage.
+- psycopg2 – PostgreSQL adapter for Python
 - Cloudinary (1.44.0) – Cloud-based image and video storage.
 - Django Cloudinary Storage (0.3.0) – Cloudinary integration for Django.
 
