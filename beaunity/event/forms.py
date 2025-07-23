@@ -6,17 +6,17 @@ from .models import Event
 from .mixins import EventValidationMixin, PublicFieldMixin
 
 
-class EventCreateForm(ActivityBaseForm, EventValidationMixin, PublicFieldMixin):
+class EventCreateForm(EventValidationMixin, PublicFieldMixin, ActivityBaseForm):
     class Meta(ActivityBaseForm.Meta):
         model = Event
 
 
-class EventEditForm(ActivityBaseForm, EventValidationMixin, PublicFieldMixin):
+class EventEditForm(EventValidationMixin, PublicFieldMixin, ActivityBaseForm):
     class Meta(ActivityBaseForm.Meta):
         model = Event
 
 
-class EventDeleteForm(ActivityBaseForm, PublicFieldMixin):
+class EventDeleteForm(PublicFieldMixin, ActivityBaseForm):
     class Meta(ActivityBaseForm.Meta):
         model = Event
 
