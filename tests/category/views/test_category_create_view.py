@@ -1,11 +1,12 @@
-from beaunity.common.mixins import UserModel
 from django.contrib.auth import get_user_model
-from django.test import TestCase, RequestFactory
-from beaunity.category.models import Category
-from django.core.files.uploadedfile import SimpleUploadedFile
-from django.urls import reverse
-from beaunity.category.views import CategoryOverviewView
 from django.contrib.auth.models import Group, Permission
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.test import RequestFactory, TestCase
+from django.urls import reverse
+
+from beaunity.category.models import Category
+from beaunity.category.views import CategoryOverviewView
+from beaunity.common.mixins import UserModel
 
 UserModel = get_user_model()
 

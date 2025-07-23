@@ -1,9 +1,10 @@
 from django.contrib.auth import get_user_model
-from django.test import TestCase
-from beaunity.post.models import Post
-from beaunity.category.models import Category
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.contrib.auth.models import Group
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.test import TestCase
+
+from beaunity.category.models import Category
+from beaunity.post.models import Post
 
 UserModel = get_user_model()
 

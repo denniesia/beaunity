@@ -1,6 +1,8 @@
-from django.test import TestCase
-from beaunity.category.forms import CategoryBaseForm
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.test import TestCase
+
+from beaunity.category.forms import CategoryBaseForm
+
 
 class TestCategoryBaseForm(TestCase):
     def setUp(self):

@@ -1,15 +1,14 @@
 from allauth.account.signals import password_reset
-from django.urls import reverse
 from django.contrib.auth import get_user_model
-from django.test import TestCase
-from beaunity.post.models import Post
-from beaunity.category.models import Category
+from django.contrib.auth.models import AnonymousUser, Group
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.contrib.auth.models import Group, AnonymousUser
-from django.test import RequestFactory
-from beaunity.post.views import PostEditView
-from beaunity.post.forms import AdminPostEditForm, PostEditForm
+from django.test import RequestFactory, TestCase
+from django.urls import reverse
 
+from beaunity.category.models import Category
+from beaunity.post.forms import AdminPostEditForm, PostEditForm
+from beaunity.post.models import Post
+from beaunity.post.views import PostEditView
 
 UserModel = get_user_model()
 

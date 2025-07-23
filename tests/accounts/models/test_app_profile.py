@@ -1,13 +1,15 @@
+from datetime import date
 from unittest import expectedFailure
 
-from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
-from beaunity.accounts.models import Profile
+from django.test import TestCase
 from prompt_toolkit.key_binding.bindings.named_commands import self_insert
-from datetime import date
+
+from beaunity.accounts.models import Profile
 
 UserModel = get_user_model()
+
 
 class TestProfile(TestCase):
     def setUp(self):
