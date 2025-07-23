@@ -32,3 +32,9 @@ Explore exciting events and discover various topics designed to inspire and moti
 ---
 
 ### *✏️ Events can only be created by Organisers, who have full control over all CRUD operations related to them.*
+
+---
+Next -> [Landing Page](https://github.com/denniesia/beaunity/blob/main/docs/pages/landing_page.md)
+
+--- 
+Home -> [Home](https://github.com/denniesia/beaunity?tab=readme-ov-file#readme)

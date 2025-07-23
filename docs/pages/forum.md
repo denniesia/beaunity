@@ -53,3 +53,10 @@
 
  ### 🐛 Error Handling  
 <img width="1350" height="945" alt="image" src="https://github.com/user-attachments/assets/c46d6a0f-477e-492e-b6ac-cc9c5582e69e" />
+
+
+---
+Next -> [Challenges Page](https://github.com/denniesia/beaunity/blob/main/docs/pages/challenges.md)
+
+--- 
+Home -> [Home](https://github.com/denniesia/beaunity?tab=readme-ov-file#readme)

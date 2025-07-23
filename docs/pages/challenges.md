@@ -71,3 +71,8 @@ If the challenge is not online a location should be provided.
 <img width="1394" height="924" alt="image" src="https://github.com/user-attachments/assets/7745b7f3-7371-4495-be33-b2d135b6ea51" />
 
 
+---
+Next -> [Events Page](https://github.com/denniesia/beaunity/blob/main/docs/pages/events.md)
+
+--- 
+Home -> [Home](https://github.com/denniesia/beaunity?tab=readme-ov-file#readme)
