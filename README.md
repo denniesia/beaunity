@@ -14,8 +14,8 @@ To empower individuals to embrace their unique selves through collaboration, cre
 - [Project Setup](docs/project_setup.md)
 - [Exploring beaunity](docs/exploring_beaunity.md)
 - [App Structure & Api Views](docs/app_structure_and_api_views.md)
-- [Role Management](docs/role_management)
-
+- [Role Management](docs/role_management.md)
+- [Testing](docs/testing.md)
 
 ---
 
