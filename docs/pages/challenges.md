@@ -67,3 +67,7 @@ Before deleting a form with filled up information about the challenge will be sh
 ### 🐛 Error Handling 
 <img width="1555" height="1072" alt="image" src="https://github.com/user-attachments/assets/786f9728-237d-4120-94e5-c9911ffe107a" />
 
+If the challenge is not online a location should be provided.
+<img width="1394" height="924" alt="image" src="https://github.com/user-attachments/assets/7745b7f3-7371-4495-be33-b2d135b6ea51" />
+
+
