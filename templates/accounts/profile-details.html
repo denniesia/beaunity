@@ -59,15 +59,15 @@
                                 </form>
                             {% endif %}
 
-                            {% if group != 'User' %}
-                                <form method="post" action="{% url 'remove-roles' profile.pk  %}">
-                                    {% csrf_token %}
-                                    <button type="submit"
-                                            class="block w-full text-left hover:bg-pink-100 px-4 py-2 text-sm text-pink-600 font-semibold cursor-pointer whitespace-nowrap">
-                                        Clear roles
-                                    </button>
-                                </form>
-                            {% endif %}
+
+                            <form method="post" action="{% url 'remove-roles' profile.pk  %}">
+                                {% csrf_token %}
+                                <button type="submit"
+                                        class="block w-full text-left hover:bg-pink-100 px-4 py-2 text-sm text-pink-600 font-semibold cursor-pointer whitespace-nowrap">
+                                    Clear roles
+                                </button>
+                            </form>
+
                         </div>
                           {% endif %}
                     </div>
