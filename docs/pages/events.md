@@ -37,4 +37,4 @@ Explore exciting events and discover various topics designed to inspire and moti
 Next -> [Landing Page](https://github.com/denniesia/beaunity/blob/main/docs/pages/landing_page.md)
 
 --- 
-Home -> [Home](https://github.com/denniesia/beaunity?tab=readme-ov-file#readme)
+Home -> [Home](https://github.com/denniesia/beaunity/blob/main/README.md)

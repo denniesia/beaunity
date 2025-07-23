@@ -233,4 +233,4 @@ to keep the user logged in without re-entering credentials. The *TokenRefreshVie
 Next -> [Category App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/category_app.md)
 
 --- 
-Home -> [Home](https://github.com/denniesia/beaunity?tab=readme-ov-file#readme)
+Home -> [Home](https://github.com/denniesia/beaunity/blob/main/README.md)

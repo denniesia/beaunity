@@ -75,4 +75,4 @@ If the challenge is not online a location should be provided.
 Next -> [Events Page](https://github.com/denniesia/beaunity/blob/main/docs/pages/events.md)
 
 --- 
-Home -> [Home](https://github.com/denniesia/beaunity?tab=readme-ov-file#readme)
+Home -> [Home](https://github.com/denniesia/beaunity/blob/main/README.md)

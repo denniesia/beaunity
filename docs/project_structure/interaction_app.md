@@ -229,4 +229,4 @@ def has_joined(user, model_name, obj_id):
 Next -> [Post App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/post_app.md)
 
 --- 
-Home -> [Home](https://github.com/denniesia/beaunity?tab=readme-ov-file#readme)
+Home -> [Home](https://github.com/denniesia/beaunity/blob/main/README.md)

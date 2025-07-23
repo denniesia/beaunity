@@ -124,4 +124,4 @@ class PostViewSet(ModelViewSet):
 ````
 
 --- 
-Home -> [Home](https://github.com/denniesia/beaunity?tab=readme-ov-file#readme)
+Home -> [Home](https://github.com/denniesia/beaunity/blob/main/README.md)
