@@ -173,6 +173,10 @@ class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def get_initial(self):
         return self.object.__dict__
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
 
 class PostDeleteView(LoginRequiredMixin, UserIsCreatorMixin, DeleteView):
     template_name = "post/post-delete.html"

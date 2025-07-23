@@ -33,7 +33,7 @@
         <!-- Post Edit Form -->
         <form method="post" class="flex flex-col gap- w-full">
             {% csrf_token %}
-                {% if request.user|is_superuser_or_moderator and not post.is_approved %}
+                {% if perms.post.can_approve_post and not post.is_approved %}
                     <!--- Category -->
                      <div class="w-full mb-4">
                          <span class="text-sm italic text-red-500 mb-2">
@@ -69,7 +69,7 @@
                     </div>
 
 
-                {% elif request.user|is_superuser_or_moderator and post.is_approved  %}
+                {% elif perms.post.can_approve_post and post.is_approved  %}
 
                      <!--- Category -->
                     <div class="w-full mb-4">
@@ -106,9 +106,7 @@
                         <span class="text-sm italic text-red-500">{{ form.content.errors }}</span>
                     </div>
 
-                {% elif post.is_approved and not post.created_by|is_superuser_or_moderator %}
-
-
+                {% elif not perms.post.can_approve_post and post.is_approved %}
                     <div class="w-full mb-4 ">
                         <label class="block text-sm font-medium text-gray-700">{{ form.banner.label }}</label>
                         {{ form.banner }}

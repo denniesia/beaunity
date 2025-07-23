@@ -61,7 +61,25 @@ class PostCreateForm(PostBaseForm):
 
 
 class PostEditForm(PostBaseForm):
-    pass
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+
+        post = self.instance
+
+        if user:
+            if user.has_perm('post.can_approve_posts'):
+                # Moderators/Superusers can change the category
+                self.fields['category'].disabled = False
+                self.fields['category'].required = True
+            else:
+                # Regular users:
+                if post.is_approved:
+                    # Lock the category if post is approved
+                    self.fields['category'].disabled = True
+                else:
+                    self.fields['category'].disabled = False
+
 
 
 class AdminPostEditForm(PostBaseForm):
