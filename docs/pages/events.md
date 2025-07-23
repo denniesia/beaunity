@@ -30,4 +30,5 @@ Explore exciting events and discover various topics designed to inspire and moti
 
 
 ---
+
 ### *✏️ Events can only be created by Organisers, who have full control over all CRUD operations related to them.*
