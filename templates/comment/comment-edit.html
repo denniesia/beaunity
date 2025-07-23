@@ -44,11 +44,11 @@
 
             <!-- Submit Button -->
             <div class="flex gap-4">
-                {% if comment.content_type.model == 'post' %}
-                    <a href="{% url 'post-details' comment.content_object.pk  %}" class="px-5 py-2 px-6 text-sm font-medium text-pink-600 hover:text-pink-500 hover:bg-pink-100 border border-pink-200 rounded-lg transition-colors">
-                        Cancel
-                    </a>
-                {% endif %}
+
+                <a href="javascript:window.history.back();" class="px-5 py-2 px-6 text-sm font-medium text-pink-600 hover:text-pink-500 hover:bg-pink-100 border border-pink-200 rounded-lg transition-colors">
+                    Cancel
+                </a>
+
                 <button type="submit"
                         class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-600 transition">
                     Save Changes

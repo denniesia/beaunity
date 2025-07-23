@@ -46,9 +46,8 @@
                     {% include 'interaction/favourite.html' with obj=event model_name='event' %}
                 </div>
             </div>
-        </div>
 
-             {% if perms.event.add_event %}
+            {% if request.user == event.created_by %}
              <div class="absolute top-2 right-1 text-normal text-pink-600 font-semibold px-6 py-3 rounded-full shadow bg-white hover:bg-pink-100 hover:shadow-lg hover:shadow-pink-300">
                 <div class="flex items-center text-2xs cursor-pointer gap-4">
                     <a href="{% url 'event-edit' event.pk %}">
