@@ -9,7 +9,7 @@ Beaunity is a forum-like platform where users can create, discover, and particip
 - [Project Setup](docs/project_setup.md)
 - [Exploring beaunity](docs/exploring_beaunity.md)
 - [App Structure & Api Views](docs/app_structure_and_api_views.md)
-- [Rolle Management](docs/rolle_management.md)
+- [Role Management](docs/rolle_management.md)
 
 
 ---
