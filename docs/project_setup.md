@@ -52,13 +52,13 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ````
 
-### Step 4: Install Dependencies
+### Step 4: Install Tailwind
+
+This project uses Tailwind 
 
 ````python
-# if needed
-pip install --upgrade pip
+python manage.py tailwind install
 
-pip install -r requirements.txt
 ````
 
 ### Step 5: Set Up the Database
@@ -86,6 +86,10 @@ Follow the prompts to set up the superuser credentials.
 Run the server with the following command:
 
 ````python
+# Start Tailwind watcher (in one terminal)
+python manage.py tailwind start
+
+# Run Django server (in another terminal)
 python manage.py runserver
 ````
 
