@@ -11,10 +11,8 @@ class PostBaseForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = [
-            "banner",
-            "title",
-            "content",
-            "category"
+            "banner", "title",
+            "content", "category"
         ]
 
     category = forms.ModelChoiceField(
@@ -25,6 +23,7 @@ class PostBaseForm(forms.ModelForm):
                 "class": CLASS
             }
         ),
+        help_text="Once the post is approved the category cannot be changed."
     )
 
     banner = forms.URLField(
@@ -62,24 +61,9 @@ class PostCreateForm(PostBaseForm):
 
 class PostEditForm(PostBaseForm):
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
-
-        post = self.instance
-
-        if user:
-            if user.has_perm('post.can_approve_posts'):
-                # Moderators/Superusers can change the category
-                self.fields['category'].disabled = False
-                self.fields['category'].required = True
-            else:
-                # Regular users:
-                if post.is_approved:
-                    # Lock the category if post is approved
-                    self.fields['category'].disabled = True
-                else:
-                    self.fields['category'].disabled = False
-
+        self.fields["category"].disabled = True
+        self.fields["category"].required = False
 
 
 class AdminPostEditForm(PostBaseForm):
@@ -87,3 +71,4 @@ class AdminPostEditForm(PostBaseForm):
         super().__init__(*args, **kwargs)
         self.fields["title"].disabled = True
         self.fields["content"].disabled = True
+        self.fields["banner"].disabled = True

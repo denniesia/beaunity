@@ -1,5 +1,5 @@
 {% extends 'common/base.html' %}
-{% load permissions %}
+
 {% block content %}
 
 <div class="max-w-screen-xl mx-auto w-full">
@@ -33,7 +33,7 @@
         <!-- Post Edit Form -->
         <form method="post" class="flex flex-col gap- w-full">
             {% csrf_token %}
-                {% if perms.post.can_approve_post and not post.is_approved %}
+
                     <!--- Category -->
                      <div class="w-full mb-4">
                          <span class="text-sm italic text-red-500 mb-2">
@@ -43,6 +43,10 @@
                          </span>
                          <label for="id_category" class="block text-sm font-medium text-gray-700 mb-1 ">Select Category:</label>
                          {{ form.category }}
+                         {% if post.is_approved %}
+                             <span class="italic text-xs text-gray-500">{{ form.category.help_text }}</span>
+                         {% endif %}
+
                      </div>
                       <!-- Optional Banner -->
                     {% if post.banner %}
@@ -69,65 +73,7 @@
                     </div>
 
 
-                {% elif perms.post.can_approve_post and post.is_approved  %}
 
-                     <!--- Category -->
-                    <div class="w-full mb-4">
-                         <span class="text-sm italic text-red-500 mb-2">
-                             {% for error in form.non_field_errors %}
-                                 <ul class="mb-2">{{ error }}</ul>
-                             {% endfor %}
-                         </span>
-                         <label for="id_category" class="block text-sm font-medium text-gray-700 mb-1 ">Select Category:</label>
-                         {{ form.category }}
-                     </div>
-
-                     <!-- Optional Banner -->
-
-                    <div class="w-full mb-4 ">
-                        <label class="block text-sm font-medium text-gray-700">{{ form.banner.label }}</label>
-                        {{ form.banner }}
-                        <span class="text-sm italic text-red-500">{{ form.banner.errors }}</span>
-                    </div>
-
-
-                    <!-- Post Title -->
-                    <div class="w-full mb-4 ">
-                        <label class="block text-sm font-medium text-gray-700">{{ form.title.label }}</label>
-                        {{ form.title }}
-
-                        <span class="text-sm italic text-red-500">{{ form.title.errors }}</span>
-                    </div>
-
-                    <!-- Content Field -->
-                    <div class="w-full mb-4">
-                        <label class="block text-sm font-medium text-gray-700">{{ form.content.label }}</label>
-                        {{ form.content }}
-                        <span class="text-sm italic text-red-500">{{ form.content.errors }}</span>
-                    </div>
-
-                {% elif not perms.post.can_approve_post and post.is_approved %}
-                    <div class="w-full mb-4 ">
-                        <label class="block text-sm font-medium text-gray-700">{{ form.banner.label }}</label>
-                        {{ form.banner }}
-                        <span class="text-sm italic text-red-500">{{ form.banner.errors }}</span>
-                    </div>
-
-                    <!-- Post Title -->
-                    <div class="w-full mb-4 ">
-                        <label class="block text-sm font-medium text-gray-700">{{ form.title.label }}</label>
-                        {{ form.title }}
-
-                        <span class="text-sm italic text-red-500">{{ form.title.errors }}</span>
-                    </div>
-
-                    <!-- Content Field -->
-                    <div class="w-full mb-4">
-                        <label class="block text-sm font-medium text-gray-700">{{ form.content.label }}</label>
-                        {{ form.content }}
-                        <span class="text-sm italic text-red-500">{{ form.content.errors }}</span>
-                    </div>
-                {% endif %}
 
 
             <!-- Submit Button -->
