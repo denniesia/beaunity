@@ -14,7 +14,7 @@ from beaunity.event.models import Event
 
 
 @shared_task()
-def send_approval_email( user_id, object_type, object_title=None):
+def send_approval_email(user_id, object_type, object_title=None):
     User = get_user_model()
     user = User.objects.get(id=user_id)
 

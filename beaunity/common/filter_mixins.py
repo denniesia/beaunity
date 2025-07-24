@@ -1,7 +1,5 @@
 from django.db.models import Count, Q
-from django.db.models.fields import return_None
 from django.utils.timezone import now
-from oauthlib.uri_validate import query
 
 from beaunity.category.models import Category
 from beaunity.challenge.models import Challenge

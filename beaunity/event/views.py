@@ -9,8 +9,6 @@ from django.urls import reverse_lazy
 from django.utils.timezone import now
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
-from django_browser_reload.views import events
-from markdown_it.rules_core import inline
 
 from beaunity.category.models import Category
 from beaunity.comment.forms import CommentCreateForm

@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 from beaunity.common.tasks import send_approval_email
+from django.shortcuts import get_object_or_404
 
 def custom_permission_denied_view(request, exception=None):
     return render(request, "common/403.html", status=403)
@@ -19,7 +21,7 @@ def approve_instance(request, model_class, pk: int, content_type:str, permission
         )
         return redirect(redirect_approved)
 
-    return redirect(redirect_fallback, pk=pk)
+    return redirect(redirect_fallback)
 
 
 @login_required
