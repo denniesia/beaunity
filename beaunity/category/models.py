@@ -1,5 +1,6 @@
 from cloudinary.models import CloudinaryField
 from django.db import models
+from django.core.validators import MinLengthValidator
 from slugify import slugify
 
 from beaunity.common.mixins import CreatedAtMixin, CreatedByMixin, LastUpdatedMixin
@@ -8,7 +9,11 @@ from beaunity.common.mixins import CreatedAtMixin, CreatedByMixin, LastUpdatedMi
 class Category(LastUpdatedMixin, CreatedAtMixin, CreatedByMixin):
     title = models.CharField(
         max_length=30,
-        unique=True)
+        unique=True,
+        validators=[
+            MinLengthValidator(5),
+        ],
+    )
     image = CloudinaryField()
     description = models.CharField(max_length=100)
     slug = models.SlugField(

@@ -1,13 +1,12 @@
-from django import forms
-from beaunity.event.models import Event
-from ckeditor.widgets import CKEditorWidget
 import bleach
+from ckeditor.widgets import CKEditorWidget
 from cloudinary.forms import CloudinaryFileField
+from django import forms
 from django.forms import ClearableFileInput
+
 from beaunity.category.models import Category
-
 from beaunity.common.validators import CloudinaryExtensionandSizeValidator
-
+from beaunity.event.models import Event
 
 CLASS = 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
 
@@ -26,7 +25,7 @@ class ActivityBaseForm(forms.ModelForm):
         label='Poster Image:',
         help_text='Allowed poster image extentions are -.jpg, .jpeg, .png, .gif, .pdf, .mp4. Allowed size is 5MB.',
         options={
-            'folder': 'event_images',
+            'folder': 'activity_images',
             'use_filename': True,
             'unique_filename': True,
         },
@@ -130,11 +129,23 @@ class ActivityBaseForm(forms.ModelForm):
     )
 
     def clean_details(self):
+        ALLOWED_TAGS = ['b', 'i', 'u', 'a', 'p', 'ul', 'li', 'strong', 'em', 'br']
+        ALLOWED_ATTRIBUTES = {
+            'a': ['href', 'title'],
+        }
+
         raw = self.cleaned_data['details']
         plain_text = bleach.clean(raw, tags=[], strip=True)
+
         if len(plain_text.strip()) < 100:
             raise forms.ValidationError("Description must be at least 100 characters (excluding formatting).")
-        return raw
+
+        return bleach.clean(
+            raw,
+            tags=ALLOWED_TAGS,
+            attributes=ALLOWED_ATTRIBUTES,
+            strip=True
+        )
 
     def clean_poster_image(self):
         poster_image = self.cleaned_data['poster_image']

@@ -24,5 +24,5 @@ class PublicFieldMixin(forms.Form):
         label="Public event:",
         required=False,
         widget=forms.CheckboxInput(),
-        initial=True,
+        initial=False,
     )

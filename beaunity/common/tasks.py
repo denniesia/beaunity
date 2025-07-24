@@ -1,14 +1,17 @@
+from datetime import timedelta
+
 from celery import shared_task
-from django.core.mail import send_mail
 from django.contrib.auth import get_user_model
+from django.core.mail import send_mail
 from django.utils.timezone import now
 
-from datetime import timedelta
-from beaunity.event.models import Event
-from beaunity.challenge.models import Challenge
 import beaunity.settings as settings
-from beaunity.common.utils import mark_new
-from beaunity.common.utils import get_upcoming_events, get_upcoming_challenges, send_reminder_email
+from beaunity.challenge.models import Challenge
+from beaunity.common.utils import (get_upcoming_challenges,
+                                   get_upcoming_events, mark_new,
+                                   send_reminder_email)
+from beaunity.event.models import Event
+
 
 @shared_task()
 def send_approval_email( user_id, object_type, object_title=None):

@@ -12,8 +12,8 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
 
 from beaunity.comment.forms import CommentCreateForm
 from beaunity.common.mixins import UserIsCreatorMixin
-from beaunity.common.mixins_class import (FilteredContextMixin,
-                                          FilteredQuerysetMixin)
+from beaunity.common.filter_mixins import (FilteredContextMixin,
+                                           FilteredQuerysetMixin)
 from beaunity.common.views import approve_instance, disapprove_instance
 
 from .forms import ChallengeCreateForm, ChallengeDeleteForm, ChallengeEditForm
@@ -21,7 +21,7 @@ from .models import Challenge
 
 
 # Create your views here.
-class ChallengeOverviewView( LoginRequiredMixin, FilteredContextMixin, FilteredQuerysetMixin, ListView):
+class ChallengeOverviewView(LoginRequiredMixin, FilteredContextMixin, FilteredQuerysetMixin, ListView):
     model = Challenge
     ordering = ["-start_time"]
     template_name = "challenge/challenges-overview.html"

@@ -14,7 +14,7 @@ from markdown_it.rules_core import inline
 
 from beaunity.category.models import Category
 from beaunity.comment.forms import CommentCreateForm
-from beaunity.common.mixins_class import FilteredContextMixin, FilteredQuerysetMixin
+from beaunity.common.filter_mixins import FilteredContextMixin, FilteredQuerysetMixin
 
 from .forms import EventCreateForm, EventDeleteForm, EventEditForm
 from .models import Event
@@ -40,6 +40,7 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
     context_object_name = "event"
     template_name = "event/event-details.html"
 
+
     def get_queryset(self):
         return super().get_queryset().prefetch_related(
             "attendees"
@@ -53,7 +54,7 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
         attendees = event.attendees.all()[:6]
         comments = event.comments.all().order_by("created_at")
         has_joined = self.request.user.event_attendees.filter(pk=event.pk).exists()
-
+        print(event.is_public)
         paginator = Paginator(comments, 5)
         page_number = self.request.GET.get("page")
         page_obj = paginator.get_page(page_number)

@@ -1,10 +1,10 @@
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.db.models.fields import return_None
 from django.utils.timezone import now
-from beaunity.challenge.models import Challenge
-from django.db.models import Count, Q
-from beaunity.category.models import Category
 from oauthlib.uri_validate import query
+
+from beaunity.category.models import Category
+from beaunity.challenge.models import Challenge
 
 
 class FilteredQuerysetMixin:
@@ -15,9 +15,13 @@ class FilteredQuerysetMixin:
         archived = self.request.GET.get('archived', '').lower() == 'true'
 
         if archived:
-            queryset = self.model.objects.filter(end_time__lt=current_datetime)
+            queryset = self.model.objects.filter(
+                end_time__lt=current_datetime
+            )
         else:
-            queryset = self.model.objects.filter(end_time__gte=current_datetime)
+            queryset = self.model.objects.filter(
+                end_time__gte=current_datetime
+            )
 
         city = self.request.GET.get('city')
         category = self.request.GET.get('category')
@@ -40,14 +44,18 @@ class FilteredQuerysetMixin:
         if online:
             queryset = queryset.filter(is_online=True)
 
-        if sort_by == 'Popularity':
-            queryset = queryset.annotate(popularity=Count('attendees')).order_by('-popularity')
-        elif sort_by == 'Public events':
-            queryset = queryset.filter(is_public=True)
-        elif sort_by == 'Hosts':
-            queryset = queryset.order_by('created_by__username')
-        elif sort_by not in ['Popularity', 'Hosts']:
-            queryset = queryset.order_by('start_time')
+        if sort_by:
+            if sort_by == 'Popularity':
+                queryset = queryset.annotate(
+                    popularity=Count('attendees')
+                ).order_by(
+                    '-popularity'
+                )
+            elif sort_by == 'Public':
+                queryset = queryset.filter(is_public=True)
+            elif sort_by == 'Hosts':
+                queryset = queryset.order_by('created_by__username')
+
 
         if difficulty == 'Beginner':
             queryset = queryset.filter(difficulty='Beginner')
@@ -78,13 +86,22 @@ class FilteredContextMixin:
             applied_filters['online'] = 'Online'
         if request.GET.get('archived'):
             applied_filters['archived'] = True
+
+        #only for challenge
         if request.GET.get('difficulty'):
             applied_filters['difficulty'] = request.GET['difficulty']
 
-
-        context['applied_filters'] = applied_filters
         context['filter_mode'] = bool(applied_filters)
+        context['applied_filters'] = applied_filters
+
         context['categories'] = Category.objects.all()
-        context['cities'] = model.objects.exclude(city=None).exclude(city='').values_list('city', flat=True).distinct()
+        context['cities'] = model.objects.exclude(
+            city=None
+        ).exclude(
+            city=''
+        ).values_list(
+            'city', flat=True
+        ).distinct()
+
         context['model_name'] = model.__name__
         return context

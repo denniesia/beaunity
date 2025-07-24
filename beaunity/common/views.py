@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-
+from beaunity.common.tasks import send_approval_email
 
 def custom_permission_denied_view(request, exception=None):
     return render(request, "common/403.html", status=403)

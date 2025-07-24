@@ -9,6 +9,7 @@ from ckeditor.fields import RichTextField
 
 UserModel = get_user_model()
 
+
 class BaseActivity(models.Model):
     poster_image = CloudinaryField()
     title = models.CharField(
@@ -24,9 +25,9 @@ class BaseActivity(models.Model):
         null=True
     )
     city = models.CharField(
+        max_length=100,
         null=True,
         blank=True,
-        max_length=100,
         validators=[
             MinLengthValidator(2)
         ]

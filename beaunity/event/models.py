@@ -20,7 +20,7 @@ UserModel = get_user_model()
 
 
 class Event(BaseActivity, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin):
-    is_public = models.BooleanField(default=True)
+    is_public = models.BooleanField()
     categories = models.ManyToManyField(
         Category,
         related_name="events"
