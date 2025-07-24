@@ -7,8 +7,6 @@ from django.core.validators import MinLengthValidator
 from ckeditor.fields import RichTextField
 
 
-# Create your models here.
-
 UserModel = get_user_model()
 
 class BaseActivity(models.Model):

@@ -54,6 +54,7 @@ EMAIL_USE_TLS = True
 PROJECT_APPS = [
     "beaunity.accounts",
     "beaunity.common",
+    "beaunity.main",
     "beaunity.category",
     "beaunity.post",
     "beaunity.comment",

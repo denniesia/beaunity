@@ -5,7 +5,6 @@ from slugify import slugify
 from beaunity.common.mixins import CreatedAtMixin, CreatedByMixin, LastUpdatedMixin
 
 
-# Create your models here.
 class Category(LastUpdatedMixin, CreatedAtMixin, CreatedByMixin):
     title = models.CharField(
         max_length=30,

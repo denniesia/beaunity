@@ -11,49 +11,6 @@ from beaunity.common.validators import CloudinaryExtensionandSizeValidator
 
 CLASS = 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
 
-class SearchForm(forms.Form):
-    query = forms.CharField(
-        label='',
-        required=False,
-        max_length=100,
-    )
-class ContactForm(forms.Form):
-    name = forms.CharField(
-        max_length=100,
-        label='Your name:',
-        widget=forms.TextInput(
-            attrs={
-                'class': CLASS
-            }
-        ),
-    )
-    email = forms.EmailField(
-        label='Your Email:',
-        widget=forms.EmailInput(
-            attrs={
-                'class': CLASS
-            }
-        )
-    )
-    subject = forms.CharField(
-        max_length=100,
-        label='Subject:',
-        widget=forms.TextInput(
-            attrs={
-                'class': CLASS
-            }
-        )
-    )
-    content = forms.CharField(
-        max_length=1000,
-        label='Content:',
-        widget=forms.Textarea(
-            attrs={
-                'class': CLASS
-            }
-        )
-    )
-
 
 class ActivityBaseForm(forms.ModelForm):
     CLASS = CLASS
@@ -184,15 +141,3 @@ class ActivityBaseForm(forms.ModelForm):
         validator = CloudinaryExtensionandSizeValidator()  # create instance
         validator(poster_image)
         return poster_image
-
-    # def clean(self):
-    #     cleaned_data = super().clean()
-    #     online = cleaned_data.get('is_online')
-    #     location = cleaned_data.get('location')
-    #     meeting_link = cleaned_data.get('meeting_link')
-    #     if not online and not location:
-    #         self.add_error('location', 'Location is required if the event is not online.')
-    #
-    #     if online and not meeting_link:
-    #         self.add_error('meeting_link', 'Meeting link is required if the event is online.')
-    #     return cleaned_data
