@@ -15,6 +15,11 @@ class PostSerializer(serializers.ModelSerializer):
     created_by = UserSerializer(read_only=True)
     last_updated = serializers.DateTimeField(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)
+    banner = serializers.URLField(
+        required=False,
+        allow_blank=True,
+        allow_null=True,
+    )
 
     class Meta:
         model = Post
