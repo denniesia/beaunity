@@ -14,8 +14,10 @@
             {% if object_list %}
 
                 {% for post in  object_list %}
+
                     <!-- Post List -->
                     <div class="space-y-4">
+
                     <!-- Post Item  -->
                     <div class="border border-pink-200 rounded-xl p-4 hover:shadow-md transition-shadow">
                         <div class="flex justify-between items-start">
@@ -23,6 +25,7 @@
                                 <a href="{% url 'post-details' post.pk %}">
                                     <h3 class="text-lg font-semibold text-pink-600  cursor-pointer">{{ post.title }}</h3>
                                 </a>
+
                                 <!-- Timestamp information row -->
                                 <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1">
                                     <a href="{% url 'profile-details' post.created_by.pk %}">
@@ -43,7 +46,8 @@
                                     </span>
                                 </div>
                             </div>
-                            <!-- Check Button -->
+
+                            <!-- Check Buttons -->
                             <div class="flex gap-2">
                                 <a class="text-pink-500 hover:text-pink-700 mr-3" href="{% url 'post-edit' post.pk %}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -69,9 +73,11 @@
             {% else %}
                 <h2 class="text-center text-pink-600">No pending posts</h2>
             {% endif %}
+
             <div class="mt-4">
                 {% include 'common/paginator.html' %}
             </div>
+
         </div>
     </section>
 {% endif %}

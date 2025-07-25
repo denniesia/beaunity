@@ -26,6 +26,7 @@
                      {% endif %}
                 </div>
             </div>
+
             <!-- Edit and Delete Icons -->
             <div class="flex gap-2">
                 {% if post.is_approved and request.user.id == post.created_by.id %}

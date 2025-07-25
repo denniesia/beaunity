@@ -62,6 +62,7 @@ class PostCreateForm(PostBaseForm):
 class PostEditForm(PostBaseForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         self.fields["category"].disabled = True
         self.fields["category"].required = False
 
@@ -69,6 +70,7 @@ class PostEditForm(PostBaseForm):
 class AdminPostEditForm(PostBaseForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         self.fields["title"].disabled = True
         self.fields["content"].disabled = True
         self.fields["banner"].disabled = True

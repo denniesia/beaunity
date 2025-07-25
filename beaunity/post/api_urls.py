@@ -7,6 +7,7 @@ from . import api_views
 router = DefaultRouter()
 
 router.register(r'post', api_views.PostViewSet)
+
 urlpatterns = [
     path('', include(router.urls)),
 

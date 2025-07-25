@@ -6,7 +6,7 @@
 <section class="flex-grow flex items-center justify-center py-16">
     <div class="bg-white rounded-2xl shadow-xl w-full max-w-3xl p-8">
 
-        <!-- Header with title and create button -->
+        <!-- Header -->
         <div class="  items-center mb-2 pb-4 border-b border-pink-200">
             <h2 class="text-2xl font-bold text-pink-600">Search Results for "{{ query }}"</h2>
             <form method="get" action="" class="mt-2">
@@ -33,6 +33,7 @@
                     <div class="flex justify-between items-start">
                         <div>
                             <h3 class="text-lg font-semibold text-pink-600 cursor-pointer">{{ category.title }}</h3>
+
                             <!-- Timestamp information row -->
                             <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1">
                                 <a href="{% url 'profile-details' category.created_by.id %}">
@@ -57,6 +58,7 @@
                             </div>
                         </div>
                         {% if perms.category.change_category %}
+
                             <!-- Edit/Delete Buttons -->
                             <div class="flex gap-2">
                                 <a class="text-pink-500 hover:text-pink-700" href="{% url 'category-edit' category.slug %}">
@@ -70,11 +72,13 @@
                                     </svg>
                                 </a>
                             </div>
+
                         {% endif %}
                     </div>
                     <p class="text-sm text-gray-600 mt-3">{{ category.description }}</p>
                 </div>
             {% endfor %}
+
             {% if posts %}
                 <div>
                 <h3 class="text-2xl mb-2 text-pink-600">
@@ -88,6 +92,7 @@
                                 <a href="{% url 'post-details' post.id %}">
                                     <h3 class="text-lg font-semibold text-pink-600 cursor-pointer">{{ post.title }}</h3>
                                 </a>
+
                                 <!-- Timestamp information row -->
                                 <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1">
                                     <a href="{% url 'profile-details' post.category.created_by.id %}">
@@ -112,6 +117,7 @@
                                 </div>
                             </div>
                             {% if request.user == post.created_by %}
+
                                 <!-- Edit/Delete Buttons -->
                                 <div class="flex gap-2">
                                     <a class="text-pink-500 hover:text-pink-700" href="{% url 'category-edit' post.category.slug %}">
