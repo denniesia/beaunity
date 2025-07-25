@@ -182,7 +182,6 @@ class PostDeleteView(LoginRequiredMixin, UserIsCreatorMixin, DeleteView):
     template_name = "post/post-delete.html"
     success_url = reverse_lazy("forum-dashboard")
 
-
     def get_initial(self):
         return self.object.__dict__
 
@@ -199,7 +198,7 @@ class PendingPostsView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
         return Post.objects.filter(
             is_approved=False
         ).order_by(
-            "-created_at"
+            "created_at"
         )
 
 
