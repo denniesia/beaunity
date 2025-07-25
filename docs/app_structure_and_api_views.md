@@ -1,5 +1,42 @@
 ## Project Structure
-[screenshot of the structure]
+
+```tree
+beauinty
+├── accounts/
+├── category/
+├── challenge/
+├── comment/
+├── common/
+├── event/
+├── interaction/
+├── main/
+├── post/
+├── __init__.py
+├── asgi.py
+├── celery.py
+├── settings.py
+├── urls.py
+├── wsgi.py
+├── docs/
+└── templates/
+    ├── accounts
+    ├── category
+    ├── challenge
+    ├── comment
+    ├── common
+    ├── event
+    ├── interaction
+    └── main
+    └── post
+└── tests/
+└── theme/
+├── env.template
+├── .gitignore
+├── README.md
+├── manage.py
+├── requirements.txt
+```
+
 
 ---
 
