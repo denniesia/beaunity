@@ -92,7 +92,7 @@
                             <span class="text-lg font-semibold text-pink-600">{{ challenge.title }}</span>
                         </a>
                         <span class="text-sm text-gray-600 mt-2">{{ challenge.content|truncatewords:30 }}</span>
-                        <span class="mt-1 text-xs text-gray-400">Host: <a href="{% url 'challenge-details' event.created_by.pk %}" class="hover:text-pink-600">{{ event.created_by }}</a></span>
+                        <span class="mt-1 text-xs text-gray-400">Host: <a href="{% url 'challenge-details' challenge.created_by.pk %}" class="hover:text-pink-600">{{ event.created_by }}</a></span>
                         <span class="mt-1 text-xs text-gray-400">Start: {{ challenge.start_time|date:"M d, Y, H:m" }}</span>
                     </div>
                 {% endfor %}

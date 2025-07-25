@@ -40,7 +40,6 @@
 
                     <hr class="my-4 border-t border-pink-300">
 
-
                     <!-- Fav Posts -->
                     <div>
                         <h3 class="text-lg font-semibold text-pink-600 mb-2">Fav Posts</h3>
@@ -70,7 +69,7 @@
                     <div class="mb-6">
                         <h3 class="text-lg font-semibold text-pink-600 mb-1">My Challenges</h3>
                         <ul class="list-none list-inside text-sm text-gray-700 space-y-2 max-h-40 overflow-y-auto">
-                            {% for challenge in challenges %}
+                            {% for challenge in my_challenges %}
                                 <li>
                                     <a href="{% url 'challenge-details' challenge.pk %}"
                                        class="flex justify-between items-center px-3 py-1 rounded hover:bg-pink-50 hover:text-pink-600 transition">
@@ -187,6 +186,7 @@
                     {% if my_events %}
                     <hr class="my-4 border-t border-pink-300">
                     {% endif %}
+
                     <!-- Fav Events -->
                     <div>
                         <h3 class="text-lg font-semibold text-pink-600 mb-1">Fav Events</h3>
@@ -239,6 +239,7 @@
                         </ul>
                     </div>
                 </div>
+
                 <!-- Stats Section -->
                 <div class="bg-pink-100  rounded-2xl p-6 shadow-md">
                     <h2 class="text-2xl font-bold text-pink-700 mb-4">Stats</h2>
@@ -287,8 +288,8 @@
                         <h3 class="text-lg font-semibold text-pink-600 mb-1">Group Stats</h3>
 
                          <div class="text-center bg-white border-2 border-pink-300 rounded-2xl shadow-md">
-                        <table class="w-full bg-white rounded-2xl overflow-hidden border-2 border-pink-300 border-separate">
-                            <thead class="bg-pink-200 text-pink-800">
+                        <table class="w-full bg-white rounded-2xl overflow-hidden">
+                            <thead class="text-pink-800">
                                 <tr>
                                     <th class="px-4 py-3 text-center text-sm font-semibold"></th>
                                     <th class="px-4 py-3 text-center text-sm font-semibold">Superusers</th>

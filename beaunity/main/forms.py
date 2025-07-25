@@ -31,7 +31,7 @@ class ContactForm(forms.Form):
         )
     )
     content = forms.CharField(
-        max_length=1000,
+        max_length=5000,
         label='Content:',
         widget=forms.Textarea(
             attrs={
