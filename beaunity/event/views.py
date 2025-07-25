@@ -1,10 +1,9 @@
-from django.contrib import messages
 from django.contrib.auth.backends import UserModel
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator
 from django.db.models import Count, Q
-from django.shortcuts import redirect, render, reverse
+from django.shortcuts import redirect, reverse
 from django.urls import reverse_lazy
 from django.utils.timezone import now
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,

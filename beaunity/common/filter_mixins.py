@@ -3,6 +3,8 @@ from django.utils.timezone import now
 
 from beaunity.category.models import Category
 from beaunity.challenge.models import Challenge
+from beaunity.common.forms import SearchForm
+from oauthlib.uri_validate import query
 
 
 class FilteredQuerysetMixin:
@@ -28,10 +30,12 @@ class FilteredQuerysetMixin:
         difficulty = self.request.GET.get('difficulty')
         query = self.request.GET.get('query')
 
-        if query:
-            queryset = queryset.filter(
-                title__icontains=query
-            )
+        form = SearchForm(self.request.GET)
+        if form.is_valid():
+            query = form.cleaned_data.get('query')
+            if query:
+                queryset = queryset.filter(
+                    title__icontains=query)
 
         if city:
             queryset = queryset.filter(city=city)
@@ -73,7 +77,10 @@ class FilteredContextMixin:
     def get_filtered_context(self, context, model):
         request = self.request
         applied_filters = {}
+        query = ''
 
+        if request.GET.get('query'):
+            query = request.GET.get('query')
         if request.GET.get('city'):
             applied_filters['city'] = request.GET['city']
         if request.GET.get('category'):
@@ -91,6 +98,7 @@ class FilteredContextMixin:
 
         context['filter_mode'] = bool(applied_filters)
         context['applied_filters'] = applied_filters
+        context['query'] = query
 
         context['categories'] = Category.objects.all()
         context['cities'] = model.objects.exclude(

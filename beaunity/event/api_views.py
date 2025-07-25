@@ -1,10 +1,10 @@
 from beaunity.common.permissions import IsCreatorOrSuperuser
-from rest_framework import permissions, viewsets
+from rest_framework import permissions
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
 
 from beaunity.event.serializers import EventSerializer, EventCreateSerializer
-from rest_framework.viewsets import ModelViewSet
 
 from .models import Event
 from .permissions import CanAddEvent

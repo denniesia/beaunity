@@ -19,6 +19,7 @@
 
                 {% endif %}
 
+                <!-- Search Bar --->
                 <div>
                     <form method="get" action="" class="mt-4">
                         <input
@@ -59,6 +60,18 @@
                                         Clear filters
                                     </a>
                                 </div>
+                            </div>
+                        </div>
+                    {% elif query %}
+                        <div class="mb-4 text-center">
+                            <h2 class="text-2xl font-semibold text-pink-600 mb-2">Showing results for: {{ query }}</h2>
+                            <div class="inline-flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+                                <a href="{% url 'events' %}" class="flex items-center text-xs text-pink-900 hover:underline">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                    Clear search
+                                </a>
                             </div>
                         </div>
                     {% else %}

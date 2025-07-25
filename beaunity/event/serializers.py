@@ -48,6 +48,6 @@ class EventSerializer(serializers.ModelSerializer):
 class EventCreateSerializer(EventSerializer):
     categories = serializers.SlugRelatedField(
         queryset=Category.objects.all(),
-        slug_field='title',
+        slug_field='slug',
         many=True,
     )
