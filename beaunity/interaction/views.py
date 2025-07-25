@@ -10,8 +10,6 @@ from beaunity.event.models import Event
 from .models import Favourite, Like
 
 
-
-
 @login_required(login_url="login")
 async def like_functionality(request, model_name, object_id):
     content_type = await ContentType.objects.aget(model=model_name)
@@ -19,7 +17,9 @@ async def like_functionality(request, model_name, object_id):
     obj = await model.objects.aget(id=object_id)
 
     like, created = await sync_to_async(Like.objects.get_or_create)(
-        user=request.user, content_type=content_type, object_id=obj.id
+        user=request.user,
+        content_type=content_type,
+        object_id=obj.id
     )
 
     if not created:
@@ -35,13 +35,15 @@ async def favourite_functionality(request, model_name, object_id):
     obj = await model.objects.aget(id=object_id)
 
     favourite, created = await sync_to_async(Favourite.objects.get_or_create)(
-        user=request.user, content_type=content_type, object_id=obj.id
+        user=request.user,
+        content_type=content_type,
+        object_id=obj.id
     )
 
     if not created:
         await sync_to_async(favourite.delete)()
 
-    return redirect(request.META.get("HTTP_REFERER", "/"))
+    return redirect(request.META.get("HTTP_REFERER") + f"#{object_id}")
 
 
 @login_required(login_url="login")
@@ -62,4 +64,4 @@ def join_functionality(request, model_name, pk):
         else:
             user.challenge_attendees.add(obj)
 
-    return redirect(request.META.get("HTTP_REFERER", "/"))
+    return redirect(request.META.get("HTTP_REFERER") + f"#{pk}")

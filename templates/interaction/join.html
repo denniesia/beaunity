@@ -3,9 +3,11 @@
 {% if user.is_authenticated %}
     {% has_joined  request.user model_name pk as joined %}
 
-    {% if joined %}
-        <a href="{% url 'join-functionality' model_name pk %}">Joined</a>
-    {% else %}
-        <a href="{% url 'join-functionality' model_name pk %}">Join</a>
-    {% endif %}
+    <form action="{% url 'join-functionality' model_name pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="cursor-pointer">
+            {% if joined %}Joined{% else %}Join{% endif %}
+        </button>
+    </form>
+
 {% endif %}
