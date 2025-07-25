@@ -1,4 +1,4 @@
-from beaunity.post.forms import PostDeleteForm
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import (LoginRequiredMixin,
@@ -20,9 +20,7 @@ from beaunity.common.forms import SearchForm
 from beaunity.common.views import approve_instance, disapprove_instance
 from beaunity.interaction.models import Like
 from beaunity.post.models import Post
-from oauthlib.uri_validate import query
-
-from .forms import AdminPostEditForm, PostCreateForm, PostEditForm
+from beaunity.post.forms import AdminPostEditForm, PostCreateForm, PostEditForm, PostDeleteForm
 
 
 class ForumDashboardView(ListView):

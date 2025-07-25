@@ -1,6 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.db.models.signals import post_save
-from oauthlib.uri_validate import query
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema, OpenApiParameter
@@ -40,11 +38,14 @@ def global_search(request):
     query = request.GET.get('q', '')
 
     if query:
-        posts = Post.objects.filter(title__icontains=query)
+        posts = Post.objects.filter(
+            title__icontains=query
+        )
         posts_data = PostSerializer(posts, many=True).data
 
         categories = Category.objects.filter(
-            title__icontains=query)
+            title__icontains=query
+        )
         categories_data = CategorySerializer(categories, many=True).data
 
         events = Event.objects.filter(
