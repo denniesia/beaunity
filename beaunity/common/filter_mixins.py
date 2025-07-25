@@ -8,7 +8,6 @@ from oauthlib.uri_validate import query
 
 
 class FilteredQuerysetMixin:
-    model = None
 
     def get_filtered_queryset(self):
         current_datetime = now()
@@ -31,6 +30,7 @@ class FilteredQuerysetMixin:
         query = self.request.GET.get('query')
 
         form = SearchForm(self.request.GET)
+
         if form.is_valid():
             query = form.cleaned_data.get('query')
             if query:

@@ -24,8 +24,10 @@ class EventDeleteForm(PublicFieldMixin, ActivityBaseForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         self.fields.pop("categories", None)
         self.fields.pop("poster_image", None)
+
         for field_name in self.fields.keys():
             self.fields[field_name].disabled = True
 

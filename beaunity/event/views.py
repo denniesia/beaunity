@@ -47,11 +47,12 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         event = self.object
         attendees = event.attendees.all()[:6]
         comments = event.comments.all().order_by("created_at")
         has_joined = self.request.user.event_attendees.filter(pk=event.pk).exists()
-        print(event.is_public)
+
         paginator = Paginator(comments, 5)
         page_number = self.request.GET.get("page")
         page_obj = paginator.get_page(page_number)
@@ -120,6 +121,7 @@ class EventDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
+
         kwargs.update(
             {
                 "data": self.get_initial(),
@@ -133,16 +135,21 @@ class MyEventsView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     context_object_name = "events"
     template_name = "event/my-events.html"
     permission_required = "event.add_event"
-    raise_exception = True
 
     def get_queryset(self):
-        self.archived = self.request.GET.get("archived", "false").lower() == "true"
-        queryset = Event.objects.filter(created_by=self.request.user)
+        self.archived = self.request.GET.get("archived", '').lower() == "true"
+        queryset = Event.objects.filter(
+            created_by=self.request.user
+        )
 
         if self.archived:
-            queryset = queryset.filter(end_time__lt=now())
+            queryset = queryset.filter(
+                end_time__lt=now()
+            )
         else:
-            queryset = queryset.filter(end_time__gte=now())
+            queryset = queryset.filter(
+                end_time__gte=now()
+            )
 
         return queryset
 
