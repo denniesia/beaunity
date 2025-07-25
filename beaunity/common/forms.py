@@ -152,3 +152,16 @@ class ActivityBaseForm(forms.ModelForm):
         validator = CloudinaryExtensionandSizeValidator()  # create instance
         validator(poster_image)
         return poster_image
+
+
+
+class SearchForm(forms.Form):
+    query = forms.CharField(
+        label='',
+        required=False,
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            "placeholder": "Search posts...",
+            "class": "w-full px-3 py-2 border border-pink-300 rounded-full text-sm text-gray-700 placeholder-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition duration-200"
+        })
+    )

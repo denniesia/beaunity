@@ -3,14 +3,6 @@ from django import forms
 CLASS = 'w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400'
 
 
-class SearchForm(forms.Form):
-    query = forms.CharField(
-        label='',
-        required=False,
-        max_length=100,
-    )
-
-
 class ContactForm(forms.Form):
     name = forms.CharField(
         max_length=100,

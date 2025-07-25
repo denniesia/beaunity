@@ -15,9 +15,11 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
 from beaunity.category.models import Category
 from beaunity.comment.forms import CommentCreateForm
 from beaunity.common.mixins import UserIsCreatorMixin
+from beaunity.common.forms import SearchForm
 from beaunity.common.views import approve_instance, disapprove_instance
 from beaunity.interaction.models import Like
 from beaunity.post.models import Post
+from oauthlib.uri_validate import query
 
 from .forms import AdminPostEditForm, PostCreateForm, PostEditForm
 
@@ -28,6 +30,7 @@ class ForumDashboardView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        form = SearchForm(self.request.GET)
 
         categories = Category.objects.all().prefetch_related("posts")
 
@@ -38,16 +41,20 @@ class ForumDashboardView(ListView):
             ).order_by(
                 "-created_at"
             )[:5]
-            category_posts.append((category, posts))
+            category_posts.append(
+                (category, posts)
+            )
 
         context["category_posts"] = category_posts
-        context["query"] = self.request.GET.get("query", "")
+        context["form"] = form
         return context
 
     def get_queryset(self):
-        query = self.request.GET.get("query")
+        form = SearchForm(self.request.GET)
 
-        if query:
+        if form.is_valid() and form.cleaned_data["query"]:
+
+            query = form.cleaned_data["query"]
             return Post.objects.filter(
                 Q(title__icontains=query)
                     |

@@ -16,7 +16,8 @@ from beaunity.comment.models import Comment
 from beaunity.common.tasks import send_approval_email
 from beaunity.event.models import Event, UserModel
 from beaunity.interaction.models import Favourite, Like
-from beaunity.main.forms import ContactForm, SearchForm
+from beaunity.main.forms import ContactForm
+from beaunity.common.forms import SearchForm
 from beaunity.post.models import Post
 
 UserModel = get_user_model()
@@ -65,31 +66,33 @@ def about_view(request):
 
 
 class SearchView(TemplateView):
-    template_name = 'main/search-results.html'
+    template_name = 'common/search-results.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         form = SearchForm(self.request.GET)
-        query = self.request.GET.get('query', '').strip()
 
-        if form.is_valid() and query:
+        if form.is_valid():
+            query = form.cleaned_data["query"]
             context['query'] = query
             context['form'] = form
             context['search_mode'] = True
 
             context['posts'] = Post.objects.filter(
-                Q(title__icontains=query) |
+                Q(title__icontains=query)
+                    |
                 Q(content__icontains=query)
             ).exclude(is_approved=False)
             context['categories'] = Category.objects.filter(
-                Q(title__icontains=query) |
+                Q(title__icontains=query)
+                    |
                 Q(description__icontains=query)
             )
             context['events'] = Event.objects.filter(
                 title__icontains=query
             )
-            context['challenge'] = Challenge.objects.filter(
+            context['challenges'] = Challenge.objects.filter(
                 title__icontains=query
             ).exclude(is_approved=False)
             context['users'] = UserModel.objects.filter(
