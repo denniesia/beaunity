@@ -72,3 +72,10 @@ class AdminPostEditForm(PostBaseForm):
         self.fields["title"].disabled = True
         self.fields["content"].disabled = True
         self.fields["banner"].disabled = True
+
+class PostDeleteForm(PostBaseForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in self.fields.values():
+            field.disabled = True

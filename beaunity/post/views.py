@@ -1,3 +1,4 @@
+from beaunity.post.forms import PostDeleteForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import (LoginRequiredMixin,
@@ -25,8 +26,8 @@ from .forms import AdminPostEditForm, PostCreateForm, PostEditForm
 
 
 class ForumDashboardView(ListView):
-    template_name = "post/forum-dashboard.html"
     model = Post
+    template_name = "post/forum-dashboard.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -41,6 +42,7 @@ class ForumDashboardView(ListView):
             ).order_by(
                 "-created_at"
             )[:5]
+
             category_posts.append(
                 (category, posts)
             )
@@ -53,8 +55,8 @@ class ForumDashboardView(ListView):
         form = SearchForm(self.request.GET)
 
         if form.is_valid() and form.cleaned_data["query"]:
-
             query = form.cleaned_data["query"]
+
             return Post.objects.filter(
                 Q(title__icontains=query)
                     |
@@ -91,13 +93,6 @@ class PostCreateView(LoginRequiredMixin, CreateView):
             initial["category"] = category.pk
 
         return initial
-
-    def get_form(self, form_class=None):
-        form = super().get_form(form_class)
-
-        if self.initial.get("category"):
-            form.fields["category"].widget = forms.HiddenInput()
-        return form
 
     def form_valid(self, form):
         post = form.save(commit=False)
@@ -180,15 +175,19 @@ class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def get_initial(self):
         return self.object.__dict__
 
-    def form_invalid(self, form):
-        print(form.errors)
-        return super().form_invalid(form)
 
 class PostDeleteView(LoginRequiredMixin, UserIsCreatorMixin, DeleteView):
-    template_name = "post/post-delete.html"
     model = Post
+    form_class = PostDeleteForm
+    template_name = "post/post-delete.html"
     success_url = reverse_lazy("forum-dashboard")
 
+
+    def get_initial(self):
+        return self.object.__dict__
+
+    def post(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
 
 class PendingPostsView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Post
