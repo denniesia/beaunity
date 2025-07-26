@@ -189,22 +189,22 @@ def superuser_required(view_func):
 
 **🌻 Serializers:**
  ensure the API receives the expected data and responds consistently.
-- UserSerializier - handles user registration data
+- `UserSerializier()` - handles user registration data
   - Serializes the fields: username, email, and password (write-only for security).
   - Creates a new user using create_user() method, which typically hashes the password and saves the user.
 
-- LoginRequestSerializer - validates login input data.
+- `LoginRequestSerializer()` - validates login input data.
   - Accepts username and password fields.
   - nsures both are provided for authentication.
 
-- LoginResponseSerializer - defines the format of the login response.
+- `LoginResponseSerializer()` - defines the format of the login response.
   - Returns access_token and refresh_token for JWT authentication. 
   - Includes a message field for any success message.
 
-- LogoutRequestSerializer - Validates logout request data.
+- `LogoutRequestSerializer()` - Validates logout request data.
   - Accepts a refresh_token string which is required to blacklist the token on logout.
 
-- LogoutResponseSerializer - defines the format of the logout response.
+- `LogoutResponseSerializer()` - defines the format of the logout response.
   - Returns a message field confirming logout success.
 
 
@@ -227,8 +227,8 @@ the refresh token can be used to obtain a new one. Logging out blacklists the re
 <img width="1520" height="600" alt="image" src="https://github.com/user-attachments/assets/b913bfd3-f24e-44f4-a0c3-8f1e753e034d" />
 
 
-- /accounts/api/login/ - Authenticates a user with username and password
-- /accounts/api/logout/ -  Logs out the user by blacklisting the refresh token.
+- `/accounts/api/login/` - Authenticates a user with username and password
+- `/accounts/api/logout/` -  Logs out the user by blacklisting the refresh token.
 ```python
 class LogoutAPIView(APIView):
     permission_classes = [IsAuthenticated]
@@ -253,8 +253,8 @@ class LogoutAPIView(APIView):
             )
   ```  
 
-- /accounts/api/register/ - Creates a new user account, includes username, email, password
-- /accounts/api/token/refresh/ - Refreshes the JWT access token using the refresh token. Returns a new access token 
+- `/accounts/api/register/` - Creates a new user account, includes username, email, password
+- `/accounts/api/token/refresh/` - Refreshes the JWT access token using the refresh token. Returns a new access token 
 to keep the user logged in without re-entering credentials. The *TokenRefreshView* is used to build this view.
 
 ---

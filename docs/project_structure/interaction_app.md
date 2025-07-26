@@ -38,7 +38,7 @@ for each (e.g., no need for ChallengeLike, EventLike, etc.).
 | `content_object` | `GenericForeignKey`    | A generic relation that links the like to any model instance using content_type and object_id. |
 
 Meta options:
-- unique_together - "user", "content_type", "object_id"
+- `unique_together` - "user", "content_type", "object_id"
 
 
 ⭐ Favourite Model
@@ -76,7 +76,7 @@ Favourite:
 
 📣 Views: 
 
-*interaction/like/<str: model_name>/<int: object_id>/* - Allows authenticated users to like or unlike different types of
+`interaction/like/<str:model_name>/<int:object_id>/`- Allows authenticated users to like or unlike different types of
 content (e.g., posts, categories) dynamically
 
 - Django’s GenericForeignKey is used to link the Like model to any other model.
@@ -101,7 +101,7 @@ async def like_functionality(request, model_name, object_id):
     return redirect(request.META.get("HTTP_REFERER") + f"#{object_id}")
 ````
 
-*interaction/favourite/<str: model_name>/<int: object_id>/* - Allows authenticated users to add or remove items
+`interaction/favourite/<str:model_name>/<int:object_id>/` - Allows authenticated users to add or remove items
 (posts, categories, etc.) to their list of favourites.
 
 - Works similarly to the like functionality, using a GenericForeignKey in the Favourite model.
@@ -123,7 +123,7 @@ async def favourite_functionality(request, model_name, object_id):
     return redirect(request.META.get("HTTP_REFERER", "/"))
 ````
 
-*interaction/join/<str: model_name>/<int: object_id>/* - Allows users to join or leave events or challenges.
+`interaction/join/<str:model_name>/<int:object_id>/` - Allows users to join or leave events or challenges.
 
 - Works directly with ManyToMany relationships between the user and the event or challenge. Similar approach to Like and
 Favourite functionalities.
@@ -164,7 +164,7 @@ As it usually triggers a page reload, async performance benefits are minimal.
 
 The custom template tags simplify checking user interactions directly in templates:
 
-*is_liked_by_user(obj, user)* - Returns True if the given user has liked the specified object. Used to dynamically render
+`is_liked_by_user()` - Returns True if the given user has liked the specified object. Used to dynamically render
 "liked" states in the UI.
 
 ````python
@@ -178,7 +178,7 @@ def is_liked_by_user(obj, user):
     ).exists()
 ````
 
-*total_likes(obj)* - Returns the total number of likes for the given object. Helpful for displaying like counters next to 
+`total_likes()` - Returns the total number of likes for the given object. Helpful for displaying like counters next to 
 posts, events, or challenges.
 
 ````python
@@ -193,7 +193,7 @@ def total_likes(obj):
 
 ````
 
-*is_favourited_by_user(obj, user)* - Returns True if the user has marked the object as a favourite. Used for
+`is_favourited_by_user()` - Returns True if the user has marked the object as a favourite. Used for
 toggling favourite indicators in templates.
 
 ````python
@@ -207,7 +207,7 @@ def is_favourited_by_user(obj, user):
     ).exists()
 ````
 
-*has_joined(user, model_name, obj_id)* - Checks whether the user has joined an event or challenge based on the provided
+`has_joined()` - Checks whether the user has joined an event or challenge based on the provided
 model_name and object ID. Returns True if the user is a participant.
 
 ````python

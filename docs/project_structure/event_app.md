@@ -82,15 +82,15 @@ ensure the API receives the expected data and responds consistently.
 
 
 The project uses two serializers to handle Event data in different contexts:
-- EventSerializer -  is used for retrieving and displaying challenge data in a structured JSON format. 
+- `EventSerializer()` -  is used for retrieving and displaying challenge data in a structured JSON format. 
 It is based on the Event model and includes related data such as categories and the user who created the challenge. 
   - Validations:
-    - validate_details method - ensures that the event details contains at least 100 characters of plain text 
+    - `validate_details()` - ensures that the event details contains at least 100 characters of plain text 
     (HTML tags are stripped before validation using bleach).
-    - validate_poster_image method - Validates the image is using a custom CloudinaryExtensionandSizeValidator to check 
+    - `validate_poster_image()` - Validates the image is using a custom CloudinaryExtensionandSizeValidator to check 
     for allowed file types and size limits.
-    - validate method - ensures the end_time is after the start_time. 
-    - validate_time method - ensures the end_time is after the start_time.
+    - `validate()` - ensures the end_time is after the start_time. 
+    - `validate_time()` - ensures the end_time is after the start_time.
 
 ````python
 class EventSerializer(serializers.ModelSerializer):
@@ -130,7 +130,7 @@ class EventSerializer(serializers.ModelSerializer):
         return data
 ````
 
-- EventCreateSerializer - extends EventSerializer and is used specifically for creating new events.
+- `EventCreateSerializer()` - extends EventSerializer and is used specifically for creating new events.
 ````python
 class EventCreateSerializer(EventSerializer):
     categories = serializers.SlugRelatedField(
@@ -146,7 +146,7 @@ class EventCreateSerializer(EventSerializer):
 <img width="1525" height="382" alt="image" src="https://github.com/user-attachments/assets/9e783d1a-b697-42ae-934f-de0e440af9f2" />
 
 
-- api/#/event/ - This ModelViewSet provides full CRUD operations for the Event model.
+- `api/#/event/` - This ModelViewSet provides full CRUD operations for the Event model.
 It uses EventCreateSerializer for creating challenges (allows category selection by slug) and EventSerializer 
 for reading and other operations. When a logged-in user with the appropriate permission creates an event, they are 
 automatically set as the 'created_by' user.

@@ -57,11 +57,11 @@ And some inherited Mixins:
 | `IsApprovedMixin  `    | Defines if the challenge has been approved. Default is False.       |
 
 - Meta options:
-  - verbose_name_plural = "Challenges"
-  - permissions - 'Can approve challenge'
+  - `verbose_name_plural` = "Challenges"
+  - `permissions` - 'Can approve challenge'
   - properties:
-    - progress - Calculates the progress of the challenge in percentage (0% before start, 100% after end.
-    - duration_in_weeks - Returns the total challenge duration in weeks, rounded up.
+    - `progress` - Calculates the progress of the challenge in percentage (0% before start, 100% after end.
+    - `duration_in_weeks` - Returns the total challenge duration in weeks, rounded up.
 
 **🚀 Additional Features**
 
@@ -88,14 +88,14 @@ The ChallengeAdmin class customizes how challenges are managed in the Django adm
 ensure the API receives the expected data and responds consistently.
 
 The project uses two serializers to handle Challenge data in different contexts:
-- ChallengeSerializer -  is used for retrieving and displaying challenge data in a structured JSON format. 
+- `ChallengeSerializer()` -  is used for retrieving and displaying challenge data in a structured JSON format. 
 It is based on the Challenge model and includes related data such as categories and the user who created the challenge. 
   - Validations:
-    - validate_details method - ensures that the challenge description contains at least 100 characters of plain text 
+    - `validate_details()` - ensures that the challenge description contains at least 100 characters of plain text 
     (HTML tags are stripped before validation using bleach).
-    - validate_poster_image method - Validates the image is using a custom CloudinaryExtensionandSizeValidator to check 
+    - `validate_poster_image()` - Validates the image is using a custom CloudinaryExtensionandSizeValidator to check 
     for allowed file types and size limits.
-    - validate_time method - ensures the end_time is after the start_time.
+    - `validate_time()` - ensures the end_time is after the start_time.
     
 ````python
 class ChallengeSerializer(serializers.ModelSerializer):
@@ -139,7 +139,7 @@ class ChallengeSerializer(serializers.ModelSerializer):
         return data
 ````
 
-- ChallengeCreateSerializer - extends ChallengeSerializer and is used specifically for creating new challenges.
+- `ChallengeCreateSerializer()` - extends ChallengeSerializer and is used specifically for creating new challenges.
 ````python
 class ChallengeCreateSerializer(ChallengeSerializer):
     categories = serializers.SlugRelatedField(
@@ -154,7 +154,7 @@ class ChallengeCreateSerializer(ChallengeSerializer):
 <img width="1538" height="413" alt="image" src="https://github.com/user-attachments/assets/2ec09c42-fa16-4c3a-8140-43a33fadec8a" />
 
 
-- api/#/challenge/ - This ModelViewSet provides full CRUD operations for the Challenge model.
+- `api/#/challenge/` - This ModelViewSet provides full CRUD operations for the Challenge model.
 It uses ChallengeCreateSerializer for creating challenges (allows category selection by slug) and ChallengeSerializer 
 for reading and other operations. The logged-in user is automatically set as the created_by field when creating a challenge.
 

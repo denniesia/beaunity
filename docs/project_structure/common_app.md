@@ -49,7 +49,7 @@ Other activity models can inherit from this base to maintain consistency and red
 
 #### 🍭 Templatetags 
 
-- The has_passed filter checks whether a given datetime has already occurred compared to the current time. This filter
+- The `has_passed` filter checks whether a given datetime has already occurred compared to the current time. This filter
 is used for conditionally displaying content based on time, such as marking events or challenges as passed.
 
 ````python
@@ -62,9 +62,9 @@ def has_passed(obj_datetime):
 
 #### 🍭 Filtered Mixins 
 
-- **FilteredQuerysetMixin**
+- `FilteredQuerysetMixin()`
 
-This mixin provides a method **get_filtered_queryset()** that dynamically filters a model’s queryset based on URL query
+This mixin provides a method `get_filtered_queryset()` that dynamically filters a model’s queryset based on URL query
 parameters. It supports filters such as:
 
 - Archived vs. upcoming entries (based on end_time)
@@ -142,9 +142,9 @@ class FilteredQuerysetMixin:
         return queryset.distinct()
 ````
 
-- **FilteredContextMixin**
+- `FilteredContextMixin()`
 
-This mixin provides a method get_filtered_context() that enriches the view context with:
+This mixin provides a method `get_filtered_context()` that enriches the view context with:
 
 - Currently applied filters (to show active filter tags)
 - Available cities and categories for building filter options
@@ -198,34 +198,34 @@ class FilteredContextMixin:
 The following mixins are used to promote code reusability and enforce consistent behavior across multiple models and views in the project:
 
 **View Mixins**
-- *UserIsSelfMixin* - Restricts access to a view to only the user themselves. It compares the current user with the object being accessed.
-- *UserIsCreatorMixin* - Grants access only if the current user is the creator of the object. Used for edit/delete permissions on user-generated content.
+- `UserIsSelfMixin()` - Restricts access to a view to only the user themselves. It compares the current user with the object being accessed.
+- `UserIsCreatorMixin()` - Grants access only if the current user is the creator of the object. Used for edit/delete permissions on user-generated content.
 
 
 **Model Mixins**
-- *LastUpdatedMixin* - Automatically updates a last_updated timestamp whenever the object is modified.
-- *CreatedAtMixin* - Automatically stores the creation timestamp when a new object is created.
-- *CreatedByMixin* - Links the object to the user who created it. Used for tracking ownership and permissions.
-- *ContentMixin* - Provides a basic content field with validation. Intended for models that contain user-generated text.
-- *IsApprovedMixin* - Adds a boolean is_approved field to indicate whether the object has been reviewed or approved.
+- `LastUpdatedMixin()` - Automatically updates a last_updated timestamp whenever the object is modified.
+- `CreatedAtMixin()` - Automatically stores the creation timestamp when a new object is created.
+- `CreatedByMixin()` - Links the object to the user who created it. Used for tracking ownership and permissions.
+- `ContentMixin()` - Provides a basic content field with validation. Intended for models that contain user-generated text.
+- `IsApprovedMixin()` - Adds a boolean is_approved field to indicate whether the object has been reviewed or approved.
 
 
 #### 🍭 Forms 
 
-**ActivityBaseForm** -  is a reusable Django ModelForm designed to handle the creation and editing of activity-related objects. 
+`ActivityBaseForm()` -  is a reusable Django ModelForm designed to handle the creation and editing of activity-related objects. 
 It includes fields for content, scheduling, categorization, and location—both physical and online. It features:
 - File upload via Cloudinary with validation and styling.
 - Rich text editing using CKEditor.
 - Input sanitization and validation (e.g. minimum character length for details).
 - Custom widgets for styling and improved user experience.
 
-**SearchForm** - A simple search form used to capture text-based queries. It provides a styled input field and is used 
+`SearchForm()` - A simple search form used to capture text-based queries. It provides a styled input field and is used 
 for filtering results across the platform.
 
 
 #### 🍭 Validators
 
-**CloudinaryExtensionandSizeValidator** - This is a custom file validator used to ensure uploaded files meet specific type and size 
+`CloudinaryExtensionandSizeValidator()` - This is a custom file validator used to ensure uploaded files meet specific type and size 
 requirements. It is:
 - Decorated with @deconstructible so it can be used in Django migrations.
 - Designed to restrict file types to .jpg, .jpeg, .png, .gif, .pdf, and .mp4.
@@ -261,7 +261,7 @@ class CloudinaryExtensionandSizeValidator:
 These tasks are executed asynchronously using **Celery**, allowing time-consuming operations like sending emails or
 updating data to run in the background without blocking the user experience.
 
-**send_approval_email** - Sends an approval or welcome email to a user based on the type of object (e.g., post, challenge, or user account).
+`send_approval_email()` - Sends an approval or welcome email to a user based on the type of object (e.g., post, challenge, or user account).
 It dynamically selects the subject and message template and uses Django’s send_mail function to deliver the email.
 
 ````python
@@ -329,7 +329,7 @@ def approve_instance(request, model_class, pk: int, content_type:str, permission
     return redirect(redirect_fallback)
 ````
 
-**send_reminders** - Sends reminder emails to users who are attending upcoming events or challenges.
+`send_reminders()` - Sends reminder emails to users who are attending upcoming events or challenges.
 This task loops through each object’s attendees and dispatches personalized reminder emails using a helper function.
 It is scheduled via Celery Beat to run daily at 8:00 AM, ensuring that users are notified two days before their upcoming
 activity.
@@ -361,7 +361,7 @@ app.conf.beat_schedule = {
  ````   
 
 
-**update_is_new_status** - Automatically updates the is_new status for events and challenges based on business logic defined in 
+`update_is_new_status()` - Automatically updates the is_new status for events and challenges based on business logic defined in 
 the mark_new() helper. This task helps keep the content up to date, likely for UI indicators or filtering.It is scheduled 
 via Celery Beat to run daily at midnight (00:00) to ensure the "new" status is consistently up to date
 
@@ -391,7 +391,7 @@ app.conf.beat_schedule = {
 These helper functions support background tasks like reminders and content tagging by automating date-based logic.
 They are also triggered by **Celery tasks** to keep users informed and engaged without manual intervention.
 
-**mark_new(model)** - Marks recently created objects as “new” by setting their is_new field to True if they were created within the past week.
+`mark_new()` - Marks recently created objects as “new” by setting their is_new field to True if they were created within the past week.
 Used for visually highlighting new content in the UI.
 
 ````python
@@ -404,7 +404,7 @@ def mark_new(model):
     ).update(is_new=True)
 ````
 
-**get_upcoming_events()** and **get_upcoming_events()** - Fetch events or challenges that are scheduled to start exactly two days from today.
+`get_upcoming_events()` and `get_upcoming_events()` - Fetch events or challenges that are scheduled to start exactly two days from today.
 Used with the celery **shared tasks** for sending timely reminders to participants.
 
 ````python
@@ -425,7 +425,7 @@ def get_upcoming_challenges():
 ````
 
 
-**send_reminder_email(user, title, start_time, item_type)** - Composes and sends a personalized reminder email to a user about an upcoming event or challenge, including the name and date.
+`send_reminder_email()` - Composes and sends a personalized reminder email to a user about an upcoming event or challenge, including the name and date.
 The subject and message are customized based on the content type.
 
 ````python
@@ -455,6 +455,10 @@ def send_reminder_email(user, title, start_time, item_type):
         fail_silently=True,
     )
 ````
+Next -> [Event App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/event_app.md)
+
+--- 
+Home -> [Home](https://github.com/denniesia/beaunity/blob/main/README.md
 
 
 

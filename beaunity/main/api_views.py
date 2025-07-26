@@ -1,3 +1,6 @@
+from http import HTTPStatus
+
+from celery.bin.control import status
 from django.contrib.auth import get_user_model
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -37,40 +40,47 @@ UserModel = get_user_model()
 def global_search(request):
     query = request.GET.get('q', '')
 
-    if query:
-        posts = Post.objects.filter(
-            title__icontains=query
-        )
-        posts_data = PostSerializer(posts, many=True).data
-
-        categories = Category.objects.filter(
-            title__icontains=query
-        )
-        categories_data = CategorySerializer(categories, many=True).data
-
-        events = Event.objects.filter(
-            title__icontains=query
-        )
-        events_data = EventSerializer(events, many=True).data
-
-        challenges = Challenge.objects.filter(
-            title__icontains=query
-        )
-        challenges_data = ChallengeSerializer(challenges, many=True).data
-
-
-        users = UserModel.objects.filter(
-            username__icontains=query
-        )
-        users_data = UserSerializer(users, many=True).data
-
+    if not query:
         return Response(
             {
-                'posts': posts_data,
-                'categories': categories_data,
-                'events': events_data,
-                'challenges': challenges_data,
-                'users': users_data,
-            }
+                "detail": "Query parameter 'q' is required."
+            },
+            status=HTTPStatus.BAD_REQUEST
         )
-    return Response()
+
+
+    posts = Post.objects.filter(
+        title__icontains=query
+    )
+    posts_data = PostSerializer(posts, many=True).data
+
+    categories = Category.objects.filter(
+        title__icontains=query
+    )
+    categories_data = CategorySerializer(categories, many=True).data
+
+    events = Event.objects.filter(
+        title__icontains=query
+    )
+    events_data = EventSerializer(events, many=True).data
+
+    challenges = Challenge.objects.filter(
+        title__icontains=query
+    )
+    challenges_data = ChallengeSerializer(challenges, many=True).data
+
+
+    users = UserModel.objects.filter(
+        username__icontains=query
+    )
+    users_data = UserSerializer(users, many=True).data
+
+    return Response(
+        {
+            'posts': posts_data,
+            'categories': categories_data,
+            'events': events_data,
+            'challenges': challenges_data,
+            'users': users_data,
+        }
+    )

@@ -38,8 +38,8 @@ Moreover, the model includes additional mixins:
 
 
 - Meta options:
-  - verbose_name_plural = "Challenges"
-  - permissions - 'Can approve posts', 'Can post without approval'
+  - `verbose_name_plural` = "Challenges"
+  - `permissions` - 'Can approve posts', 'Can post without approval'
  
 
 **🚀 Additional Features**
@@ -68,7 +68,7 @@ The **PostAdmin** class customizes how **posts** are managed in the Django admin
 ensure the API receives the expected data and responds consistently.
 
 The Model has only one serializer:
-- PostSerializer - the **PostSerializer** is used to serialize and deserialize Post objects for the API.
+- `PostSerializer()` - is used to serialize and deserialize Post objects for the API.
 
 ```python
 class PostSerializer(serializers.ModelSerializer):
@@ -96,7 +96,7 @@ class PostSerializer(serializers.ModelSerializer):
 <img width="1515" height="404" alt="image" src="https://github.com/user-attachments/assets/2ebe5dad-3ce1-4c2d-a7b0-615b0d16ab33" />
 
 
-- api/#/post/ - This ModelViewSet provides full CRUD operations for the **Post** model. The logged-in user is 
+- `api/#/post/` - This ModelViewSet provides full CRUD operations for the **Post** model. The logged-in user is 
 automatically set as the created_by field when creating a post. The category field accepts the title of an existing 
 category (slug-based lookup). If the user has the permission to post without approval - belongs to the Moderator's or the 
 Superuser's group - the post is automatically approved and posted.

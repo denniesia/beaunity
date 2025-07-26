@@ -56,7 +56,7 @@ The CommentAdmin class customizes how comments are managed in the Django admin p
 The comment system is designed to work with multiple models (Post, Event, and Challenge) using Django’s Generic Relations.
 This allows comments to be attached to different types of content without creating separate comment models for each.
 
-🌳 CommentEditView:
+🌳 `CommentEditView()`:
 
 This class-based view (UpdateView) allows authenticated users to edit their own comments.
 The view leverages the generic relation through content_object, which points to the model instance (Post, Event, or Challenge) 
@@ -75,7 +75,7 @@ class CommentEditView(LoginRequiredMixin, UserIsCreatorMixin, UpdateView):
         return content_object.get_absolute_url()
 ````
 
-🌳 CommentDeleteView:
+🌳 `CommentDeleteView()`:
 
 A class-based view that lets authenticated users delete their own comments. It uses a generic relation to identify the 
 related object (e.g., Post, Event, Challenge) and redirects back to that object’s detail page after deletion. Access is 

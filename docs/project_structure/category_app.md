@@ -34,8 +34,8 @@ category/
 | `CreatedByMixin  `    | *ForeignKey* to UserModel, tracks which user created the category. |
 
 - Meta options:
-  - verbose_name_plural = "Categories"
-  - ordering = ["title"] (alphabetical order)
+  - `verbose_name_plural` = "Categories"
+  - `ordering` = ["title"] (alphabetical order)
 
 - Custom logic:
   - Automatically generates a slug from the title on save if none is provided.
@@ -72,7 +72,7 @@ The CategoryAdmin class customizes how categories are managed in the Django admi
  ensure the API receives the expected data and responds consistently.
 
 The project uses two serializers to handle Category data in different contexts:
-- CategorySimpleSerializer - a lightweight serializer that returns only basic category information like title and description.
+- `CategorySimpleSerializer()` - a lightweight serializer that returns only basic category information like title and description.
 
 ````python
 class CategorySimpleSerializer(serializers.ModelSerializer):
@@ -83,14 +83,8 @@ class CategorySimpleSerializer(serializers.ModelSerializer):
             "description"
         )
 ````
-- CategorySerializer - A detailed serializer that provides full category information.
-  - id – The unique identifier of the category.
-  - title – The category name.
-  - image – The category image (Cloudinary-hosted).
-  - description – A short description of the category.
-  - last_updated (read-only) – Timestamp of the last update.
-  - created_by (read-only) – User who created the category (nested UserSerializer).
-  - created_at (read-only) – Timestamp when the category was created.
+- `CategorySerializer()` - A detailed serializer that provides full category information.
+  
 
 ````python
 class CategorySerializer(serializers.ModelSerializer):
@@ -118,7 +112,7 @@ class CategorySerializer(serializers.ModelSerializer):
 <img width="1763" height="386" alt="image" src="https://github.com/user-attachments/assets/8b787f4e-5010-4589-9554-b40f313d3add" />
 
 
-- api/#/category/ - ModelViewSet - This ModelViewSet provides full CRUD operations for the Category model.
+- `api/#/category/` - ModelViewSet - This ModelViewSet provides full CRUD operations for the Category model.
 It uses the CategorySerializer to handle serialization and ensures that the created_by field is automatically assigned to 
 the authenticated user when creating a category. A custom permission class (CanAddCategory) restricts category creation to 
 authorized users - members of the Moderator or Superuser Group.
