@@ -328,7 +328,6 @@ def approve_instance(request, model_class, pk: int, content_type:str, permission
 
     return redirect(redirect_fallback)
 ````
---- 
 
 **send_reminders** - Sends reminder emails to users who are attending upcoming events or challenges.
 This task loops through each object’s attendees and dispatches personalized reminder emails using a helper function.
