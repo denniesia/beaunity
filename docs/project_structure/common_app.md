@@ -7,21 +7,21 @@ specific to any single feature.
 ````tree
 common/
 ├── migrations/          # Django migrations for the common app
-├── templatetags/  
+├── templatetags/        # Custom template filters and tags
     ├── __init__.py
-    └── has_passed.py
+    └── has_passed.py    # Template filter to check if a datetime has passed
 ├── __init__.py
 ├── admin.py            
 ├── apps.py              
-├── filter_mixins.py              
-├── forms.py             # Django forms for CRUD operations
-├── mixins.py           
+├── filter_mixins.py     # Mixins for filtering querysets and context data           
+├── forms.py             # Shared Django forms for activities and search
+├── mixins.py            # Reusable model and view mixins (e.g., timestamps, ownership)
 ├── models.py            # BaseActivity Model           
-├── permissions.py     
-├── tasks.py     
+├── permissions.py       # Custom permission logic for DRF
+├── tasks.py             # Celery tasks for background jobs (emails, updates)
 ├── urls.py              # Regular (non-API) URL routes
-├── utils.py           
-├── validators.py           
+├── utils.py             # Helper functions (e.g., reminders, mark_new)
+├── validators.py        # Custom validators (e.g., file size/type checks)   
 └── views.py             # Standard Django views (non-API)
 ````
 
@@ -45,7 +45,7 @@ Other activity models can inherit from this base to maintain consistency and red
 | `is_new`       | `BooleanField`    | Indicates if the activity is newly added (True). Defaults to False.                        |
 
 
-**🚀 Additional Features**
+**🚀 Features**
 
 #### 🍭 Templatetags 
 

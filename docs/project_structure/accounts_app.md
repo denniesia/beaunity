@@ -55,9 +55,9 @@ Profile Model:
 | `bio`           | `CharField`        | Short personal bio or description.                           |
 | `skin_type`     | `CharField`        | 	Skin type from SkinTypeChoices. Optional.                   |
 
-- Model Property - *age* - Returns user's age based on date_of_birth
-- Model Method - *full_name* - Combines and capitalizes first_name and last_name
-- Custom Manager - *AppUserManager* - provides custom user creation methods where passwords are hashed before saving the user to the database.
+- Model Property - `age()`- Returns user's age based on date_of_birth
+- Model Method - `full_name()` - Combines and capitalizes first_name and last_name
+- Custom Manager - `AppUserManager()` - provides custom user creation methods where passwords are hashed before saving the user to the database.
 
 ✅ Benefits of this structure: 
 - Separates authentication concerns from profile data.
@@ -87,9 +87,36 @@ This setup improves user management with a clean, tailored admin interface.
 
 **🚀 Additional Features**
 
+🎌 Signals:
+
+The project uses Django signals to automate actions immediately after a new user is created. Two `post_save` signal handlers are connected to the `UserModel` to handle profile creation and group assignment.
+
+-  `create_profile` - Automatically creates a `Profile` linked to the newly created user. Triggers an asynchronous task (`send_approval_email.delay`) to send an approval email, passing the user's ID and the object type `'user'`.
+
+````python
+@receiver(post_save, sender=UserModel)
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+        send_approval_email.delay(
+            user_id=instance.id,
+            object_type='user'
+        )
+````
+
+- `add_user_to_default_group` Automatically assigns the new user to the default user group.
+
+````python
+@receiver(post_save, sender=UserModel)
+def add_user_to_default_group(sender, instance,created, **kwargs):
+    if created:
+        user_group = Group.objects.get(name='User')
+        instance.groups.add(user_group)
+````
+
 🔧 Role Management Views:
 
-- Make Superuser – Grants a user the Superuser role by adding them to the corresponding group.
+- `make_superuser()` – Grants a user the Superuser role by adding them to the corresponding group.
 ```python
 @superuser_required
 def make_superuser(request, pk):
@@ -100,7 +127,7 @@ def make_superuser(request, pk):
     return redirect("profile-details", pk)
 ```
 
-- Make Moderator – Assigns the Moderator role (removes Organizer role if present).
+-  `make_moderator()`  – Assigns the Moderator role (removes Organizer role if present).
 ```python
 @superuser_required
 def make_moderator(request, pk):
@@ -119,7 +146,7 @@ def make_moderator(request, pk):
 
 ```
 
-- Make Organizer – Assigns the Organizer role (removes Moderator role if present).
+-  `make_organizer()`  – Assigns the Organizer role (removes Moderator role if present).
 ```python
 @superuser_required
 def make_organizer(request, pk):
@@ -137,7 +164,7 @@ def make_organizer(request, pk):
     return redirect("profile-details", pk=pk)
 ````
 
-- Remove Roles – Clears all roles and resets the user to the default User group.
+-  `remove_roles()`  – Clears all roles and resets the user to the default User group.
 ```python
 @superuser_required
 def remove_roles(request, pk):
@@ -148,9 +175,10 @@ def remove_roles(request, pk):
     user.groups.add(group)
     return redirect("profile-details", pk=pk)
 ````
+
 🔧 Custom Decorator:
 
-Checks if the user is superuser: 
+- `superuser_required()` - Checks if the user is superuser: 
 
 ````python
 def superuser_required(view_func):
