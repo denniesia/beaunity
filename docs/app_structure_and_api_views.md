@@ -19,15 +19,15 @@ beauinty
 ├── wsgi.py
 ├── docs/
 └── templates/
-    ├── accounts
-    ├── category
-    ├── challenge
-    ├── comment
-    ├── common
-    ├── event
-    ├── interaction
-    └── main
-    └── post
+    ├── accounts/
+    ├── category/
+    ├── challenge/
+    ├── comment/
+    ├── common/
+    ├── event/
+    ├── interaction/
+    ├── main/
+    └── post/
 └── tests/
 └── theme/
 ├── env.template
@@ -49,4 +49,5 @@ beauinty
 - [Common App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/common_app.md)
 - [Event App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/event_app.md)
 - [Interaction App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/interaction_app.md)
+- [Main App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/main_app.md)
 - [Post App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/post_app.md)
