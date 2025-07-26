@@ -8,7 +8,6 @@ from oauthlib.uri_validate import query
 
 
 class FilteredQuerysetMixin:
-
     def get_filtered_queryset(self):
         current_datetime = now()
         archived = self.request.GET.get('archived', '').lower() == 'true'

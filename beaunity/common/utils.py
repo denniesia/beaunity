@@ -5,18 +5,25 @@ def mark_new(model):
     current_date = now()
     week_ago = current_date - timedelta(weeks=1)
 
-    model.objects.filter(created_at__range=(week_ago, current_date)).update(is_new=True)
-
+    model.objects.filter(
+        created_at__range=(week_ago, current_date)
+    ).update(is_new=True)
 
 
 def get_upcoming_events():
     two_days_later = now().date() + timedelta(days=2)
-    return Event.objects.filter(start_time__date=two_days_later)
+
+    return Event.objects.filter(
+        start_time__date=two_days_later
+    )
 
 
 def get_upcoming_challenges():
     two_days_later = now().date() + timedelta(days=2)
-    return Challenge.objects.filter(start_time__date=two_days_later)
+
+    return Challenge.objects.filter(
+        start_time__date=two_days_later
+    )
 
 
 def send_reminder_email(user, title, start_time, item_type):
