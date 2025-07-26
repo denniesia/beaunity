@@ -22,6 +22,9 @@ main/
 
 🌻 **API Views**
 
+<img width="1551" height="734" alt="image" src="https://github.com/user-attachments/assets/443aa368-3d37-491f-995c-703fb95d8682" />
+
+
 - `api/#/search/`  -This API endpoint allows users to perform a global search across multiple models (Post, Category,
 Event, Challenge, and User) using a single query string. It supports simple case-insensitive matching on titles and usernames.
 
