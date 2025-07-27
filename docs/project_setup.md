@@ -54,7 +54,7 @@ pip install -r requirements.txt
 
 ### Step 4: Install Tailwind
 
-This project uses Tailwind 
+This project uses Tailwind. To run the following command you firstly need to have node.js on your machine. 
 
 ````python
 python manage.py tailwind install
