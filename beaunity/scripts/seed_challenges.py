@@ -1,6 +1,6 @@
-from django.utils import timezone
 from django.contrib.auth import get_user_model
-from your_app.models import Challenge, Category  # Adjust to your app
+from beaunity.challenge.models import Challenge
+from beaunity.category.models import Category
 
 User = get_user_model()
 
@@ -22,6 +22,7 @@ challenge_data = [
         "details": "<p>I&#39;ve been feeling really sluggish in the mornings lately &mdash; like I&#39;m dragging myself out of bed and rushing into the day without really waking up. So I created this <strong>challenge </strong>to give myself a softer, more intentional start.</p><p>&nbsp;</p><p>My goal is simple: <strong>every morning for the next week, I&rsquo;ll do a 10-minute stretch, drink a big glass of water, and write down just one thing I&rsquo;m grateful for.</strong> It doesn&rsquo;t have to be deep or perfect &mdash; I just want to center myself before the day begins.I will set the end time in 10 weeks.&nbsp;</p><p>I hope this helps me feel more energized and positive in the mornings. And honestly, I think starting the day with gratitude might shift my whole mindset. Anyone want to join me? I would be great if I find people that would like to join me.</p>",
         "difficulty": "Beginner",
         "is_online": True,
+        "meeting_link": "",
         "created_by": creator1,
         "categories": [category_journey],
         "city": "",
@@ -107,4 +108,32 @@ for data in challenge_data:
     challenge.categories.set(categories) #setting M2M relationships
     print(f"✅ Created challenge: {challenge.title}")
 
+
+# Assigning attendees
+challenge = Challenge.objects.get(pk=1)
+challenge.attendees.add(UserModel.objects.get(pk=1))
+challenge.attendees.add(UserModel.objects.get(pk=2))
+challenge.attendees.add(UserModel.objects.get(pk=3))
+
+challenge.save()
+
+challenge = Challenge.objects.get(pk=2)
+challenge.attendees.add(UserModel.objects.get(pk=2))
+challenge.attendees.add(UserModel.objects.get(pk=3))
+
+challenge.save()
+
+challenge = Challenge.objects.get(pk=3)
+challenge.attendees.add(UserModel.objects.get(pk=2))
+challenge.attendees.add(UserModel.objects.get(pk=3))
+challenge.attendees.add(UserModel.objects.get(pk=4))
+challenge.attendees.add(UserModel.objects.get(pk=5))
+
+challenge.save()
+
+challenge = Challenge.objects.get(pk=4)
+challenge.attendees.add(UserModel.objects.get(pk=3))
+
+
+challenge.save()
 print("🎉 All challenges seeded successfully.")
