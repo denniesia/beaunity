@@ -69,8 +69,8 @@ class FilteredQuerysetMixin:
 
 
         if self.model == Challenge:
-            return queryset.filter(is_approved=True).distinct()
-        return queryset.distinct()
+            return queryset.filter(is_approved=True).distinct().order_by(*self.ordering)
+        return queryset.distinct().order_by(*self.ordering)
 
 class FilteredContextMixin:
     def get_filtered_context(self, context, model):

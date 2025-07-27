@@ -137,6 +137,9 @@ def make_superuser(request, pk):
     profile = get_object_or_404(Profile, pk=pk)
     user = profile.user
     group = Group.objects.get(name="Superuser")
+    user.is_superuser = True
+    user.is_staff = True
+    user.save()
     user.groups.add(group)
     return redirect("profile-details", pk)
 
@@ -154,6 +157,7 @@ def make_moderator(request, pk):
 
     group = Group.objects.get(name="Moderator")
     user.groups.add(group)
+    user.save()
     return redirect("profile-details", pk=pk)
 
 

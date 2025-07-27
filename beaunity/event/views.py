@@ -20,7 +20,7 @@ from .models import Event
 class EventsOverviewView(LoginRequiredMixin, FilteredContextMixin, FilteredQuerysetMixin, ListView):
     model = Event
     template_name = "event/events-overview.html"
-    ordering = ["-start_time"]
+    ordering = ["start_time"]
     context_object_name = "events"
     paginate_by = 9
 

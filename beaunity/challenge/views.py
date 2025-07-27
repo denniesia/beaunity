@@ -23,7 +23,7 @@ from .models import Challenge
 # Create your views here.
 class ChallengeOverviewView(LoginRequiredMixin, FilteredContextMixin, FilteredQuerysetMixin, ListView):
     model = Challenge
-    ordering = ["-start_time"]
+    ordering = ["start_time"]
     template_name = "challenge/challenges-overview.html"
     context_object_name = "challenges"
     paginate_by = 5

@@ -14,6 +14,7 @@ class BaseActivity(models.Model):
     poster_image = CloudinaryField()
     title = models.CharField(
         max_length=100,
+        unique=True,
         validators=[
             MinLengthValidator(10)
         ]
