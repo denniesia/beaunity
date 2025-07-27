@@ -1,4 +1,3 @@
-
 from django.contrib.auth import get_user_model
 from beaunity.event.models import Event
 from beaunity.category.models import Category
@@ -99,7 +98,7 @@ for data in challenge_data:
     categories = data.pop("categories")
     challenge = Challenge.objects.create(**data)
     challenge.categories.set(categories) #setting M2M relationships
-    print(f"✅ Created event: {challenge.title}")
+    print(f"✅ Created challenge: {challenge.title}")
 
 
 # Assigning attendees
@@ -122,4 +121,4 @@ event.attendees.add(UserModel.objects.get(pk=2))
 event.attendees.add(UserModel.objects.get(pk=5))
 
 
-print("🎉 All event seeded successfully.")
+print("🎉 All events seeded successfully.")
