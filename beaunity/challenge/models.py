@@ -1,3 +1,5 @@
+from contextlib import nullcontext
+
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
@@ -29,7 +31,8 @@ class Challenge(BaseActivity, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, 
     attendees = models.ManyToManyField(
         UserModel,
         related_name="challenge_attendees",
-        blank=True
+        blank=True,
+        null=True,
     )
     likes = GenericRelation(Like)
     comments = GenericRelation(Comment)

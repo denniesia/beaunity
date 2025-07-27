@@ -4,14 +4,14 @@
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "beaunity.settings")
 # django.setup()
 #
-# from django.contrib.auth import get_user_model
-# from django.contrib.auth.models import Group
+from PycharmProjects.advanced_queries_lab.main_app.models import Category
+
 # from beaunity.category.models import Category
 #
-# UserModel = get_user_model()
+
 #
-#
-# categories = [
+## === Populate Category Data ===
+# categories_data  = [
 #     {
 #         "title": "Mindset & Mental Wellness23",
 #         "description": "Discuss mindfulness, affirmations, journaling, and emotional self-care.",
@@ -70,10 +70,9 @@
 # ]
 #
 #
-# for category in categories:
-#     Category.objects.create(**category)
-#
-#     print(f"✅ Category {category['title']} created")
+# category_instances = [Category(**data) for data in categories_data]
+# Category.objects.bulk_create(category_instances)
+# print(f"✅ Categories created")
 #
 
 # # Optional: clear data
