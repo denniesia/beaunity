@@ -1,3 +1,11 @@
+import os
+import django
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "beaunity.settings")
+django.setup()
+
+from datetime import timedelta
+from django.utils import timezone
 from django.contrib.auth import get_user_model
 from beaunity.post.models import Post
 from beaunity.category.models import Category
@@ -108,5 +116,39 @@ for data in posts_data:
     post = Post.objects.create(**data)
 
     print(f"✅ Created post: {post.title}")
+
+#Defining some created_at fields
+post1 = Post.objects.get(id=1)
+post1.created_at = timezone.now() - timedelta(days=3)
+post1.save()
+
+post2 = Post.objects.get(id=2)
+post2.created_at = timezone.now() - timedelta(days=3, minutes=33)
+post2.save()
+
+
+post3 = Post.objects.get(id=3)
+post3.created_at = timezone.now() - timedelta(days=5, minutes=5)
+post3.save()
+
+post4 = Post.objects.get(id=4)
+post4.created_at = timezone.now() - timedelta(days=4, minutes=44)
+post4.save()
+
+post5 = Post.objects.get(id=5)
+post5.created_at = timezone.now() - timedelta(days=5, minutes=55)
+post5.save()
+
+post6 = Post.objects.get(id=6)
+post6.created_at = timezone.now() - timedelta(days=6, minutes=8)
+post6.save()
+
+post7 = Post.objects.get(id=7)
+post7.created_at = timezone.now() - timedelta(days=12, minutes=8)
+post7.save()
+
+post8 = Post.objects.get(id=8)
+post8.created_at = timezone.now() - timedelta(days=12, minutes=3)
+post8.save()
 
 print("🎉 All posts seeded successfully.")

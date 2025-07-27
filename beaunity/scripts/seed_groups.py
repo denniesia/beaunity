@@ -1,8 +1,7 @@
 import django
 import os
 
-# Only needed if running outside manage.py shell
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "your_project.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "beaunity.settings")
 django.setup()
 
 from django.contrib.auth.models import Group, Permission

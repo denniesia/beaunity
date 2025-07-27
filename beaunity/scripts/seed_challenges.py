@@ -1,8 +1,14 @@
+import os
+import django
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "beaunity.settings")
+django.setup()
+
 from django.contrib.auth import get_user_model
 from beaunity.challenge.models import Challenge
 from beaunity.category.models import Category
 
-User = get_user_model()
+UserModel = get_user_model()
 
 # Getting the creators - User Group
 creator1 = User.objects.get(pk=4)
@@ -102,11 +108,12 @@ challenge_data = [
 ]
 
 # Creating and assigning categories
-for data in challenge_data:
+for data in event_data:
     categories = data.pop("categories")
-    challenge = Challenge.objects.create(**data)
-    challenge.categories.set(categories) #setting M2M relationships
-    print(f"✅ Created challenge: {challenge.title}")
+    event = Event.objects.create(**data)
+    event.categories.set(categories) #setting M2M relationships
+    print(f"✅ Created event: {event.title}")
+
 
 
 # Assigning attendees

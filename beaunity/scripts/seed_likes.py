@@ -1,3 +1,9 @@
+import os
+import django
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "beaunity.settings")
+django.setup()
+
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import get_user_model
 from beaunity.challenge.models import Challenge
