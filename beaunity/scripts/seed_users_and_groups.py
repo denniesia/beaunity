@@ -1,6 +1,4 @@
 import os
-from tokenize import group
-
 import django
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "beaunity.settings")
@@ -138,6 +136,6 @@ UserModel = get_user_model()
 #print(f"User '{user}' belongs to Group '{group}'")
 
 
-# # Optional: clear data (use with caution in dev only)
+# # Optional: clear data
 # UserModel.objects.all().delete()
 # Profile.objects.all().delete()
