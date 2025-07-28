@@ -27,7 +27,7 @@ If your registration cannot be completed due to missing or invalid information, 
 <img width="1417" height="937" alt="image" src="https://github.com/user-attachments/assets/deb6a149-68c4-49ee-b894-cf6dbceeece2" />
 
 
-After successful registration, you will receive a **Welcome email** and be automatically redirected to the **login page**.
+After successful registration, you will receive a **Welcome email** and you would be automatically redirected to the **login page**.
 
 ---
 
