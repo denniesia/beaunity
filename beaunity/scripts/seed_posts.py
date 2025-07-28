@@ -10,11 +10,11 @@ from django.contrib.auth import get_user_model
 from beaunity.post.models import Post
 from beaunity.category.models import Category
 
-User = get_user_model()
+UserModel = get_user_model()
 
 # Getting the creators - Organizer Group
-creator1 = User.objects.get(pk=4)
-creator2 = User.objects.get(pk=5)
+creator1 = UserModel.objects.get(pk=4)
+creator2 = UserModel.objects.get(pk=5)
 
 # Getting some categories
 category_mindset = Category.objects.get(title="Mindset & Mental Wellness")

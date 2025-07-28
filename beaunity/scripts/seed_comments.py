@@ -4,11 +4,16 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "beaunity.settings")
 django.setup()
 
+from django.utils import timezone
+from datetime import timedelta
+
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import get_user_model
 from beaunity.challenge.models import Challenge
 from beaunity.category.models import Category
 from beaunity.comment.models import Comment
+from beaunity.event.models import Event
+from beaunity.post.models import Post
 
 
 UserModel = get_user_model()
@@ -228,7 +233,7 @@ comment.created_at = timezone.now() - timedelta(minutes=3)
 comment.save()
 
 comment = Comment.objects.get(pk=20)
-comment.created_at = timezone.now() - timedelta(hour=1)
+comment.created_at = timezone.now() - timedelta(hours=1)
 comment.save()
 
 comment = Comment.objects.get(pk=21)
