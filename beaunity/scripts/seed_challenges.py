@@ -141,6 +141,6 @@ challenge.save()
 challenge = Challenge.objects.get(pk=4)
 challenge.attendees.add(UserModel.objects.get(pk=3))
 
-
 challenge.save()
+
 print("🎉 All challenges seeded successfully.")

@@ -126,5 +126,11 @@ event.attendees.add(UserModel.objects.get(pk=1))
 event.attendees.add(UserModel.objects.get(pk=2))
 event.attendees.add(UserModel.objects.get(pk=5))
 
+event.save()
+
+event = Event.objects.get(pk=4)
+event.attendees.add(UserModel.objects.get(pk=4))
+
+event.save()
 
 print("🎉 All events seeded successfully.")
