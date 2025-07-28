@@ -17,7 +17,7 @@ categories_data  = [
         "title": "Mindset & Mental Wellness",
         "description": "Discuss mindfulness, affirmations, journaling, and emotional self-care.",
         "created_by_id": 1,
-        "image": "mindset-mental-wellness,image/upload/v1750502384/category_images/growth-mindset_iaivyz.png",
+        "image": "image/upload/v1750502384/category_images/growth-mindset_iaivyz.png",
         "slug": "mindset-mental-wellness"
 
     },

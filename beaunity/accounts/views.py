@@ -137,6 +137,8 @@ def make_superuser(request, pk):
     profile = get_object_or_404(Profile, pk=pk)
     user = profile.user
     group = Group.objects.get(name="Superuser")
+    group = Group.objects.get(name="Moderator")
+    group = Group.objects.get(name="Organizer")
     user.is_superuser = True
     user.is_staff = True
     user.save()
@@ -154,9 +156,12 @@ def make_moderator(request, pk):
 
     if user.groups.filter(name="Organizer").exists():
         user.groups.remove(Group.objects.get(name="Organizer"))
+    elif user.groups.filter(name="Superuser").exists():
+        user.groups.remove(Group.objects.get(name="Superuser"))
 
     group = Group.objects.get(name="Moderator")
     user.groups.add(group)
+    user.is_staff = True
     user.save()
     return redirect("profile-details", pk=pk)
 
@@ -171,9 +176,13 @@ def make_organizer(request, pk):
 
     if user.groups.filter(name="Moderator").exists():
         user.groups.remove(Group.objects.get(name="Moderator"))
+    elif user.groups.filter(name="Superuser").exists():
+        user.groups.remove(Group.objects.get(name="Superuser"))
 
     group = Group.objects.get(name="Organizer")
     user.groups.add(group)
+    user.is_staff = True
+    user.save()
     return redirect("profile-details", pk=pk)
 
 
@@ -181,7 +190,11 @@ def make_organizer(request, pk):
 def remove_roles(request, pk):
     profile = get_object_or_404(Profile, pk=pk)
     user = profile.user
+
     user.groups.clear()
+
     group = Group.objects.get(name="User")
     user.groups.add(group)
+    user.is_staff = False
+    user.save()
     return redirect("profile-details", pk=pk)

@@ -26,6 +26,7 @@ users = [
         "username": "alice_s",
         "password": "Skincare#92",
         "profile": {
+            "profile_pic": "image/upload/v1753680201/profile_pics/pic_yi0k9m.jpg",
             "first_name": "Alice",
             "last_name": "Smith",
             "date_of_birth": "1990-01-01",
@@ -39,6 +40,7 @@ users = [
         "username": "bri_j",
         "password": "Glow_Up!18",
         "profile": {
+            "profile_pic": "image/upload/v1753680542/profile_pics/pic2_acoifq.avif",
             "first_name": "Brianna",
             "last_name": "Johnson",
             "date_of_birth": "1993-06-15",
@@ -52,6 +54,7 @@ users = [
         "username": "caro_lee99",
         "password": "Tr3ndySkin*",
         "profile": {
+            "profile_pic": "image/upload/v1751294216/profile_pics/avatar2_el5tyl.avif",
             "first_name": "Carolina",
             "last_name": "Lee",
             "date_of_birth": "2002-11-23",
@@ -65,6 +68,7 @@ users = [
         "username": "dani.elle",
         "password": "Be@utyR0cks",
         "profile": {
+            "profile_pic": "image/upload/v1750936500/profile_pics/e35e40c9be86b5b6e46d6503b299c01a_gzelaz.jpg",
             "first_name": "Danielle",
             "last_name": "",
             "date_of_birth": "2004-04-04",
