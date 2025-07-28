@@ -134,8 +134,9 @@ Beaunity leverages a modern Python and Django-based tech stack to deliver a robu
 - Pillow (11.2.1) – Image processing.
 - Python Slugify (8.0.4) – Creates clean URL slugs.
 
+--- 
 
-
+## 🧪 Data for testing
 
 
 
