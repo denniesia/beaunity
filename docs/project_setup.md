@@ -58,7 +58,7 @@ pip install -r requirements.txt
 
 ### Step 4: Install Tailwind
 
-This project uses Tailwind. To run the following command you firstly need to have node.js on your machine. 
+This project uses Tailwind. To run the following command make sure you have node.js on your machine. 
 
 ````python
 python manage.py tailwind install
@@ -75,17 +75,7 @@ Next, run the following commands to apply database migrations:
 python manage.py migrate
 ````
 
-### Step 6: Create a Superuser
-
-To access the admin panel or Swagger documentation, create a superuser account:
-
-````python
-python manage.py createsuperuser
-````
-Follow the prompts to set up the superuser credentials.
-
-
-### Step 7: Run the Development Server
+### Step 6: Run the Development Server
 
 Run the server with the following command:
 
@@ -95,6 +85,14 @@ python manage.py tailwind start
 
 # Run Django server (in another terminal)
 python manage.py runserver
+````
+
+### Step 7: Populate the database
+
+Run the following command to populate data in the models.
+
+````python
+python manage.py seed_all
 ````
 
 By default, the server runs on http://127.0.0.1:8000/.
@@ -119,5 +117,6 @@ python manage.py test
 
 --- 
 Next -> [Exploring Beaunity](https://github.com/denniesia/beaunity/blob/main/docs/exploring_beaunity.md)
+
 --- 
 Home -> [Home](https://github.com/denniesia/beaunity/blob/main/README.md)
