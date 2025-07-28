@@ -63,7 +63,7 @@ This project is built using a modern Django stack, designed for scalability, per
 - Moderators review and approve submitted content such as challenges or posts before they become publicly visible.
 
 🔔 **Automated Reminders & Notifications**
-- Scheduled tasks (via Celery & Redis) automatically send email notifications and reminders to keep users engaged.
+- Scheduled tasks (via Celery & Redis) automatically send email notifications and reminders to keep users engaged. Additionally, email notifications are sent instantly when post or challenge is approved or new account is created.
 
 🌐 **Integrated API Support**
 - Select parts of the project expose API endpoints via Django REST Framework, enabling integration with frontend components or external services where needed.
