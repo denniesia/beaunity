@@ -10,6 +10,7 @@ Before you begin, make sure you have the following installed:
 - **Redis (recommended)**
 - **Git** – For cloning the repository
 - **Node.js 16+**
+- **Celery 5.5**
   
 ### Step 1: Clone the repository
 ````python
@@ -30,15 +31,18 @@ cp .env.template .env
 - Database connection settings (DB_NAME, DB_USER, DB_PASSWORD, etc.).
 - DEBUG: Set to True for development, False for production.
 - ALLOWED_HOSTS: Add your allowed hosts, separated by commas.
+- ! *The project uses Clodinary, Celery and Google Authentication, so there are keys for these variables as well.* 
 
   
 ### Step 2: Create & Activate a Virtual Environment
 ````python
-python -m venv venv
+python -m venv .venv
 
 # Activate
+
 # Windows:
-venv\Scripts\activate
+.venv\Scripts\activate
+
 # macOS/Linux:
 source venv/bin/activate
 ````
@@ -113,6 +117,7 @@ To run the tests:
 python manage.py test
 ````
 
-
+--- 
+Next -> [Exploring Beaunity](https://github.com/denniesia/beaunity/blob/main/docs/exploring_beaunity.md)
 --- 
 Home -> [Home](https://github.com/denniesia/beaunity/blob/main/README.md)
