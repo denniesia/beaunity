@@ -69,8 +69,11 @@ This project is built using a modern Django stack, designed for scalability, per
 - Select parts of the project expose API endpoints via Django REST Framework, enabling integration with frontend components or external services where needed.
 
 💻 **Responsive UI with Mobile Navigation**
-- Responsive design ensures seamless user experience across desktop and mobile devices.
+- Responsive design ensures seamless user experience across desktop and mobile devices
 
+🎨 **Tailwind CSS Integration**
+- Utilizes Tailwind CSS for rapid UI development, utility-first styling, and consistent design—making customization and responsiveness easier to maintain..
+  
 📂 **Soft Delete Functionality**
 - Instead of permanently deleting profiles users' status is set to 'not active'.
 
