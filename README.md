@@ -21,26 +21,62 @@ To empower individuals to embrace their unique selves through collaboration, cre
 
 ## Core Features
 
-- 🧴 **User-Generated Challenges**  
-  Create challenges with images, meeting links, and categorize them with predefined tags for easy discovery.
+This project is built using a modern Django stack, designed for scalability, performance, and developer productivity. Below are the core components integrated into the application: 
 
-- 🗓️ **Host Online & Offline Events**  
-  Organize workshops, tutorials, or in-person meetups with built-in scheduling and management tools.
+🔐 **User Authentication & JWT Login**
+- Secure user registration, login, and logout functionality supporting both JWT-based stateless authentication and traditional login via username or email for web users.
 
-- 💬 **Engage Through Comments & Likes**  
-  Interact with other users by giving feedback, encouragement, and inspiration.
+👥 **Join & Follow System**
+- Users can create accounts, join the platform, connect and interact with others.
 
-- 🔍 **Discover by Category**  
-  Browse challenges and events by interests—ranging from skincare and makeup to wellness and self-care.
+🛠️ **Enhanced Admin Interface with Django Unfold**
+- The admin panel is customized using Django Unfold, providing a modern, user-friendly interface with improved layout, theming, and navigation—streamlining content moderation and system management for administrators.
 
-- 📩 **Approval Workflow**  
-  Admins and moderators review and approve or reject submitted challenges and posts before they go live.
+🔗 **Generic Foreign Keys**
+- Enable flexible and dynamic model relationships across multiple content types, allowing models to reference any other model seamlessly.
 
-- 👩‍💼 **Role-Based Permissions**  
-  Access and functionality are managed based on user roles, such as admins, moderators, and regular users.
+🔍 **Discover by Category**  
+- User can browse posts, challenges and events by interests—ranging from skincare and makeup to wellness and self-care.
 
-- 🌍 **Community-Driven**  
-  Explore challenges filtered by category or location, fostering interaction, learning, and community building.
+📝 **Post Creation with Predefined Categories**
+- Users can share tips, experiences, or insights by creating posts categorized under predefined topics—encouraging structured interaction and community knowledge sharing.
+
+🧴 **User-Generated Challenges**  
+- Users can create challenges with images, meeting links, and categorize them with predefined tags for easy discovery.
+
+🗓️ **Host Online & Offline Events**  
+- Organizer host workshops, tutorials, or in-person meetups which user can join.
+
+⭐ Favorites System
+- Users can mark challenges, events, and posts as favorites for quick access and personal organization..
+
+💬 **Engage Through Comments & Likes**
+- Users can interact with other users by giving feedback, encouragement, and inspiration.
+
+👩‍💼 **Role-Based Permissions**
+- Different access levels for admins, moderators, organizers and regular users, including public/private content management. Features include public/private content management, pending post and challenge review pages, dashboard statistics, and group membership switching.
+
+📬 **Approval Workflow**
+- Moderators review and approve submitted content such as events, challenges, or posts before they become publicly visible.
+
+🔔 **Automated Reminders & Notifications**
+- Scheduled tasks (via Celery & Redis) automatically send email notifications and reminders to keep users engaged.
+
+🌐 **Integrated API Support**
+- Select parts of the project expose API endpoints via Django REST Framework, enabling integration with frontend components or external services where needed.
+
+💻 **Responsive UI with Mobile Navigation**
+- Responsive design ensures seamless user experience across desktop and mobile devices.
+
+📂 **Soft Delete Functionality**
+- Instead of permanently deleting profiles users' status is set to 'not active'.
+
+⚙️ **Custom Error Templates (404/403)**
+- Friendly and branded error pages improve user experience on forbidden or missing resources.
+
+🧼 **Content Sanitization**
+- User-generated HTML content is sanitized using bleach to prevent malicious scripts and ensure safety.
+
 
 ---
 
