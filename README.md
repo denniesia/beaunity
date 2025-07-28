@@ -60,7 +60,7 @@ This project is built using a modern Django stack, designed for scalability, per
 - Different access levels for admins, moderators, organizers and regular users, including public/private content management. Features include public/private content management, pending post and challenge review pages, dashboard statistics, and group membership switching.
 
 📬 **Approval Workflow**
-- Moderators review and approve submitted content such as events, challenges, or posts before they become publicly visible.
+- Moderators review and approve submitted content such as challenges or posts before they become publicly visible.
 
 🔔 **Automated Reminders & Notifications**
 - Scheduled tasks (via Celery & Redis) automatically send email notifications and reminders to keep users engaged.
