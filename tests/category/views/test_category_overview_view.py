@@ -10,6 +10,7 @@ from beaunity.common.mixins import UserModel
 
 UserModel = get_user_model()
 
+
 class TestCategoryOverviewView(TestCase):
     def setUp(self):
         Group.objects.get_or_create(name='User')
@@ -66,6 +67,7 @@ class TestCategoryOverviewView(TestCase):
         view = CategoryOverviewView()
         view.request = request
         queryset = view.get_queryset()
+
         self.assertIn(self.category1, queryset)
         self.assertIn(self.category2, queryset)
         self.assertIn(self.category3, queryset)

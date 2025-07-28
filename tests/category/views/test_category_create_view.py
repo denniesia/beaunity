@@ -10,6 +10,7 @@ from beaunity.common.mixins import UserModel
 
 UserModel = get_user_model()
 
+
 class TestsCategoryCreateView(TestCase):
     def setUp(self):
         Group.objects.get_or_create(name='User')
@@ -31,24 +32,26 @@ class TestsCategoryCreateView(TestCase):
 
         self.url = reverse('category-create')
 
-    def test_redirect_if_not_logged_in(self):
+    def test__redirect_if_not_logged_in(self):
         response = self.client.get(self.url)
+
         self.assertNotEqual(response.status_code, 202)
         self.assertIn('/login/', response.url )
 
-    def test_forbidden_if_normal_user(self):
+    def test__forbidden_if_normal_user(self):
         self.client.login(username='normaluser', password='4354mvo!N')
         response = self.client.get(self.url)
+
         self.assertEqual(response.status_code, 403)
 
-    def test_get_create_category_page_with_staff_user(self):
+    def test__get_create_category_page_with_staff_user(self):
         self.client.login(username='staffuser', password='skdfgmW2!')
         response = self.client.get(self.url)
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response,'category/category-create.html')
 
-    def test_create_category_with_staff_user(self):
+    def test__create_category_with_staff_user(self):
         self.client.login(username='staffuser', password='skdfgmW2!')
         test_image = SimpleUploadedFile(
             name='test.gif',

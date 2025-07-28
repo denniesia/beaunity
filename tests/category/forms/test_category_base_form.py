@@ -21,16 +21,21 @@ class TestCategoryBaseForm(TestCase):
             'description': 'Test Description',
         }
 
-    def test__form_is_valid_expect_true(self):
+    def test__form_is_valid_expects_true(self):
         form = CategoryBaseForm(data=self.valid_data, files={'image': self.test_image})
         self.assertTrue(form.is_valid())
 
-    def test__title_is_capitalized_expect_true(self):
+    def test__title_is_capitalized_expects_true(self):
         self.valid_data['title'] = 'test category'
-        form = CategoryBaseForm(data=self.valid_data, files={'image': self.test_image})
+        form = CategoryBaseForm(
+            data=self.valid_data,
+            files={'image': self.test_image}
+        )
+
         self.assertTrue(form.is_valid())
 
         category = form.save(commit=False)
+
         self.assertEqual(
             category.title,
             self.valid_data['title'].capitalize(),
@@ -38,8 +43,13 @@ class TestCategoryBaseForm(TestCase):
 
     def test__description_is_capitalized_expect_true(self):
         self.valid_data['description'] = 'test description'
-        form = CategoryBaseForm(data=self.valid_data, files={'image': self.test_image})
+        form = CategoryBaseForm(
+            data=self.valid_data,
+            files={'image': self.test_image}
+        )
+
         self.assertTrue(form.is_valid())
+
         category = form.save(commit=False)
         self.assertEqual(
             category.description,

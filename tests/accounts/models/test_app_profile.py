@@ -1,10 +1,8 @@
 from datetime import date
-from unittest import expectedFailure
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.test import TestCase
-from prompt_toolkit.key_binding.bindings.named_commands import self_insert
 
 from beaunity.accounts.models import Profile
 
@@ -21,7 +19,6 @@ class TestProfile(TestCase):
         )
 
     def test__full_name_property(self):
-
         profile = self.user.profile
         profile.first_name = "Test"
 

@@ -10,9 +10,11 @@ from beaunity.common.mixins import UserModel
 
 UserModel = get_user_model()
 
+
 class TestsCategoryEditView(TestCase):
     def setUp(self):
         Group.objects.get_or_create(name='User')
+
         self.user = UserModel.objects.create_user(
             username='normaluser',
             email='normaluser@test.bg',
@@ -47,12 +49,13 @@ class TestsCategoryEditView(TestCase):
 
         self.url = reverse('category-edit', kwargs={'category_slug': self.category.slug})
 
-    def test_redirect_if_not_logged_in(self):
+    def test__redirect_if_not_logged_in(self):
         response = self.client.get(self.url)
+
         self.assertNotEqual(response.status_code, 202)
         self.assertIn('/login/', response.url )
 
-    def test_get_edit_category_page_with_staff_user(self):
+    def test__get_edit_category_page_with_staff_user(self):
         self.client.login(
             username='staffuser',
             password='dfgm!2'
@@ -62,7 +65,7 @@ class TestsCategoryEditView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'category/category-edit.html')
 
-    def test_change_category_title_success(self):
+    def test__change_category_title_success(self):
         self.client.login(
             username='staffuser',
             password='dfgm!2'
@@ -82,6 +85,7 @@ class TestsCategoryEditView(TestCase):
             ),
             'created_by': self.staff,
         }
+
         response = self.client.post(self.url, data=form_data)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('category-overview'))
