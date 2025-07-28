@@ -25,7 +25,7 @@ Clicking on the delete icon would redirect to you a confirmation page.
 
 
 <img width="1351" height="941" alt="image" src="https://github.com/user-attachments/assets/75117735-39bd-4c8e-b6e0-8d76d818beaf" />
-After the account is deleted the you would be automatically logged out and redirected to the landing page. 
+After the account is deleted you would be automatically logged out and redirected to the landing page. 
 
 
 --- 
