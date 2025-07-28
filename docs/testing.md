@@ -18,7 +18,9 @@ tests/
 ├── __init__.py
 ````
 
-To run the test please use the command:
+To run the tests please use the command:
 ````python
 python manage.py test
 ````
+
+The total is 21 Tests. 
