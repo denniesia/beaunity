@@ -2,6 +2,9 @@
 
 Beaunity is a forum-like platform where users can create, discover, and participate in challenges, discussions and events — both online and offline. The app brings together beauty enthusiasts, professionals, and brands to share their creativity and knowledge through interactive experiences. Whether you're building a skincare routine, exploring makeup trends, or hosting a beauty workshop, Beaunity helps you grow individually while connecting with a supportive community.
 
+<img width="1660" height="942" alt="image" src="https://github.com/user-attachments/assets/0c41af46-8536-40d8-9c98-db628274be75" />
+
+
 ---
 
 ## 💖 The Vision
