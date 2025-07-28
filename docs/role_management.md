@@ -102,3 +102,8 @@ Event Create Page
 <img width="1402" height="944" alt="image" src="https://github.com/user-attachments/assets/c218d4c8-c53d-4e92-973b-d18b00e44f9b" />
 
 
+--- 
+Next -> [Testing](https://github.com/denniesia/beaunity/blob/main/docs/testing.md)
+
+--- 
+Home -> [Home](https://github.com/denniesia/beaunity/blob/main/README.md)
