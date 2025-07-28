@@ -60,7 +60,7 @@ Users can edit and delete their own challenges
 <img width="1363" height="1065" alt="image" src="https://github.com/user-attachments/assets/64127411-324e-44e7-a099-c447f2da66c7" />
 <img width="1459" height="1061" alt="image" src="https://github.com/user-attachments/assets/0418d070-f0f0-44b6-afc4-7b66eb5d6a3f" />
 
-Before deleting a form with filled up information about the challenge will be shown. 
+Before deleting a challenge a form with filled up read-only information about the challenge will be shown. 
 <img width="1522" height="1064" alt="image" src="https://github.com/user-attachments/assets/5ca27c7f-47ff-4f7c-93a0-540064890019" />
 
 
