@@ -75,7 +75,15 @@ Next, run the following commands to apply database migrations:
 python manage.py migrate
 ````
 
-### Step 6: Run the Development Server
+### Step 6: Populate the database
+
+Run the following command to populate data in the models.
+
+````python
+python manage.py seed_all
+````
+
+### Step 7: Run the Development Server
 
 Run the server with the following command:
 
@@ -87,17 +95,33 @@ python manage.py tailwind start
 python manage.py runserver
 ````
 
-### Step 7: Populate the database
-
-Run the following command to populate data in the models.
-
-````python
-python manage.py seed_all
-````
-
 By default, the server runs on http://127.0.0.1:8000/.
 
-### *(Optional) Step 8: Access API Documentation*
+### Step 8: Activate celery 
+
+Activate celery worker and beat 
+```python
+celery -A beaunity worker -l info
+
+#on Windows to avoid restricting multiprocessing synchronization objects
+
+celery -A beaunity worker --polo=solo --loglevel=info 
+
+#beat
+celery -A beaunity beat --loglevel=info
+````
+
+!! ***Note on User Creation and Email Errors*** !!
+
+When initially populating the database, users are created using Django’s bulk_create() method. This bypasses Django’s post_save signals, which means related objects like Profile or AppUser may not be automatically created. As a result, you might encounter errors such as:
+
+<img width="1337" height="184" alt="image" src="https://github.com/user-attachments/assets/5e22f688-e201-479e-b522-1fa1b543f128" />
+This is expected behavior during bulk creation.
+
+To properly test account creation and email functionality, create a user through the standard workflow. which ensures all signals are triggered and related models are set up correctly.
+
+
+### *(Optional)  Access API Documentation*
 
 The project contains some API View and uses DRF Spectacular for Swagger documentation.
 
