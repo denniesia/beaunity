@@ -67,9 +67,13 @@ class FilteredQuerysetMixin:
         elif difficulty == 'Legendary':
             queryset = queryset.filter(difficulty='Legendary')
 
-
         if self.model == Challenge:
+            if sort_by == 'Popularity':
+                return queryset.filter(is_approved=True).distinct()
             return queryset.filter(is_approved=True).distinct().order_by(*self.ordering)
+
+        if sort_by == 'Popularity':
+            return queryset.distinct()
         return queryset.distinct().order_by(*self.ordering)
 
 class FilteredContextMixin:

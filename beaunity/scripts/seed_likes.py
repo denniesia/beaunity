@@ -200,3 +200,4 @@ Like.objects.create(
     object_id=5,
 )
 
+print("🎉 All likes seeded successfully.")

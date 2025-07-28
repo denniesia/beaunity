@@ -33,7 +33,7 @@ posts_data = [
         "title": "Quick & Healthy Breakfast Ideas?",
         "content": "Looking for nutritious breakfast options that are quick to prepare and keep you full until lunch. What do you eat in the morning that fuels your day?",
         "is_approved": True,
-        "category_id": category_morning,
+        "category_id": category_morning.id,
         "created_by": creator1,
     },
     {
@@ -41,7 +41,7 @@ posts_data = [
         "title": "Morning Routine Must-Haves?",
         "content": "What are your holy grail skincare products for a glowing morning routine? I’m trying to build a routine that hydrates and protects throughout the day. Bonus points for SPF recommendations!",
         "is_approved": True,
-        "category_id": category_self_care,
+        "category_id": category_self_care.id,
         "created_by": creator1,
     },
     {
@@ -49,7 +49,7 @@ posts_data = [
         "title": "Supplements You Swear By?",
         "content": "From collagen to magnesium—what supplements have you noticed a real difference with? Share your favorite brands and how they’ve helped you!",
         "is_approved": False,
-        "category_id": category_health,
+        "category_id": category_health.id,
         "created_by": creator1,
     },
     {
@@ -57,7 +57,7 @@ posts_data = [
         "title": "Hydration Tips for Busy Days",
         "content": "I always forget to drink water throughout the day. Anyone have creative ways to stay hydrated—like infusions or apps? Let’s share ideas!",
         "is_approved": True,
-        "category_id": category_health,
+        "category_id": category_health.id,
         "created_by": creator1,
     },
     {
@@ -65,7 +65,7 @@ posts_data = [
         "title": "Imposter Syndrome Struggles",
         "content": "Anyone else struggling with imposter syndrome? Whether it's at work, school, or just life in general—how do you manage those self-doubt moments?",
         "is_approved": True,
-        "category_id": category_ask,
+        "category_id": category_ask.id,
         "created_by": creator1,
     },
     {
@@ -73,7 +73,7 @@ posts_data = [
         "title": "How Wearing My Favorite Color Boosted My Mood",
         "content": "Tried an all-pink outfit today and felt so empowered. Color therapy is real 💖✨",
         "is_approved": True,
-        "category_id": category_style,
+        "category_id": category_style.id,
         "created_by": creator2,
     },
     {
@@ -81,7 +81,7 @@ posts_data = [
         "title": "Skincare Routine",
         "content": "What’s your favorite morning skincare step?",
         "is_approved": True,
-        "category_id": category_morning,
+        "category_id": category_morning.id,
         "created_by": creator2,
     },
     {
@@ -89,7 +89,7 @@ posts_data = [
         "title": "SKIN1004 Madagascar Centella Ampoule",
         "content": "Hey guys, has somebody used this serum? I am thinking of buying it because I see a lot of positive feedback on tik tok but i am not quite sure. I have dry skin.",
         "is_approved": True,
-        "category_id": category_product,
+        "category_id": category_product.id,
         "created_by": creator2,
     },
     {
@@ -97,7 +97,7 @@ posts_data = [
         "title": "Confidence Boost",
         "content": "What’s one habit that makes you feel confident?",
         "is_approved": False,
-        "category_id": category_product,
+        "category_id": category_product.id,
         "created_by": creator2,
     },
     {
@@ -105,7 +105,7 @@ posts_data = [
         "title": "Self-Care Tips",
         "content": "How do you unwind after a stressful day?",
         "is_approved": False,
-        "category_id": category_ask,
+        "category_id": category_ask.id,
         "created_by": creator2,
     },
 ]

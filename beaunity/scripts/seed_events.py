@@ -8,10 +8,10 @@ from django.contrib.auth import get_user_model
 from beaunity.event.models import Event
 from beaunity.category.models import Category
 
-User = get_user_model()
+UserModel = get_user_model()
 
 # Getting the creators - Organizer Group
-creator1 = User.objects.get(pk=3)
+creator1 = UserModel.objects.get(pk=3)
 
 # Getting some categories
 category_mindset = Category.objects.get(title="Mindset & Mental Wellness")
@@ -33,13 +33,13 @@ event_data = [
         "meeting_link": "https://us02web.zoom.us/j/86543210987?pwd=a1b2C3d4Ef",
         "start_time": "2025-07-19 07:00:00.000000 +00:00",
         "end_time": "2025-07-19 10:00:00.000000 +00:00",
-        "is_public": False,
+        "is_public": True,
         "is_new": False,
         "created_by": creator1,
         "categories": [
-            category_self_care,
-            category_morning,
-            category_health,
+            category_self_care.id,
+            category_morning.id,
+            category_health.id,
         ],
     },
     {
@@ -56,7 +56,7 @@ event_data = [
         "is_new": False,
         "created_by": creator1,
         "categories": [
-            category_product
+            category_product.id,
         ],
     },
     {
@@ -73,10 +73,10 @@ event_data = [
         "is_new": False,
         "created_by": creator1,
         "categories": [
-            category_morning,
-            category_product,
-            category_style,
-            category_self_care
+            category_morning.id,
+            category_product.id,
+            category_style.id,
+            category_self_care.id,
         ],
     },
     {
@@ -93,19 +93,18 @@ event_data = [
         "is_new": False,
         "created_by": creator1,
         "categories": [
-            category_mindset
+            category_mindset.id,
         ],
     },
 ]
 
 
 # Creating and assigning categories
-for data in challenge_data:
+for data in event_data:
     categories = data.pop("categories")
-    challenge = Challenge.objects.create(**data)
-    challenge.categories.set(categories) #setting M2M relationships
-    print(f"✅ Created challenge: {challenge.title}")
-
+    event = Event.objects.create(**data)
+    event.categories.set(categories) #setting M2M relationships
+    print(f"✅ Created challenge: {event.title}")
 
 # Assigning attendees
 event = Event.objects.get(pk=1)

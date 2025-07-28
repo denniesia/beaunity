@@ -174,3 +174,5 @@ Favourite.objects.create(
     content_type=ContentType.objects.get_for_model(Post),
     object_id=3,
 )
+
+print("🎉 All favourites seeded successfully.")

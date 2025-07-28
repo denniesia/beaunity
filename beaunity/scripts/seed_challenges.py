@@ -11,8 +11,8 @@ from beaunity.category.models import Category
 UserModel = get_user_model()
 
 # Getting the creators - User Group
-creator1 = User.objects.get(pk=4)
-creator2 = User.objects.get(pk=5)
+creator1 = UserModel.objects.get(pk=4)
+creator2 = UserModel.objects.get(pk=5)
 
 # Getting some categories
 category_mindset = Category.objects.get(title="Mindset & Mental Wellness")
@@ -30,7 +30,9 @@ challenge_data = [
         "is_online": True,
         "meeting_link": "",
         "created_by": creator1,
-        "categories": [category_journey],
+        "categories": [
+            category_journey.id
+        ],
         "city": "",
         "location": "",
         "start_time": "2025-08-15 06:00:00.000000 +00:00",
@@ -52,7 +54,10 @@ challenge_data = [
         "difficulty": "Beginner",
         "is_approved": True,
         "created_by": creator1,
-        "categories": [category_mindset, category_journey],
+        "categories": [
+            category_mindset.id,
+            category_journey.id,
+        ],
     },
     {
         "title": "Axing My Finals",
@@ -71,7 +76,9 @@ challenge_data = [
         "end_time": "2025-07-13 06:00:00+00:00",
         "difficulty": "Beginner",
         "created_by": creator2,
-        "categories": [category_style],
+        "categories": [
+            category_style.id
+        ],
     },
     {
         "title": "Glow-Up: Retinol Routine",
@@ -87,7 +94,9 @@ challenge_data = [
         "difficulty": "Beginner",
         "is_approved": True,
         "created_by": creator2,
-        "categories": [category_morning],
+        "categories": [
+            category_morning.id
+        ],
     },
     {
         "title": "1 Hour Daily Reading Challenge",
@@ -103,17 +112,19 @@ challenge_data = [
         "difficulty": "Beginner",
         "is_approved": False,
         "created_by": creator2,
-        "categories": [category_morning, category_mindset],
+        "categories": [
+            category_morning.id,
+            category_mindset.id,
+        ],
     },
 ]
 
 # Creating and assigning categories
-for data in event_data:
+for data in challenge_data:
     categories = data.pop("categories")
-    event = Event.objects.create(**data)
-    event.categories.set(categories) #setting M2M relationships
-    print(f"✅ Created event: {event.title}")
-
+    challenge = Challenge.objects.create(**data)
+    challenge.categories.set(categories) #setting M2M relationships
+    print(f"✅ Created challenge: {challenge.title}")
 
 
 # Assigning attendees

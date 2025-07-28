@@ -43,7 +43,7 @@ class CategoryBaseForm(forms.ModelForm):
 
     def clean_title(self):
         title = self.cleaned_data["title"]
-        return title.capitalize() if title else title
+        return title[0].upper() + title[1:] if title else title
 
     def clean_description(self):
         description = self.cleaned_data["description"]
