@@ -84,11 +84,16 @@ Edit post view: Staff members can only edit the category of the post, the other 
 <img width="1415" height="948" alt="image" src="https://github.com/user-attachments/assets/eb4a1fed-4f5a-4db1-8f7c-db9da0cecf60" />
 
 
-- 💊 Superuser can view and change the group belonging of the users.
-- 
+- 💊 Superusers can view and change the group belonging of the users.
+  
 <img width="1341" height="944" alt="image" src="https://github.com/user-attachments/assets/2c32f645-8855-41b7-a35f-5f6681d12ae2" />
 
 <img width="1370" height="948" alt="image" src="https://github.com/user-attachments/assets/37dff23c-cbe9-4733-9fdb-284db16f35bd" />
+
+- 💊 The Dashhoard provides an additional statistic table for Superusers only.
+
+<img width="940" height="946" alt="image" src="https://github.com/user-attachments/assets/dc1c0c38-121c-4417-9b6d-931e680c76ec" />
+
 
 🐛  Error Handling
 
