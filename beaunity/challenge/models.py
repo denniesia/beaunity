@@ -1,5 +1,3 @@
-from contextlib import nullcontext
-
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
@@ -63,10 +61,9 @@ class Challenge(BaseActivity, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, 
 
     @property
     def duration_in_weeks(self):
-        if self.start_time and self.end_time:
-            delta = self.end_time - self.start_time
-            return (delta.days + 6) // 7
-        return 0
+        duration = self.end_time - self.start_time
+        return (duration.days + 6) // 7
+
 
     def get_absolute_url(self):
         return reverse("challenge-details", kwargs={"pk": self.pk})

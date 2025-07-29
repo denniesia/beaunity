@@ -2,6 +2,7 @@ import bleach
 from ckeditor.widgets import CKEditorWidget
 from cloudinary.forms import CloudinaryFileField
 from django import forms
+from django.forms import ValidationError
 from django.forms import ClearableFileInput
 
 from beaunity.category.models import Category
@@ -138,7 +139,9 @@ class ActivityBaseForm(forms.ModelForm):
         plain_text = bleach.clean(raw, tags=[], strip=True)
 
         if len(plain_text.strip()) < 100:
-            raise forms.ValidationError("Description must be at least 100 characters (excluding formatting).")
+            self.add_error(
+                "details" ,"Description must be at least 100 characters (excluding formatting)."
+            )
 
         return bleach.clean(
             raw,
@@ -152,6 +155,16 @@ class ActivityBaseForm(forms.ModelForm):
         validator = CloudinaryExtensionandSizeValidator()  # create instance
         validator(poster_image)
         return poster_image
+
+    def clean(self):
+        cleaned_data = super().clean()
+        start_time = cleaned_data.get('start_time')
+        end_time = cleaned_data.get('end_time')
+
+        if start_time and end_time and end_time <= start_time:
+            self.add_error(
+                'end_time', "End time must be after start time."
+            )
 
 
 

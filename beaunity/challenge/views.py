@@ -5,7 +5,6 @@ from django.contrib.auth.mixins import (LoginRequiredMixin,
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render
-from django.template.base import kwarg_re
 from django.urls import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)

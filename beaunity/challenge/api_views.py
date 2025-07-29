@@ -17,7 +17,6 @@ class ChallengeViewSet(ModelViewSet):
         is_approved=True
     ).order_by('-created_at')
 
-
     def get_serializer_class(self):
         if self.action == "create":
             return ChallengeCreateSerializer

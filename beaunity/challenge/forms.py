@@ -2,41 +2,22 @@ from django import forms
 
 from beaunity.common.forms import ActivityBaseForm
 
-from .choices import DifficultyLevel
 from .models import Challenge
-from .mixins import ChallengeValidationMixin
+from .mixins import ChallengeValidationMixin, DifficultyFieldMixin
 
 CLASS = "w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400"
 
 
-class ChallengeCreateForm(ChallengeValidationMixin, ActivityBaseForm):
+class ChallengeCreateForm(DifficultyFieldMixin, ChallengeValidationMixin, ActivityBaseForm):
     class Meta(ActivityBaseForm.Meta):
         model = Challenge
-
-    difficulty = forms.ChoiceField(
-        choices=DifficultyLevel,
-        label="Difficulty:",
-        widget=forms.Select(
-            attrs={
-                "class": CLASS,
-            }
-        ),
-    )
+        fields = ActivityBaseForm.Meta.fields + ['difficulty', ]
 
 
-class ChallengeEditForm(ChallengeValidationMixin, ActivityBaseForm):
+class ChallengeEditForm(DifficultyFieldMixin, ChallengeValidationMixin, ActivityBaseForm):
     class Meta(ActivityBaseForm.Meta):
         model = Challenge
-
-    difficulty = forms.ChoiceField(
-        choices=DifficultyLevel,
-        label="Difficulty:",
-        widget=forms.Select(
-            attrs={
-                "class": CLASS,
-            }
-        ),
-    )
+        fields = ActivityBaseForm.Meta.fields + ['difficulty', ]
 
 
 class ChallengeDeleteForm(ActivityBaseForm):
@@ -44,7 +25,6 @@ class ChallengeDeleteForm(ActivityBaseForm):
         super().__init__(*args, **kwargs)
         self.fields.pop("categories", None)
         self.fields.pop("poster_image", None)
-        self.fields.pop("difficulty", None)
         for field_name in self.fields.keys():
             self.fields[field_name].disabled = True
 
