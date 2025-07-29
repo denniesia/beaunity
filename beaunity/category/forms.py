@@ -69,11 +69,3 @@ class CategoryDeleteForm(CategoryBaseForm):
 
         for field in self.fields.values():
             field.widget.attrs["readonly"] = True
-
-
-class SearchForm(forms.Form):
-    query = forms.CharField(
-        label="",
-        required=False,
-        max_length=100,
-    )

@@ -9,8 +9,7 @@ class CategorySimpleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = (
-            "title",
-            "description"
+            "title", "description"
         )
 
 
@@ -22,11 +21,6 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = [
-            "id",
-            "title",
-            "image",
-            "description",
-            "last_updated",
-            "created_by",
-            "created_at",
+            "id", "title", "image", "description",
+            "last_updated", "created_by", "created_at",
         ]

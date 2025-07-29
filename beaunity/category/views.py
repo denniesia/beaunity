@@ -1,14 +1,15 @@
+from beaunity.common.forms import SearchForm
+
 from datetime import timezone
 
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import HttpResponseRedirect, render
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
-
-from .forms import CategoryCreateForm, CategoryDeleteForm, CategoryEditForm, SearchForm
+from .forms import CategoryCreateForm, CategoryDeleteForm, CategoryEditForm
 from .models import Category
 
 
@@ -34,7 +35,6 @@ class CategoryOverviewView(LoginRequiredMixin,PermissionRequiredMixin, ListView)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["form"] = self.form
         context["query"] = self.request.GET.get("query", "")
         return context
 
