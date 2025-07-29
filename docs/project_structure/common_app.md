@@ -464,7 +464,7 @@ def send_reminder_email(user, title, start_time, item_type):
 Next -> [Event App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/event_app.md)
 
 --- 
-Home -> [Home](https://github.com/denniesia/beaunity/blob/main/README.md
+Home -> [Home](https://github.com/denniesia/beaunity/blob/main/README.md)
 
 
 
