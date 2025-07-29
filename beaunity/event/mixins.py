@@ -19,6 +19,7 @@ class EventValidationMixin:
             )
         return cleaned_data
 
+
 class PublicFieldMixin(forms.Form):
     is_public = forms.BooleanField(
         label="Public event:",

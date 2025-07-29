@@ -89,7 +89,6 @@ class EventCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = EventCreateForm
     template_name = "event/event-create.html"
     permission_required = "event.add_event"
-    success_url = reverse_lazy("events")
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
