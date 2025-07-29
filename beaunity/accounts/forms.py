@@ -15,7 +15,6 @@ CLASS = "w-full px-4 py-2 border border-pink-300 rounded-md focus:outline-none f
 
 
 class AppUserCreationForm(UserCreationForm):
-
     class Meta(UserCreationForm.Meta):
         model = UserModel
         fields = (

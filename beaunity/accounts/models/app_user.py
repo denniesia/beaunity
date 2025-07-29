@@ -17,7 +17,9 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
         unique=True,
         blank=True,
         null=True,
-        error_messages={"unique": "A user with that username already exists."},
+        error_messages={
+            "unique": "A user with that username already exists."
+        },
     )
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
