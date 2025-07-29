@@ -6,6 +6,9 @@ specific to any single feature.
 
 ````tree
 common/
+├── management/         # Base command for populating data 
+   └── commands/
+      └── seed_all.py  
 ├── migrations/          # Django migrations for the common app
 ├── templatetags/        # Custom template filters and tags
     ├── __init__.py
@@ -76,7 +79,6 @@ parameters. It supports filters such as:
 
 ````python
 class FilteredQuerysetMixin:
-
     def get_filtered_queryset(self):
         current_datetime = now()
         archived = self.request.GET.get('archived', '').lower() == 'true'
@@ -136,10 +138,14 @@ class FilteredQuerysetMixin:
         elif difficulty == 'Legendary':
             queryset = queryset.filter(difficulty='Legendary')
 
-
         if self.model == Challenge:
-            return queryset.filter(is_approved=True).distinct()
-        return queryset.distinct()
+            if sort_by == 'Popularity':
+                return queryset.filter(is_approved=True).distinct()
+            return queryset.filter(is_approved=True).distinct().order_by(*self.ordering)
+
+        if sort_by == 'Popularity':
+            return queryset.distinct()
+        return queryset.distinct().order_by(*self.ordering)
 ````
 
 - `FilteredContextMixin()`
