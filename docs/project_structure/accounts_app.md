@@ -122,8 +122,16 @@ def add_user_to_default_group(sender, instance,created, **kwargs):
 def make_superuser(request, pk):
     profile = get_object_or_404(Profile, pk=pk)
     user = profile.user
+    
     group = Group.objects.get(name="Superuser")
+    group = Group.objects.get(name="Moderator")
+    group = Group.objects.get(name="Organizer")
+    
+    user.is_superuser = True
+    user.is_staff = True
+    user.save()
     user.groups.add(group)
+    
     return redirect("profile-details", pk)
 ```
 
@@ -139,11 +147,14 @@ def make_moderator(request, pk):
 
     if user.groups.filter(name="Organizer").exists():
         user.groups.remove(Group.objects.get(name="Organizer"))
+    elif user.groups.filter(name="Superuser").exists():
+        user.groups.remove(Group.objects.get(name="Superuser"))
 
     group = Group.objects.get(name="Moderator")
     user.groups.add(group)
+    user.is_staff = True
+    user.save()
     return redirect("profile-details", pk=pk)
-
 ```
 
 -  `make_organizer()`  – Assigns the Organizer role (removes Moderator role if present).
@@ -158,9 +169,13 @@ def make_organizer(request, pk):
 
     if user.groups.filter(name="Moderator").exists():
         user.groups.remove(Group.objects.get(name="Moderator"))
+    elif user.groups.filter(name="Superuser").exists():
+        user.groups.remove(Group.objects.get(name="Superuser"))
 
     group = Group.objects.get(name="Organizer")
     user.groups.add(group)
+    user.is_staff = True
+    user.save()
     return redirect("profile-details", pk=pk)
 ````
 
@@ -170,10 +185,15 @@ def make_organizer(request, pk):
 def remove_roles(request, pk):
     profile = get_object_or_404(Profile, pk=pk)
     user = profile.user
+
     user.groups.clear()
+
     group = Group.objects.get(name="User")
     user.groups.add(group)
+    user.is_staff = False
+    user.save()
     return redirect("profile-details", pk=pk)
+
 ````
 
 🔧 Custom Decorator:
@@ -228,15 +248,67 @@ the refresh token can be used to obtain a new one. Logging out blacklists the re
 
 
 - `/accounts/api/login/` - Authenticates a user with username and password
+  
+````python
+@extend_schema(
+    tags=["accounts"],
+    summary="Login endpoint",
+    description="Authenticates user with username and password and return access and refresh token.",
+    request=LoginRequestSerializer,
+    responses={
+        200: LoginResponseSerializer,
+        401: "Invalid username or password.",
+    },
+)
+class LoginAPIView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        username = request.data.get("username")
+        password = request.data.get("password")
+
+        user = authenticate(username=username, password=password)
+
+        if user is None:
+            return Response(
+                {
+                    "error": "Invalid username or password",
+                },
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
+        refresh_token = RefreshToken.for_user(user)
+
+        return Response(
+            {
+                "refresh_token": str(refresh_token),
+                "access_token": str(refresh_token.access_token),
+                "message": "Successfully logged in.",
+            },
+            status=status.HTTP_200_OK,
+        )
+````
+
 - `/accounts/api/logout/` -  Logs out the user by blacklisting the refresh token.
 ```python
+@extend_schema(
+    tags=["accounts"],
+    summary="Logout endpoint",
+    description="Blacklists the refresh token",
+    request=LogoutRequestSerializer,
+    responses={
+        200: LogoutResponseSerializer,
+        400: "Invalid or expired token.",
+    },
+)
 class LogoutAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
+
         try:
-            refresh_token = request.data.get("refresh_token")  
-            token = RefreshToken(refresh_token)  
+            refresh_token = request.data.get("refresh_token")  # string
+            token = RefreshToken(refresh_token)  # inistializing the token object
             token.blacklist()
             return Response(
                 {
@@ -254,6 +326,13 @@ class LogoutAPIView(APIView):
   ```  
 
 - `/accounts/api/register/` - Creates a new user account, includes username, email, password
+````python
+class AppUserRegisterAPIView(CreateAPIView):
+    queryset = UserModel.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]
+````
+  
 - `/accounts/api/token/refresh/` - Refreshes the JWT access token using the refresh token. Returns a new access token 
 to keep the user logged in without re-entering credentials. The *TokenRefreshView* is used to build this view.
 
