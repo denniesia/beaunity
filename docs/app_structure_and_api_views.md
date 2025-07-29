@@ -11,6 +11,7 @@ beauinty
 ├── interaction/
 ├── main/
 ├── post/
+├── scripts/
 ├── __init__.py
 ├── asgi.py
 ├── celery.py
