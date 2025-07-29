@@ -31,14 +31,10 @@ import cloudinary.uploader
 SECRET_KEY = config("THE_SECRET_KEY", None)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", cast=bool)
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost",
-    ".ngrok.io",
-    "4674-2-200-180-38.ngrok-free.app",
-]
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', "").split(",")
+
 
 CSRF_TRUSTED_ORIGINS = ["https://4674-2-200-180-38.ngrok-free.app"]
 
@@ -239,10 +235,10 @@ LOGOUT_REDIRECT_URL = "landing-page"
 AUTH_USER_MODEL = "accounts.AppUser"
 
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_BROKER_URL = config("CELERY_BROKER_URL")
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_ACCEPT_CONTENT = ['json']
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = config("CELERY_RESULT_BACKEND")
 
 
 # Cloudinary-Django intergration

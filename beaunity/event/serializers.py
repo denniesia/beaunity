@@ -35,7 +35,7 @@ class EventSerializer(serializers.ModelSerializer):
         CloudinaryExtensionandSizeValidator()(image)
         return image
 
-    def validate_time(self, data):
+    def validate(self, data):
         start_time = data.get("start_time")
         end_time = data.get("end_time")
 

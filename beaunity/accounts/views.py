@@ -136,13 +136,16 @@ class ProfileDeleteView(LoginRequiredMixin, UserIsSelfMixin, DeleteView):
 def make_superuser(request, pk):
     profile = get_object_or_404(Profile, pk=pk)
     user = profile.user
+
     group = Group.objects.get(name="Superuser")
     group = Group.objects.get(name="Moderator")
     group = Group.objects.get(name="Organizer")
+
     user.is_superuser = True
     user.is_staff = True
     user.save()
     user.groups.add(group)
+
     return redirect("profile-details", pk)
 
 
