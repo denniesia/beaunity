@@ -27,7 +27,7 @@ To empower individuals to embrace their unique selves through collaboration, cre
 This project is built using a modern Django stack, designed for scalability, performance, and developer productivity. Below are the core components integrated into the application: 
 
 🔐 **User Authentication & JWT Login**
-- Secure user registration, login, and logout functionality supporting both JWT-based stateless authentication and traditional login via username or email for web users.
+- Secure user registration, login, and logout functionality supporting both JWT-based stateless authentication and traditional login via username, email  or Google Account for web users.
 
 👥 **Join & Follow System**
 - Users can create accounts, join the platform, connect and interact with others.
