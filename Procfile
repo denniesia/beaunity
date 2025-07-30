@@ -1,3 +1,3 @@
 web: gunicorn beaunity.wsgi
-worker: celery -A myproject worker --loglevel=info
-beat: celery -A myproject beat --loglevel=info
+worker: celery -A beaunity worker --loglevel=info
+beat: celery -A beaunity beat --loglevel=info
