@@ -9,8 +9,8 @@ class ChallengeValidationMixin:
         if cleaned_data is None:
             cleaned_data = self.cleaned_data  # fallback
 
-        online = cleaned_data.get("is_online")
-        location = cleaned_data.get("location")
+        online = cleaned_data.get("is_online", '')
+        location = cleaned_data.get("location", '')
 
         if not online and not location:
             self.add_error(
