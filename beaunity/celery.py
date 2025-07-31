@@ -24,10 +24,12 @@ app.conf.update(
     broker_use_ssl={
         'ssl_cert_reqs': ssl_cert_reqs,
     },
+    result_backend_use_ssl={
+        'ssl_cert_reqs': ssl_cert_reqs,
+    },
     task_serializer='json',
     accept_content=['json'],
 )
-
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
