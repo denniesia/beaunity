@@ -14,8 +14,8 @@ UserModel = get_user_model()
 
 users = [
     {
-        "email": "alicia.sim@example.com",
-        "username": "alice_s",
+        "email": "alice_sim@example.com",
+        "username": "alice_sim",
         "password": "Skincare#92",
         "is_active": True,
         "profile": {
