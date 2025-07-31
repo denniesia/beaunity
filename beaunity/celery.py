@@ -11,6 +11,16 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'beaunity.settings')
 
 app = Celery('beaunity')
 
+app.conf.update(
+    broker_url=config('CELERY_BROKER_URL'),
+    result_backend=config('CELERY_RESULT_BACKEND'),
+    broker_use_ssl={
+        'ssl_cert_reqs': ssl.CERT_NONE  # or ssl.CERT_REQUIRED for stricter verification
+    },
+    task_serializer='json',
+    accept_content=['json'],
+)
+
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
@@ -28,13 +38,6 @@ app.conf.beat_schedule = {
     }
 }
 
-app.conf.update(
-    broker_url=config("CELERY_BROKER_URL"),
-    result_backend=config("CELERY_RESULT_BACKEND"),
-    broker_use_ssl={
-        'ssl_cert_reqs': ssl.CERT_NONE
-    },
-)
 @app.task(bind=True)
 def debug_task(self):
     print('Request: {}'.format(self.request))
