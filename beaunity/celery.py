@@ -21,18 +21,12 @@ ssl_cert_reqs = ssl_map.get(config('REDIS_SSL_CERT_REQS', 'required').lower(), s
 app.conf.update(
     broker_url=config('CELERY_BROKER_URL'),
     result_backend=config('CELERY_RESULT_BACKEND'),
-    broker_use_ssl={
-        'ssl_cert_reqs': ssl_cert_reqs,
-    },
-    result_backend_use_ssl={
-        'ssl_cert_reqs': ssl_cert_reqs,
-    },
     task_serializer='json',
     accept_content=['json'],
 )
+
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
-
 
 app.conf.beat_schedule = {
     'send-reminders-every-morning' : {
