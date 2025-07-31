@@ -95,7 +95,7 @@ class EventCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy("event-details", kwargs={"pk": self.object.pk})
+        return reverse("event-details", kwargs={"pk": self.object.pk})
 
 
 class EventEditView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
