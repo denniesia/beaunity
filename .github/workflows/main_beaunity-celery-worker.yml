@@ -2,7 +2,7 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
-name: Build and deploy Python app to Azure Web App - beaunity
+name: Build and deploy Python app to Azure Web App - beaunity-celery-worker
 
 on:
   push:
@@ -58,14 +58,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_EFA42D1FA3E448ED862610779FF83B09 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_B655650815CA45AE80E63DCD9C9E6695 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_8ED3111210B14C3584F2EDA38F73B434 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_45499962EC1A4D28A1C5C70EBE42A9C0 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_66EEB065F7884A2EB88F9F8957EFEF72 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_5D0510161DBB4C71AACCB88CBD68CD21 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'beaunity'
+          app-name: 'beaunity-celery-worker'
           slot-name: 'Production'
           
