@@ -4,6 +4,7 @@ from celery import Celery
 from celery.schedules import crontab
 from kombu import Connection
 import ssl
+from decouple import config
 
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'beaunity.settings')
