@@ -2,7 +2,7 @@ from __future__ import absolute_import, unicode_literals
 import os
 from celery import Celery
 from celery.schedules import crontab
-from kombu import Connection
+from kombu.utils.url import safequote
 import ssl
 from decouple import config
 
@@ -11,11 +11,18 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'beaunity.settings')
 
 app = Celery('beaunity')
 
+ssl_map = {
+    'required': ssl.CERT_REQUIRED,
+    'optional': ssl.CERT_OPTIONAL,
+    'none': ssl.CERT_NONE,
+}
+ssl_cert_reqs = ssl_map.get(config('REDIS_SSL_CERT_REQS', 'required').lower(), ssl.CERT_REQUIRED)
+
 app.conf.update(
     broker_url=config('CELERY_BROKER_URL'),
     result_backend=config('CELERY_RESULT_BACKEND'),
     broker_use_ssl={
-        'ssl_cert_reqs': ssl.CERT_NONE  # or ssl.CERT_REQUIRED for stricter verification
+        'ssl_cert_reqs': ssl_cert_reqs,
     },
     task_serializer='json',
     accept_content=['json'],
