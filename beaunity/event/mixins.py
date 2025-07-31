@@ -4,9 +4,15 @@ from django import forms
 class EventValidationMixin:
     def clean(self):
         cleaned_data = super().clean()
+
+        if cleaned_data is None:
+            cleaned_data = self.cleaned_data
+
         online = cleaned_data.get("is_online")
         location = cleaned_data.get("location")
         meeting_link = cleaned_data.get("meeting_link")
+
+
 
         if not online and not location:
             self.add_error(
