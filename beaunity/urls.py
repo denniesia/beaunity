@@ -1,7 +1,8 @@
-
 from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+
+from beaunity.common.views import custom_permission_denied_view
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
@@ -19,3 +20,4 @@ urlpatterns = [
     path("api/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
 ]
 
+handler403 = 'beaunity.common.views.custom_permission_denied_view'
