@@ -141,6 +141,16 @@ Beaunity leverages a modern Python and Django-based tech stack to deliver a robu
 
 ## 🧪 Data for testing
 
+You can test the site live at https://beaunity.onrender.com. Feel free to create a new account or use one of the pre-existing demo accounts:
+
+
+| Group     | Username   | Password     | Email                   |
+|-----------|------------|--------------|-------------------------|
+| Superuser | vivi.enn   | Skincare#96  | vivien@example.com      |
+| Moderator | alice_sim  | Skincare#92  | alice_sim@example.com   |
+| Organizer | bilyanaa   | Glow_Up!18   | b_mladenova@example.com |
+| User      | caro_lee99 | Tr3ndySkin*  | degip92859@balincs.com  |
+| User      | roxy_foxy  | CmbSkin_L0ve | jomike2985@amirei.com   |
 
 
 
