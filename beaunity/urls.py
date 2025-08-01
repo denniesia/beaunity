@@ -20,4 +20,4 @@ urlpatterns = [
     path("api/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
 ]
 
-handler403 = 'beaunity.common.views.custom_permission_denied_view'
+handler403 = 'common.views.custom_permission_denied_view'
