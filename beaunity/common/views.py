@@ -4,7 +4,7 @@ from beaunity.common.tasks import send_approval_email
 from django.shortcuts import get_object_or_404
 
 def custom_permission_denied_view(request, exception=None):
-    return render(request, "common/403.html", status=403)
+    return render(request, "403.html", status=403)
 
 
 @login_required
