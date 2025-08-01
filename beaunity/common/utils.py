@@ -1,6 +1,10 @@
 from datetime import timedelta
 from django.utils.timezone import now
 
+from beaunity.challenge.models import Challenge
+from beaunity.event.models import Event
+
+
 def mark_new(model):
     current_date = now()
     week_ago = current_date - timedelta(weeks=1)
