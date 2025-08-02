@@ -12,7 +12,7 @@
                 </p>
             {% endif %}
 
-                {% if request.user.is_staff %}
+                {% if request.user.is_staff and profile.user.is_active %}
                 <div class="relative inline-block text-left">
                     <div class="flex inline-flex justify-center rounded-full bg-white px-3 py-1 font-semibold shadow-md hover:bg-gray-100 focus:outline-none">
                         <button type="button"
