@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin,
                                         UserPassesTestMixin)
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
@@ -149,17 +150,20 @@ class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = "post/post-edit.html"
 
     def test_func(self):
+        post = self.get_object()
         user = self.request.user
         return (
-                user.pk == self.get_object().created_by.pk
-                    or
-                user.has_perm('post.can_approve_posts')
-                )
+            user == post.created_by and post.is_approved
+            or user.has_perm('post.can_approve_posts')
+        )
+
+    def handle_no_permission(self):
+        return redirect("post-details", pk=self.get_object().pk)
 
     def get_success_url(self):
         if self.request.user.has_perm('post.can_approve_posts'):
             return reverse_lazy("post-pending")
-        return reverse_lazy("post-details", kwargs={"pk": self.object.pk})
+        return reverse_lazy("post-details", kwargs={"pk": self.get_object().pk})
 
     def get_form_class(self):
         post = self.get_object()
@@ -168,7 +172,10 @@ class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if user.has_perm('post.can_approve_posts') and not post.is_approved:
             return AdminPostEditForm
 
-        return PostEditForm
+        if post.is_approved and user == post.created_by:
+            return PostEditForm
+
+        raise PermissionDenied("You are not allowed to edit this post.")
 
     def get_initial(self):
         return self.object.__dict__
