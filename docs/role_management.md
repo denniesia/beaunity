@@ -94,6 +94,9 @@ Edit post view: Staff members can only edit the category of the post, the other 
 
 <img width="940" height="946" alt="image" src="https://github.com/user-attachments/assets/dc1c0c38-121c-4417-9b6d-931e680c76ec" />
 
+- 💊 Staff Members can view if the status of the user is set to not active - after deletion of the profile.
+<img width="1365" height="944" alt="image" src="https://github.com/user-attachments/assets/11718621-dee1-44c9-85e9-bb0faa6087d4" />
+
 
 🐛  Error Handling
 
