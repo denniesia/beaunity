@@ -104,7 +104,7 @@ class ChallengeDetailsView(LoginRequiredMixin, DetailView):
         return redirect(reverse("challenge-details", kwargs={"pk": self.object.id}))
 
 
-class ChallengeEditView(UpdateView):
+class ChallengeEditView(LoginRequiredMixin, UserIsCreatorMixin, UpdateView):
     model = Challenge
     form_class = ChallengeEditForm
     template_name = "challenge/challenge-edit.html"

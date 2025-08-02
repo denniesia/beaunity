@@ -12,6 +12,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
 from beaunity.category.models import Category
 from beaunity.comment.forms import CommentCreateForm
 from beaunity.common.filter_mixins import FilteredContextMixin, FilteredQuerysetMixin
+from beaunity.common.mixins import UserIsCreatorMixin
 
 from .forms import EventCreateForm, EventDeleteForm, EventEditForm
 from .models import Event
@@ -98,21 +99,19 @@ class EventCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         return reverse("event-details", kwargs={"pk": self.object.pk})
 
 
-class EventEditView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+class EventEditView(LoginRequiredMixin, UserIsCreatorMixin, UpdateView):
     model = Event
     form_class = EventEditForm
-    permission_required = "event.change_event"
     template_name = "event/event-edit.html"
 
     def get_success_url(self):
         return reverse_lazy("event-details", kwargs={"pk": self.object.pk})
 
 
-class EventDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+class EventDeleteView(LoginRequiredMixin, UserIsCreatorMixin, DeleteView):
     model = Event
     form_class = EventDeleteForm
     template_name = "event/event-delete.html"
-    permission_required = "event.delete_event"
     success_url = reverse_lazy("events")
 
     def get_initial(self):
