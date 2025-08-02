@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import Group
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
@@ -50,6 +50,10 @@ class AppUserLoginView(UserPassesTestMixin, LoginView):
     def handle_no_permission(self):
         return redirect("landing-page")
     # to not throw error 403
+
+
+class CustomLogoutView(LoginRequiredMixin, LogoutView):
+    pass
 
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
