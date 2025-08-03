@@ -29,8 +29,8 @@ beauinty
     ├── interaction/
     ├── main/
     └── post/
-└── tests/                  # Test suites
-└── theme/                  # Styling/layout assets (Tailwind)
+├── tests/                  # Test suites
+├── theme/                  # Styling/layout assets (Tailwind)
 ├── env.template            # Sample environment variables.
 ├── .gitignore
 ├── Dockerfile              # Docker build instructions
