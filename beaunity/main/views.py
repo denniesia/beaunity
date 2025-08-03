@@ -143,7 +143,7 @@ class DashboardView(LoginRequiredMixin, DetailView):
             likes__user=user
         )
         comments_events = Event.objects.filter(
-            comments__created_by=user
+            comments__user=user
         )
 
         my_posts = Post.objects.filter(
@@ -159,7 +159,7 @@ class DashboardView(LoginRequiredMixin, DetailView):
             likes__user=user,
         )
         comments_posts = Post.objects.filter(
-           comments__created_by=user,
+           comments__user=user,
         )
 
         my_challenges = Challenge.objects.filter(created_by=user, is_approved=True).order_by('-start_time')
@@ -170,7 +170,7 @@ class DashboardView(LoginRequiredMixin, DetailView):
             likes__user=user,
         )
         comments_challenges = Challenge.objects.filter(
-           comments__created_by=user,
+           comments__user=user,
         )
 
         context.update({
@@ -187,7 +187,7 @@ class DashboardView(LoginRequiredMixin, DetailView):
             'liked_posts': liked_posts.count(),
             'liked_events': liked_events.count(),
             'liked_challenges': liked_challenges.count(),
-            'comments': Comment.objects.filter(created_by=user),
+            'comments': Comment.objects.filter(user=user),
             'comments_events': comments_events.count(),
             'comments_challenges': comments_challenges.count(),
             'comments_posts': comments_posts.count(),
