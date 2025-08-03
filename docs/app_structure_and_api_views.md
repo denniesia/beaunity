@@ -2,24 +2,24 @@
 
 ```tree
 beauinty
-├── accounts/
-├── category/
-├── challenge/
-├── comment/
-├── common/
-├── event/
-├── interaction/
-├── main/
-├── post/
-├── scripts/
+    ├── accounts/
+    ├── category/
+    ├── challenge/
+    ├── comment/
+    ├── common/            # Shared utilities (abstract models, mixins, helpers).
+    ├── event/
+    ├── interaction/
+    ├── main/              # General views - about page, landing page, dashboard
+    ├── post/              
+    └── scripts/           # Populating data scripts
 ├── __init__.py
 ├── asgi.py
-├── celery.py
-├── settings.py
-├── urls.py
+├── celery.py              # Celery configuration for background tasks.
+├── settings.py            # Django settings and configurations.
+├── urls.py                # Global URL routing.
 ├── wsgi.py
-├── docs/
-└── templates/
+├── docs/                  # Documentation and reports for the project.
+└── templates/             # Global Django templates folder (with per-app subfolders).
     ├── accounts/
     ├── category/
     ├── challenge/
@@ -29,13 +29,16 @@ beauinty
     ├── interaction/
     ├── main/
     └── post/
-└── tests/
-└── theme/
-├── env.template
+└── tests/                  # Test suites
+└── theme/                  # Styling/layout assets (Tailwind)
+├── env.template            # Sample environment variables.
 ├── .gitignore
-├── README.md
-├── manage.py
-├── requirements.txt
+├── Dockerfile              # Docker build instructions
+├── Procfile                # Process declaration (Railway)
+├── README.md               # Project overview and setup instructions
+├── docker-compose.yml      # Container configuration
+├── manage.py               # Django command-line utility
+├── requirements.txt        # Python dependencies
 ```
 
 
