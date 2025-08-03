@@ -75,7 +75,7 @@ class EventDetailsView(LoginRequiredMixin, DetailView):
 
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.created_by = request.user
+            comment.user = request.user
 
             comment.content_type = ContentType.objects.get_for_model(self.model)
             comment.object_id = self.object.id

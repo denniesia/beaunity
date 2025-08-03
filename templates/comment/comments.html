@@ -4,8 +4,8 @@
 
         <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 text-xs shadow-inner">
 
-            {% if comment.created_by.profile.profile_pic %}
-                <img src="{{ comment.created_by.profile.profile_pic.url }}" class="rounded-full w-fit h-fit">
+            {% if comment.user.profile.profile_pic %}
+                <img src="{{ comment.user.profile.profile_pic.url }}" class="rounded-full w-fit h-fit">
             {% else %}
                 <img src="https://i.pinimg.com/474x/9d/86/8e/9d868edb99fa442461138e2f9a1e0be1.jpg" alt="Default Profile" class="w-fit h-fit rounded-full">
             {% endif %}
@@ -17,7 +17,7 @@
             <div class="flex items-center justify-between">
 
                 <div class="flex">
-                    <p class="font-medium text-base text-gray-900"><a href="{% url 'profile-details' comment.created_by_id %}">{{ comment.created_by }}</a>
+                    <p class="font-medium text-base text-gray-900"><a href="{% url 'profile-details' comment.user.pk %}">{{ comment.user.username }}</a>
                         <span class="text-xs text-gray-400 ml-1">| {{ comment.created_at|date:"F j, Y, H:i" }}</span>
                         {% if comment.created_at < comment.last_updated %}
                             <span class="text-xs text-gray-400 ml-1">| Edited: {{ comment.last_updated|date:"F j, Y, H:i" }}</span>
@@ -26,7 +26,7 @@
                 </div>
 
                 <!-- Edit and Delete -->
-                {% if comment.created_by_id == request.user.id %}
+                {% if comment.user == request.user %}
                     <div class="flex gap-2">
                         <a class="text-pink-500 hover:text-pink-700" href="{% url 'comment-edit'  comment.pk %}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">

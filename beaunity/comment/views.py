@@ -20,7 +20,6 @@ class CommentEditView(LoginRequiredMixin, UserIsCreatorMixin, UpdateView):
 
 class CommentDeleteView(LoginRequiredMixin, UserIsCreatorMixin, DeleteView):
     model = Comment
-    template_name = "comment/comment_confirm_delete.html"
 
     def get_success_url(self):
         return self.object.content_object.get_absolute_url()

@@ -9,10 +9,10 @@ class CommentAdmin(ModelAdmin):
     list_display = (
         "content",
         "content_object",
-        "created_by",
+        "user",
     )
     search_fields = (
         "content",
-        "created_by",
+        "user",
     )
-    ordering = ("-created_at",)
+    ordering = ("user",)

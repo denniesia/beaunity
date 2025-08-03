@@ -4,14 +4,8 @@ from django.db import models
 
 from beaunity.common.mixins import (ContentMixin, CreatedAtMixin,
                                     CreatedByMixin, LastUpdatedMixin)
+from beaunity.interaction.models import InteractionBaseModel
 
 
-class Comment(LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, ContentMixin):
-    content_type = models.ForeignKey(
-        ContentType,
-        on_delete=models.CASCADE
-    )
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey(
-        "content_type",
-        "object_id")
+class Comment(LastUpdatedMixin, CreatedAtMixin, ContentMixin, InteractionBaseModel):
+    pass

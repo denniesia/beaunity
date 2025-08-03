@@ -16,7 +16,12 @@ class UserIsSelfMixin(UserPassesTestMixin):
 
 class UserIsCreatorMixin(UserPassesTestMixin):
     def test_func(self):
-        return self.request.user.pk == self.get_object().created_by.pk
+        obj = self.get_object()
+
+        if hasattr(obj, "created_by"):
+            return self.request.user.pk == getattr(obj.created_by, "pk", None)
+
+        return self.request.user.pk == getattr(obj, "user_id", None)
 
 
 class LastUpdatedMixin(models.Model):
