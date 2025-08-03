@@ -5,8 +5,7 @@ from django.db import models
 
 UserModel = get_user_model()
 
-
-class Like(models.Model):
+class InteractionBaseModel(models.Model):
     user = models.ForeignKey(
         UserModel,
         on_delete=models.CASCADE
@@ -21,6 +20,7 @@ class Like(models.Model):
         "object_id")
 
     class Meta:
+        abstract = True
         unique_together = (
             "user",
             "content_type",
@@ -28,24 +28,9 @@ class Like(models.Model):
         )
 
 
-class Favourite(models.Model):
-    user = models.ForeignKey(
-        UserModel,
-        on_delete=models.CASCADE
-    )
-    content_type = models.ForeignKey(
-        ContentType,
-        on_delete=models.CASCADE
-    )
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey(
-        "content_type",
-        "object_id"
-    )
+class Like(InteractionBaseModel):
+    pass
 
-    class Meta:
-        unique_together = (
-            "user",
-            "content_type",
-            "object_id"
-        )
+
+class Favourite(InteractionBaseModel):
+    pass
