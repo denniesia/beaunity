@@ -9,6 +9,28 @@ from ckeditor.fields import RichTextField
 
 UserModel = get_user_model()
 
+class InteractionBaseModel(models.Model):
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE
+    )
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE
+    )
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey(
+        "content_type",
+        "object_id")
+
+    class Meta:
+        abstract = True
+        unique_together = (
+            "user",
+            "content_type",
+            "object_id"
+        )
+
 
 class BaseActivity(models.Model):
     poster_image = CloudinaryField()
