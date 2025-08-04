@@ -20,7 +20,7 @@ challenge/
 
 💻 Challenge Model
 
-The Challenge Model inherits the BaseActivity abstract class, which contains:
+The Challenge Model inherits the ActivityBaseModel abstract class, which contains:
 
 | Field          | Type              | Description                                                                               |
 |----------------|-------------------|-------------------------------------------------------------------------------------------|
