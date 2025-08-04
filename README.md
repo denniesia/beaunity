@@ -85,7 +85,7 @@ This project is built using a modern Django stack, designed for scalability, per
 🧼 **Content Sanitization**
 - User-generated HTML content is sanitized using bleach to prevent malicious scripts and ensure safety.
 
-🛡️ **Sentry App Monitoring***
+🛡️ **Sentry App Monitoring**
 - The project integrates Sentry for real-time error tracking and performance monitoring across the Django web application. This ensures early detection of issues in production and enables rapid debugging and resolution.
   
 ---
