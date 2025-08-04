@@ -17,6 +17,9 @@ import dj_database_url
 
 from decouple import config
 
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -268,3 +271,14 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
 
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+
+sentry_sdk.init(
+    dsn=config("SENTRY_DSN"),
+    integrations=[DjangoIntegration()],
+
+    # Set to True to send PII such as user info (optional)
+    send_default_pii=True,
+
+    # Adjust the sample rate for performance monitoring (optional)
+    traces_sample_rate=0.5,  # 50% of transactions
+)
