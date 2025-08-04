@@ -19,5 +19,4 @@ urlpatterns = [
         path('remove-roles/', views.remove_roles, name='remove-roles'),
     ])),
     path('api/', include('beaunity.accounts.api_urls')),
-    path('sentry-debug/', views.trigger_error),
 ]
