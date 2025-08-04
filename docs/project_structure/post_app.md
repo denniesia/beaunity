@@ -38,8 +38,9 @@ Moreover, the model includes additional mixins:
 
 
 - Meta options:
-  - `verbose_name_plural` = "Challenges"
+  - `verbose_name_plural` = "Posts"
   - `permissions` - 'Can approve posts', 'Can post without approval'
+  - `ordering` - displaying the newest first
  
 
 **🚀 Additional Features**
