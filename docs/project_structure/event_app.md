@@ -19,31 +19,31 @@ event/
 
 💻 Event Model
 
-The Event Model inherits the BaseActivity abstract class, which contains:
+The Event Model inherits the ActivityBaseModel abstract class, which contains:
 
 | Field          | Type              | Description                                                                               |
 |----------------|-------------------|-------------------------------------------------------------------------------------------|
 | `poster_image` | `CloudinaryField` | An image hosted on Cloudinary.                                                            |
-| `title`        | `CharField`       | The title of the challenge. Must be at least 10 characters long.                          |
-| `details`      | `RichTextField`   | A rich-text description providing details about the challenge.                            |
-| `is_online`    | `BooleanField`    | Indicates if the activity is online (True) or in-person (False). Defaults to False        |
-| `meeting_link` | `CharField`       | The meeting link for online activities. Can be blank or null.                             |
-| `city`         | `CharField`       | The city where the activity takes place. Must be at least 2 characters if provided.       |
-| `location`     | `CharField`       | The physical address/location of the activity. Must be at least 10 characters if provided. |
-| `start_time`   | `DateTimeField`   | The start date and time of the challenge.                                                 |
-| `end_time`     | `DateTimeField`   | The end date and time of the activity.                                                    |
-| `is_new`       | `BooleanField`    | Indicates if the activity is newly added (True). Defaults to False.                       |
+| `title`        | `CharField`       | The title of the event. Must be at least 10 characters long.                              |
+| `details`      | `RichTextField`   | A rich-text description providing details about the event.                                |
+| `is_online`    | `BooleanField`    | Indicates if the event is online (True) or in-person (False). Defaults to False           |
+| `meeting_link` | `CharField`       | The meeting link for online event. Can be blank or null.                                  |
+| `city`         | `CharField`       | The city where the event takes place. Must be at least 2 characters if provided.          |
+| `location`     | `CharField`       | The physical address/location of the event. Must be at least 10 characters if provided.   |
+| `start_time`   | `DateTimeField`   | The start date and time of the event.                                                     |
+| `end_time`     | `DateTimeField`   | The end date and time of the event.                                                       |
+| `is_new`       | `BooleanField`    | Indicates if the event is newly added (True). Defaults to False.                          |
 
 Moreover, the model includes additional fields:
 
 | Field        | Type               | Description                                                                         |
 |--------------|--------------------|-------------------------------------------------------------------------------------|
 | `is_public`  | `CharField `       | Defines if the event is public. Defaults to Beginner. Default is True.              |
-| `categories` | `ManyToManyField ` | *ManyToManyField* to Category Model. Links the challenge to one or more categories. |
-| `attendees`  | `ManyToManyField ` | *ManyToManyField* to UserModel. Users who have joined the challenge. Can be empty.  |
+| `categories` | `ManyToManyField ` | *ManyToManyField* to Category Model. Links the event to one or more categories.     |
+| `attendees`  | `ManyToManyField ` | *ManyToManyField* to UserModel. Users who have joined the event. Can be empty.      |
 | `likes`      | `GenericRelation ` | *Generic relation* to Like Model for tracking likes.                                |
 | `comments `  | `GenericRelation ` | *Generic relation* to Comment Model for tracking comments.                          |
-| `favourites` | `GenericRelation`  | *Generic relation* to Favourite Model for tracking favourites.            |
+| `favourites` | `GenericRelation`  | *Generic relation* to Favourite Model for tracking favourites.                      |
 
 And some inherited Mixins:
 
