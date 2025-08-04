@@ -28,9 +28,9 @@ common/
 └── views.py             # Standard Django views (non-API)
 ````
 
-💻 BaseActivity Model
+💻 ActivityBaseModel 
 
-The BaseActivity model is an *abstract* base class used to define shared attributes and structure for different types
+The ActivityBaseModel model is an *abstract* base class used to define shared attributes and structure for different types
 of activities in the application. It includes general fields for content, location, timing, and display preferences.
 Other activity models can inherit from this base to maintain consistency and reduce code duplication across the project.
 
@@ -46,6 +46,19 @@ Other activity models can inherit from this base to maintain consistency and red
 | `start_time`   | `DateTimeField`   | The start date and time of the activity.                                                   |
 | `end_time`     | `DateTimeField`   | The end date and time of the activity.                                                     |
 | `is_new`       | `BooleanField`    | Indicates if the activity is newly added (True). Defaults to False.                        |
+
+💻 InteractionBaseModel 
+
+The InteractionBaseModel model is an *abstract* base class used to define shared attributes and structure for different types
+of interactions in the application - Comment, Like, Favourite. 
+
+
+| Field            | Type                   | Description                                                                                           |
+|------------------|------------------------|-------------------------------------------------------------------------------------------------------|
+| `user`           | `ForeignKey`           | *ForeignKey* to UserModel model, tracks which user created the interaction.                           |
+| `content_type`   | `ForeignKey`           | *ForeignKey* to Django’s ContentType model. Defines the type of related model instance.               |
+| `object_id`      | `PositiveIntegerField` | The primary key (ID) of the related model instance.                                                   |
+| `content_object` | `GenericForeignKey`    | A generic relation that links the interaction to any model instance using content_type and object_id. |
 
 
 **🚀 Features**
@@ -65,7 +78,7 @@ def has_passed(obj_datetime):
 
 #### 🍭 Filtered Mixins 
 
-- `FilteredQuerysetMixin()`
+##### `FilteredQuerysetMixin()`
 
 This mixin provides a method `get_filtered_queryset()` that dynamically filters a model’s queryset based on URL query
 parameters. It supports filters such as:
@@ -148,7 +161,7 @@ class FilteredQuerysetMixin:
         return queryset.distinct().order_by(*self.ordering)
 ````
 
-- `FilteredContextMixin()`
+##### `FilteredContextMixin()`
 
 This mixin provides a method `get_filtered_context()` that enriches the view context with:
 
