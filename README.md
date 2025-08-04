@@ -85,7 +85,9 @@ This project is built using a modern Django stack, designed for scalability, per
 🧼 **Content Sanitization**
 - User-generated HTML content is sanitized using bleach to prevent malicious scripts and ensure safety.
 
-
+🛡️ **Sentry App Monitoring***
+- The project integrates Sentry for real-time error tracking and performance monitoring across the Django web application. This ensures early detection of issues in production and enables rapid debugging and resolution.
+  
 ---
 
 ## 🛠️ Tools and Technologies: 
@@ -134,6 +136,9 @@ Beaunity leverages a modern Python and Django-based tech stack to deliver a robu
 - Black (25.1.0) – Code formatting for Python.
 - Isort (6.0.1) – Organizes imports automatically.
 - Bleach (6.2.0) – HTML sanitization for security.
+
+### Real-Time Monitoring 
+- Sentry (sentry-sdk) – Real-time error tracking and performance monitoring integrated with Django and Celery to capture exceptions and improve application reliability.
 
 ### Other Notable Libraries
 - Pillow (11.2.1) – Image processing.
