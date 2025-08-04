@@ -34,7 +34,7 @@ class InteractionBaseModel(models.Model):
         )
 
 
-class BaseActivity(models.Model):
+class ActivityBaseModel(models.Model):
     poster_image = CloudinaryField()
     title = models.CharField(
         max_length=100,

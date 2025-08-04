@@ -13,13 +13,13 @@ from django.utils import timezone
 from beaunity.category.models import Category
 from beaunity.comment.models import Comment
 from beaunity.common.mixins import CreatedAtMixin, CreatedByMixin, LastUpdatedMixin
-from beaunity.common.models import BaseActivity
+from beaunity.common.models import ActivityBaseModel
 from beaunity.interaction.models import Like, Favourite
 
 UserModel = get_user_model()
 
 
-class Event(BaseActivity, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin):
+class Event(ActivityBaseModel, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin):
     is_public = models.BooleanField()
     categories = models.ManyToManyField(
         Category,

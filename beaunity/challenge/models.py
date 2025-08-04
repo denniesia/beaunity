@@ -8,7 +8,7 @@ from beaunity.category.models import Category
 from beaunity.comment.models import Comment
 from beaunity.common.mixins import (CreatedAtMixin, CreatedByMixin,
                                     IsApprovedMixin, LastUpdatedMixin)
-from beaunity.common.models import BaseActivity
+from beaunity.common.models import ActivityBaseModel
 from beaunity.interaction.models import Like, Favourite
 
 from .choices import DifficultyLevel
@@ -16,7 +16,7 @@ from .choices import DifficultyLevel
 UserModel = get_user_model()
 
 
-class Challenge(BaseActivity, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, IsApprovedMixin):
+class Challenge(ActivityBaseModel, LastUpdatedMixin, CreatedAtMixin, CreatedByMixin, IsApprovedMixin):
     difficulty = models.CharField(
         max_length=15,
         choices=DifficultyLevel,
