@@ -28,30 +28,14 @@ for each (e.g., no need for ChallengeLike, EventLike, etc.).
 - Easier Maintenance – Any change to the Like or Favourite logic only needs to be updated in one place.
 - Extensibility – New models (e.g., Comments, Reviews) can be liked or favourited without additional migrations.
 
-👍 Like Model
+Both models inherit the InteractionBaseModel with the following fields:
 
-| Field            | Type                   | Description                                                                                    |
-|------------------|------------------------|------------------------------------------------------------------------------------------------|
-| `user`           | `ForeignKey`           | *ForeignKey* to UserModel, tracks which user liked an object.                                  |
-| `content_type`   | `ForeignKey`           | *ForeignKey* to Django’s ContentType model. Defines the type of related model instance.        |
-| `object_id`      | `PositiveIntegerField` | The primary key (ID) of the related model instance.                                            |
-| `content_object` | `GenericForeignKey`    | A generic relation that links the like to any model instance using content_type and object_id. |
-
-Meta options:
-- `unique_together` - "user", "content_type", "object_id"
-
-
-⭐ Favourite Model
-
-| Field            | Type                   | Description                                                                                         |
-|------------------|------------------------|-----------------------------------------------------------------------------------------------------|
-| `user`           | `ForeignKey`           | *ForeignKey* to UserModel, tracks which user added an object to Favourites.                         |
-| `content_type`   | `ForeignKey`           | *ForeignKey* to Django’s ContentType model. Defines the type of related model instance.             |
-| `object_id`      | `PositiveIntegerField` | The primary key (ID) of the related model instance.                                                 |
-| `content_object` | `GenericForeignKey`    | A generic relation that links the favourite to any model instance using content_type and object_id. |
-
-Meta options:
-- unique_together - "user", "content_type", "object_id"
+| Field            | Type                   | Description                                                                                       |
+|------------------|------------------------|---------------------------------------------------------------------------------------------------|
+| `user`           | `ForeignKey`           | *ForeignKey* to UserModel model, tracks which user created the interaction.           |
+| `content_type`   | `ForeignKey`           | *ForeignKey* to Django’s ContentType model. Defines the type of related model instance.           |
+| `object_id`      | `PositiveIntegerField` | The primary key (ID) of the related model instance.                                               |
+| `content_object` | `GenericForeignKey`    | A generic relation that links the interaction to any model instance using content_type and object_id. |
 
 **🚀 Additional Features**
 
