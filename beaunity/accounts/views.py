@@ -205,3 +205,6 @@ def remove_roles(request, pk):
     user.is_staff = False
     user.save()
     return redirect("profile-details", pk=pk)
+
+def trigger_error(request):
+    division_by_zero = 1 / 0
