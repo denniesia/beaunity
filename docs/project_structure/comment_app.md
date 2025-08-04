@@ -15,10 +15,11 @@ comment/
 💻 Comment Model
 
 The Comment Model uses Django’s content types framework (content_type, object_id, and content_object) to allow comments
-to be linked to any model instance (e.g., Challenges, Events, Posts).
+to be linked to any model instance (e.g., Challenges, Events, Posts). It iherits the InteractionBaseModel with the following fields: 
 
 | Field            | Type                   | Description                                                                                       |
 |------------------|------------------------|---------------------------------------------------------------------------------------------------|
+| `user`           | `ForeignKey`           | *ForeignKey* to UserModel model, tracks which user created the comment.           |
 | `content_type`   | `ForeignKey`           | *ForeignKey* to Django’s ContentType model. Defines the type of related model instance.           |
 | `object_id`      | `PositiveIntegerField` | The primary key (ID) of the related model instance.                                               |
 | `content_object` | `GenericForeignKey`    | A generic relation that links the comment to any model instance using content_type and object_id. |
@@ -29,7 +30,6 @@ Moreover, the model includes some inherited mixins:
 |----------------------|-------------------------------------------------------------------------|
 | `LastUpdatedMixin  ` | Tracks the last modification timestamp.                                 |
 | `CreatedAtMixin  `   | Stores when the category was created.                                   | 
-| `CreatedByMixin  `   | *ForeignKey* to UserModel, tracks which user created the category.      |
 | `ContentMixin  `     | Stores the content of the object. Minimal length value is 5 characters. |
 
 
@@ -38,15 +38,15 @@ Moreover, the model includes some inherited mixins:
 🔧 Role Management: 
 
 Regular authenticated users have full CRUD (Create, Read, Update, and Delete) permissions for the Comment model.
-Unauthenticated user cannot create but can view the comments.
+Unauthenticated user cannot create but can view comments.
 
 
 🌷 Admin Panel
 
 The CommentAdmin class customizes how comments are managed in the Django admin panel:
-- List Display: Shows content, content_object and created_by fields for quick overview.
-- Ordering: Challenges are ordered by created_at in descending order (newest first). 
-- Search: Allows searching by content or created_by for easier navigation.
+- List Display: Shows `content`, `content_object` and `user` fields for quick overview.
+- Ordering: Challenges are ordered by `created_at` in descending order (newest first). 
+- Search: Allows searching by `content` or `user` for easier navigation.
 
 <img width="1893" height="577" alt="image" src="https://github.com/user-attachments/assets/aff2d870-b2f5-4509-8d26-c026fbcc087b" />
 
@@ -84,7 +84,6 @@ restricted to the comment’s creator.
 ````python
 class CommentDeleteView(LoginRequiredMixin, UserIsCreatorMixin, DeleteView):
     model = Comment
-    template_name = "comment/comment_confirm_delete.html"
 
     def get_success_url(self):
         return self.object.content_object.get_absolute_url()
