@@ -96,4 +96,4 @@ def global_search(request):
 Next -> [Post App](https://github.com/denniesia/beaunity/blob/main/docs/project_structure/post_app.md)
 
 --- 
-Home -> [Home](https://github.com/denniesia/beaunity/blob/main/README.md
+Home -> [Home](https://github.com/denniesia/beaunity/blob/main/README.md)
