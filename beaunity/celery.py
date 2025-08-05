@@ -40,7 +40,3 @@ app.conf.beat_schedule = {
         # 'schedule': 30.0
     }
 }
-
-@app.task(bind=True)
-def debug_task(self):
-    print('Request: {}'.format(self.request))

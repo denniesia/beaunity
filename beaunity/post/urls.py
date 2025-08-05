@@ -3,6 +3,7 @@ from django.urls import include, path
 from . import views
 from .views import post_confirmation
 
+
 urlpatterns = [
     path("dashboard/", views.ForumDashboardView.as_view(), name="forum-dashboard"),
     path("create", views.PostCreateView.as_view(), name="post-create"),
@@ -17,5 +18,4 @@ urlpatterns = [
     ),
     path("pending/", views.PendingPostsView.as_view(), name="post-pending"),
     path('api/', include('beaunity.post.api_urls')),
-
 ]

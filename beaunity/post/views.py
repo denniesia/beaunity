@@ -161,7 +161,7 @@ class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return redirect("post-details", pk=self.get_object().pk)
 
     def get_success_url(self):
-        if self.request.user.has_perm('post.can_approve_posts'):
+        if self.request.user.has_perm('post.can_approve_posts') and not self.object.is_approved:
             return reverse_lazy("post-pending")
         return reverse_lazy("post-details", kwargs={"pk": self.get_object().pk})
 
