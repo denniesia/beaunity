@@ -43,11 +43,11 @@ class CategoryBaseForm(forms.ModelForm):
 
     def clean_title(self):
         title = self.cleaned_data["title"]
-        return title[0].upper() + title[1:] if title else title
+        return title[0].upper() + title[1:]
 
     def clean_description(self):
         description = self.cleaned_data["description"]
-        return description[0].upper() + description[1:] if description else description
+        return description[0].upper() + description[1:]
 
     def clean_image(self):
         image = self.cleaned_data["image"]
