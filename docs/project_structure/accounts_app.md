@@ -211,22 +211,55 @@ def superuser_required(view_func):
  ensure the API receives the expected data and responds consistently.
 - `UserSerializier()` - handles user registration data
   - Serializes the fields: username, email, and password (write-only for security).
-  - Creates a new user using create_user() method, which typically hashes the password and saves the user.
+  - Creates a new user using create_user() method, which hashes the password and saves the user.
+ 
+````python
+class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = UserModel
+        fields = ["username", "email", "password"]
+
+    def create(self, validated_data):
+        return UserModel.objects.create_user(**validated_data)
+````
 
 - `LoginRequestSerializer()` - validates login input data.
   - Accepts username and password fields.
   - nsures both are provided for authentication.
+ 
+````python
+class LoginRequestSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
+````
 
 - `LoginResponseSerializer()` - defines the format of the login response.
   - Returns access_token and refresh_token for JWT authentication. 
   - Includes a message field for any success message.
+ 
+````python
+class LoginResponseSerializer(serializers.Serializer):
+    access_token = serializers.CharField()
+    refresh_token = serializers.CharField()
+    message = serializers.CharField()
+````
 
 - `LogoutRequestSerializer()` - Validates logout request data.
   - Accepts a refresh_token string which is required to blacklist the token on logout.
 
+````python
+class LogoutRequestSerializer(serializers.Serializer):
+    refresh_token = serializers.CharField()
+````
+
 - `LogoutResponseSerializer()` - defines the format of the logout response.
   - Returns a message field confirming logout success.
-
+````python
+class LogoutResponseSerializer(serializers.Serializer):
+    message = serializers.CharField()
+````
 
 🌻 **JWT Authentication**
 
