@@ -121,15 +121,8 @@ class ChallengeDeleteView(LoginRequiredMixin, UserIsCreatorMixin, DeleteView):
     def get_initial(self):
         return self.object.__dict__
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs.update(
-            {
-                "data": self.get_initial(),
-            }
-        )
-        return kwargs
-
+    def post(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
 
 class PendingChallengeView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Challenge
