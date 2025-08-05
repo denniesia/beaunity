@@ -19,7 +19,6 @@ from .forms import ChallengeCreateForm, ChallengeDeleteForm, ChallengeEditForm
 from .models import Challenge
 
 
-# Create your views here.
 class ChallengeOverviewView(LoginRequiredMixin, FilteredContextMixin, FilteredQuerysetMixin, ListView):
     model = Challenge
     ordering = ["start_time"]
@@ -139,7 +138,9 @@ class PendingChallengeView(LoginRequiredMixin, PermissionRequiredMixin, ListView
     paginate_by = 5
 
     def get_queryset(self):
-        return Challenge.objects.filter(is_approved=False).order_by("-created_at")
+        return Challenge.objects.filter(
+            is_approved=False
+        ).order_by("-created_at")
 
 
 def approve_challenge(request, pk):
