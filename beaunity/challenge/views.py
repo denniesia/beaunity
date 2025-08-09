@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin,
                                         UserPassesTestMixin)
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
@@ -67,6 +68,14 @@ class ChallengeDetailsView(LoginRequiredMixin, DetailView):
         ).select_related(
             "created_by"
         )
+
+    def get_object(self):
+        challenge = super().get_object()
+
+        if not challenge.is_approved and not self.request.user.has_perm("challenge.can_approve_challenge"):
+            raise PermissionDenied("You do not have permission to view this challenge.")
+
+        return challenge
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

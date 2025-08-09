@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 
 from beaunity.challenge.models import Challenge
 from beaunity.event.models import Event
+from beaunity import settings
 
 
 def mark_new(model):
